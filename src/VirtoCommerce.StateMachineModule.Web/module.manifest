@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+  <id>VirtoCommerce.StateMachine</id>
+  <version>3.800.0</version>
+  <version-tag></version-tag>
+
+  <platformVersion>3.832.3</platformVersion>
+  <dependencies>
+    <dependency id="VirtoCommerce.Core" version="3.802.0" />
+  </dependencies>
+
+  <title>VirtoCommerce StateMachine module</title>
+  <description>Provides core functionality for entity's State Machine</description>
+
+  <authors>
+    <author>Vladimir Buravlev</author>
+  </authors>
+  <owners>
+    <owner>VirtoCommerce</owner>
+  </owners>
+
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-state-machine</projectUrl>
+  <iconUrl>Modules/$(VirtoCommerce.StateMachine)/Content/logo.png</iconUrl>
+  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+  <assemblyFile>VirtoCommerce.StateMachineModule.Web.dll</assemblyFile>
+  <moduleType>VirtoCommerce.StateMachineModule.Web.Module, VirtoCommerce.StateMachineModule.Web</moduleType>
+
+  <releaseNotes>First version.</releaseNotes>
+  <copyright>Copyright © 2025 VirtoCommerce. All rights reserved</copyright>
+  <tags>VirtoCommerce State Machine module</tags>
+  <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+</module>

@@ -1,0 +1,37 @@
+<div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/create.tpl.html'" ng-if="blade.isNew"></div>
+
+<div class="blade-content">
+    <div class="blade-inner">
+        <div class="inner-block">
+            <form class="form" name="contextEntityDetailForm">
+                <div class="form-group" ng-init="setForm(contextEntityDetailForm)">
+                  <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.name' | translate }}</label>
+                    <div class="form-input">
+                        <input ng-model="blade.currentEntity.name" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.name' | translate }}" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.entity-type' | translate }}</label>
+                    <div class="form-input">
+                        <input ng-model="blade.currentEntity.entityType" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.entity-type' | translate }}" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.is-active' | translate }}</label>
+                    <div class="form-input">
+                        <label class="form-label __switch">
+                            <input type="checkbox" ng-model="blade.currentEntity.isActive" />
+                            <span class="switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.states' | translate }}</label>
+                    <div class="form-input">
+                        <textarea class="__large" required cols="60" rows="60" ng-model="blade.currentEntity.statesSerialized" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.states' | translate }}"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

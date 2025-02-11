@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Project is not a test project -->
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.StateMachineModule.Core\VirtoCommerce.StateMachineModule.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.StateMachineModule.Data\VirtoCommerce.StateMachineModule.Data.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.StateMachineModule.Data.MySql\VirtoCommerce.StateMachineModule.Data.MySql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.StateMachineModule.Data.PostgreSql\VirtoCommerce.StateMachineModule.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.StateMachineModule.Data.SqlServer\VirtoCommerce.StateMachineModule.Data.SqlServer.csproj" />
+  </ItemGroup>
+</Project>

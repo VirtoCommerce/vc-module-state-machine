@@ -1,0 +1,51 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "State machines"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "State machine",
+        "labels": {
+          "active": "Active",
+          "inactive": "Inactive",
+          "no-state-machines-yet": "No state machines yet"
+        }
+      },
+      "state-machine-details": {
+        "labels": {
+          "is-active": "Active",
+          "entity-type": "Entity type",
+          "name": "Name",
+          "states": "States serialized"
+        },
+        "placeholders": {
+          "entity-type": "Entyty type",
+          "name": "State machine name",
+          "states": "States serialized"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Open StateMachineModule menu",
+    "statemachine:create": "Create StateMachineModule related data",
+    "statemachine:read": "View StateMachineModule related data",
+    "statemachine:update": "Update StateMachineModule related data",
+    "statemachine:delete": "Delete StateMachineModule related data",
+    "statemachine:fire": "Fire State Machine state transitions"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineModuleEnabled": {
+        "title": "StateMachineModule Enabled",
+        "description": "StateMachineModule Enabled setting"
+      },
+      "StateMachineModulePassword": {
+        "title": "StateMachineModule Password",
+        "description": "StateMachineModule Password setting"
+      }
+    }
+  }
+}
