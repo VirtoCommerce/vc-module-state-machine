@@ -31,29 +31,29 @@ public static class ModuleConstants
     {
         public static class General
         {
-            //    public static SettingDescriptor StateMachineModuleEnabled { get; } = new()
-            //    {
-            //        Name = "StateMachineModule.StateMachineModuleEnabled",
-            //        GroupName = "StateMachineModule|General",
-            //        ValueType = SettingValueType.Boolean,
-            //        DefaultValue = false,
-            //    };
+            public static SettingDescriptor StateMachineModuleEnabled { get; } = new()
+            {
+                Name = "StateMachineModule.StateMachineModuleEnabled",
+                GroupName = "StateMachineModule|General",
+                ValueType = SettingValueType.Boolean,
+                DefaultValue = false,
+            };
 
-            //    public static SettingDescriptor StateMachineModulePassword { get; } = new()
-            //    {
-            //        Name = "StateMachineModule.StateMachineModulePassword",
-            //        GroupName = "StateMachineModule|Advanced",
-            //        ValueType = SettingValueType.SecureString,
-            //        DefaultValue = "qwerty",
-            //    };
+            public static SettingDescriptor StateMachineModulePassword { get; } = new()
+            {
+                Name = "StateMachineModule.StateMachineModulePassword",
+                GroupName = "StateMachineModule|Advanced",
+                ValueType = SettingValueType.SecureString,
+                DefaultValue = "qwerty",
+            };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
-                get;
-                //{
-                //    yield return StateMachineModuleEnabled;
-                //    yield return StateMachineModulePassword;
-                //}
+                get
+                {
+                    yield return StateMachineModuleEnabled;
+                    yield return StateMachineModulePassword;
+                }
             }
         }
 
