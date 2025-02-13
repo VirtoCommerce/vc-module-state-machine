@@ -7,6 +7,6 @@ angular.module('virtoCommerce.stateMachineModule')
             searchStateMachineInstance: { method: 'POST', url: 'api/statemachine/instances/search' },
             getStateMachineInstanceById: { method: 'GET', url: 'api/statemachine/instances/:instanceId' },
             createStateMachineInstance: { method: 'POST', url: 'api/statemachine/instances/:definitionId/new' },
-            fireStateMachineInstanceTrigger: { method: 'POST', url: 'api/vcmp/statemachine/firetrigger' },
+            fireStateMachineInstanceTrigger: { method: 'POST', url: 'api/statemachine/firetrigger' },
         });
     }]);

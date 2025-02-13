@@ -23,6 +23,7 @@ public static class ModuleConstants
                 Read,
                 Update,
                 Delete,
+                Fire,
             };
         }
     }
