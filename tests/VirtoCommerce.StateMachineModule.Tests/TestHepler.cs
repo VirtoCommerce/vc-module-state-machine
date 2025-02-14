@@ -15,7 +15,7 @@ public static class TestHepler
 
     public static T LoadFromJsonFile<T>(string fileName)
     {
-        var filePath = Path.Combine(@"..\..\..\TestData", fileName);
+        var filePath = Path.Combine(@"../../../TestData", fileName);
         return JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
     }
 
