@@ -41,14 +41,14 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         var nullState = new StateMachineState
         {
             Name = "Null",
-            Transitions = new[]
-              {
-                      new StateMachineTransition()
-                      {
-                           ToState = initialState.Name,
-                           Trigger = $"Start"
-                      }
-                  }
+            Transitions =
+            [
+                new StateMachineTransition()
+                {
+                    ToState = initialState.Name,
+                    Trigger = $"Start"
+                }
+            ]
         };
         if (!string.IsNullOrEmpty(state))
         {
@@ -60,7 +60,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         }
         _stateMachine = new StateMachine<string, string>(currentState.Name);
 
-        foreach (var availState in definition.States.Concat(new[] { nullState }))
+        foreach (var availState in definition.States.Concat([nullState]))
         {
             var configuration = _stateMachine.Configure(availState.Name);
             foreach (var permittedTransition in availState.Transitions ?? Array.Empty<StateMachineTransition>())

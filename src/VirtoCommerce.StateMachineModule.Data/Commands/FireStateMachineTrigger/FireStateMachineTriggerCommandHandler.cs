@@ -18,6 +18,26 @@ public class FireStateMachineTriggerCommandHandler : ICommandHandler<FireStateMa
 
     public virtual async Task<StateMachineInstance> Handle(FireStateMachineTriggerCommand request, CancellationToken cancellationToken)
     {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (request.StateMachineInstanceId == null)
+        {
+            throw new ArgumentNullException(nameof(request.StateMachineInstanceId));
+        }
+
+        if (request.Trigger == null)
+        {
+            throw new ArgumentNullException(nameof(request.Trigger));
+        }
+
+        if (request.EntityId == null)
+        {
+            throw new ArgumentNullException(nameof(request.EntityId));
+        }
+
         var instanceId = request.StateMachineInstanceId;
 
         var instance = await _stateMachineInstanceService.GetByIdAsync(instanceId);

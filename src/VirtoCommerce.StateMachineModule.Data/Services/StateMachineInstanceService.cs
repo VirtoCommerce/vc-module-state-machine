@@ -53,7 +53,7 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         stateMachineInstance.Evaluate(context);
         stateMachineInstance.Start(context);
 
-        await SaveChangesAsync(new[] { stateMachineInstance });
+        await SaveChangesAsync([stateMachineInstance]);
 
         return stateMachineInstance;
     }

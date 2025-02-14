@@ -73,6 +73,11 @@ public class StateMachineInstanceEntity : AuditableEntity, IDataEntity<StateMach
 
     public virtual void Patch(StateMachineInstanceEntity target)
     {
+        if (target == null)
+        {
+            throw new ArgumentNullException(nameof(target));
+        }
+
         target.State = State;
     }
 }

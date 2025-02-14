@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.StateMachineModule.Core.Common;
@@ -16,6 +17,21 @@ public class CreateStateMachineInstanceCommandHandler : ICommandHandler<CreateSt
 
     public virtual async Task<StateMachineInstance> Handle(CreateStateMachineInstanceCommand request, CancellationToken cancellationToken)
     {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (request.StateMachineDefinitionId == null)
+        {
+            throw new ArgumentNullException(nameof(request.StateMachineDefinitionId));
+        }
+
+        //if (request.Entity == null)
+        //{
+        //    throw new ArgumentNullException(nameof(request.Entity));
+        //}
+
         return await _stateMachineInstanceService.CreateStateMachineInstanceAsync(request.StateMachineDefinitionId, request.StateMachineInstanceId, request.Entity);
     }
 }

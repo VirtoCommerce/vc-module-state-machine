@@ -80,6 +80,11 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
 
     public virtual void Patch(StateMachineDefinitionEntity target)
     {
+        if (target == null)
+        {
+            throw new ArgumentNullException(nameof(target));
+        }
+
         target.Name = Name;
         target.EntityType = EntityType;
         target.IsActive = IsActive;

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
@@ -17,6 +18,16 @@ public class GetStateMachineInstanceQueryHandler : IQueryHandler<GetStateMachine
 
     public virtual async Task<StateMachineInstance> Handle(GetStateMachineInstanceQuery request, CancellationToken cancellationToken)
     {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (string.IsNullOrEmpty(request.StateMachineInstanceId))
+        {
+            throw new ArgumentNullException(nameof(request.StateMachineInstanceId));
+        }
+
         var result = await _stateMachineInstanceService.GetByIdAsync(request.StateMachineInstanceId);
         result.Evaluate(new StateMachineTriggerContext { Principal = request.User });
         return result;

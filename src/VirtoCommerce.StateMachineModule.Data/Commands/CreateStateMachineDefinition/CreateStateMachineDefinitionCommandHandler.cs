@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.StateMachineModule.Core.Common;
@@ -16,6 +17,16 @@ public class CreateStateMachineDefinitionCommandHandler : ICommandHandler<Create
 
     public virtual async Task<StateMachineDefinition> Handle(CreateStateMachineDefinitionCommand request, CancellationToken cancellationToken)
     {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (request.Definition == null)
+        {
+            throw new ArgumentNullException(nameof(request.Definition));
+        }
+
         return await _stateMachineDefinitionService.SaveStateMachineDefinitionAsync(request.Definition);
     }
 }

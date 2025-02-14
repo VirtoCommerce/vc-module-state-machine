@@ -1,8 +1,15 @@
+using System;
+
 namespace VirtoCommerce.StateMachineModule.Core.Models;
 public class StateMachineStateShort
 {
     public StateMachineStateShort(StateMachineState state)
     {
+        if (state == null)
+        {
+            throw new ArgumentNullException(nameof(state));
+        }
+
         Name = state.Name;
         Description = state.Description;
         IsInitial = state.IsInitial;

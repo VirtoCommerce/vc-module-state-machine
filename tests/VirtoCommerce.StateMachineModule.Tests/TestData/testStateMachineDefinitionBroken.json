@@ -1,0 +1,8 @@
+[
+  {
+    "Name": "TestState",
+    "Type": "StateMachineState",
+    "IsInitial": false,
+    "IsFinal": false
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "StartState",
+    "Type": "StateMachineState",
+    "IsInitial": true,
+    "IsFinal": false,
+    "Transitions": [
+      {
+        "Trigger": "Finalize",
+        "ToState": "FinalState"
+      }
+    ]
+  },
+  {
+    "Name": "FinalState",
+    "Type": "StateMachineState",
+    "IsInitial": false,
+    "IsFinal": true
+  }
+]

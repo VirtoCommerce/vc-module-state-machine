@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.StateMachineModule.Core.Common;
@@ -16,6 +17,11 @@ public class SearchStateMachineInstancesQueryHandler : IQueryHandler<SearchState
 
     public virtual async Task<SearchStateMachineInstancesResult> Handle(SearchStateMachineInstancesQuery request, CancellationToken cancellationToken)
     {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
         var searchCriteria = request.ToCriteria();
         var result = await _stateMachineInstancesSearchService.SearchAsync(searchCriteria);
         return result;

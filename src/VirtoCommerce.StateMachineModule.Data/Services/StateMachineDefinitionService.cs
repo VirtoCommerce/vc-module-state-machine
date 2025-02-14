@@ -46,7 +46,7 @@ public class StateMachineDefinitionService : CrudService<StateMachineDefinition,
         var validator = new StateMachineValidator();
         await validator.ValidateAndThrowAsync(definition);
 
-        await SaveChangesAsync(new[] { definition });
+        await SaveChangesAsync([definition]);
         return definition;
     }
 
