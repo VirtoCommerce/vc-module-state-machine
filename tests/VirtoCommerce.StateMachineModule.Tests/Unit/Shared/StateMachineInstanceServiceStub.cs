@@ -40,7 +40,7 @@ public class StateMachineInstanceServiceStub : IStateMachineInstanceService
 
         foreach (var id in ids)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && id != "InvalidInstanceId")
             {
                 var stateMachineInstance = new StateMachineInstance { Id = id };
                 stateMachineInstance.Configure(stateMachineDefinition, "Null");

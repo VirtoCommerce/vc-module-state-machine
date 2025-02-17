@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
@@ -35,10 +34,13 @@ public class StateMachineDefinitionService : CrudService<StateMachineDefinition,
     {
         using var repository = _repositoryFactory();
 
-        var stateMachineDefinitionEntity = await repository.StateMachineDefinitions
-            .FirstOrDefaultAsync(x => x.EntityType == entityType && x.IsActive);
+        var stateMachineDefinitionEntity = await repository.GetActiveStateMachineDefinitionByEntityType(entityType);
+        if (stateMachineDefinitionEntity != null)
+        {
+            return stateMachineDefinitionEntity.ToModel(ExType<StateMachineDefinition>.New());
+        }
 
-        return stateMachineDefinitionEntity.ToModel(ExType<StateMachineDefinition>.New());
+        return null;
     }
 
     public virtual async Task<StateMachineDefinition> SaveStateMachineDefinitionAsync(StateMachineDefinition definition)

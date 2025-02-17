@@ -23,17 +23,17 @@ public class FireStateMachineTriggerCommandHandler : ICommandHandler<FireStateMa
             throw new ArgumentNullException(nameof(request));
         }
 
-        if (request.StateMachineInstanceId == null)
+        if (string.IsNullOrEmpty(request.StateMachineInstanceId))
         {
             throw new ArgumentNullException(nameof(request.StateMachineInstanceId));
         }
 
-        if (request.Trigger == null)
+        if (string.IsNullOrEmpty(request.Trigger))
         {
             throw new ArgumentNullException(nameof(request.Trigger));
         }
 
-        if (request.EntityId == null)
+        if (string.IsNullOrEmpty(request.EntityId))
         {
             throw new ArgumentNullException(nameof(request.EntityId));
         }

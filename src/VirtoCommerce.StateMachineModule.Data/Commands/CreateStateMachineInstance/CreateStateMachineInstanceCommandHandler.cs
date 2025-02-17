@@ -22,7 +22,7 @@ public class CreateStateMachineInstanceCommandHandler : ICommandHandler<CreateSt
             throw new ArgumentNullException(nameof(request));
         }
 
-        if (request.StateMachineDefinitionId == null)
+        if (string.IsNullOrEmpty(request.StateMachineDefinitionId))
         {
             throw new ArgumentNullException(nameof(request.StateMachineDefinitionId));
         }

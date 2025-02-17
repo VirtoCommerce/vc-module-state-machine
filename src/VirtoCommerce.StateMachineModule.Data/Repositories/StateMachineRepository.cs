@@ -23,9 +23,16 @@ public class StateMachineRepository : DbContextRepositoryBase<StateMachineDbCont
 
         if (!ids.IsNullOrEmpty())
         {
-            result = await StateMachineDefinitions.Where(x => ids.Contains(x.Id)).ToArrayAsync();
+            result = await StateMachineDefinitions.
+                Where(x => ids.Contains(x.Id)).ToArrayAsync();
         }
         return result;
+    }
+
+    public virtual async Task<StateMachineDefinitionEntity> GetActiveStateMachineDefinitionByEntityType(string entityType, string responseGroup = null)
+    {
+        return await StateMachineDefinitions
+            .FirstOrDefaultAsync(x => x.EntityType == entityType && x.IsActive);
     }
 
     public virtual async Task<StateMachineInstanceEntity[]> GetStateMachineInstancesByIds(string[] ids, string responseGroup = null)

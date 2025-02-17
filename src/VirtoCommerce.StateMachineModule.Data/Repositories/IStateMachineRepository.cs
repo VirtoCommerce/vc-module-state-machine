@@ -10,5 +10,6 @@ public interface IStateMachineRepository : IRepository
     IQueryable<StateMachineInstanceEntity> StateMachineInstances { get; }
 
     Task<StateMachineDefinitionEntity[]> GetStateMachineDefinitionsByIds(string[] ids, string responseGroup = null);
+    Task<StateMachineDefinitionEntity> GetActiveStateMachineDefinitionByEntityType(string entityType, string responseGroup = null);
     Task<StateMachineInstanceEntity[]> GetStateMachineInstancesByIds(string[] ids, string responseGroup = null);
 }

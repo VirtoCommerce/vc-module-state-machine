@@ -8,6 +8,7 @@ public class SearchStateMachineDefinitionsQuery : SearchStateMachineDefinitionsC
     {
         var criteria = new SearchStateMachineDefinitionsCriteria();
 
+        criteria.ObjectIds = ObjectIds;
         criteria.Take = Take;
         criteria.Skip = Skip;
         criteria.SearchPhrase = SearchPhrase;

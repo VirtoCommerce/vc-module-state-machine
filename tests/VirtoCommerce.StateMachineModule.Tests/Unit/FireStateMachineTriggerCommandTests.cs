@@ -13,12 +13,82 @@ namespace VirtoCommerce.StateMachineModule.Tests.Unit;
 public class FireStateMachineTriggerCommandTests
 {
     [Fact]
-    public void Handle_InalidRequest_ThrowsOperationCanceledException()
+    public void Handle_NullCommandRequest_ThrowsArgumentNullException()
+    {
+        // Arrange
+        var cancellationToken = new CancellationToken();
+
+        // Act
+        Action actual = () => GetCommandHandler().Handle(null, cancellationToken).GetAwaiter().GetResult();
+
+        // Assertion
+        Assert.Throws<ArgumentNullException>(actual);
+    }
+
+    [Fact]
+    public void Handle_EmptyStateMachineInstanceId_ThrowsArgumentNullException()
     {
         // Arrange
         var command = new FireStateMachineTriggerCommand
         {
             StateMachineInstanceId = string.Empty,
+            Trigger = "Finalize",
+            EntityId = "TestEntityId"
+        };
+        var cancellationToken = new CancellationToken();
+
+        // Act
+        Action actual = () => GetCommandHandler().Handle(command, cancellationToken).GetAwaiter().GetResult();
+
+        // Assertion
+        Assert.Throws<ArgumentNullException>(actual);
+    }
+
+    [Fact]
+    public void Handle_EmptyTrigger_ThrowsArgumentNullException()
+    {
+        // Arrange
+        var command = new FireStateMachineTriggerCommand
+        {
+            StateMachineInstanceId = "TestStateMachineInstanceId",
+            Trigger = string.Empty,
+            EntityId = "TestEntityId"
+        };
+        var cancellationToken = new CancellationToken();
+
+        // Act
+        Action actual = () => GetCommandHandler().Handle(command, cancellationToken).GetAwaiter().GetResult();
+
+        // Assertion
+        Assert.Throws<ArgumentNullException>(actual);
+    }
+
+    [Fact]
+    public void Handle_EmptyEntityId_ThrowsArgumentNullException()
+    {
+        // Arrange
+        var command = new FireStateMachineTriggerCommand
+        {
+            StateMachineInstanceId = "TestStateMachineInstanceId",
+            Trigger = "Finalize",
+            EntityId = string.Empty
+        };
+        var cancellationToken = new CancellationToken();
+
+        // Act
+        Action actual = () => GetCommandHandler().Handle(command, cancellationToken).GetAwaiter().GetResult();
+
+        // Assertion
+        Assert.Throws<ArgumentNullException>(actual);
+    }
+
+    [Fact]
+    public void Handle_InalidStateMachineInstanceId_ThrowsOperationCanceledException()
+    {
+        // Arrange
+        var command = new FireStateMachineTriggerCommand
+        {
+            StateMachineInstanceId = "InvalidInstanceId",
             Trigger = "Finalize",
             EntityId = "TestEntityId"
         };
