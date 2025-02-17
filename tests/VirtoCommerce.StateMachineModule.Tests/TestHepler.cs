@@ -21,7 +21,7 @@ public static class TestHepler
 
     public static dynamic LoadArrayFromJsonFile(string fileName)
     {
-        var filePath = Path.Combine(@"..\..\..\TestData", fileName);
+        var filePath = Path.Combine(@"../../../TestData", fileName);
         return JArray.Parse(File.ReadAllText(filePath));
     }
 
