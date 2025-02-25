@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.Platform.Core.DynamicProperties;
 using VirtoCommerce.StateMachineModule.Core;
+using VirtoCommerce.StateMachineModule.Core.Common;
 using VirtoCommerce.StateMachineModule.Core.Models;
 using VirtoCommerce.StateMachineModule.Core.Models.Search;
 using VirtoCommerce.StateMachineModule.Data.Commands;
@@ -62,6 +63,18 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
             var validator = new StateMachineValidator();
             await validator.ValidateAndThrowAsync(definition);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("definitions/allstates")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<StateMachineStateShort[]>> GetAllStates([FromQuery] string entityType)
+        {
+            var query = ExType<GetStateMachineDefinitionStatesQuery>.New();
+            query.EntityType = entityType;
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
         }
 
         [HttpPost]

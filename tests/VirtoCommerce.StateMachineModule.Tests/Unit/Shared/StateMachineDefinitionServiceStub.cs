@@ -15,7 +15,25 @@ public class StateMachineDefinitionServiceStub : IStateMachineDefinitionService
 
     public Task<StateMachineDefinition> GetActiveStateMachineDefinitionAsync(string entityType)
     {
-        throw new System.NotImplementedException();
+        StateMachineDefinition stateMachineDefinition = null;
+        if (!string.IsNullOrEmpty(entityType) && entityType != "InvalidEntityType")
+        {
+            stateMachineDefinition = new StateMachineDefinition
+            {
+                Id = "TestDefinitionId",
+                EntityType = entityType,
+                States = new List<StateMachineState>
+                {
+                    new StateMachineState
+                    {
+                        Name = "TestState",
+                        IsInitial = true,
+                        IsFinal = true
+                    }
+                }
+            };
+        }
+        return Task.FromResult(stateMachineDefinition);
     }
 
     public Task<IList<StateMachineDefinition>> GetAsync(IList<string> ids, string responseGroup = null, bool clone = true)
@@ -24,10 +42,14 @@ public class StateMachineDefinitionServiceStub : IStateMachineDefinitionService
 
         foreach (var id in ids)
         {
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && id != "InvalidDefinitionId")
             {
-                var stateMachineInstance = new StateMachineDefinition { Id = id };
-                result.Add(stateMachineInstance);
+                var stateMachineDefinition = new StateMachineDefinition
+                {
+                    Id = id,
+                    States = new List<StateMachineState>()
+                };
+                result.Add(stateMachineDefinition);
             }
         }
 
