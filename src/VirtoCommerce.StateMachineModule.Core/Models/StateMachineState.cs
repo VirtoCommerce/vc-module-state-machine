@@ -13,6 +13,8 @@ public class StateMachineState : ValueObject
     public string Description { get; set; }
     public bool IsInitial { get; set; }
     public bool IsFinal { get; set; }
+    public bool IsSuccess { get; set; }
+    public bool IsFailed { get; set; }
     public object StateData { get; set; }
     public IList<StateMachineTransition> Transitions { get; set; }
 }

@@ -35,6 +35,8 @@ public class StateMachineStateShortTests
         Assert.Equal(stateMachineStateShort.Description, stateMachineState.Description);
         Assert.Equal(stateMachineStateShort.IsInitial, stateMachineState.IsInitial);
         Assert.Equal(stateMachineStateShort.IsFinal, stateMachineState.IsFinal);
+        Assert.Equal(stateMachineStateShort.IsSuccess, stateMachineState.IsSuccess);
+        Assert.Equal(stateMachineStateShort.IsFailed, stateMachineState.IsFailed);
     }
 
     private StateMachineState GetStateMachineState()
@@ -45,6 +47,8 @@ public class StateMachineStateShortTests
             Description = "Test state description",
             IsInitial = true,
             IsFinal = true,
+            IsSuccess = true,
+            IsFailed = true,
             StateData = null,
             Transitions = new List<StateMachineTransition>
             {

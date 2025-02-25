@@ -4,6 +4,8 @@
     "Type": "StateMachineState",
     "IsInitial": true,
     "IsFinal": false,
+    "IsSuccess": false,
+    "IsFailed": false,
     "Transitions": [
       {
         "Trigger": "Finalize",
@@ -15,6 +17,8 @@
     "Name": "FinalState",
     "Type": "StateMachineState",
     "IsInitial": false,
-    "IsFinal": true
+    "IsFinal": true,
+    "IsSuccess": true,
+    "IsFailed": false
   }
 ]

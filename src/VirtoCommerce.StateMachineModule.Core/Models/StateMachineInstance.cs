@@ -36,7 +36,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         var initialState = definition.States.FirstOrDefault(x => x.IsInitial);
         if (initialState == null)
         {
-            throw new OperationCanceledException("initialState must be set");
+            throw new OperationCanceledException("Initial state must be set");
         }
         var nullState = new StateMachineState
         {
