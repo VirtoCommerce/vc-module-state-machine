@@ -49,8 +49,21 @@ namespace VirtoCommerce.StateMachineModule.Data.MySql.Migrations
             migrationBuilder.Sql(createStateMachineInstanceTableScript);
 
             var createStateMachineInstanceIndexScript = @"
-                CREATE INDEX IF NOT EXISTS `IX_StateMachineInstance_StateMachineId`
-                ON `StateMachineInstance` (`StateMachineId`);";
+                CREATE PROCEDURE createsmindex()
+                BEGIN
+                IF (SELECT 1        
+                    FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                    WHERE `TABLE_NAME` = 'StateMachineInstance'
+                    AND `INDEX_NAME` = 'IX_StateMachineInstance_StateMachineId') IS NULL THEN
+
+                    ALTER TABLE `StateMachineInstance` ADD INDEX `IX_StateMachineInstance_StateMachineId` (`StateMachineId` ASC);
+
+                END IF;
+                END;
+
+                CALL createsmindex();
+                DROP PROCEDURE createsmindex;
+            ";
 
             migrationBuilder.Sql(createStateMachineInstanceIndexScript);
         }
