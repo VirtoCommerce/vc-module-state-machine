@@ -58,7 +58,7 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddTransient<StateMachineTriggerEvent>();
 
-        serviceCollection.AddMediatR(typeof(Anchor));
+        serviceCollection.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Anchor>());
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
