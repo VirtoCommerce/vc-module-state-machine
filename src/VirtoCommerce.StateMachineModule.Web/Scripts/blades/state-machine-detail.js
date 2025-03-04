@@ -54,5 +54,16 @@ angular.module('virtoCommerce.stateMachineModule')
                 }
             ];
 
+            blade.openVisualEditor = function () {
+                var newBlade = {
+                    id: "stateMachineVisualEditor",
+                    currentEntity: blade.currentEntity.statesSerialized,
+                    controller: 'virtoCommerce.stateMachineModule.stateMachineVisualEditorController',
+                    template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-visual-editor.tpl.html'
+                };
+
+                bladeNavigationService.showBlade(newBlade, blade);
+            }
+
             blade.refresh();
         }]);

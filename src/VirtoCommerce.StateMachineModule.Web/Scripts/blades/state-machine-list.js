@@ -102,14 +102,14 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.toolbarCommands = [
                 {
-                    name: "Refresh", icon: 'fa fa-refresh',
+                    name: "statemachine.blades.state-machine-list.commands.refresh", icon: 'fa fa-refresh',
                     executeMethod: blade.refresh,
                     canExecuteMethod: function () {
                         return true;
                     }
                 },
                 {
-                    name: "New", icon: 'fas fa-plus',
+                    name: "statemachine.blades.state-machine-list.commands.new", icon: 'fas fa-plus',
                     executeMethod: function () {
                         $scope.selectedNodeId = undefined;
                         var newBlade = {

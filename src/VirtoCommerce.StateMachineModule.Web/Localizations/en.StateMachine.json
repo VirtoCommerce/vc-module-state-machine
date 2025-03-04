@@ -7,6 +7,10 @@
     "blades": {
       "state-machine-list": {
         "title": "State machine",
+        "commands": {
+          "refresh": "Refresh",
+          "New": "New"
+        },
         "labels": {
           "active": "Active",
           "inactive": "Inactive",
@@ -14,6 +18,9 @@
         }
       },
       "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Open Visual Editor"
+        },
         "labels": {
           "is-active": "Active",
           "entity-type": "Entity type",
@@ -25,6 +32,14 @@
           "name": "State machine name",
           "states": "States serialized"
         }
+      },
+      "state-machine-visual-editor": {
+        "title": "State machine Visual Editor",
+        "commands": {
+          "add-state": "Add new state",
+          "reset": "Reset",
+          "delete": "Delete"
+        },
       }
     }
   },

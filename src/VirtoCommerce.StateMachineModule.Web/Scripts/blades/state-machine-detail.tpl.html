@@ -26,6 +26,9 @@
                     </div>
                 </div>
                 <div class="form-group">
+                  <a class="btn" ng-click="blade.openVisualEditor();">{{ 'statemachine.blades.state-machine-details.commands.open-visual-editor' | translate }}</a>
+                </div>
+                <div class="form-group">
                   <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.states' | translate }}</label>
                     <div class="form-input">
                         <textarea class="__large" required cols="60" rows="60" ng-model="blade.currentEntity.statesSerialized" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.states' | translate }}"></textarea>
