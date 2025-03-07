@@ -9,7 +9,7 @@
         "title": "State machine",
         "commands": {
           "refresh": "Refresh",
-          "New": "New"
+          "new": "New"
         },
         "labels": {
           "active": "Active",

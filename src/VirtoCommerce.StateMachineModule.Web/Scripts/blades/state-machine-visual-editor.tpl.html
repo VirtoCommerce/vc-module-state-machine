@@ -3,7 +3,67 @@
         <div class="inner-block">
             <form class="form" name="visualEditorForm">
                 <div class="form-group" ng-init="setForm(visualEditorForm)">
-                  <label class="form-label">I am the State Machine Visual Editor</label>
+                    <div id="visualEditorWorkspace" class="visual-editor-workspace" oncontextmenu="return false;">
+                        <!-- Transitions will be rendered as SVG paths -->
+                        <svg class="svg-lines" oncontextmenu="return false;">
+                            <g ng-repeat="transition in transitions"
+                               class="transition-group"
+                               ng-mouseenter="onTransitionHover(transition, true)"
+                               ng-mouseleave="onTransitionHover(transition, false)">
+                                <path ng-attr-d="{{transition.path}}"
+                                      class="transition-path"
+                                      ng-right-click="showTransitionContextMenu($event, transition)"
+                                      ng-dblclick="editTransition($event, transition)"
+                                      style="cursor: context-menu">
+                                </path>
+                                <text class="transition-label"
+                                      ng-attr-x="{{transition.labelPosition.x}}"
+                                      ng-attr-y="{{transition.labelPosition.y}}"
+                                      ng-right-click="showTransitionContextMenu($event, transition)"
+                                      ng-dblclick="editTransition($event, transition)"
+                                      style="cursor: context-menu">
+                                    {{transition.trigger}}
+                                </text>
+                            </g>
+                            <!-- Arrow marker definition -->
+                            <!--<defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#000"/>
+                                </marker>
+                            </defs>-->
+                        </svg>
+                        <!-- States will be dynamically added here -->
+                        <div ng-repeat="state in states"
+                             class="state-node"
+                             ng-style="{'left': state.position.x + 'px', 'top': state.position.y + 'px'}"
+                             ng-right-click="showStateContextMenu($event, state)">
+                            <div class="state-header"
+                                 ng-class="{'is-success': state.isSuccess, 'is-failed': state.isFailed}"
+                                 ng-mousedown="startDrag($event, state)"
+                                 ng-dblclick="editState($event, state)">
+                              <span class="state-name">{{state.name}}</span>
+                            </div>
+                            <div class="state-description"
+                                 ng-mousedown="startDrag($event, state)"
+                                 ng-dblclick="editState($event, state)">
+                                <div class="state-description-text">{{state.description || '(No description)'}}</div>
+                            </div>
+                            <div class="attributes" ng-if="state.isFinal">
+                                <three-position-toggle
+                                    toggle-id="{{state.id}}-toggle"
+                                    left-label="Success"
+                                    right-label="Fail"
+                                    ng-model="state.togglePosition"
+                                    on-change="onStateToggleChange(state, $position)">
+                                </three-position-toggle>
+                            </div>
+                            <div class="connector"
+                                 ng-mouseenter="connector.style.background = '#424242'"
+                                 ng-mouseleave="connector.style.background = '#757575'"
+                                 ng-mousedown="startTransition($event, state)">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

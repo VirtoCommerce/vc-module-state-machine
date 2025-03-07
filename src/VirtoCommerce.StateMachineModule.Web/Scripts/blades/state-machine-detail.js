@@ -61,8 +61,12 @@ angular.module('virtoCommerce.stateMachineModule')
                     controller: 'virtoCommerce.stateMachineModule.stateMachineVisualEditorController',
                     template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-visual-editor.tpl.html'
                 };
-
+                newBlade.parentBlade = blade;
                 bladeNavigationService.showBlade(newBlade, blade);
+            }
+
+            blade.updateStateMachineData = function (data) {
+                blade.currentEntity.statesSerialized = data;
             }
 
             blade.refresh();
