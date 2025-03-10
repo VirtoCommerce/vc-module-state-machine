@@ -76,6 +76,19 @@ angular.module('virtoCommerce.stateMachineModule')
                 if (!blade.currentEntity) return;
 
                 try {
+                    // Add resize observer to handle blade size changes
+                    const bladeContent = document.querySelector('.blade-content');
+                    if (bladeContent) {
+                        const resizeObserver = new ResizeObserver(() => {
+                            updateWorkspaceSize();
+                            updateTransitionPaths();
+                        });
+                        resizeObserver.observe(bladeContent);
+                    }
+
+                    // Initialize workspace context menu
+                    initializeWorkspaceContextMenu();
+
                     // Parse the JSON string if it's a string
                     const statesData = typeof blade.currentEntity === 'string'
                         ? JSON.parse(blade.currentEntity)
@@ -219,6 +232,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
             // Add toggle change handler
             $scope.onStateToggleChange = function(state, position) {
+                saveCurrentState();
                 $scope.$evalAsync(() => {
                     switch(position) {
                         case 'left':
@@ -502,6 +516,7 @@ angular.module('virtoCommerce.stateMachineModule')
             };
 
             function deleteState(state) {
+                saveCurrentState();
                 // Remove all inbound transitions to this state from other states
                 $scope.states.forEach(s => {
                     s.transitions = s.transitions.filter(t => t.toState !== state);
@@ -572,6 +587,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
 
                     if (existingState) {
+                        // Save current state before updating
+                        saveCurrentState();
                         // Update existing state
                         $scope.$apply(() => {
                             // If name changed, update ID and connected transitions
@@ -597,6 +614,8 @@ angular.module('virtoCommerce.stateMachineModule')
                         });
                         modal.remove();
                     } else {
+                        // Save current state before adding new state
+                        saveCurrentState();
                         // Create new state
                         const newState = {
                             id: stateName,
@@ -656,65 +675,96 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 };
 
-                modal.onclick = (e) => {
-                    if (e.target === modal) {
-                        modal.remove();
-                        if (startState) {
-                            removeTempLine();
-                        }
-                    }
-                };
-
+                // Focus on name input
                 nameInput.focus();
             }
 
             function saveCurrentState() {
-                lastSavedState = JSON.parse(JSON.stringify($scope.states.map(state => ({
-                    ...state,
+                // Create a deep copy of the current state before any modifications
+                const currentState = $scope.states.map(state => ({
+                    id: state.id,
+                    name: state.name,
+                    description: state.description || '',
+                    isInitial: state.isInitial,
+                    isFinal: state.isFinal,
+                    isSuccess: state.isSuccess,
+                    isFailed: state.isFailed,
+                    position: { ...state.position },
                     transitions: state.transitions.map(t => ({
                         trigger: t.trigger,
                         icon: t.icon || '',
                         description: t.description || '',
                         toState: t.toState.id
                     }))
-                }))));
+                }));
+                lastSavedState = currentState;
             }
 
             function restoreLastState() {
                 if (lastSavedState) {
-                    buildStateFromJSON(lastSavedState);
-                    lastSavedState = null;
+                    const stateToRestore = lastSavedState;
+                    buildStateFromJSON(stateToRestore);
+                    updateTransitionPaths();
+                    updateCurrentEntity();
                 }
             }
 
-            //workspace.oncontextmenu = (e) => {
-            //    if ((e.target === workspace || e.target === svg) && lastSavedState) {
-            //        e.preventDefault();
-            //        showWorkspaceContextMenu(e);
-            //    }
-            //};
+            function buildStateFromJSON(statesData) {
+                // Clear existing states and transitions
+                $scope.states = [];
+                $scope.transitions = [];
 
-            //function showWorkspaceContextMenu(e) {
-            //    removeContextMenu();
+                // First pass: Create all states
+                const stateMap = new Map();
 
-            //    const menu = document.createElement('div');
-            //    menu.className = 'context-menu';
-            //    menu.style.left = `${e.pageX}px`;
-            //    menu.style.top = `${e.pageY}px`;
+                statesData.forEach((stateData) => {
+                    const state = {
+                        id: stateData.id,
+                        name: stateData.name,
+                        description: stateData.description || '',
+                        isInitial: stateData.isInitial,
+                        isFinal: stateData.isFinal,
+                        isSuccess: stateData.isSuccess,
+                        isFailed: stateData.isFailed,
+                        position: stateData.position,
+                        transitions: [],
+                        togglePosition: stateData.isSuccess ? 'left' : (stateData.isFailed ? 'right' : 'center')
+                    };
+                    stateMap.set(state.id, state);
+                    $scope.states.push(state);
+                });
 
-            //    const undoItem = document.createElement('div');
-            //    undoItem.className = 'context-menu-item';
-            //    undoItem.innerHTML = '<i class="fas fa-undo"></i>Undo';
-            //    undoItem.onclick = () => {
-            //        restoreLastState();
-            //        removeContextMenu();
-            //    };
+                // Second pass: Create transitions
+                statesData.forEach(stateData => {
+                    const fromState = stateMap.get(stateData.id);
+                    if (!fromState) return;
 
-            //    menu.appendChild(undoItem);
-            //    document.body.appendChild(menu);
+                    // Handle transitions array
+                    if (Array.isArray(stateData.transitions)) {
+                        stateData.transitions.forEach(transitionData => {
+                            const toState = stateMap.get(transitionData.toState);
+                            if (!toState) return;
 
-            //    document.addEventListener('click', removeContextMenu);
-            //}
+                            const transition = {
+                                trigger: transitionData.trigger,
+                                icon: transitionData.icon || '',
+                                description: transitionData.description || '',
+                                fromState: fromState,
+                                toState: toState,
+                                path: '', // Will be calculated by updateTransitionPath
+                                labelPosition: {} // Will be calculated by updateTransitionPath
+                            };
+
+                            $scope.transitions.push(transition);
+                            fromState.transitions.push(transition);
+                        });
+                    }
+                });
+
+                // Update states attributes
+                updateStatesAttributes();
+                calculateStateLevels();
+            }
 
             function calculateStateLevels() {
                 $scope.states.forEach(state => state.level = 0);
@@ -765,6 +815,9 @@ angular.module('virtoCommerce.stateMachineModule')
                     affectedTransitions.forEach(transition => {
                         updateTransitionPath(transition);
                     });
+
+                    // Update workspace size to accommodate new state position
+                    updateWorkspaceSize();
                 }
 
                 workspace.onmousemove = (e) => {
@@ -909,8 +962,20 @@ angular.module('virtoCommerce.stateMachineModule')
                 menu.appendChild(addStateItem);
                 document.body.appendChild(menu);
 
-                document.addEventListener('click', (e) => {
-                });
+                // Add click handler to document to close menu and clean up
+                const handleClickOutside = (event) => {
+                    if (!menu.contains(event.target)) {
+                        removeContextMenu();
+                        removeTempLine();
+                        isTransitioning = false;
+                        document.removeEventListener('click', handleClickOutside);
+                    }
+                };
+
+                // Delay adding the click listener to prevent immediate closure
+                setTimeout(() => {
+                    document.addEventListener('click', handleClickOutside);
+                }, 0);
             }
 
             function removeContextMenu() {
@@ -1022,6 +1087,7 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             function deleteTransition(transition) {
+                saveCurrentState();
                 const fromState = transition.fromState;
 
                 // Remove from transitions array
@@ -1102,12 +1168,8 @@ angular.module('virtoCommerce.stateMachineModule')
 
                 cancelButton.onclick = () => {
                     modal.remove();
-                };
-
-                modal.onclick = (e) => {
-                    if (e.target === modal) {
-                        modal.remove();
-                    }
+                    removeTempLine();
+                    isTransitioning = false;
                 };
 
                 // Focus on trigger input
@@ -1144,6 +1206,11 @@ angular.module('virtoCommerce.stateMachineModule')
 
             function normalizeStateLayout() {
                 var workspace = document.getElementById('visualEditorWorkspace');
+                if (!workspace) return;
+
+                // Update workspace size before normalization
+                updateWorkspaceSize();
+
                 calculateStateLevels();
 
                 function doLinesIntersect(x1, y1, x2, y2, x3, y3, x4, y4) {
@@ -1351,7 +1418,7 @@ angular.module('virtoCommerce.stateMachineModule')
                 $scope.states.forEach(state => {
                     maxY = Math.max(maxY, state.position.y + stateHeight);
                 });
-                workspace.style.height = (maxY + 100) + 'px';
+                //workspace.style.height = (maxY + 100) + 'px';
 
                 workspace.style.width = '100%';
             }
@@ -1378,6 +1445,138 @@ angular.module('virtoCommerce.stateMachineModule')
                 // Update blade.currentEntity with stringified state machine
                 blade.currentEntity = JSON.stringify(serializedStates);
                 blade.parentBlade.updateStateMachineData(blade.currentEntity);
+            }
+
+            function updateWorkspaceSize() {
+                const workspace = document.getElementById('visualEditorWorkspace');
+                const bladeContent = document.querySelector('.blade-content');
+                if (!workspace || !bladeContent) return;
+
+                // Get blade content dimensions
+                const bladeRect = bladeContent.getBoundingClientRect();
+
+                // Calculate required size based on state positions
+                let minX = Infinity;
+                let maxX = -Infinity;
+                let minY = Infinity;
+                let maxY = -Infinity;
+
+                $scope.states.forEach(state => {
+                    minX = Math.min(minX, state.position.x);
+                    maxX = Math.max(maxX, state.position.x + stateWidth);
+                    minY = Math.min(minY, state.position.y);
+                    maxY = Math.max(maxY, state.position.y + stateHeight);
+                });
+
+                // Add padding
+                const padding = 10;
+                minX -= padding;
+                maxX += padding;
+                minY -= padding;
+                maxY += padding;
+
+                // Set workspace dimensions
+                workspace.style.width = '100%';
+                workspace.style.position = 'absolute';
+                workspace.style.top = '0';
+                workspace.style.left = '0';
+                workspace.style.right = '0';
+                workspace.style.bottom = '0';
+                workspace.style.overflow = 'auto';
+
+                // Update SVG dimensions and position
+                const svg = workspace.querySelector('svg');
+                if (svg) {
+                    // If we have negative coordinates, shift all states to positive space
+                    if (minX < 0) {
+                        const shift = Math.abs(minX);
+                        $scope.states.forEach(state => {
+                            state.position.x += shift;
+                        });
+                        maxX += shift;
+                        minX = 0;
+                    }
+
+                    if (minY < 0) {
+                        const shift = Math.abs(minY);
+                        $scope.states.forEach(state => {
+                            state.position.y += shift;
+                        });
+                        maxY += shift;
+                        minY = 0;
+                    }
+
+                    const totalWidth = maxX - minX;
+                    const totalHeight = maxY - minY;
+
+                    svg.style.minWidth = Math.max(totalWidth, bladeRect.width) + 'px';
+                    svg.style.minHeight = Math.max(totalHeight, bladeRect.height - 20) + 'px';
+
+                    // Update all transition paths after shifting states
+                    updateTransitionPaths();
+                }
+            }
+
+            // Add workspace context menu handler
+            function initializeWorkspaceContextMenu() {
+                const workspace = document.getElementById('visualEditorWorkspace');
+                if (!workspace) return;
+
+                workspace.oncontextmenu = (e) => {
+                    // Only show context menu if clicking on the workspace or SVG background
+                    const target = e.target;
+                    if (target === workspace || target.tagName === 'svg' || target === workspace.querySelector('svg')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showWorkspaceContextMenu(e);
+                        return false;
+                    }
+                };
+            }
+
+            function showWorkspaceContextMenu(e) {
+                removeContextMenu();
+
+                const menu = document.createElement('div');
+                menu.className = 'context-menu';
+                menu.style.position = 'absolute';
+                menu.style.left = `${e.pageX}px`;
+                menu.style.top = `${e.pageY}px`;
+                menu.style.zIndex = '1000';
+
+                const undoItem = document.createElement('div');
+                undoItem.className = 'context-menu-item';
+                undoItem.innerHTML = '<i class="fas fa-undo"></i>Undo';
+
+                if (!lastSavedState) {
+                    undoItem.classList.add('disabled');
+                    undoItem.style.opacity = '0.5';
+                    undoItem.style.cursor = 'default';
+                } else {
+                    undoItem.style.cursor = 'pointer';
+                    undoItem.onclick = () => {
+                        removeContextMenu();
+                        $scope.$apply(() => {
+                            restoreLastState();
+                        });
+                    };
+                }
+
+                menu.appendChild(undoItem);
+                document.body.appendChild(menu);
+
+                // Add click handler to document to close menu
+                const handleClickOutside = (event) => {
+                    if (!menu.contains(event.target)) {
+                        removeContextMenu();
+                        document.removeEventListener('click', handleClickOutside);
+                    }
+                };
+
+                // Delay adding the click listener to prevent immediate closure
+                setTimeout(() => {
+                    document.addEventListener('click', handleClickOutside);
+                }, 0);
             }
 
             // Initialize
