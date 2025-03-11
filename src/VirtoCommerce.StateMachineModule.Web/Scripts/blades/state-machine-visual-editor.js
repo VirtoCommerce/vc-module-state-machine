@@ -56,11 +56,13 @@ angular.module('virtoCommerce.stateMachineModule')
         };
     })
     .controller('virtoCommerce.stateMachineModule.stateMachineVisualEditorController', [
-        '$scope', '$element',
-        function ($scope, $element) {
+        '$scope', '$element', '$timeout',
+        function ($scope, $element, $timeout) {
             var blade = $scope.blade;
-            blade.headIcon = 'fas fa-code';
+            blade.headIcon = 'fas fa-project-diagram';
             blade.title = 'statemachine.blades.state-machine-visual-editor.title';
+            blade.isInVisualMode = true;
+            blade.isInJsonMode = false;
 
             // State machine data
             $scope.states = [];
@@ -71,6 +73,51 @@ angular.module('virtoCommerce.stateMachineModule')
             const stateHeight = 100;
             const horizontalSpacing = 200;
             const verticalSpacing = 150;
+
+            function initializeJsonEditor() {
+                const jsonEditor = document.getElementById('jsonEditor');
+                if (!jsonEditor) return;
+
+                // Set initial JSON content
+                const formattedJson = JSON.stringify(JSON.parse(blade.currentEntity), null, 2);
+                jsonEditor.value = formattedJson;
+
+                jsonEditor.addEventListener('input', () => {
+                    refreshJsonEditor();
+                });
+
+                jsonEditor.addEventListener('blur', () => {
+                    refreshJsonEditor();
+                });
+
+            }
+
+            function refreshJsonEditor() {
+                const jsonEditor = document.getElementById('jsonEditor');
+                if (!jsonEditor) return;
+
+                try {
+                    const jsonContent = jsonEditor.value;
+                    const parsedJson = JSON.parse(jsonContent);
+
+                    // Update blade.currentEntity
+                    $scope.$apply(() => {
+                        blade.currentEntity = JSON.stringify(parsedJson);
+                        blade.parentBlade.updateStateMachineData(blade.currentEntity);
+
+                        // If we're in visual mode, reinitialize the state machine
+                        if (blade.isInVisualMode) {
+                            initializeStateMachine();
+                        }
+                    });
+
+                    // Remove error styling if present
+                    jsonEditor.style.border = '1px solid #ccc';
+                } catch (error) {
+                    // Add error styling to indicate invalid JSON
+                    jsonEditor.style.border = '1px solid #ff0000';
+                }
+            }
 
             function initializeStateMachine() {
                 if (!blade.currentEntity) return;
@@ -146,6 +193,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                 if (!toState) return;
 
                                 const transition = {
+                                    id: transitionData.id || generateUniqueId(),
                                     trigger: transitionData.trigger,
                                     icon: transitionData.icon || '',
                                     description: transitionData.description || '',
@@ -226,6 +274,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.refresh = function () {
                 initializeStateMachine();
+                initializeJsonEditor(); // Create JSON editor during initialization
                 blade.origEntity = angular.copy(blade.currentEntity);
                 blade.isLoading = false;
             };
@@ -285,6 +334,30 @@ angular.module('virtoCommerce.stateMachineModule')
                 });
             };
 
+            $scope.onStateHover = function(state, isHovered) {
+                const stateEl = document.getElementById('state' + state.id);
+                if (stateEl) {
+                    if (isHovered) {
+                        stateEl.style.border = '2px solid #242424';
+                        stateEl.style.boxShadow = '5px 5px 6px rgba(0, 0, 0, 0.2)';
+                    } else {
+                        stateEl.style.border = '';
+                        stateEl.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.2)';
+                    }
+                }
+                const connectedTransitions = $scope.transitions.filter(x => x.fromState.id === state.id || x.toState.id === state.id);
+                connectedTransitions.forEach(transition =>{
+                    const transitionEl = document.getElementById(transition.id);
+                    if (transitionEl) {
+                        if (isHovered) {
+                            transitionEl.classList.add('hovered');
+                        } else {
+                            transitionEl.classList.remove('hovered');
+                        }
+                    }
+                });
+            };
+
             // Add hover handler
             $scope.onTransitionHover = function(transition, isHovered) {
                 const workspace = document.getElementById('visualEditorWorkspace');
@@ -300,23 +373,30 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 }
 
-                // Update connected states
-                const fromStateEl = workspace.querySelector(`[ng-repeat="state in states"]:nth-child(${$scope.states.indexOf(transition.fromState) + 1})`);
-                const toStateEl = workspace.querySelector(`[ng-repeat="state in states"]:nth-child(${$scope.states.indexOf(transition.toState) + 1})`);
+                const fromStateEl = document.getElementById('state' + transition.fromState.id);
+                const toStateEl = document.getElementById('state' + transition.toState.id);
 
                 if (fromStateEl) {
                     if (isHovered) {
                         fromStateEl.classList.add('hovered');
+                        fromStateEl.style.border = '2px solid #242424';
+                        fromStateEl.style.boxShadow = '5px 5px 6px rgba(0, 0, 0, 0.2)';
                     } else {
                         fromStateEl.classList.remove('hovered');
+                        fromStateEl.style.border = '';
+                        fromStateEl.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.2)';
                     }
                 }
 
                 if (toStateEl) {
                     if (isHovered) {
                         toStateEl.classList.add('hovered');
+                        toStateEl.style.border = '2px solid #242424';
+                        toStateEl.style.boxShadow = '5px 5px 6px rgba(0, 0, 0, 0.2)';
                     } else {
                         toStateEl.classList.remove('hovered');
+                        toStateEl.style.border = '';
+                        toStateEl.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.2)';
                     }
                 }
             };
@@ -426,6 +506,22 @@ angular.module('virtoCommerce.stateMachineModule')
                         initializeStateMachine();
                     },
                     canExecuteMethod: isDirty
+                },
+                {
+                    name: "statemachine.blades.state-machine-visual-editor.commands.toggle-to-visual-mode",
+                    icon: 'fas fa-project-diagram',
+                    executeMethod: toggleToVisualMode,
+                    canExecuteMethod: function () {
+                        return blade.isInJsonMode;
+                    }
+                },
+                {
+                    name: "statemachine.blades.state-machine-visual-editor.commands.toggle-to-json-mode",
+                    icon: 'fas fa-code',
+                    executeMethod: toggleToJsonMode,
+                    canExecuteMethod: function () {
+                        return blade.isInVisualMode;
+                    }
                 }
             ];
 
@@ -435,6 +531,57 @@ angular.module('virtoCommerce.stateMachineModule')
 
             function isDirty() {
                 return !angular.equals(blade.currentEntity, blade.origEntity);
+            }
+
+            function toggleToVisualMode() {
+                blade.isInJsonMode = false;
+                blade.isInVisualMode = true;
+                blade.headIcon = 'fas fa-project-diagram';
+
+                const jsonEditorContainer = document.getElementById('jsonEditorContainer');
+                const visualEditor = document.getElementById('visualEditorWorkspace');
+
+                if (jsonEditorContainer) {
+                    jsonEditorContainer.style.display = 'none';
+                }
+                if (visualEditor) {
+                    visualEditor.style.display = 'block';
+                    $timeout(() => {
+                        initializeStateMachine();
+                    });
+                }
+            }
+
+            function toggleToJsonMode() {
+                blade.isInJsonMode = true;
+                blade.isInVisualMode = false;
+                blade.headIcon = 'fas fa-code';
+
+                const jsonEditorContainer = document.getElementById('jsonEditorContainer');
+                const visualEditor = document.getElementById('visualEditorWorkspace');
+
+                if (!jsonEditorContainer) {
+                    initializeJsonEditor();
+                } else {
+                    jsonEditorContainer.style.display = 'block';
+                    const jsonEditor = document.getElementById('jsonEditor');
+                    if (jsonEditor) {
+                        const formattedJson = JSON.stringify(JSON.parse(blade.currentEntity), null, 2);
+                        jsonEditor.value = formattedJson;
+
+                        jsonEditor.addEventListener('input', () => {
+                            refreshJsonEditor();
+                        });
+
+                        jsonEditor.addEventListener('blur', () => {
+                            refreshJsonEditor();
+                        });
+                    }
+                }
+
+                if (visualEditor) {
+                    visualEditor.style.display = 'none';
+                }
             }
 
             // Add new state
@@ -640,6 +787,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                 modal.remove();
                                 showTransitionModal(null, (transitionData) => {
                                     const newTransition = {
+                                        id: generateUniqueId(),
                                         trigger: transitionData.trigger,
                                         icon: transitionData.icon || '',
                                         description: transitionData.description || '',
@@ -691,6 +839,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     isFailed: state.isFailed,
                     position: { ...state.position },
                     transitions: state.transitions.map(t => ({
+                        id: t.id,
                         trigger: t.trigger,
                         icon: t.icon || '',
                         description: t.description || '',
@@ -746,6 +895,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             if (!toState) return;
 
                             const transition = {
+                                id: transitionData.id || generateUniqueId(),
                                 trigger: transitionData.trigger,
                                 icon: transitionData.icon || '',
                                 description: transitionData.description || '',
@@ -914,6 +1064,7 @@ angular.module('virtoCommerce.stateMachineModule')
                 saveCurrentState();
                 showTransitionModal(null, (transitionData) => {
                     const newTransition = {
+                        id: generateUniqueId(),
                         trigger: transitionData.trigger,
                         icon: transitionData.icon || '',
                         description: transitionData.description || '',
@@ -1435,6 +1586,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     isFailed: state.isFailed,
                     position: state.position,
                     transitions: state.transitions.map(t => ({
+                        id: t.id,
                         trigger: t.trigger,
                         icon: t.icon || '',
                         description: t.description || '',
@@ -1577,6 +1729,11 @@ angular.module('virtoCommerce.stateMachineModule')
                 setTimeout(() => {
                     document.addEventListener('click', handleClickOutside);
                 }, 0);
+            }
+
+            // Add a function to generate unique IDs
+            function generateUniqueId() {
+                return 'transition_' + Math.random().toString(36).substr(2, 9);
             }
 
             // Initialize

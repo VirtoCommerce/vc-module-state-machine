@@ -38,8 +38,10 @@
         "commands": {
           "add-state": "Add new state",
           "reset": "Reset",
-          "delete": "Delete"
-        },
+          "delete": "Delete",
+          "toggle-to-visual-mode": "Visual mode",
+          "toggle-to-json-mode": "JSON mode"
+        }
       }
     }
   },
