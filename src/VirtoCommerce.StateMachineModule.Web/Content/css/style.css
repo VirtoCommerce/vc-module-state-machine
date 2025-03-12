@@ -408,3 +408,9 @@ text {
     justify-content: center;
 }
 
+.state-machine-capture-preview {
+  background: lightgray;
+  border: 2px solid #a1c0d4;
+  width: 380px;
+  cursor: pointer;
+}
