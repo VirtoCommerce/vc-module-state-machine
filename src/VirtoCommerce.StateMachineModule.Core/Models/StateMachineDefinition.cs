@@ -11,7 +11,7 @@ public class StateMachineDefinition : AuditableEntity, ICloneable
     public bool IsActive { get; set; }
     public IList<StateMachineState> States { get; set; }
     public string StatesGraph { get; set; }
-    public string StatesCaptureUrl { get; set; }
+    public string StatesCapture { get; set; }
 
     public object Clone()
     {

@@ -27,8 +27,7 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
 
     public string StatesGraph { get; set; }
 
-    [StringLength(2083)]
-    public string StatesCaptureUrl { get; set; }
+    public string StatesCapture { get; set; }
 
     public virtual StateMachineDefinition ToModel(StateMachineDefinition model)
     {
@@ -48,7 +47,7 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         model.Version = Version;
         model.States = JsonConvert.DeserializeObject<StateMachineState[]>(StatesSerialized, new PolymorphJsonConverter());
         model.StatesGraph = StatesGraph;
-        model.StatesCaptureUrl = StatesCaptureUrl;
+        model.StatesCapture = StatesCapture;
 
         return model;
     }
@@ -81,7 +80,7 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         settings.Converters.Add(new ConditionJsonConverter(doNotSerializeAvailCondition: true));
         StatesSerialized = JsonConvert.SerializeObject(model.States, settings);
         StatesGraph = model.StatesGraph;
-        StatesCaptureUrl = model.StatesCaptureUrl;
+        StatesCapture = model.StatesCapture;
 
         return this;
     }
@@ -100,6 +99,6 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         target.Version = Version;
         target.StatesSerialized = StatesSerialized;
         target.StatesGraph = StatesGraph;
-        target.StatesCaptureUrl = StatesCaptureUrl;
+        target.StatesCapture = StatesCapture;
     }
 }

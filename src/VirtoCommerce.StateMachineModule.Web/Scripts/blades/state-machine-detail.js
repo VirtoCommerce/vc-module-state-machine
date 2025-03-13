@@ -7,10 +7,13 @@ angular.module('virtoCommerce.stateMachineModule')
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
             blade.title = '';
+            blade.canSave = true;
 
             blade.refresh = function () {
                 if (!blade.isNew) {
-                    blade.currentEntity.statesSerialized = JSON.stringify(blade.currentEntity.states, null, 2);
+                    if (!blade.currentEntity.statesGraph) {
+                        blade.currentEntity.statesGraph = JSON.stringify(blade.currentEntity.states, null, 2);
+                    }
                 }
                 blade.origEntity = angular.copy(blade.currentEntity);
                 blade.isLoading = false;
@@ -22,12 +25,20 @@ angular.module('virtoCommerce.stateMachineModule')
                 return !angular.equals(blade.currentEntity, blade.origEntity);
             }
 
-            $scope.saveChanges = function () {
-                blade.currentEntity.states = JSON.parse(blade.currentEntity.statesSerialized);
+            $scope.saveChanges = async function () {
+                blade.canSave = false;
+                blade.isLoading = true;
+                if (blade.childrenBlades && blade.childrenBlades.length == 1
+                    && blade.childrenBlades[0].makeSnaphot) {
+                    await blade.childrenBlades[0].makeSnaphot();
+                }
+                blade.currentEntity.states = JSON.parse(blade.currentEntity.statesGraph);
                 if (!blade.currentEntity.version) {
                     blade.currentEntity.version = '0';
                 }
-                webApi.updateStateMachineDefinition({ definition: blade.currentEntity },
+                webApi.updateStateMachineDefinition({
+                    definition: blade.currentEntity
+                },
                     function (data) {
                         $scope.bladeClose();
                         blade.parentBlade.refresh(true);
@@ -42,7 +53,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         $scope.saveChanges();
                     },
                     canExecuteMethod: function () {
-                        return isDirty() && $scope.formScope && $scope.formScope.$valid;
+                        return isDirty() && $scope.formScope && $scope.formScope.$valid && blade.canSave;
                     }
                 },
                 {
@@ -57,7 +68,7 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.openVisualEditor = function () {
                 var newBlade = {
                     id: "stateMachineVisualEditor",
-                    currentEntity: blade.currentEntity.statesSerialized,
+                    currentEntity: blade.currentEntity.statesGraph,
                     controller: 'virtoCommerce.stateMachineModule.stateMachineVisualEditorController',
                     template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-visual-editor.tpl.html'
                 };
@@ -66,7 +77,13 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.updateStateMachineData = function (data) {
-                blade.currentEntity.statesSerialized = data;
+                blade.currentEntity.statesGraph = data;
+            }
+
+            blade.updateStateMachineSnapshot = function (data) {
+                $scope.$apply(() => {
+                    blade.currentEntity.statesCapture = data;
+                });
             }
 
             blade.refresh();

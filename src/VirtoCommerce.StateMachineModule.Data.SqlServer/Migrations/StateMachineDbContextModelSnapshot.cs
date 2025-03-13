@@ -55,9 +55,8 @@ namespace VirtoCommerce.StateMachineModule.Data.SqlServer.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<string>("StatesCaptureUrl")
-                        .HasMaxLength(2083)
-                        .HasColumnType("nvarchar(2083)");
+                    b.Property<string>("StatesCapture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StatesGraph")
                         .HasColumnType("nvarchar(max)");

@@ -57,7 +57,9 @@ angular.module('virtoCommerce.stateMachineModule')
     })
     .controller('virtoCommerce.stateMachineModule.stateMachineVisualEditorController', [
         '$scope', '$element', '$timeout',
-        function ($scope, $element, $timeout) {
+        'platformWebApp.assets.api',
+        function ($scope, $element, $timeout,
+            assetsApi) {
             var blade = $scope.blade;
             blade.headIcon = 'fas fa-project-diagram';
             blade.title = 'statemachine.blades.state-machine-visual-editor.title';
@@ -258,18 +260,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     console.error('Error initializing state machine:', error);
                     console.error('Data:', blade.currentEntity);
                 }
-            }
-
-            function calculateStatePosition(index) {
-                // Calculate position in a grid layout
-                const columns = 3; // Number of states per row
-                const row = Math.floor(index / columns);
-                const col = index % columns;
-
-                return {
-                    x: col * horizontalSpacing + 50,
-                    y: row * verticalSpacing + 50
-                };
             }
 
             blade.refresh = function () {
@@ -522,12 +512,25 @@ angular.module('virtoCommerce.stateMachineModule')
                     canExecuteMethod: function () {
                         return blade.isInVisualMode;
                     }
+                //},
+                //{
+                //    name: "Snapshot",
+                //    icon: 'fa fa-camera',
+                //    executeMethod: makeSnaphot,
+                //    canExecuteMethod: function () {
+                //        return true;
+                //    }
                 }
             ];
 
             $scope.setForm = function (form) {
                 $scope.formScope = form;
             }
+
+            blade.onClose = async function (closeCallback) {
+                await blade.makeSnaphot();
+                closeCallback();
+            };
 
             function isDirty() {
                 return !angular.equals(blade.currentEntity, blade.origEntity);
@@ -582,6 +585,111 @@ angular.module('virtoCommerce.stateMachineModule')
                 if (visualEditor) {
                     visualEditor.style.display = 'none';
                 }
+            }
+
+            blade.makeSnaphot = async function () {
+                blade.isLoading = true;
+                try {
+                    const workspace = document.getElementById('visualEditorWorkspace');
+                    if (!workspace) {
+                        console.error('Workspace not found');
+                        return;
+                    }
+
+                    // Calculate the bounds of all content
+                    let minX = Infinity, minY = Infinity;
+                    let maxX = -Infinity, maxY = -Infinity;
+
+                    // Check all states
+                    $scope.states.forEach(state => {
+                        minX = Math.min(minX, state.position.x);
+                        minY = Math.min(minY, state.position.y);
+                        maxX = Math.max(maxX, state.position.x + stateWidth);
+                        maxY = Math.max(maxY, state.position.y + stateHeight);
+                    });
+
+                    // Add 20px margin
+                    const margin = 20;
+                    minX = Math.max(0, minX - margin);
+                    minY = Math.max(0, minY - margin);
+                    maxX = maxX + margin;
+                    maxY = maxY + margin;
+
+                    const totalWidth = maxX - minX;
+                    const totalHeight = maxY - minY;
+
+                    // Create a hidden clone of the workspace
+                    const hiddenWorkspace = workspace.cloneNode(true);
+                    hiddenWorkspace.id = 'hidden-workspace';
+                    hiddenWorkspace.style.position = 'fixed';
+                    hiddenWorkspace.style.left = '-9999px';
+                    hiddenWorkspace.style.top = '-9999px';
+                    hiddenWorkspace.style.background = 'white';
+                    hiddenWorkspace.style.width = totalWidth + 'px';
+                    hiddenWorkspace.style.height = totalHeight + 'px';
+                    hiddenWorkspace.style.overflow = 'visible';
+
+                    // Update SVG dimensions in the clone
+                    const hiddenSvg = hiddenWorkspace.querySelector('svg');
+                    if (hiddenSvg) {
+                        //hiddenSvg.style.left = (totalWidth - 9999) + 'px';
+                        hiddenSvg.style.width = totalWidth + 'px';
+                        //hiddenSvg.style.top = (totalHeight - 9999) + 'px';                        hiddenSvg.style.width = totalWidth + 'px';
+                        hiddenSvg.style.height = totalHeight + 'px';
+                        //hiddenSvg.setAttribute('left', totalWidth-9999);
+                        hiddenSvg.setAttribute('width', totalWidth);
+                        //hiddenSvg.setAttribute('top', totalHeight-9999);
+                        hiddenSvg.setAttribute('height', totalHeight);
+                        hiddenSvg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+                    }
+
+                    // Add the hidden workspace to the document
+                    document.body.appendChild(hiddenWorkspace);
+
+                    const canvas = await html2canvas(hiddenWorkspace, {
+                        backgroundColor: '#ffffff',
+                        scale: 1,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true,
+                        width: totalWidth,
+                        height: totalHeight,
+                        x: minX,
+                        y: minY,
+                        windowWidth: totalWidth,
+                        windowHeight: totalHeight
+                    });
+
+                        const aspectRatio = canvas.height / canvas.width;
+                        const targetWidth = 380;
+                        const targetHeight = Math.round(targetWidth * aspectRatio);
+
+                        const resizedCanvas = document.createElement('canvas');
+                        resizedCanvas.width = targetWidth;
+                        resizedCanvas.height = targetHeight;
+                        const ctx = resizedCanvas.getContext('2d');
+
+                        // Enable image smoothing for better quality
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+
+                        // Draw the original canvas onto the resized one
+                        ctx.drawImage(canvas, 0, 0, targetWidth, targetHeight);
+
+                        const imageData = resizedCanvas.toDataURL('image/png', 1.0);
+                        if (blade.parentBlade.updateStateMachineSnapshot) {
+                            blade.parentBlade.updateStateMachineSnapshot(imageData);
+                        }
+
+                        // Always remove the hidden workspace
+                        if (hiddenWorkspace && hiddenWorkspace.parentNode) {
+                            hiddenWorkspace.parentNode.removeChild(hiddenWorkspace);
+                        }
+
+                } catch (error) {
+                    console.error('Error in makeSnaphot:', error);
+                }
+                blade.isLoading = false;
             }
 
             // Add new state

@@ -28,9 +28,9 @@
                 <div class="form-group">
                   <a class="btn" ng-click="blade.openVisualEditor();">{{ 'statemachine.blades.state-machine-details.commands.open-visual-editor' | translate }}</a>
                 </div>
-                <div class="form-group" ng-if="blade.currentEntity.statesCaptureUrl">
+                <div class="form-group" ng-if="blade.currentEntity.statesCapture">
                     <div class="state-machine-capture-preview">
-                      <img ng-src="{{ blade.currentEntity.statesCaptureUrl }}" ng-click="blade.openVisualEditor()" />
+                      <img ng-src="{{ blade.currentEntity.statesCapture }}" ng-click="blade.openVisualEditor()" />
                     </div>
                 </div>
             </form>
