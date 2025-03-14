@@ -588,6 +588,13 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.makeSnaphot = async function () {
+                if (!isDirty()) {
+                    return;
+                }
+
+                removeContextMenu();
+                removeTempLine();
+
                 blade.isLoading = true;
                 try {
                     const workspace = document.getElementById('visualEditorWorkspace');

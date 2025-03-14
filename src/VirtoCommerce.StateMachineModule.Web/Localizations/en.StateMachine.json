@@ -64,5 +64,10 @@
         "description": "StateMachineModule Password setting"
       }
     }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Export/Import of state machines"
+    }
   }
 }
