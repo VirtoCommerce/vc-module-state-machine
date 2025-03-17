@@ -62,8 +62,36 @@ angular.module('virtoCommerce.stateMachineModule')
                         angular.copy(blade.origEntity, blade.currentEntity);
                     },
                     canExecuteMethod: isDirty
+                },
+                {
+                    name: "statemachine.blades.state-machine-details.commands.export",
+                    icon: 'fa fa-upload',
+                    executeMethod: function () {
+                        blade.exportStateMachine();
+                    },
+                    canExecuteMethod: function () {
+                        return true;
+                    }
+                },
+                {
+                    name: "statemachine.blades.state-machine-details.commands.import",
+                    icon: 'fa fa-download',
+                    executeMethod: function () {
+                        blade.importStateMachine();
+                    },
+                    canExecuteMethod: function () {
+                        return true;
+                    }
                 }
             ];
+
+            blade.exportStateMachine = function () {
+                alert("I am an export");
+            }
+
+            blade.importStateMachine = function () {
+                alert("I am an import");
+            }
 
             blade.openVisualEditor = function () {
                 var newBlade = {

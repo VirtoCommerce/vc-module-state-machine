@@ -19,7 +19,9 @@
       },
       "state-machine-details": {
         "commands": {
-          "open-visual-editor": "Open Visual Editor"
+          "open-visual-editor": "Open Visual Editor",
+          "export": "Export",
+          "import": "Import"
         },
         "labels": {
           "is-active": "Active",
