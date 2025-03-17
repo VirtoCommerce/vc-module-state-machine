@@ -10,6 +10,7 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.headIcon = 'far fa-plus-square';
             blade.title = 'statemachine.blades.state-machine-list.title';
             blade.subtitle = '';
+            blade.importInProgress = false;
             $scope.uiGridConstants = uiGridHelper.uiGridConstants;
             $scope.hasMore = true;
             $scope.items = [];
@@ -102,18 +103,21 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.toolbarCommands = [
                 {
-                    name: "statemachine.blades.state-machine-list.commands.refresh", icon: 'fa fa-refresh',
+                    name: "platform.commands.refresh",
+                    icon: 'fa fa-refresh',
                     executeMethod: blade.refresh,
                     canExecuteMethod: function () {
                         return true;
                     }
                 },
                 {
-                    name: "statemachine.blades.state-machine-list.commands.new", icon: 'fas fa-plus',
+                    name: "statemachine.blades.state-machine-list.commands.new",
+                    icon: 'fas fa-plus',
                     executeMethod: function () {
                         $scope.selectedNodeId = undefined;
                         var newBlade = {
                             subtitle: '',
+                            currentEntity: {},
                             isNew: true,
                             onChangesConfirmedFn: function (entry) {
                                 $scope.selectedNodeId = entry.id;
@@ -124,8 +128,83 @@ angular.module('virtoCommerce.stateMachineModule')
                     canExecuteMethod: function () {
                         return true;
                     }
+                },
+                {
+                    name: "statemachine.blades.state-machine-list.commands.import",
+                    icon: 'fa fa-download',
+                    executeMethod: function () {
+                        blade.importStateMachine();
+                    },
+                    canExecuteMethod: function () {
+                        return !blade.importInProgress;
+                    }
                 }
             ];
+
+            blade.importStateMachine = function () {
+                try {
+                    // Create a file input element
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = '.zip';
+
+                    // Handle file selection
+                    input.onchange = function (e) {
+                        const file = e.target.files[0];
+                        if (!file) return;
+
+                        blade.importInProgress = true;
+                        blade.isLoading = true;
+                        // Create a new JSZip instance
+                        const zip = new JSZip();
+
+                        // Load the zip file
+                        zip.loadAsync(file)
+                            .then(function (zip) {
+                                // Find the first JSON file in the zip
+                                const jsonFile = Object.values(zip.files).find(file =>
+                                    file.name.endsWith('.json') && !file.dir
+                                );
+
+                                if (!jsonFile) {
+                                    throw new Error('No JSON file found in the zip archive');
+                                }
+
+                                // Read the JSON file content
+                                return jsonFile.async('string');
+                            })
+                            .then(function (jsonString) {
+                                try {
+                                    const importedData = JSON.parse(jsonString);
+
+                                    // Validate the imported data structure
+                                    if (!importedData.states || !Array.isArray(importedData.states)) {
+                                        throw new Error('Invalid state machine format');
+                                    }
+
+                                    webApi.updateStateMachineDefinition({
+                                        definition: importedData
+                                    },
+                                    function (data) {
+                                        blade.importInProgress = false;
+                                        blade.isLoading = false;
+                                        blade.refresh();
+                                    });
+
+                                } catch (error) {
+                                    console.error('Error parsing imported file:', error);
+                                }
+                            })
+                            .catch(function (error) {
+                                console.error('Error processing zip file:', error);
+                            });
+                    };
+
+                    input.click();
+                } catch (error) {
+                    console.error('Error importing state machine:', error);
+                }
+            }
 
             $scope.setGridOptions = function (gridOptions) {
                 bladeUtils.initializePagination($scope, true);

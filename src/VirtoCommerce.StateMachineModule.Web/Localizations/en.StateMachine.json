@@ -8,8 +8,8 @@
       "state-machine-list": {
         "title": "State machine",
         "commands": {
-          "refresh": "Refresh",
-          "new": "New"
+          "new": "New",
+          "import": "Import"
         },
         "labels": {
           "active": "Active",
@@ -20,8 +20,7 @@
       "state-machine-details": {
         "commands": {
           "open-visual-editor": "Open Visual Editor",
-          "export": "Export",
-          "import": "Import"
+          "export": "Export"
         },
         "labels": {
           "is-active": "Active",
