@@ -464,8 +464,56 @@ angular.module('virtoCommerce.stateMachineModule')
                     deleteTransition(transition);
                 };
 
+                const insertStateItem = document.createElement('div');
+                insertStateItem.className = 'context-menu-item';
+                insertStateItem.innerHTML = '<i class="fas fa-plus"></i>Insert state here';
+                insertStateItem.onclick = () => {
+                    removeContextMenu();
+                    // Calculate position between source and target states
+                    const sourceState = transition.fromState;
+                    const targetState = transition.toState;
+                    const newX = (sourceState.position.x + targetState.position.x) / 2;
+                    const newY = (sourceState.position.y + targetState.position.y) / 2;
+
+                    showStateModal(newX, newY, null, null, (newState) => {
+                        // After new state is created, show transition modal
+                        showTransitionModal(null, (transitionData) => {
+                            // Create new transition from new state to target state
+                            const newTransition = {
+                                id: generateUniqueId(),
+                                trigger: transitionData.trigger,
+                                icon: transitionData.icon || '',
+                                description: transitionData.description || '',
+                                fromState: newState,
+                                toState: targetState
+                            };
+
+                            // Update the original transition to point to the new state
+                            transition.toState = newState;
+
+                            $scope.$apply(() => {
+                                // Add new transition
+                                $scope.transitions.push(newTransition);
+                                newState.transitions.push(newTransition);
+
+                                // Update states attributes and recalculate levels
+                                updateStatesAttributes();
+                                calculateStateLevels();
+
+                                // Update blade.currentEntity
+                                updateCurrentEntity();
+
+                                // Update transition paths
+                                updateTransitionPath(transition);
+                                updateTransitionPath(newTransition);
+                            });
+                        });
+                    });
+                };
+
                 menu.appendChild(editItem);
                 menu.appendChild(deleteItem);
+                menu.appendChild(insertStateItem);
                 workspace.appendChild(menu);
 
                 // Add click handler to document to close menu
@@ -832,7 +880,7 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             // Update showStateModal to handle editing existing states
-            function showStateModal(x, y, startState = null, existingState = null) {
+            function showStateModal(x, y, startState = null, existingState = null, callback = null) {
                 const modal = document.createElement('div');
                 modal.className = 'modal';
 
@@ -947,6 +995,9 @@ angular.module('virtoCommerce.stateMachineModule')
                                     // Remove temporary line
                                     removeTempLine();
                                 });
+                            } else if (callback) {
+                                modal.remove();
+                                callback(newState);
                             } else {
                                 modal.remove();
                             }
