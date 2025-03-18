@@ -16,6 +16,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 }
                 blade.origEntity = angular.copy(blade.currentEntity);
+                blade.canSave = true;
                 blade.isLoading = false;
             };
 
@@ -40,7 +41,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     definition: blade.currentEntity
                 },
                 function (data) {
-                    //$scope.bladeClose();
+                    blade.refresh();
                     blade.parentBlade.refresh(true);
                 },
                 function (error) {

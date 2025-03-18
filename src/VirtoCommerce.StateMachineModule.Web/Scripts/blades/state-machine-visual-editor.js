@@ -27,7 +27,7 @@ angular.module('virtoCommerce.stateMachineModule')
             template: `
                 <div class="toggle-container">
                     <span class="toggle-side-label left">{{leftLabel}}</span>
-                    <div class="three-position-toggle" ng-class="ngModel || 'center'" ng-click="togglePosition()">
+                    <div class="three-position-toggle" ng-class="ngModel || 'center'" ng-click="togglePosition($event)">
                         <div class="toggle-option left"><i class="fas fa-check"></i></div>
                         <div class="toggle-option center"></div>
                         <div class="toggle-option right"><i class="fas fa-ban"></i></div>
@@ -36,20 +36,21 @@ angular.module('virtoCommerce.stateMachineModule')
                 </div>
             `,
             link: function(scope) {
-                scope.togglePosition = function() {
-                    switch(scope.ngModel) {
-                        case 'left':
-                            scope.ngModel = 'center';
-                            break;
-                        case 'center':
-                            scope.ngModel = 'right';
-                            break;
-                        case 'right':
-                            scope.ngModel = 'left';
-                            break;
-                        default:
-                            scope.ngModel = 'left';
+                scope.togglePosition = function(event) {
+                    const toggle = event.currentTarget;
+                    const rect = toggle.getBoundingClientRect();
+                    const clickX = event.clientX - rect.left;
+                    const width = rect.width;
+
+                    // Calculate which part was clicked
+                    if (clickX < width / 3) {
+                        scope.ngModel = 'left';
+                    } else if (clickX > (width * 2 / 3)) {
+                        scope.ngModel = 'right';
+                    } else {
+                        scope.ngModel = 'center';
                     }
+
                     scope.onChange({ $position: scope.ngModel });
                 };
             }
@@ -270,33 +271,55 @@ angular.module('virtoCommerce.stateMachineModule')
             };
 
             // Add toggle change handler
-            $scope.onStateToggleChange = function(state, position) {
+            $scope.onStateToggleChange = function(state, newPosition) {
                 saveCurrentState();
-                $scope.$evalAsync(() => {
-                    switch(position) {
-                        case 'left':
-                            state.isSuccess = true;
-                            state.isFailed = false;
-                            break;
-                        case 'right':
-                            state.isSuccess = false;
-                            state.isFailed = true;
-                            break;
-                        default: // center
-                            state.isSuccess = false;
-                            state.isFailed = false;
-                            break;
-                    }
 
-                    // Force Angular to update the state's classes
-                    const stateIndex = $scope.states.indexOf(state);
-                    const stateEl = document.querySelector(`[ng-repeat="state in states"]:nth-child(${stateIndex + 1})`);
-                    if (stateEl) {
-                        stateEl.className = `state-node ${state.isInitial ? 'is-initial' : ''} ${state.isFinal ? 'is-final' : ''} ${state.isSuccess ? 'is-success' : ''} ${state.isFailed ? 'is-failed' : ''}`;
-                    }
-                    updateCurrentEntity();
-                });
+                // Update state flags based on position
+                if (newPosition === 'left') {
+                    state.isSuccess = true;
+                    state.isFailed = false;
+                } else if (newPosition === 'right') {
+                    state.isSuccess = false;
+                    state.isFailed = true;
+                } else {
+                    state.isSuccess = false;
+                    state.isFailed = false;
+                }
+
+                // Update state's classes
+                const stateEl = document.getElementById('state' + state.id);
+                if (stateEl) {
+                    stateEl.className = `state-node ${state.isInitial ? 'is-initial' : ''} ${state.isFinal ? 'is-final' : ''} ${state.isSuccess ? 'is-success' : ''} ${state.isFailed ? 'is-failed' : ''}`;
+                }
+
+                // Update state attributes and current entity
+                updateStateAttributes(state);
+                updateCurrentEntity();
             };
+
+            // Update IsInitial and IsFinal attributes
+            function updateStateAttributes(state) {
+                const hasIncoming = $scope.states.some(s =>
+                    s.transitions.some(t => t.toState.id === state.id)
+                );
+
+                const hasOutgoing = state.transitions.length > 0;
+
+                state.isInitial = !hasIncoming;
+                state.isFinal = !hasOutgoing;
+
+                // Only allow success/fail states for final states
+                if (!state.isFinal) {
+                    state.isSuccess = false;
+                    state.isFailed = false;
+                }
+            }
+
+            function updateStatesAttributes() {
+                $scope.states.forEach(state => {
+                    updateStateAttributes(state)
+                });
+            }
 
             // Add editState handler
             $scope.editState = function(e, state) {
@@ -1449,25 +1472,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     svg.removeChild(tempLine);
                     tempLine = null;
                 }
-            }
-
-            // Update IsInitial and IsFinal attributes
-            function updateStatesAttributes() {
-                $scope.states.forEach(state => {
-                    const hasIncoming = $scope.states.some(s =>
-                        s.transitions.some(t => t.toState.id === state.id)
-                    );
-
-                    const hasOutgoing = state.transitions.length > 0;
-
-                    state.isInitial = !hasIncoming;
-                    state.isFinal = !hasOutgoing;
-
-                    if (!state.isFinal) {
-                        state.isSuccess = false;
-                        state.isFailed = false;
-                    }
-                });
             }
 
             function normalizeStateLayout() {
