@@ -127,7 +127,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
                 try {
                     // Add resize observer to handle blade size changes
-                    const bladeContent = document.querySelector('.blade-content');
+                    const bladeContent = document.getElementById('visualEditorBlade');
                     if (bladeContent) {
                         const resizeObserver = new ResizeObserver(() => {
                             updateWorkspaceSize();
@@ -235,7 +235,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                 updateTransitionPaths();
                             }, 50);
                         }, 100);
-                    }, 0);
+                    }, 100);
                 } catch (error) {
                     console.error('Error initializing state machine:', error);
                     console.error('Data:', blade.currentEntity);
@@ -1386,9 +1386,6 @@ angular.module('virtoCommerce.stateMachineModule')
 
             // Update all transition paths
             function updateTransitionPaths() {
-                var workspace = document.getElementById('visualEditorWorkspace');
-                if (!workspace) return;
-
                 $scope.transitions.forEach(function(transition) {
                     updateTransitionPath(transition);
                 });
@@ -1739,7 +1736,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
             function updateWorkspaceSize() {
                 const workspace = document.getElementById('visualEditorWorkspace');
-                const bladeContent = document.querySelector('.blade-content');
+                const bladeContent = document.getElementById('visualEditorBlade');
                 if (!workspace || !bladeContent) return;
 
                 // Get blade content dimensions

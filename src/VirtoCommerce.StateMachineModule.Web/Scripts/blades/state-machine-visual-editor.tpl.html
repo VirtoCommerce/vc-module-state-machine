@@ -1,4 +1,4 @@
-<div class="blade-content __large-wide">
+<div id="visualEditorBlade" class="blade-content __large-wide">
     <div class="blade-inner">
         <div class="inner-block">
             <form class="form" name="visualEditorForm">
@@ -6,7 +6,7 @@
                     <div id="visualEditorWorkspace" class="visual-editor-workspace"
                          oncontextmenu="return false;" style="width: 100%; position: absolute; inset: 0px; overflow: auto;">
                         <!-- Transitions will be rendered as SVG paths -->
-                        <svg class="svg-lines" oncontextmenu="return false;">
+                        <svg id="svg-lines" class="svg-lines" oncontextmenu="return false;">
                             <g ng-repeat="transition in transitions"
                                class="transition-group"
                                id="{{transition.id}}"
