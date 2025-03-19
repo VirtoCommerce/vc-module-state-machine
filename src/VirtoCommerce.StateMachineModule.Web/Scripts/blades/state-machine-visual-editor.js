@@ -1312,6 +1312,12 @@ angular.module('virtoCommerce.stateMachineModule')
                 const fromState = transition.fromState;
                 const toState = transition.toState;
 
+                // Check if states have valid positions
+                if (!fromState.position || !toState.position) {
+                    console.warn('States do not have valid positions:', fromState, toState);
+                    return;
+                }
+
                 // Calculate path points
                 const startX = fromState.position.x + stateWidth/2;
                 const startY = fromState.position.y + stateHeight;
@@ -1373,23 +1379,6 @@ angular.module('virtoCommerce.stateMachineModule')
                             labelEl.setAttribute('x', labelX);
                             labelEl.setAttribute('y', labelY + 5);
                             labelEl.textContent = transition.trigger;
-                        }
-
-                        // Update hover handlers
-                        const fromStateEl = workspace.querySelector(`[ng-repeat="state in states"]:nth-child(${$scope.states.indexOf(fromState) + 1})`);
-                        const toStateEl = workspace.querySelector(`[ng-repeat="state in states"]:nth-child(${$scope.states.indexOf(toState) + 1})`);
-
-                        if (pathEl && fromStateEl && toStateEl) {
-                            const updateHoverState = (isHovered) => {
-                                fromStateEl.classList.toggle('hovered', isHovered);
-                                toStateEl.classList.toggle('hovered', isHovered);
-                                transitionGroup.classList.toggle('hovered', isHovered);
-                            };
-
-                            pathEl.onmouseenter = () => updateHoverState(true);
-                            pathEl.onmouseleave = () => updateHoverState(false);
-                            labelEl.onmouseenter = () => updateHoverState(true);
-                            labelEl.onmouseleave = () => updateHoverState(false);
                         }
                     }
                 });
