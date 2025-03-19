@@ -241,6 +241,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                             setTimeout(() => {
                                                 $scope.$apply(() => {
                                                     updateTransitionPaths();
+                                                    updateWorkspaceSize();
                                                 });
                                             }, 100);
                                         });
@@ -253,12 +254,10 @@ angular.module('virtoCommerce.stateMachineModule')
                         setTimeout(() => {
                             $scope.$apply(() => {
                                 updateTransitionPaths();
+                                updateWorkspaceSize();
                             });
                         }, 100);
                     }
-
-                    updateWorkspaceSize();
-
                 } catch (error) {
                     console.error('Error initializing state machine:', error);
                     console.error('Data:', blade.currentEntity);
