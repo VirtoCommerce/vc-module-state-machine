@@ -136,6 +136,8 @@ angular.module('virtoCommerce.stateMachineModule')
                         resizeObserver.observe(bladeContent);
                     }
 
+                    updateWorkspaceSize();
+
                     // Initialize workspace context menu
                     initializeWorkspaceContextMenu();
 
