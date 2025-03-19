@@ -218,46 +218,24 @@ angular.module('virtoCommerce.stateMachineModule')
                     // Calculate state levels
                     calculateStateLevels();
 
-                    // If any state had invalid position, normalize the layout after DOM is ready
-                    if (needsNormalization) {
-                        $scope.$evalAsync(() => {
-                            const workspace = document.getElementById('visualEditorWorkspace');
-                            if (workspace) {
-                                normalizeStateLayout();
-                                // Wait for DOM update after normalization
-                                setTimeout(() => {
-                                    $scope.$apply(() => {
-                                        updateTransitionPaths();
-                                    });
-                                }, 100);
-                            } else {
-                                // If workspace is not ready yet, wait a bit and try again
-                                setTimeout(() => {
-                                    const workspace = document.getElementById('visualEditorWorkspace');
-                                    if (workspace) {
-                                        $scope.$apply(() => {
-                                            normalizeStateLayout();
-                                            // Wait for DOM update after normalization
-                                            setTimeout(() => {
-                                                $scope.$apply(() => {
-                                                    updateTransitionPaths();
-                                                    updateWorkspaceSize();
-                                                });
-                                            }, 100);
-                                        });
-                                    }
-                                }, 100);
-                            }
-                        });
-                    } else {
-                        // Update transition paths after DOM is ready
-                        setTimeout(() => {
-                            $scope.$apply(() => {
+                    // Use $timeout to ensure DOM is ready and trigger a digest cycle
+                    $timeout(() => {
+                        // If any state had invalid position, normalize the layout
+                        if (needsNormalization) {
+                            normalizeStateLayout();
+                        }
+
+                        // Wait for DOM update after normalization
+                        $timeout(() => {
+                            // Update workspace size first
+                            updateWorkspaceSize();
+
+                            // Then update transition paths
+                            $timeout(() => {
                                 updateTransitionPaths();
-                                updateWorkspaceSize();
-                            });
+                            }, 50);
                         }, 100);
-                    }
+                    }, 0);
                 } catch (error) {
                     console.error('Error initializing state machine:', error);
                     console.error('Data:', blade.currentEntity);
