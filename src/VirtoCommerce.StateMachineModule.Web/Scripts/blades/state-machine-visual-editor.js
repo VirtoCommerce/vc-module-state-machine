@@ -579,6 +579,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.onClose = async function (closeCallback) {
                 await blade.makeSnaphot();
+                blade.recalculateStatePositions();
                 closeCallback();
             };
 
@@ -635,6 +636,19 @@ angular.module('virtoCommerce.stateMachineModule')
                 if (visualEditor) {
                     visualEditor.style.display = 'none';
                 }
+            }
+
+            blade.recalculateStatePositions = function () {
+                let minX = Infinity, minY = Infinity;
+                $scope.states.forEach(state => {
+                    minX = Math.min(minX, state.position.x);
+                    minY = Math.min(minY, state.position.y);
+                });
+                $scope.states.forEach(state => {
+                    state.position.x -= minX - 20;
+                    state.position.y -= minY - 20;
+                });
+                updateCurrentEntity();
             }
 
             blade.makeSnaphot = async function () {
@@ -1796,8 +1810,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     const totalWidth = maxX - minX;
                     const totalHeight = maxY - minY;
 
-                    svg.style.minWidth = Math.max(totalWidth, bladeRect.width) + 'px';
-                    svg.style.minHeight = Math.max(totalHeight, bladeRect.height - 20) + 'px';
+                    svg.style.minWidth = Math.max(maxX/*totalWidth*/, bladeRect.width) + 'px';
+                    svg.style.minHeight = Math.max(maxY/*totalHeight*/, bladeRect.height - 20) + 'px';
 
                     // Update all transition paths after shifting states
                     updateTransitionPaths();
