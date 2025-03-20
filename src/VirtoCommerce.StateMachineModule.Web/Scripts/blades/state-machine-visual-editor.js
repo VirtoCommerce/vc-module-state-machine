@@ -572,8 +572,10 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.onClose = async function (closeCallback) {
-                await blade.makeSnaphot();
-                blade.recalculateStatePositions();
+                if (blade.isInVisualMode) {
+                    await blade.makeSnaphot();
+                    blade.recalculateStatePositions();
+                }
                 closeCallback();
             };
 
