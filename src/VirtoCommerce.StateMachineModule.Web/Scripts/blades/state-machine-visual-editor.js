@@ -639,14 +639,18 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.recalculateStatePositions = function () {
+                if (!isDirty()) {
+                    return;
+                }
                 let minX = Infinity, minY = Infinity;
+                const margin = 50;
                 $scope.states.forEach(state => {
                     minX = Math.min(minX, state.position.x);
                     minY = Math.min(minY, state.position.y);
                 });
                 $scope.states.forEach(state => {
-                    state.position.x -= minX - 20;
-                    state.position.y -= minY - 20;
+                    state.position.x -= minX - margin;
+                    state.position.y -= minY - margin;
                 });
                 updateCurrentEntity();
             }
@@ -696,21 +700,21 @@ angular.module('virtoCommerce.stateMachineModule')
                     hiddenWorkspace.style.left = '-9999px';
                     hiddenWorkspace.style.top = '-9999px';
                     hiddenWorkspace.style.background = 'white';
-                    hiddenWorkspace.style.width = totalWidth + 'px';
-                    hiddenWorkspace.style.height = totalHeight + 'px';
+                    hiddenWorkspace.style.width = maxX/*totalWidth*/ + 'px';
+                    hiddenWorkspace.style.height = maxY/*totalHeight*/ + 'px';
                     hiddenWorkspace.style.overflow = 'visible';
 
                     // Update SVG dimensions in the clone
                     const hiddenSvg = hiddenWorkspace.querySelector('svg');
                     if (hiddenSvg) {
                         //hiddenSvg.style.left = (totalWidth - 9999) + 'px';
-                        hiddenSvg.style.width = totalWidth + 'px';
+                        hiddenSvg.style.width = maxX + 'px';
                         //hiddenSvg.style.top = (totalHeight - 9999) + 'px';                        hiddenSvg.style.width = totalWidth + 'px';
-                        hiddenSvg.style.height = totalHeight + 'px';
+                        hiddenSvg.style.height = maxY + 'px';
                         //hiddenSvg.setAttribute('left', totalWidth-9999);
-                        hiddenSvg.setAttribute('width', totalWidth);
+                        hiddenSvg.setAttribute('width', maxX);
                         //hiddenSvg.setAttribute('top', totalHeight-9999);
-                        hiddenSvg.setAttribute('height', totalHeight);
+                        hiddenSvg.setAttribute('height', maxY);
                         hiddenSvg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
                     }
 
