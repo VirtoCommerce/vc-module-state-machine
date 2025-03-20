@@ -265,12 +265,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     state.isFailed = false;
                 }
 
-                // Update state's classes
-                const stateEl = document.getElementById('state' + state.id);
-                if (stateEl) {
-                    stateEl.className = `state-node ${state.isInitial ? 'is-initial' : ''} ${state.isFinal ? 'is-final' : ''} ${state.isSuccess ? 'is-success' : ''} ${state.isFailed ? 'is-failed' : ''}`;
-                }
-
                 // Update state attributes and current entity
                 updateStateAttributes(state);
                 updateCurrentEntity();
@@ -1486,6 +1480,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         description: descriptionInput.value.trim()
                     });
                     updateCurrentEntity();
+                    updateStatesAttributes();
                     modal.remove();
                 };
 
