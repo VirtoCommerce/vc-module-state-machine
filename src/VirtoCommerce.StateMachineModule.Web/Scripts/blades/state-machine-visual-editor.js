@@ -572,7 +572,10 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.onClose = async function (closeCallback) {
-                if (blade.isInVisualMode) {
+                if (isDirty()) {
+                    if (!blade.isInVisualMode) {
+                        toggleToVisualMode();
+                    }
                     await blade.makeSnaphot();
                     blade.recalculateStatePositions();
                 }
@@ -596,9 +599,7 @@ angular.module('virtoCommerce.stateMachineModule')
                 }
                 if (visualEditor) {
                     visualEditor.style.display = 'block';
-                    $timeout(() => {
                         initializeStateMachine();
-                    });
                 }
             }
 

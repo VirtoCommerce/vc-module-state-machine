@@ -7,17 +7,23 @@ angular.module('virtoCommerce.stateMachineModule')
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
             blade.title = '';
-            blade.canSave = true;
+            blade.savingInProgress = false;
 
-            blade.refresh = function () {
+            function initializeBlade(data) {
                 if (!blade.isNew) {
-                    if (!blade.currentEntity.statesGraph) {
-                        blade.currentEntity.statesGraph = JSON.stringify(blade.currentEntity.states, null, 2);
+                    if (!data.statesGraph) {
+                        data.statesGraph = JSON.stringify(data.states, null, 2);
                     }
                 }
-                blade.origEntity = angular.copy(blade.currentEntity);
-                blade.canSave = true;
+                blade.currentEntity = angular.copy(data);
+                blade.origEntity = data;
+
                 blade.isLoading = false;
+            }
+
+            blade.refresh = function () {
+                initializeBlade(blade.currentEntity);
+                blade.savingInProgress = false;
             };
 
             $scope.setForm = function (form) { $scope.formScope = form; }
@@ -26,8 +32,12 @@ angular.module('virtoCommerce.stateMachineModule')
                 return !angular.equals(blade.currentEntity, blade.origEntity);
             }
 
+            function canSave() {
+                return isDirty() && $scope.formScope && $scope.formScope.$valid && !blade.savingInProgress;
+            }
+
             $scope.saveChanges = async function () {
-                blade.canSave = false;
+                blade.savingInProgress = true;
                 blade.isLoading = true;
                 if (blade.childrenBlades && blade.childrenBlades.length == 1
                     && blade.childrenBlades[0].makeSnaphot) {
@@ -56,7 +66,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         $scope.saveChanges();
                     },
                     canExecuteMethod: function () {
-                        return isDirty() && $scope.formScope && $scope.formScope.$valid && blade.canSave;
+                        return canSave();
                     }
                 },
                 {
@@ -77,6 +87,10 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 }
             ];
+
+            blade.onClose = function (closeCallback) {
+                bladeNavigationService.showConfirmationIfNeeded(isDirty(), canSave(), blade, $scope.saveChanges, closeCallback, "statemachine.dialogs.state-machine-details-save.title", "statemachine.dialogs.state-machine-details-save.message");
+            };
 
             blade.exportStateMachine = function () {
                 try {

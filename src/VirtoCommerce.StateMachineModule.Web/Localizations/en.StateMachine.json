@@ -29,7 +29,7 @@
           "states": "States serialized"
         },
         "placeholders": {
-          "entity-type": "Entyty type",
+          "entity-type": "Entity type",
           "name": "State machine name",
           "states": "States serialized"
         }
@@ -43,6 +43,12 @@
           "toggle-to-visual-mode": "Visual mode",
           "toggle-to-json-mode": "JSON mode"
         }
+      }
+    },
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Save state machine definition",
+        "message": "The state machine definition has unsaved changes. Do you want to save it?"
       }
     }
   },
