@@ -31,7 +31,7 @@ angular.module(moduleName, [])
             //Register module in main menu
             var stateMachineMenuItem = {
                 path: 'configuration/state-machine',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fas fa-project-diagram',
                 title: 'statemachine.main-menu.statemachine',
                 priority: 2,
                 action: function () { $state.go('workspace.statemachine'); },

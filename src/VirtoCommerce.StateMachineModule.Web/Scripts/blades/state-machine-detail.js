@@ -40,6 +40,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 blade.savingInProgress = true;
                 blade.isLoading = true;
                 if (blade.childrenBlades && blade.childrenBlades.length == 1
+                    && blade.childrenBlades[0].recalculateStatePositions) {
+                    blade.childrenBlades[0].recalculateStatePositions();
+                }
+                if (blade.childrenBlades && blade.childrenBlades.length == 1
                     && blade.childrenBlades[0].makeSnaphot) {
                     await blade.childrenBlades[0].makeSnaphot();
                 }
@@ -52,6 +56,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 },
                 function (data) {
                     blade.refresh();
+                    if (blade.childrenBlades && blade.childrenBlades.length == 1
+                        && blade.childrenBlades[0].refresh) {
+                        blade.childrenBlades[0].refresh();
+                    }
                     blade.parentBlade.refresh(true);
                 },
                 function (error) {

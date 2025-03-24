@@ -576,8 +576,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     if (!blade.isInVisualMode) {
                         toggleToVisualMode();
                     }
-                    await blade.makeSnaphot();
                     blade.recalculateStatePositions();
+                    await blade.makeSnaphot();
                 }
                 closeCallback();
             };
