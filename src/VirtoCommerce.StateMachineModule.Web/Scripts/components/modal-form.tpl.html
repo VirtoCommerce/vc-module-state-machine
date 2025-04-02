@@ -1,0 +1,23 @@
+<div class="modal" ng-style="{'position': 'absolute', 'zIndex': '1000'}">
+    <div class="modal-content">
+        <div class="modal-title">{{$ctrl.title}}</div>
+        <div ng-repeat="field in $ctrl.fields" class="form-group">
+            <label for="{{field.name}}">{{field.title}}:</label>
+            <input ng-if="field.valueType === 'ShortText'"
+                   type="text"
+                   id="{{field.name}}"
+                   name="{{field.name}}"
+                   ng-model="$ctrl.entity[field.name]"
+                   ng-required="field.isRequired">
+            <textarea ng-if="field.valueType === 'LongText'"
+                      id="{{field.name}}"
+                      name="{{field.name}}"
+                      ng-model="$ctrl.entity[field.name]">
+            </textarea>
+        </div>
+        <div class="modal-buttons">
+            <button class="modal-button modal-button-primary" ng-click="$ctrl.doOkAction()">OK</button>
+            <button class="modal-button modal-button-secondary" ng-click="$ctrl.doCancelAction()">Cancel</button>
+        </div>
+    </div>
+</div>

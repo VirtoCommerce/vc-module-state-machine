@@ -1,79 +1,44 @@
-<div id="visualEditorBlade" class="blade-content __large-wide">
+<div id="visualEditorBlade" class="blade-content __large-wide" ng-controller="virtoCommerce.stateMachineModule.stateMachineVisualEditorController">
     <div class="blade-inner">
         <div class="inner-block">
             <form class="form" name="visualEditorForm">
                 <div class="form-group" ng-init="setForm(visualEditorForm)">
                     <div id="visualEditorWorkspace" class="visual-editor-workspace"
                          oncontextmenu="return false;" style="width: 100%; position: absolute; inset: 0px; overflow: auto;">
-                        <!-- Transitions will be rendered as SVG paths -->
-                        <svg id="svg-lines" class="svg-lines" oncontextmenu="return false;">
-                            <g ng-repeat="transition in transitions"
-                               class="transition-group"
-                               id="{{transition.id}}"
-                               ng-mouseenter="onTransitionHover(transition, true)"
-                               ng-mouseleave="onTransitionHover(transition, false)">
-                                <path ng-attr-d="{{transition.path}}"
-                                      class="transition-path"
-                                      ng-right-click="showTransitionContextMenu($event, transition)"
-                                      ng-dblclick="editTransition($event, transition)"
-                                      style="cursor: context-menu">
-                                </path>
-                                <text class="transition-label"
-                                      ng-attr-x="{{transition.labelPosition.x}}"
-                                      ng-attr-y="{{transition.labelPosition.y}}"
-                                      ng-right-click="showTransitionContextMenu($event, transition)"
-                                      ng-dblclick="editTransition($event, transition)"
-                                      style="cursor: context-menu">
-                                    {{transition.trigger}}
-                                </text>
-                            </g>
-                        </svg>
-                        <!-- States will be dynamically added here -->
-                        <div ng-repeat="state in states"
-                             class="state-node"
-                             id="state{{state.id}}"
-                             ng-style="{'left': state.position.x + 'px', 'top': state.position.y + 'px'}"
-                             ng-mouseenter="onStateHover(state, true)"
-                             ng-mouseleave="onStateHover(state, false)"
-                             ng-right-click="showStateContextMenu($event, state)">
-                            <div class="state-header"
-                                 ng-class="{'is-success': state.isSuccess, 'is-failed': state.isFailed}"
-                                 ng-mousedown="startDrag($event, state)"
-                                 ng-dblclick="editState($event, state)">
-                              <span class="state-name">{{state.name}}</span>
-                            </div>
-                            <div class="state-description"
-                                 ng-mousedown="startDrag($event, state)"
-                                 ng-dblclick="editState($event, state)">
-                                <div class="state-description-text">{{state.description || '(No description)'}}</div>
-                            </div>
-                            <div class="attributes" ng-if="state.isFinal">
-                                <three-position-toggle
-                                    toggle-id="{{state.id}}-toggle"
-                                    left-label="Success"
-                                    right-label="Fail"
-                                    ng-model="state.togglePosition"
-                                    on-change="onStateToggleChange(state, $position)">
-                                </three-position-toggle>
-                            </div>
-                            <div class="connector"
-                                 ng-mouseenter="connector.style.background = '#424242'"
-                                 ng-mouseleave="connector.style.background = '#757575'"
-                                 ng-mousedown="startTransition($event, state)">
-                            </div>
-                        </div>
+                        <state-transitions
+                            transitions="blade.machineData.transitions"
+                            machine-data="blade.machineData"
+                            parent-scope="blade.scope">
+                        </state-transitions>
+
+                        <state-node ng-repeat="state in blade.machineData.states"
+                            state="state"
+                            machine-data="blade.machineData"
+                            parent-scope="blade.scope">
+                        </state-node>
                     </div>
-                  <div id="jsonEditorContainer"
-                      style="position:absolute; top:0px; left:0px; bottom:0px; right:0px; padding:10px; display:none;"
-                      >
-                    <textarea id="jsonEditor"
-                        style="width: 100%; height: 100%; padding: 10px; font-family: monospace; font-size: 14px; border:1px solid #ccc; border-radius:4px; resize:none;"
-                        >
-                    </textarea>
-                  </div>
+                    <div id="jsonEditorContainer"
+                        style="position:absolute; top:0px; left:0px; bottom:0px; right:0px; padding:10px; display:none;">
+                        <textarea id="jsonEditor"
+                            style="width: 100%; height: 100%; padding: 10px; font-family: monospace; font-size: 14px; border:1px solid #ccc; border-radius:4px; resize:none;">
+                        </textarea>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
+    <modal-form ng-if="blade.scope.modalData"
+        title="blade.scope.modalData.title"
+        entity="blade.scope.modalData.entity"
+        fields="blade.scope.modalData.fields"
+        ok-action="blade.scope.modalData.okAction"
+        cancel-action="blade.scope.modalData.cancelAction">
+    </modal-form>
+    <context-menu ng-if="blade.scope.contextMenuData"
+        items="blade.scope.contextMenuData.items"
+        x="blade.scope.contextMenuData.x"
+        y="blade.scope.contextMenuData.y">
+  </context-menu>
+
 </div>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>

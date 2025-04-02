@@ -44,8 +44,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     blade.childrenBlades[0].recalculateStatePositions();
                 }
                 if (blade.childrenBlades && blade.childrenBlades.length == 1
-                    && blade.childrenBlades[0].makeSnaphot) {
-                    await blade.childrenBlades[0].makeSnaphot();
+                    && blade.childrenBlades[0].makeSnapshot) {
+                    await blade.childrenBlades[0].makeSnapshot();
                 }
                 blade.currentEntity.states = JSON.parse(blade.currentEntity.statesGraph);
                 if (!blade.currentEntity.version) {
@@ -54,14 +54,14 @@ angular.module('virtoCommerce.stateMachineModule')
                 webApi.updateStateMachineDefinition({
                     definition: blade.currentEntity
                 },
-                function (data) {
+                    function (data) {
                     blade.refresh();
                     if (blade.childrenBlades && blade.childrenBlades.length == 1
                         && blade.childrenBlades[0].refresh) {
                         blade.childrenBlades[0].refresh();
                     }
-                    blade.parentBlade.refresh(true);
-                },
+                        blade.parentBlade.refresh(true);
+                    },
                 function (error) {
                     bladeNavigationService.setError('Error ' + error.status, blade);
                 });

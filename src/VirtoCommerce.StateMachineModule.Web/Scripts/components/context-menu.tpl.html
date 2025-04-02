@@ -1,0 +1,8 @@
+<div class="context-menu"
+     ng-style="{'position': 'absolute', 'left': $ctrl.x + 'px', 'top': $ctrl.y + 'px', 'zIndex': '1000'}">
+  <div ng-repeat="item in $ctrl.items"
+       class="context-menu-item"
+       ng-click="$ctrl.doAction(item.action)">
+    <i class="{{item.icon}}"></i>{{item.label}}
+  </div>
+</div>

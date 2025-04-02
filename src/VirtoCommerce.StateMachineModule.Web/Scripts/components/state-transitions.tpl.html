@@ -1,0 +1,22 @@
+<svg id="svg-lines" class="svg-lines" oncontextmenu="return false;">
+  <g ng-repeat="transition in $ctrl.transitions"
+     class="transition-group"
+     id="{{transition.id}}"
+     ng-mouseenter="$ctrl.onTransitionHover(transition, true)"
+     ng-mouseleave="$ctrl.onTransitionHover(transition, false)">
+    <path ng-attr-d="{{transition.path}}"
+          class="transition-path"
+          ng-right-click="$ctrl.showTransitionContextMenu($event, transition)"
+          ng-dblclick="$ctrl.editTransition($event, transition)"
+          style="cursor: context-menu">
+    </path>
+    <text class="transition-label"
+          ng-attr-x="{{transition.labelPosition.x}}"
+          ng-attr-y="{{transition.labelPosition.y}}"
+          ng-right-click="$ctrl.showTransitionContextMenu($event, transition)"
+          ng-dblclick="$ctrl.editTransition($event, transition)"
+          style="cursor: context-menu">
+      {{transition.trigger}}
+    </text>
+  </g>
+</svg>
