@@ -67,7 +67,7 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
 
         serviceCollection.AddTransient<StateMachineExportImport>();
 
-        serviceCollection.AddMediatR(typeof(Anchor));
+        serviceCollection.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Anchor>());
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
