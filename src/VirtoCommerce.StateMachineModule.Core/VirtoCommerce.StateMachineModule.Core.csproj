@@ -12,6 +12,6 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Stateless" Version="5.15.0" />
     <PackageReference Include="VirtoCommerce.CoreModule.Core" Version="3.802.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.832.3" />
+    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.883.0" />
   </ItemGroup>
 </Project>

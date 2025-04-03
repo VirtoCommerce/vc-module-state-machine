@@ -52,7 +52,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         };
         if (!string.IsNullOrEmpty(state))
         {
-            currentState = definition.States.FirstOrDefault(x => x.Name.EqualsInvariant(state));
+            currentState = definition.States.FirstOrDefault(x => x.Name.EqualsIgnoreCase(state));
         }
         if (currentState == null)
         {
