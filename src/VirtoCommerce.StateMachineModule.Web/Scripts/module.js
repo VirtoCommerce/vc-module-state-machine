@@ -1,4 +1,3 @@
-// Call this to register your module to main application
 var moduleName = 'virtoCommerce.stateMachineModule';
 
 if (AppDependencies !== undefined) {
@@ -6,6 +5,11 @@ if (AppDependencies !== undefined) {
 }
 
 angular.module(moduleName, [])
+    .component('state-node', require('./components/state-node.component'))
+    .component('state-transitions', require('./components/state-transitions.component'))
+    .component('context-menu', require('./components/context-menu.component'))
+    .component('modal-form', require('./components/modal-form.component'))
+    .component('three-position-toggle', require('./components/three-position-toggle.component'))
     .config(['$stateProvider',
         function ($stateProvider) {
             $stateProvider.state('workspace.statemachine',
@@ -28,17 +32,14 @@ angular.module(moduleName, [])
     ])
     .run(['platformWebApp.mainMenuService', '$state',
         function (mainMenuService, $state) {
-            //Register module in main menu
             var stateMachineMenuItem = {
                 path: 'configuration/state-machine',
-                icon: 'fa fa-pencil-square-o',
+                icon: 'fas fa-project-diagram',
                 title: 'statemachine.main-menu.statemachine',
                 priority: 2,
                 action: function () { $state.go('workspace.statemachine'); },
                 permission: 'statemachine:access'
             };
             mainMenuService.addMenuItem(stateMachineMenuItem);
-
-
         }
     ]);

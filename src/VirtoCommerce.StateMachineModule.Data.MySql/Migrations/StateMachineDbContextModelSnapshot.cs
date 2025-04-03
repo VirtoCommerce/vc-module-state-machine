@@ -55,6 +55,12 @@ namespace VirtoCommerce.StateMachineModule.Data.MySql.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("varchar(512)");
 
+                    b.Property<string>("StatesCapture")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StatesGraph")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("StatesSerialized")
                         .IsRequired()
                         .HasColumnType("longtext");

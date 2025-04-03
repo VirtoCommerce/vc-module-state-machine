@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VirtoCommerce.StateMachineModule.Data.Repositories;
@@ -11,9 +12,11 @@ using VirtoCommerce.StateMachineModule.Data.Repositories;
 namespace VirtoCommerce.StateMachineModule.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(StateMachineDbContext))]
-    partial class StateMachineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313110812_RenameGraphFields")]
+    partial class RenameGraphFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

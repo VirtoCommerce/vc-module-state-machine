@@ -25,6 +25,10 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
     [Required]
     public string StatesSerialized { get; set; }
 
+    public string StatesGraph { get; set; }
+
+    public string StatesCapture { get; set; }
+
     public virtual StateMachineDefinition ToModel(StateMachineDefinition model)
     {
         if (model == null)
@@ -42,6 +46,8 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         model.IsActive = IsActive;
         model.Version = Version;
         model.States = JsonConvert.DeserializeObject<StateMachineState[]>(StatesSerialized, new PolymorphJsonConverter());
+        model.StatesGraph = StatesGraph;
+        model.StatesCapture = StatesCapture;
 
         return model;
     }
@@ -73,6 +79,8 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         };
         settings.Converters.Add(new ConditionJsonConverter(doNotSerializeAvailCondition: true));
         StatesSerialized = JsonConvert.SerializeObject(model.States, settings);
+        StatesGraph = model.StatesGraph;
+        StatesCapture = model.StatesCapture;
 
         return this;
     }
@@ -90,5 +98,7 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         target.IsActive = IsActive;
         target.Version = Version;
         target.StatesSerialized = StatesSerialized;
+        target.StatesGraph = StatesGraph;
+        target.StatesCapture = StatesCapture;
     }
 }

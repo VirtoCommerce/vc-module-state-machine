@@ -1,9 +1,13 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
@@ -14,6 +18,7 @@ using VirtoCommerce.StateMachineModule.Core;
 using VirtoCommerce.StateMachineModule.Core.Events;
 using VirtoCommerce.StateMachineModule.Core.Services;
 using VirtoCommerce.StateMachineModule.Data;
+using VirtoCommerce.StateMachineModule.Data.ExportImport;
 using VirtoCommerce.StateMachineModule.Data.MySql;
 using VirtoCommerce.StateMachineModule.Data.PostgreSql;
 using VirtoCommerce.StateMachineModule.Data.Repositories;
@@ -22,10 +27,12 @@ using VirtoCommerce.StateMachineModule.Data.SqlServer;
 
 namespace VirtoCommerce.StateMachineModule.Web;
 
-public class Module : IModule, IHasConfiguration
+public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
 {
     public ManifestModuleInfo ModuleInfo { get; set; }
     public IConfiguration Configuration { get; set; }
+
+    private IApplicationBuilder _appBuilder;
 
     public void Initialize(IServiceCollection serviceCollection)
     {
@@ -58,11 +65,15 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddTransient<StateMachineTriggerEvent>();
 
+        serviceCollection.AddTransient<StateMachineExportImport>();
+
         serviceCollection.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Anchor>());
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
     {
+        _appBuilder = appBuilder;
+
         var serviceProvider = appBuilder.ApplicationServices;
 
         // Register settings
@@ -82,6 +93,20 @@ public class Module : IModule, IHasConfiguration
     public void Uninstall()
     {
         // Nothing to do here
+    }
+
+    public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
+        ICancellationToken cancellationToken)
+    {
+        return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoExportAsync(outStream, options,
+            progressCallback, cancellationToken);
+    }
+
+    public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
+        ICancellationToken cancellationToken)
+    {
+        return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoImportAsync(inputStream, options,
+            progressCallback, cancellationToken);
     }
 }
 

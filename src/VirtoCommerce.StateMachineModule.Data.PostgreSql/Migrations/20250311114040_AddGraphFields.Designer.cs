@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VirtoCommerce.StateMachineModule.Data.Repositories;
@@ -11,9 +12,11 @@ using VirtoCommerce.StateMachineModule.Data.Repositories;
 namespace VirtoCommerce.StateMachineModule.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(StateMachineDbContext))]
-    partial class StateMachineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250311114040_AddGraphFields")]
+    partial class AddGraphFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,8 +58,9 @@ namespace VirtoCommerce.StateMachineModule.Data.PostgreSql.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("character varying(512)");
 
-                    b.Property<string>("StatesCapture")
-                        .HasColumnType("text");
+                    b.Property<string>("StatesCaptureUrl")
+                        .HasMaxLength(2083)
+                        .HasColumnType("character varying(2083)");
 
                     b.Property<string>("StatesGraph")
                         .HasColumnType("text");

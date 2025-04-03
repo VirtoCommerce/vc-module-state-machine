@@ -1,0 +1,9 @@
+<div class="toggle-container">
+  <span class="toggle-side-label left">{{$ctrl.leftLabel}}</span>
+  <div class="three-position-toggle" ng-class="$ctrl.ngModel || 'center'" ng-click="$ctrl.togglePosition($event)">
+    <div class="toggle-option left"><i class="fas fa-check"></i></div>
+    <div class="toggle-option center"></div>
+    <div class="toggle-option right"><i class="fas fa-ban"></i></div>
+  </div>
+  <span class="toggle-side-label right">{{$ctrl.rightLabel}}</span>
+</div>
