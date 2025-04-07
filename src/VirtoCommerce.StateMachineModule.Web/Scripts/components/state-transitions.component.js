@@ -135,7 +135,9 @@ angular.module('virtoCommerce.stateMachineModule')
                     $ctrl.parentScope.contextMenuData = { items: contextMenuItems, x: x, y: y };
 
                     const handleClickOutside = (event) => {
-                        $ctrl.parentScope.contextMenuData = null;
+                        $ctrl.parentScope.$apply(() => {
+                            $ctrl.parentScope.contextMenuData = null;
+                        });
                         stateMachineTransitionService.removeTempLine($ctrl.parentScope);
                         isTransitioning = false;
                         document.removeEventListener('click', handleClickOutside);
