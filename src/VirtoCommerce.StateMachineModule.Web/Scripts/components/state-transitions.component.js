@@ -69,8 +69,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     if (!workspace) return;
 
                     const rect = workspace.getBoundingClientRect();
-                    const x = e.clientX - rect.left + workspace.scrollLeft;
-                    const y = e.clientY - rect.top + workspace.scrollTop;
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
 
                     const contextMenuItems = [
                         {
