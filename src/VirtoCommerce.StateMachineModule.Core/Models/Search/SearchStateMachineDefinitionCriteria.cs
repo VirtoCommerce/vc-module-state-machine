@@ -1,6 +1,6 @@
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.StateMachineModule.Core.Models.Search;
-public class SearchStateMachineDefinitionsCriteria : SearchCriteriaBase
+public class SearchStateMachineDefinitionCriteria : SearchCriteriaBase
 {
 }

@@ -8,8 +8,10 @@ public interface IStateMachineRepository : IRepository
 {
     IQueryable<StateMachineDefinitionEntity> StateMachineDefinitions { get; }
     IQueryable<StateMachineInstanceEntity> StateMachineInstances { get; }
+    IQueryable<StateMachineLocalizationEntity> StateMachineLocalizations { get; }
 
     Task<StateMachineDefinitionEntity[]> GetStateMachineDefinitionsByIds(string[] ids, string responseGroup = null);
     Task<StateMachineDefinitionEntity> GetActiveStateMachineDefinitionByEntityType(string entityType, string responseGroup = null);
     Task<StateMachineInstanceEntity[]> GetStateMachineInstancesByIds(string[] ids, string responseGroup = null);
+    Task<StateMachineLocalizationEntity[]> GetStateMachineLocalizationsByIds(string[] ids, string responseGroup = null);
 }

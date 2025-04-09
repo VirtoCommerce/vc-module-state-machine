@@ -20,9 +20,9 @@ public class ServiceBuilder
 
         services.AddTransient<IStateMachineRepository, StateMachineRepositoryMock>();
         services.AddTransient<IStateMachineDefinitionService, StateMachineDefinitionServiceStub>();
-        services.AddTransient<IStateMachineDefinitionsSearchService, StateMachineDefinitionsSearchServiceStub>();
+        services.AddTransient<IStateMachineDefinitionSearchService, StateMachineDefinitionsSearchServiceStub>();
         services.AddTransient<IStateMachineInstanceService, StateMachineInstanceServiceStub>();
-        services.AddTransient<IStateMachineInstancesSearchService, StateMachineInstancesSearchServiceStub>();
+        services.AddTransient<IStateMachineInstanceSearchService, StateMachineInstancesSearchServiceStub>();
 
         return services;
     }

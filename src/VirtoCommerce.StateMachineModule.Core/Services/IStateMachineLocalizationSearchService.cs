@@ -3,6 +3,6 @@ using VirtoCommerce.StateMachineModule.Core.Models;
 using VirtoCommerce.StateMachineModule.Core.Models.Search;
 
 namespace VirtoCommerce.StateMachineModule.Core.Services;
-public interface IStateMachineDefinitionsSearchService : ISearchService<SearchStateMachineDefinitionsCriteria, SearchStateMachineDefinitionsResult, StateMachineDefinition>
+public interface IStateMachineLocalizationSearchService : ISearchService<SearchStateMachineLocalizationCriteria, SearchStateMachineLocalizationResult, StateMachineLocalization>
 {
 }

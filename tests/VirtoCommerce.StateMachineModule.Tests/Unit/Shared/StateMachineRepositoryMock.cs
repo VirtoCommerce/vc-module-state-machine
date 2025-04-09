@@ -33,6 +33,15 @@ public class StateMachineRepositoryMock : IStateMachineRepository
 
     public List<StateMachineInstanceEntity> StateMachineInstanceEntities = new();
 
+    public IQueryable<StateMachineLocalizationEntity> StateMachineLocalizations
+    {
+        get
+        {
+            return StateMachineLocalizationEntities.AsAsyncQueryable();
+        }
+    }
+
+    public List<StateMachineLocalizationEntity> StateMachineLocalizationEntities = new();
     public IUnitOfWork UnitOfWork => new Mock<IUnitOfWork>().Object;
 
     public void Add<T>(T item) where T : class
@@ -55,6 +64,15 @@ public class StateMachineRepositoryMock : IStateMachineRepository
             }
             StateMachineInstanceEntities.Add(stateMachineInstanceEntity);
         }
+        else if (item.GetType() == typeof(StateMachineLocalizationEntity))
+        {
+            var stateMachineLocalizationEntity = item as StateMachineLocalizationEntity;
+            if (string.IsNullOrEmpty(stateMachineLocalizationEntity.Id))
+            {
+                stateMachineLocalizationEntity.Id = nameof(StateMachineLocalizationEntity) + stateMachineLocalizationEntity.CreatedDate.Ticks.ToString();
+            }
+            StateMachineLocalizationEntities.Add(stateMachineLocalizationEntity);
+        }
     }
 
     public void Attach<T>(T item) where T : class
@@ -73,6 +91,11 @@ public class StateMachineRepositoryMock : IStateMachineRepository
         {
             var stateMachineInstanceEntity = item as StateMachineInstanceEntity;
             StateMachineInstanceEntities.Remove(stateMachineInstanceEntity);
+        }
+        else if (item.GetType() == typeof(StateMachineLocalizationEntity))
+        {
+            var stateMachineLocalizationEntity = item as StateMachineLocalizationEntity;
+            StateMachineLocalizationEntities.Remove(stateMachineLocalizationEntity);
         }
     }
 
@@ -106,6 +129,16 @@ public class StateMachineRepositoryMock : IStateMachineRepository
         if (!ids.IsNullOrEmpty())
         {
             result = StateMachineInstanceEntities.Where(x => ids.Contains(x.Id)).ToList();
+        }
+        return Task.FromResult(result.ToArray());
+    }
+
+    public Task<StateMachineLocalizationEntity[]> GetStateMachineLocalizationsByIds(string[] ids, string responseGroup = null)
+    {
+        var result = new List<StateMachineLocalizationEntity>();
+        if (!ids.IsNullOrEmpty())
+        {
+            result = StateMachineLocalizationEntities.Where(x => ids.Contains(x.Id)).ToList();
         }
         return Task.FromResult(result.ToArray());
     }

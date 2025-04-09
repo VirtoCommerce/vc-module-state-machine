@@ -7,11 +7,11 @@ using VirtoCommerce.StateMachineModule.Core.Services;
 
 namespace VirtoCommerce.StateMachineModule.Tests.Unit.Shared;
 [ExcludeFromCodeCoverage]
-public class StateMachineDefinitionsSearchServiceStub : IStateMachineDefinitionsSearchService
+public class StateMachineDefinitionsSearchServiceStub : IStateMachineDefinitionSearchService
 {
-    public Task<SearchStateMachineDefinitionsResult> SearchAsync(SearchStateMachineDefinitionsCriteria criteria, bool clone = true)
+    public Task<SearchStateMachineDefinitionResult> SearchAsync(SearchStateMachineDefinitionCriteria criteria, bool clone = true)
     {
-        var result = new SearchStateMachineDefinitionsResult();
+        var result = new SearchStateMachineDefinitionResult();
         result.Results = _stateMachineDefinitions
             .Where(x => criteria.ObjectIds.Contains(x.Id)).ToList();
         result.TotalCount = result.Results.Count;

@@ -30,7 +30,7 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
         [HttpPost]
         [Route("definitions/search")]
         [Authorize(ModuleConstants.Security.Permissions.Read)]
-        public async Task<ActionResult<SearchStateMachineDefinitionsResult>> Search([FromBody] SearchStateMachineDefinitionsQuery query)
+        public async Task<ActionResult<SearchStateMachineDefinitionResult>> Search([FromBody] SearchStateMachineDefinitionsQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
@@ -80,7 +80,7 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
         [HttpPost]
         [Route("instances/search")]
         [Authorize(ModuleConstants.Security.Permissions.Read)]
-        public async Task<ActionResult<SearchStateMachineInstancesResult>> SearchInstance([FromBody] SearchStateMachineInstancesQuery query)
+        public async Task<ActionResult<SearchStateMachineInstanceResult>> SearchInstance([FromBody] SearchStateMachineInstancesQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);

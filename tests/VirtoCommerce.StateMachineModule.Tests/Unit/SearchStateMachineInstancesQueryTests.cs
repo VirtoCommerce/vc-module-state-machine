@@ -45,7 +45,7 @@ public class SearchStateMachineInstancesQueryTests
 
     private SearchStateMachineInstancesQueryHandler GetQueryHandler()
     {
-        IStateMachineInstancesSearchService stateMachineInstancesSearchServiceStub = new StateMachineInstancesSearchServiceStub();
+        IStateMachineInstanceSearchService stateMachineInstancesSearchServiceStub = new StateMachineInstancesSearchServiceStub();
         return new SearchStateMachineInstancesQueryHandler(stateMachineInstancesSearchServiceStub);
     }
 

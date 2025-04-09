@@ -33,7 +33,7 @@ public class StateMachineDefinitionsSearchServiceTests
 
         var stateMachineDefinitionSearchService = GetStateMachineDefinitionsSearchService(stateMachineRepositoryMock);
 
-        var criteria = new SearchStateMachineDefinitionsCriteria();
+        var criteria = new SearchStateMachineDefinitionCriteria();
         criteria.ObjectTypes = [entityType];
 
         // Act
@@ -44,7 +44,7 @@ public class StateMachineDefinitionsSearchServiceTests
         actualSearchResult.TotalCount.Should().Be(expectedMessagesCount);
     }
 
-    private StateMachineDefinitionsSearchService GetStateMachineDefinitionsSearchService
+    private StateMachineDefinitionSearchService GetStateMachineDefinitionsSearchService
     (
         IStateMachineRepository stateMachineRepositoryMock = null
     )
@@ -59,7 +59,7 @@ public class StateMachineDefinitionsSearchServiceTests
         var memoryCache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
         var platformMemoryCache = new PlatformMemoryCache(memoryCache, Options.Create(new CachingOptions()), new Mock<ILogger<PlatformMemoryCache>>().Object);
 
-        var stateMachineDefinitionsSearchService = new StateMachineDefinitionsSearchService
+        var stateMachineDefinitionsSearchService = new StateMachineDefinitionSearchService
         (
             () => stateMachineRepositoryMock,
             platformMemoryCache,

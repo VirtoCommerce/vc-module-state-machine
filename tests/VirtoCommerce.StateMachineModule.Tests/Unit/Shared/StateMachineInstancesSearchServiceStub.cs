@@ -8,7 +8,7 @@ using VirtoCommerce.StateMachineModule.Core.Services;
 
 namespace VirtoCommerce.StateMachineModule.Tests.Unit.Shared;
 [ExcludeFromCodeCoverage]
-public class StateMachineInstancesSearchServiceStub : IStateMachineInstancesSearchService
+public class StateMachineInstancesSearchServiceStub : IStateMachineInstanceSearchService
 {
     public List<StateMachineInstance> StateMachineInstances = new List<StateMachineInstance>
     {
@@ -29,9 +29,9 @@ public class StateMachineInstancesSearchServiceStub : IStateMachineInstancesSear
         },
     };
 
-    public Task<SearchStateMachineInstancesResult> SearchAsync(SearchStateMachineInstancesCriteria criteria, bool clone = true)
+    public Task<SearchStateMachineInstanceResult> SearchAsync(SearchStateMachineInstanceCriteria criteria, bool clone = true)
     {
-        var result = new SearchStateMachineInstancesResult();
+        var result = new SearchStateMachineInstanceResult();
         result.Results = StateMachineInstances
             .Where(x => criteria.ObjectIds.Contains(x.Id)).ToList();
         result.TotalCount = result.Results.Count;

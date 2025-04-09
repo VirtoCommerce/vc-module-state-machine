@@ -6,16 +6,16 @@ using VirtoCommerce.StateMachineModule.Core.Models.Search;
 using VirtoCommerce.StateMachineModule.Core.Services;
 
 namespace VirtoCommerce.StateMachineModule.Data.Queries;
-public class SearchStateMachineDefinitionsQueryHandler : IQueryHandler<SearchStateMachineDefinitionsQuery, SearchStateMachineDefinitionsResult>
+public class SearchStateMachineDefinitionsQueryHandler : IQueryHandler<SearchStateMachineDefinitionsQuery, SearchStateMachineDefinitionResult>
 {
-    private readonly IStateMachineDefinitionsSearchService _stateMachineDefinitionsSearchService;
+    private readonly IStateMachineDefinitionSearchService _stateMachineDefinitionsSearchService;
 
-    public SearchStateMachineDefinitionsQueryHandler(IStateMachineDefinitionsSearchService stateMachineDefinitionsSearchService)
+    public SearchStateMachineDefinitionsQueryHandler(IStateMachineDefinitionSearchService stateMachineDefinitionsSearchService)
     {
         _stateMachineDefinitionsSearchService = stateMachineDefinitionsSearchService;
     }
 
-    public virtual async Task<SearchStateMachineDefinitionsResult> Handle(SearchStateMachineDefinitionsQuery request, CancellationToken cancellationToken)
+    public virtual async Task<SearchStateMachineDefinitionResult> Handle(SearchStateMachineDefinitionsQuery request, CancellationToken cancellationToken)
     {
         if (request == null)
         {

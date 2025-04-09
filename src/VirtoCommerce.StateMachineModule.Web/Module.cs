@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -58,10 +57,14 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
         serviceCollection.AddTransient<IStateMachineRepository, StateMachineRepository>();
         serviceCollection.AddTransient<Func<IStateMachineRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IStateMachineRepository>());
 
-        serviceCollection.AddTransient<IStateMachineDefinitionsSearchService, StateMachineDefinitionsSearchService>();
+        serviceCollection.AddTransient<IStateMachineDefinitionSearchService, StateMachineDefinitionSearchService>();
         serviceCollection.AddTransient<IStateMachineDefinitionService, StateMachineDefinitionService>();
-        serviceCollection.AddTransient<IStateMachineInstancesSearchService, StateMachineInstancesSearchService>();
+
+        serviceCollection.AddTransient<IStateMachineInstanceSearchService, StateMachineInstanceSearchService>();
         serviceCollection.AddTransient<IStateMachineInstanceService, StateMachineInstanceService>();
+
+        serviceCollection.AddTransient<IStateMachineLocalizationSearchService, StateMachineLocalizationSearchService>();
+        serviceCollection.AddTransient<IStateMachineLocalizationCrudService, StateMachineLocalizationCrudService>();
 
         serviceCollection.AddTransient<StateMachineTriggerEvent>();
 

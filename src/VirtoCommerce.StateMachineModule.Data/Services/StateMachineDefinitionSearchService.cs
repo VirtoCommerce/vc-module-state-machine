@@ -13,48 +13,43 @@ using VirtoCommerce.StateMachineModule.Data.Models;
 using VirtoCommerce.StateMachineModule.Data.Repositories;
 
 namespace VirtoCommerce.StateMachineModule.Data.Services;
-public class StateMachineInstancesSearchService : SearchService<SearchStateMachineInstancesCriteria, SearchStateMachineInstancesResult, StateMachineInstance, StateMachineInstanceEntity>,
-    IStateMachineInstancesSearchService
+public class StateMachineDefinitionSearchService : SearchService<SearchStateMachineDefinitionCriteria, SearchStateMachineDefinitionResult, StateMachineDefinition, StateMachineDefinitionEntity>,
+    IStateMachineDefinitionSearchService
 {
-    public StateMachineInstancesSearchService(
+    public StateMachineDefinitionSearchService(
         Func<IStateMachineRepository> repositoryFactory,
         IPlatformMemoryCache platformMemoryCache,
-        IStateMachineInstanceService crudService,
+        IStateMachineDefinitionService crudService,
         IOptions<CrudOptions> crudOptions
         )
         : base(repositoryFactory, platformMemoryCache, crudService, crudOptions)
     {
     }
-    protected override IQueryable<StateMachineInstanceEntity> BuildQuery(IRepository repository, SearchStateMachineInstancesCriteria criteria)
+    protected override IQueryable<StateMachineDefinitionEntity> BuildQuery(IRepository repository, SearchStateMachineDefinitionCriteria criteria)
     {
-        var query = ((IStateMachineRepository)repository).StateMachineInstances;
+        var query = ((IStateMachineRepository)repository).StateMachineDefinitions;
 
-        if (!criteria.ObjectType.IsNullOrEmpty())
+        if (!criteria.ObjectTypes.IsNullOrEmpty())
         {
-            query = query.Where(x => x.EntityType == criteria.ObjectType);
-        }
-
-        if (!criteria.ObjectIds.IsNullOrEmpty())
-        {
-            query = query.Where(x => criteria.ObjectIds.Contains(x.EntityId));
+            query = query.Where(x => criteria.ObjectTypes.Contains(x.EntityType));
         }
 
         return query;
     }
 
-    protected override IList<SortInfo> BuildSortExpression(SearchStateMachineInstancesCriteria criteria)
+    protected override IList<SortInfo> BuildSortExpression(SearchStateMachineDefinitionCriteria criteria)
     {
         var sortInfos = criteria.SortInfos;
         if (sortInfos.IsNullOrEmpty())
         {
-            sortInfos = new[]
-            {
+            sortInfos =
+                [
                     new SortInfo
                     {
-                        SortColumn = ReflectionUtility.GetPropertyName<StateMachineInstanceEntity>(x => x.CreatedDate),
+                        SortColumn = ReflectionUtility.GetPropertyName<StateMachineDefinitionEntity>(x => x.CreatedDate),
                         SortDirection = SortDirection.Descending
                     }
-                };
+                ];
         }
 
         return sortInfos;

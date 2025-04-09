@@ -11,18 +11,18 @@ using VirtoCommerce.StateMachineModule.Data.Queries;
 namespace VirtoCommerce.StateMachineModule.Data.ExportImport;
 public class StateMachineExportImport
 {
-    private readonly IStateMachineDefinitionsSearchService _stateMachineDefinitionsSearchService;
+    private readonly IStateMachineDefinitionSearchService _stateMachineDefinitionsSearchService;
     private readonly IStateMachineDefinitionService _stateMachineDefinitionsCrudService;
-    private readonly IStateMachineInstancesSearchService _stateMachineInstancesSearchService;
+    private readonly IStateMachineInstanceSearchService _stateMachineInstancesSearchService;
     private readonly IStateMachineInstanceService _stateMachineInstancesCrudService;
     private readonly JsonSerializer _jsonSerializer;
 
     private readonly int _batchSize = 50;
 
     public StateMachineExportImport(
-        IStateMachineDefinitionsSearchService stateMachineDefinitionsSearchService,
+        IStateMachineDefinitionSearchService stateMachineDefinitionsSearchService,
         IStateMachineDefinitionService stateMachineDefinitionsCrudService,
-        IStateMachineInstancesSearchService stateMachineInstancesSearchService,
+        IStateMachineInstanceSearchService stateMachineInstancesSearchService,
         IStateMachineInstanceService stateMachineInstancesCrudService,
         JsonSerializer jsonSerializer
         )

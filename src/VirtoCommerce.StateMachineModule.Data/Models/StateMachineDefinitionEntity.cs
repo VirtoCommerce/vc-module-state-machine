@@ -85,7 +85,6 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         return this;
     }
 
-
     public virtual void Patch(StateMachineDefinitionEntity target)
     {
         if (target == null)

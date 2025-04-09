@@ -45,7 +45,7 @@ public class SearchStateMachineDefinitionsQueryTests
 
     private SearchStateMachineDefinitionsQueryHandler GetQueryHandler()
     {
-        IStateMachineDefinitionsSearchService stateMachineDefinitionsSearchServiceStub = new StateMachineDefinitionsSearchServiceStub();
+        IStateMachineDefinitionSearchService stateMachineDefinitionsSearchServiceStub = new StateMachineDefinitionsSearchServiceStub();
         return new SearchStateMachineDefinitionsQueryHandler(stateMachineDefinitionsSearchServiceStub);
     }
 

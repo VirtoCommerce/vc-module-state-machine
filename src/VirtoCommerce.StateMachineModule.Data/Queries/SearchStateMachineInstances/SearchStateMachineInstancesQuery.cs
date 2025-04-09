@@ -2,11 +2,11 @@ using VirtoCommerce.StateMachineModule.Core.Common;
 using VirtoCommerce.StateMachineModule.Core.Models.Search;
 
 namespace VirtoCommerce.StateMachineModule.Data.Queries;
-public class SearchStateMachineInstancesQuery : SearchStateMachineInstancesCriteria, IQuery<SearchStateMachineInstancesResult>
+public class SearchStateMachineInstancesQuery : SearchStateMachineInstanceCriteria, IQuery<SearchStateMachineInstanceResult>
 {
-    public virtual SearchStateMachineInstancesCriteria ToCriteria()
+    public virtual SearchStateMachineInstanceCriteria ToCriteria()
     {
-        var criteria = new SearchStateMachineInstancesCriteria();
+        var criteria = new SearchStateMachineInstanceCriteria();
 
         criteria.ObjectIds = ObjectIds;
         criteria.Take = Take;
