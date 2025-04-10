@@ -2,12 +2,14 @@ using VirtoCommerce.StateMachineModule.Core.Common;
 using VirtoCommerce.StateMachineModule.Core.Models.Search;
 
 namespace VirtoCommerce.StateMachineModule.Data.Queries;
-public class SearchStateMachineDefinitionsQuery : SearchStateMachineDefinitionCriteria, IQuery<SearchStateMachineDefinitionResult>
+public class SearchStateMachineLocalizationsQuery : SearchStateMachineLocalizationCriteria, IQuery<SearchStateMachineLocalizationResult>
 {
-    public virtual SearchStateMachineDefinitionCriteria ToCriteria()
+    public virtual SearchStateMachineLocalizationCriteria ToCriteria()
     {
-        var criteria = new SearchStateMachineDefinitionCriteria();
+        var criteria = new SearchStateMachineLocalizationCriteria();
 
+        criteria.DefinitionId = DefinitionId;
+        criteria.Item = Item;
         criteria.Locale = Locale;
         criteria.ObjectIds = ObjectIds;
         criteria.Take = Take;

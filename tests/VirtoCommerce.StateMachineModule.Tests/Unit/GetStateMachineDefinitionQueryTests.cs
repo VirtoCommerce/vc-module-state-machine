@@ -59,6 +59,7 @@ public class GetStateMachineDefinitionQueryTests
     private GetStateMachineDefinitionQueryHandler GetQueryHandler()
     {
         IStateMachineDefinitionService stateMachineDefinitionService = new StateMachineDefinitionServiceStub();
-        return new GetStateMachineDefinitionQueryHandler(stateMachineDefinitionService);
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchServiceStub = new StateMachineLocalizationSearchServiceStub();
+        return new GetStateMachineDefinitionQueryHandler(stateMachineDefinitionService, stateMachineLocalizationSearchServiceStub);
     }
 }

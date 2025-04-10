@@ -16,5 +16,6 @@ public class StateMachineState : ValueObject
     public bool IsSuccess { get; set; }
     public bool IsFailed { get; set; }
     public object StateData { get; set; }
+    public string LocalizedValue { get; set; }
     public IList<StateMachineTransition> Transitions { get; set; }
 }

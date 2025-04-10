@@ -7,4 +7,5 @@ public class GetStateMachineDefinitionQuery : IQuery<StateMachineDefinition>
 {
     [Required]
     public string StateMachineDefinitionId { get; set; }
+    public string Locale { get; set; }
 }

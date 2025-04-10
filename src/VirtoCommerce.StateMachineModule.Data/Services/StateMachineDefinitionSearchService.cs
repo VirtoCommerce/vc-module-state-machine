@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
@@ -16,14 +17,18 @@ namespace VirtoCommerce.StateMachineModule.Data.Services;
 public class StateMachineDefinitionSearchService : SearchService<SearchStateMachineDefinitionCriteria, SearchStateMachineDefinitionResult, StateMachineDefinition, StateMachineDefinitionEntity>,
     IStateMachineDefinitionSearchService
 {
+    private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
+
     public StateMachineDefinitionSearchService(
         Func<IStateMachineRepository> repositoryFactory,
         IPlatformMemoryCache platformMemoryCache,
         IStateMachineDefinitionService crudService,
-        IOptions<CrudOptions> crudOptions
+        IOptions<CrudOptions> crudOptions,
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService
         )
         : base(repositoryFactory, platformMemoryCache, crudService, crudOptions)
     {
+        _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
     }
     protected override IQueryable<StateMachineDefinitionEntity> BuildQuery(IRepository repository, SearchStateMachineDefinitionCriteria criteria)
     {
@@ -53,5 +58,35 @@ public class StateMachineDefinitionSearchService : SearchService<SearchStateMach
         }
 
         return sortInfos;
+    }
+
+    protected override async Task<SearchStateMachineDefinitionResult> ProcessSearchResultAsync(SearchStateMachineDefinitionResult result, SearchStateMachineDefinitionCriteria criteria)
+    {
+        var respGroupEnum = EnumUtility.SafeParseFlags(criteria.ResponseGroup, StateMachineResponseGroup.None);
+        if (respGroupEnum.HasFlag(StateMachineResponseGroup.WithLocalization)
+            && !string.IsNullOrEmpty(criteria.Locale))
+        {
+            if (!result.Results.IsNullOrEmpty())
+            {
+                foreach (var definition in result.Results)
+                {
+                    var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionId = definition.Id, Locale = criteria.Locale };
+                    var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria)).Results;
+                    if (localizationSearchResults.Any())
+                    {
+                        foreach (var definitionState in definition.States)
+                        {
+                            definitionState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
+                            foreach (var definitionStateTransition in definitionState.Transitions)
+                            {
+                                definitionStateTransition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }

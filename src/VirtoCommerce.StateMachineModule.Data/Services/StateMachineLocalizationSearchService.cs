@@ -40,6 +40,11 @@ public class StateMachineLocalizationSearchService : SearchService<SearchStateMa
             query = query.Where(x => x.Item == criteria.Item);
         }
 
+        if (!string.IsNullOrEmpty(criteria.Locale))
+        {
+            query = query.Where(x => x.Locale == criteria.Locale);
+        }
+
         return query;
     }
 

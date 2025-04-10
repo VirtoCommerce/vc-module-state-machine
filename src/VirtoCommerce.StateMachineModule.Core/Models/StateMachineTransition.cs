@@ -5,5 +5,7 @@ public class StateMachineTransition
     public string Description { get; set; }
     public string ToState { get; set; }
     public string Icon { get; set; }
+    public string LocalizedValue { get; set; }
+
     //public IConditionTree Condition { get; set; }
 }
