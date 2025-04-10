@@ -16,6 +16,7 @@ public static class ModuleConstants
             public const string Update = "statemachine:update";
             public const string Delete = "statemachine:delete";
             public const string Fire = "statemachine:fire";
+            public const string Localize = "statemachine:localize";
 
             public static string[] AllPermissions { get; } =
             {
@@ -25,6 +26,7 @@ public static class ModuleConstants
                 Update,
                 Delete,
                 Fire,
+                Localize,
             };
         }
     }

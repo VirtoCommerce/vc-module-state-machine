@@ -121,6 +121,51 @@ namespace VirtoCommerce.StateMachineModule.Data.SqlServer.Migrations
                     b.ToTable("StateMachineInstance", (string)null);
                 });
 
+            modelBuilder.Entity("VirtoCommerce.StateMachineModule.Data.Models.StateMachineLocalizationEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DefinitionId")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Item")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Locale")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StateMachineLocalization", (string)null);
+                });
+
             modelBuilder.Entity("VirtoCommerce.StateMachineModule.Data.Models.StateMachineInstanceEntity", b =>
                 {
                     b.HasOne("VirtoCommerce.StateMachineModule.Data.Models.StateMachineDefinitionEntity", "StateMachineDefinition")

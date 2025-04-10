@@ -19,7 +19,6 @@ public class StateMachineDbContext : DbContextBase
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        #region StateMachines
         modelBuilder.Entity<StateMachineDefinitionEntity>().ToTable("StateMachineDefinition").HasKey(x => x.Id);
         modelBuilder.Entity<StateMachineDefinitionEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
 
@@ -27,7 +26,9 @@ public class StateMachineDbContext : DbContextBase
         modelBuilder.Entity<StateMachineInstanceEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
         modelBuilder.Entity<StateMachineInstanceEntity>().HasOne(x => x.StateMachineDefinition).WithMany()
             .HasForeignKey(x => x.StateMachineId).OnDelete(DeleteBehavior.Cascade);
-        #endregion
+
+        modelBuilder.Entity<StateMachineLocalizationEntity>().ToTable("StateMachineLocalization").HasKey(x => x.Id);
+        modelBuilder.Entity<StateMachineLocalizationEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
 
         base.OnModelCreating(modelBuilder);
 

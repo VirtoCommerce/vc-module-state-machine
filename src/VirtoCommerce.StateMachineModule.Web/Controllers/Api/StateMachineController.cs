@@ -9,6 +9,7 @@ using VirtoCommerce.StateMachineModule.Core.Common;
 using VirtoCommerce.StateMachineModule.Core.Models;
 using VirtoCommerce.StateMachineModule.Core.Models.Search;
 using VirtoCommerce.StateMachineModule.Data.Commands;
+using VirtoCommerce.StateMachineModule.Data.Commands.UpdateStateMachineLocalization;
 using VirtoCommerce.StateMachineModule.Data.Queries;
 using VirtoCommerce.StateMachineModule.Data.Validators;
 
@@ -115,6 +116,24 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
             command.User = User;
             var result = await _mediator.Send(command);
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("localization/search")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<SearchStateMachineLocalizationResult>> SearchLocalization([FromBody] SearchStateMachineLocalizationsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("localization/update")]
+        [Authorize(ModuleConstants.Security.Permissions.Localize)]
+        public async Task<ActionResult> UpdateLocalization([FromBody] UpdateStateMachineLocalizationCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }

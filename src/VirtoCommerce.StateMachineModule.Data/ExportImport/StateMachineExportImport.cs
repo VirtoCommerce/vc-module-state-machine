@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.StateMachineModule.Core.Models;
+using VirtoCommerce.StateMachineModule.Core.Models.Search;
 using VirtoCommerce.StateMachineModule.Core.Services;
 using VirtoCommerce.StateMachineModule.Data.Queries;
 
@@ -15,6 +16,8 @@ public class StateMachineExportImport
     private readonly IStateMachineDefinitionService _stateMachineDefinitionsCrudService;
     private readonly IStateMachineInstanceSearchService _stateMachineInstancesSearchService;
     private readonly IStateMachineInstanceService _stateMachineInstancesCrudService;
+    private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
+    private readonly IStateMachineLocalizationCrudService _stateMachineLocalizationCrudService;
     private readonly JsonSerializer _jsonSerializer;
 
     private readonly int _batchSize = 50;
@@ -24,6 +27,8 @@ public class StateMachineExportImport
         IStateMachineDefinitionService stateMachineDefinitionsCrudService,
         IStateMachineInstanceSearchService stateMachineInstancesSearchService,
         IStateMachineInstanceService stateMachineInstancesCrudService,
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
+        IStateMachineLocalizationCrudService stateMachineLocalizationCrudService,
         JsonSerializer jsonSerializer
         )
     {
@@ -31,6 +36,8 @@ public class StateMachineExportImport
         _stateMachineDefinitionsCrudService = stateMachineDefinitionsCrudService;
         _stateMachineInstancesSearchService = stateMachineInstancesSearchService;
         _stateMachineInstancesCrudService = stateMachineInstancesCrudService;
+        _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
+        _stateMachineLocalizationCrudService = stateMachineLocalizationCrudService;
         _jsonSerializer = jsonSerializer;
     }
 
@@ -83,6 +90,25 @@ public class StateMachineExportImport
 
             #endregion
 
+            #region Export StateMachineLocalizations
+
+            progressInfo.Description = "StateMachineLocalizations exporting...";
+            progressCallback(progressInfo);
+
+            await writer.WritePropertyNameAsync("StateMachineLocalizations");
+            await writer.SerializeArrayWithPagingAsync(_jsonSerializer, _batchSize, async (skip, take) =>
+            {
+                var searchResult = await _stateMachineLocalizationSearchService.SearchAsync(new SearchStateMachineLocalizationCriteria { Skip = skip, Take = take });
+                return (GenericSearchResult<StateMachineLocalization>)searchResult;
+            }
+            , (processedCount, totalCount) =>
+            {
+                progressInfo.Description = $"{processedCount} of {totalCount} state machine localizations have been exported";
+                progressCallback(progressInfo);
+            }, cancellationToken);
+
+            #endregion
+
             await writer.WriteEndObjectAsync();
             await writer.FlushAsync();
         }
@@ -118,6 +144,13 @@ public class StateMachineExportImport
                         await reader.DeserializeArrayWithPagingAsync<StateMachineInstance>(_jsonSerializer, _batchSize, items => _stateMachineInstancesCrudService.SaveChangesAsync(items), processedCount =>
                         {
                             progressInfo.Description = $"{processedCount} state machine instances have been imported";
+                            progressCallback(progressInfo);
+                        }, cancellationToken);
+                        break;
+                    case "StateMachineLocalizations":
+                        await reader.DeserializeArrayWithPagingAsync<StateMachineLocalization>(_jsonSerializer, _batchSize, items => _stateMachineLocalizationCrudService.SaveChangesAsync(items), processedCount =>
+                        {
+                            progressInfo.Description = $"{processedCount} state machine localization have been imported";
                             progressCallback(progressInfo);
                         }, cancellationToken);
                         break;
