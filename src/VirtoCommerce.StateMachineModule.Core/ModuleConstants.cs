@@ -35,28 +35,19 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static SettingDescriptor StateMachineModuleEnabled { get; } = new()
+            public static SettingDescriptor StateMachineLanguages { get; } = new()
             {
-                Name = "StateMachineModule.StateMachineModuleEnabled",
-                GroupName = "StateMachineModule|General",
-                ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
-            };
-
-            public static SettingDescriptor StateMachineModulePassword { get; } = new()
-            {
-                Name = "StateMachineModule.StateMachineModulePassword",
-                GroupName = "StateMachineModule|Advanced",
-                ValueType = SettingValueType.SecureString,
-                DefaultValue = "qwerty",
+                Name = "StateMachineModule.StateMachineLanguages",
+                GroupName = "State Machine",
+                ValueType = SettingValueType.ShortText,
+                IsDictionary = true,
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
-                    yield return StateMachineModuleEnabled;
-                    yield return StateMachineModulePassword;
+                    yield return StateMachineLanguages;
                 }
             }
         }

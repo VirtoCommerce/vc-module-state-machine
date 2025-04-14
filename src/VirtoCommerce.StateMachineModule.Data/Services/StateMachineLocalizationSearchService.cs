@@ -30,7 +30,11 @@ public class StateMachineLocalizationSearchService : SearchService<SearchStateMa
     {
         var query = ((IStateMachineRepository)repository).StateMachineLocalizations;
 
-        if (!string.IsNullOrEmpty(criteria.DefinitionId))
+        if (!criteria.DefinitionIds.IsNullOrEmpty())
+        {
+            query = query.Where(x => criteria.DefinitionIds.Contains(x.DefinitionId));
+        }
+        else if (!string.IsNullOrEmpty(criteria.DefinitionId))
         {
             query = query.Where(x => x.DefinitionId == criteria.DefinitionId);
         }

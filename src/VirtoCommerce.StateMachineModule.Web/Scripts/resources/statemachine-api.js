@@ -9,5 +9,10 @@ angular.module('virtoCommerce.stateMachineModule')
             getStateMachineInstanceById: { method: 'GET', url: 'api/statemachine/instances/:instanceId' },
             createStateMachineInstance: { method: 'POST', url: 'api/statemachine/instances/:definitionId/new' },
             fireStateMachineInstanceTrigger: { method: 'POST', url: 'api/statemachine/firetrigger' },
+            // localizations
+            searchStateMachineLocalization: { method: 'POST', url: 'api/statemachine/localization/search' },
+            updateStateMachineLocalization: { method: 'POST', url: 'api/statemachine/localization/update' },
+            // settings
+            getStateMachineSettings: { method: 'GET', url: 'api/statemachine/settings' },
         });
     }]);

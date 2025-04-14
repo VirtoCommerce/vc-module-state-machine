@@ -23,7 +23,7 @@ public class SearchStateMachineLocalizationsQueryHandler : IQueryHandler<SearchS
         }
 
         var searchCriteria = request.ToCriteria();
-        var result = await _stateMachineLocalizationSearchService.SearchAsync(searchCriteria);
+        var result = await _stateMachineLocalizationSearchService.SearchAsync(searchCriteria, false);
         return result;
     }
 

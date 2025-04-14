@@ -86,6 +86,19 @@ angular.module('virtoCommerce.stateMachineModule')
                             }
                         },
                         {
+                            label: 'Edit localization',
+                            icon: 'fas fa-globe',
+                            action: async () => {
+                                $ctrl.parentScope.contextMenuData = null;
+                                var languages = $ctrl.parentScope.blade.allLanguages;
+                                var existedTranslations = [];
+                                if ($ctrl.parentScope.blade.getCurrentTranslations) {
+                                    existedTranslations = await $ctrl.parentScope.blade.getCurrentTranslations(state);
+                                }
+                                stateMachineModalService.editLocalization($ctrl.parentScope, $element, state, languages, existedTranslations, $ctrl.parentScope.blade.saveCurrentTranslations);
+                            }
+                        },
+                        {
                             label: 'Delete state',
                             icon: 'fas fa-trash',
                             action: () => {

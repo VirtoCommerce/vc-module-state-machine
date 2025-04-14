@@ -142,9 +142,57 @@ angular.module('virtoCommerce.stateMachineModule')
                 });
             }
 
+            function editLocalization($scope, $element, item, languages, existedTranslations, saveCallback) {
+                var itemText = item.name || item.trigger;
+                var localizations = [];
+                languages.forEach(language => {
+                    localizations.push({
+                        locale: language,
+                        item: itemText,
+                        value: existedTranslations?.find(x => x.locale === language)?.value
+                    });
+                });
+                var modalComponent = {
+                    title: 'Edit localization ' + itemText,
+                    entity: localizations,
+                    isArray: true,
+                    fields: [
+                        {
+                            name: 'locale',
+                            title: '',
+                            valueType: 'Label'
+                        },
+                        {
+                            name: 'value',
+                            title: '',
+                            valueType: 'ShortText'
+                        }
+                    ],
+                    okAction: function () {
+                        if (saveCallback) {
+                            saveCallback(localizations);
+                        }
+                        $scope.modalData = null;
+                    },
+                    cancelAction: function () {
+                        $scope.modalData = null;
+                    }
+                };
+
+                $scope.modalData = modalComponent;
+
+                $timeout(() => {
+                    const triggerInput = $element[0].querySelector('input[name="value"]');
+                    if (triggerInput) {
+                        triggerInput.focus();
+                    }
+                });
+            }
+
             return {
                 editStateModal: editStateModal,
-                editTransitionModal: editTransitionModal
+                editTransitionModal: editTransitionModal,
+                editLocalization: editLocalization
             };
         }
     ]);

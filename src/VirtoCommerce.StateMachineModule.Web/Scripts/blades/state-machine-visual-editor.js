@@ -1,6 +1,7 @@
 angular.module('virtoCommerce.stateMachineModule')
     .controller('virtoCommerce.stateMachineModule.stateMachineVisualEditorController', [
         '$scope', '$element', '$timeout',
+        'virtoCommerce.stateMachineModule.webApi',
         'virtoCommerce.stateMachineModule.stateMachineStateService',
         'virtoCommerce.stateMachineModule.stateMachineTransitionService',
         'virtoCommerce.stateMachineModule.stateMachineSnapshotService',
@@ -9,6 +10,7 @@ angular.module('virtoCommerce.stateMachineModule')
         'virtoCommerce.stateMachineModule.stateMachineLayoutService',
         'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
         function ($scope, $element, $timeout,
+            stateMachineApi,
             stateMachineStateService,
             stateMachineTransitionService,
             stateMachineSnapshotService,
@@ -23,6 +25,7 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.title = 'statemachine.blades.state-machine-visual-editor.title';
             blade.isInVisualMode = true;
             blade.isInJsonMode = false;
+            blade.allLanguages = [];
 
             // State machine data
             blade.machineData = { states: [], transitions: [] };
@@ -33,6 +36,10 @@ angular.module('virtoCommerce.stateMachineModule')
 
             function initializeStateMachine() {
                 if (!blade.currentEntity) return;
+
+                stateMachineApi.getStateMachineSettings({}, function (data) {
+                    blade.allLanguages = data.languages;
+                });
 
                 try {
                     const bladeContent = document.getElementById('visualEditorBlade');
@@ -346,6 +353,28 @@ angular.module('virtoCommerce.stateMachineModule')
 
                 blade.currentEntity = JSON.stringify(serializedStates);
                 blade.parentBlade.updateStateMachineData(blade.currentEntity);
+            }
+
+            blade.getCurrentTranslations = async function (item) {
+                var itemText = item.name || item.trigger;
+                var searchCriteria = {
+                    definitionId: blade.stateMachineDefinitionId,
+                    item: itemText
+                };
+                var localizationSearchResult = await stateMachineApi.searchStateMachineLocalization(searchCriteria).$promise;
+                var currentTranslations = localizationSearchResult ? localizationSearchResult.results : [];
+
+                return currentTranslations;
+            }
+
+            blade.saveCurrentTranslations = function (localizations) {
+                if (localizations) {
+                    localizations = localizations.filter(x => x.value !== undefined && x.value !== null && x.value !== '');
+                    localizations.forEach(x => {
+                        x.definitionId = blade.stateMachineDefinitionId;
+                    });
+                    stateMachineApi.updateStateMachineLocalization({ localizations: localizations });
+                }
             }
 
             blade.refresh();

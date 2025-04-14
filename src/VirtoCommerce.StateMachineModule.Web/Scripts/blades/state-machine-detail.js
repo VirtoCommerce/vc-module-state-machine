@@ -158,6 +158,7 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.openVisualEditor = function () {
                 var newBlade = {
                     id: "stateMachineVisualEditor",
+                    stateMachineDefinitionId: blade.currentEntity.id,
                     currentEntity: blade.currentEntity.statesGraph,
                     controller: 'virtoCommerce.stateMachineModule.stateMachineVisualEditorController',
                     template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-visual-editor.tpl.html'

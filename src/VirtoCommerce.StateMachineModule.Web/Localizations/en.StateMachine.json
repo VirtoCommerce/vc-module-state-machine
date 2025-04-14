@@ -62,13 +62,9 @@
   },
   "settings": {
     "StateMachineModule": {
-      "StateMachineModuleEnabled": {
-        "title": "StateMachineModule Enabled",
-        "description": "StateMachineModule Enabled setting"
-      },
-      "StateMachineModulePassword": {
-        "title": "StateMachineModule Password",
-        "description": "StateMachineModule Password setting"
+      "StateMachineLanguages": {
+        "title": "Localization languages",
+        "description": "Select languages for State Machine localization"
       }
     }
   },

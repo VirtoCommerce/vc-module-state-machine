@@ -1,8 +1,9 @@
 angular.module('virtoCommerce.stateMachineModule')
     .component('modalForm', {
         bindings: {
-            title: '<',
+            formTitle: '<',
             entity: '<',
+            isArray: '<',
             fields: '<',
             okAction: '<',
             cancelAction: '<',
