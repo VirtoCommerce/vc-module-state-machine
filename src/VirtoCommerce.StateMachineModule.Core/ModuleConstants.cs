@@ -41,6 +41,7 @@ public static class ModuleConstants
                 GroupName = "State Machine",
                 ValueType = SettingValueType.ShortText,
                 IsDictionary = true,
+                DefaultValue = "en-US",
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings

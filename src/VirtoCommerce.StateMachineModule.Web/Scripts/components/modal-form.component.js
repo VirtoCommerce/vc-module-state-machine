@@ -5,6 +5,7 @@ angular.module('virtoCommerce.stateMachineModule')
             entity: '<',
             isArray: '<',
             fields: '<',
+            okButtonCaption: '<',
             okAction: '<',
             cancelAction: '<',
         },

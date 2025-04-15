@@ -28,6 +28,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'LongText'
                         }
                     ],
+                    okButtonCaption: 'Ok',
                     okAction: function () {
                         $scope.modalData = null;
                         if (existingState) {
@@ -109,6 +110,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'LongText'
                         }
                     ],
+                    okButtonCaption: 'Ok',
                     okAction: function () {
                         const trigger = modalComponent.entity.trigger.trim();
                         if (!trigger) {
@@ -168,6 +170,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'ShortText'
                         }
                     ],
+                    okButtonCaption: 'Save',
                     okAction: function () {
                         if (saveCallback) {
                             saveCallback(localizations);

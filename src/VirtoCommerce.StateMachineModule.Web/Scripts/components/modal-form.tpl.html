@@ -1,47 +1,49 @@
-<div class="modal" ng-style="{'position': 'absolute', 'zIndex': '1000'}">
+<div class="modal">
     <div class="modal-content">
         <div class="modal-title">{{$ctrl.formTitle}}</div>
-        <div ng-if="!$ctrl.isArray"
-             ng-repeat="field in $ctrl.fields" class="form-group">
-            <label ng-if="field.title"
-                   for="{{field.name}}">{{field.title}}:</label>
-            <input ng-if="field.valueType === 'ShortText'"
-                   type="text"
-                   id="{{field.name}}"
-                   name="{{field.name}}"
-                   ng-model="$ctrl.entity[field.name]"
-                   ng-required="field.isRequired">
-            <textarea ng-if="field.valueType === 'LongText'"
-                      id="{{field.name}}"
-                      name="{{field.name}}"
-                      ng-model="$ctrl.entity[field.name]"
-                      ng-required="field.isRequired">
-            </textarea>
-        </div>
-        <div ng-if="$ctrl.isArray"
-             ng-repeat="element in $ctrl.entity">
-            <div ng-repeat="field in $ctrl.fields" class="form-group">
+        <div class="modal-controls">
+            <div ng-if="!$ctrl.isArray"
+                 ng-repeat="field in $ctrl.fields" class="form-group">
                 <label ng-if="field.title"
                        for="{{field.name}}">{{field.title}}:</label>
-                <label ng-if="field.valueType === 'Label'">
-                    {{element[field.name]}}:
-                </label>
                 <input ng-if="field.valueType === 'ShortText'"
                        type="text"
                        id="{{field.name}}"
                        name="{{field.name}}"
-                       ng-model="element[field.name]"
+                       ng-model="$ctrl.entity[field.name]"
                        ng-required="field.isRequired">
                 <textarea ng-if="field.valueType === 'LongText'"
                           id="{{field.name}}"
                           name="{{field.name}}"
-                          ng-model="element[field.name]"
+                          ng-model="$ctrl.entity[field.name]"
                           ng-required="field.isRequired">
                 </textarea>
             </div>
+            <div ng-if="$ctrl.isArray"
+                 ng-repeat="element in $ctrl.entity">
+                <div ng-repeat="field in $ctrl.fields" class="form-group">
+                    <label ng-if="field.title"
+                           for="{{field.name}}">{{field.title}}:</label>
+                    <label ng-if="field.valueType === 'Label'">
+                        {{element[field.name]}}:
+                    </label>
+                    <input ng-if="field.valueType === 'ShortText'"
+                           type="text"
+                           id="{{field.name}}"
+                           name="{{field.name}}"
+                           ng-model="element[field.name]"
+                           ng-required="field.isRequired">
+                    <textarea ng-if="field.valueType === 'LongText'"
+                              id="{{field.name}}"
+                              name="{{field.name}}"
+                              ng-model="element[field.name]"
+                              ng-required="field.isRequired">
+                    </textarea>
+                </div>
+            </div>
         </div>
         <div class="modal-buttons">
-            <button class="modal-button modal-button-primary" ng-click="$ctrl.doOkAction()">OK</button>
+          <button class="modal-button modal-button-primary" ng-click="$ctrl.doOkAction()">{{$ctrl.okButtonCaption}}</button>
             <button class="modal-button modal-button-secondary" ng-click="$ctrl.doCancelAction()">Cancel</button>
         </div>
     </div>

@@ -1,12 +1,10 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -84,9 +82,6 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
         // Register settings
         var settingsRegistrar = serviceProvider.GetRequiredService<ISettingsRegistrar>();
         settingsRegistrar.RegisterSettings(ModuleConstants.Settings.AllSettings, ModuleInfo.Id);
-
-        var settingsManager = appBuilder.ApplicationServices.GetRequiredService<ISettingsManager>();
-        ModuleConstants.Settings.General.StateMachineLanguages.AllowedValues = settingsManager.GetObjectSettingsAsync([PlatformConstants.Settings.General.Languages.Name]).GetAwaiter().GetResult()?.FirstOrDefault()?.AllowedValues?.OfType<string>().OrderBy(x => x).ToArray() ?? [];
 
         // Register permissions
         var permissionsRegistrar = serviceProvider.GetRequiredService<IPermissionsRegistrar>();
