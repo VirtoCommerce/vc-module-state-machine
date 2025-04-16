@@ -64,7 +64,8 @@ public class StateMachineInstancesSearchServiceTests
             () => stateMachineRepositoryMock,
             platformMemoryCache,
             serviceProvider.GetService<IStateMachineInstanceService>(),
-            serviceProvider.GetService<IOptions<CrudOptions>>()
+            serviceProvider.GetService<IOptions<CrudOptions>>(),
+            serviceProvider.GetService<IStateMachineLocalizationSearchService>()
         );
 
         return stateMachineInstancesSearchService;

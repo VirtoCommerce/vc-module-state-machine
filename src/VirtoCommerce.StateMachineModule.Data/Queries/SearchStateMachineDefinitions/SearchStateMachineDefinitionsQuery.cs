@@ -9,6 +9,7 @@ public class SearchStateMachineDefinitionsQuery : SearchStateMachineDefinitionCr
         var criteria = new SearchStateMachineDefinitionCriteria();
 
         criteria.Locale = Locale;
+        criteria.ResponseGroup = ResponseGroup;
         criteria.ObjectIds = ObjectIds;
         criteria.Take = Take;
         criteria.Skip = Skip;

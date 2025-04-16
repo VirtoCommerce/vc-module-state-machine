@@ -40,7 +40,7 @@ public class GetStateMachineDefinitionQueryHandler : IQueryHandler<GetStateMachi
         if (result != null && !string.IsNullOrEmpty(request.Locale))
         {
             var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionId = result.Id, Locale = request.Locale };
-            var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria)).Results;
+            var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
             if (localizationSearchResults.Any())
             {
                 foreach (var state in result.States)

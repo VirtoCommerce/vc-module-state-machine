@@ -8,6 +8,8 @@ public class SearchStateMachineInstancesQuery : SearchStateMachineInstanceCriter
     {
         var criteria = new SearchStateMachineInstanceCriteria();
 
+        criteria.Locale = Locale;
+        criteria.ResponseGroup = ResponseGroup;
         criteria.ObjectIds = ObjectIds;
         criteria.Take = Take;
         criteria.Skip = Skip;

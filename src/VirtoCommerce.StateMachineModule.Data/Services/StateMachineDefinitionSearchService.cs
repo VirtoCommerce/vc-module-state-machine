@@ -68,18 +68,20 @@ public class StateMachineDefinitionSearchService : SearchService<SearchStateMach
         {
             if (!result.Results.IsNullOrEmpty())
             {
+                var definitionIds = result.Results.Select(x => x.Id).ToArray();
+                var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionIds = definitionIds, Locale = criteria.Locale };
+                var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
                 foreach (var definition in result.Results)
                 {
-                    var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionId = definition.Id, Locale = criteria.Locale };
-                    var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria)).Results;
-                    if (localizationSearchResults.Any())
+                    var definitionLocalizations = localizationSearchResults.Where(x => x.DefinitionId == definition.Id);
+                    if (definitionLocalizations.Any())
                     {
                         foreach (var definitionState in definition.States)
                         {
-                            definitionState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
+                            definitionState.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
                             foreach (var definitionStateTransition in definitionState.Transitions)
                             {
-                                definitionStateTransition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                                definitionStateTransition.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
                             }
                         }
                     }

@@ -98,7 +98,7 @@ public class StateMachineExportImport
             await writer.WritePropertyNameAsync("StateMachineLocalizations");
             await writer.SerializeArrayWithPagingAsync(_jsonSerializer, _batchSize, async (skip, take) =>
             {
-                var searchResult = await _stateMachineLocalizationSearchService.SearchAsync(new SearchStateMachineLocalizationCriteria { Skip = skip, Take = take });
+                var searchResult = await _stateMachineLocalizationSearchService.SearchAsync(new SearchStateMachineLocalizationCriteria { Skip = skip, Take = take }, false);
                 return (GenericSearchResult<StateMachineLocalization>)searchResult;
             }
             , (processedCount, totalCount) =>
