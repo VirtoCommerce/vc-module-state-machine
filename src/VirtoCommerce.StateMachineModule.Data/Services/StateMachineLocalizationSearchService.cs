@@ -46,7 +46,7 @@ public class StateMachineLocalizationSearchService : SearchService<SearchStateMa
 
         if (!string.IsNullOrEmpty(criteria.Locale))
         {
-            query = query.Where(x => x.Locale == criteria.Locale);
+            query = query.Where(x => x.Locale.StartsWith(criteria.Locale));
         }
 
         return query;
