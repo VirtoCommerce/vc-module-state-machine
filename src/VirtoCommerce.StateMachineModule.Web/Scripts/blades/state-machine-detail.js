@@ -1,13 +1,16 @@
 angular.module('virtoCommerce.stateMachineModule')
     .controller('virtoCommerce.stateMachineModule.stateMachineDetailController', [
-            '$scope', 'platformWebApp.bladeNavigationService',
-            'virtoCommerce.stateMachineModule.webApi',
+        '$scope', 'platformWebApp.bladeNavigationService',
+        'virtoCommerce.stateMachineModule.stateMachineTypes',
+        'virtoCommerce.stateMachineModule.webApi',
         function ($scope, bladeNavigationService,
+            stateMachineTypes,
             webApi) {
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
             blade.title = '';
             blade.savingInProgress = false;
+            blade.stateMachineRegisteredTypes = [];
 
             function initializeBlade(data) {
                 if (!blade.isNew) {
@@ -18,6 +21,7 @@ angular.module('virtoCommerce.stateMachineModule')
                 blade.currentEntity = angular.copy(data);
                 blade.origEntity = data;
 
+                blade.stateMachineRegisteredTypes = stateMachineTypes.getAllTypes();
                 blade.isLoading = false;
             }
 
