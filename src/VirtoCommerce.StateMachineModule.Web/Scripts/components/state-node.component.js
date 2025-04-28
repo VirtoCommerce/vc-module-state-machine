@@ -6,12 +6,12 @@ angular.module('virtoCommerce.stateMachineModule')
             parentScope: '<',
         },
         templateUrl: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/components/state-node.tpl.html',
-        controller: ['$scope', '$element',
+        controller: ['$scope', '$element', '$filter',
             'virtoCommerce.stateMachineModule.stateMachineModalService',
             'virtoCommerce.stateMachineModule.stateMachineStateService',
             'virtoCommerce.stateMachineModule.stateMachineTransitionService',
             'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
-            function ($scope, $element,
+            function ($scope, $element, $filter,
                 stateMachineModalService,
                 stateMachineStateService,
                 stateMachineTransitionService,
@@ -78,7 +78,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
                     const contextMenuItems = [
                         {
-                            label: 'Edit state',
+                            label: $filter('translate')('statemachine.components.state-node.context-menu.edit-state'),
                             icon: 'fas fa-edit',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
@@ -86,7 +86,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             }
                         },
                         {
-                            label: 'Edit localization',
+                            label: $filter('translate')('statemachine.components.state-node.context-menu.edit-localization'),
                             icon: 'fas fa-globe',
                             action: async () => {
                                 $ctrl.parentScope.contextMenuData = null;
@@ -99,7 +99,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             }
                         },
                         {
-                            label: 'Delete state',
+                            label: $filter('translate')('statemachine.components.state-node.context-menu.delete-state'),
                             icon: 'fas fa-trash',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
@@ -269,7 +269,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
                     const contextMenuItems = [
                         {
-                            label: 'Add new State',
+                            label: $filter('translate')('statemachine.components.state-node.context-menu.add-new-state'),
                             icon: 'fas fa-plus',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;

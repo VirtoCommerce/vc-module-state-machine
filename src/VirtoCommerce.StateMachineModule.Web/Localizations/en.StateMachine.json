@@ -45,6 +45,50 @@
         }
       }
     },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Edit state",
+          "edit-localization": "Edit localization",
+          "delete-state": "Delete state",
+          "add-new-state": "Add new State"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Edit transition",
+          "edit-localization": "Edit localization",
+          "delete-transition": "Delete transition",
+          "insert-state": "Insert state here"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Name",
+        "description": "Description",
+        "ok": "OK",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "state": {
+        "edit-title": "Edit State",
+        "add-title": "Add New State"
+      },
+      "transition": {
+        "edit-title": "Edit Transition",
+        "new-title": "New Transition",
+        "trigger": "Trigger",
+        "icon": "Icon",
+        "trigger-required": "Trigger cannot be empty"
+      },
+      "localization": {
+        "edit-title": "Edit localization {{itemText}}"
+      }
+    },
+
     "dialogs": {
       "state-machine-details-save": {
         "title": "Save state machine definition",
