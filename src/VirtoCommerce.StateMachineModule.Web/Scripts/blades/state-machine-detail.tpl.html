@@ -14,7 +14,7 @@
                   <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.entity-type' | translate }}</label>
                     <div class="form-input">
                         <ui-select ng-model="blade.currentEntity.entityType"
-                                    search-enabled="false">
+                                    search-enabled="false" ng-disabled="!blade.isNew">
                           <ui-select-match>{{ $select.selected.caption | translate }}</ui-select-match>
                             <ui-select-choices repeat="entityType.value as entityType in blade.stateMachineRegisteredTypes">
                                 <span ng-bind-html="entityType.caption | translate"></span>
