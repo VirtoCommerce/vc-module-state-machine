@@ -23,7 +23,7 @@ public class GetStateMachineSettingsQueryHandler : IQueryHandler<GetStateMachine
         var languageSettings = await _settingsManager.GetObjectSettingAsync(Settings.General.StateMachineLanguages.Name);
 
         var result = ExType<StateMachineSettings>.New();
-        result.Languages = languageSettings.AllowedValues.Select(x => x.ToString()).OrderBy(x => x).ToArray();
+        result.Languages = languageSettings.AllowedValues?.Select(x => x.ToString()).OrderBy(x => x).ToArray() ?? [languageSettings.DefaultValue?.ToString()];
 
         return result;
     }

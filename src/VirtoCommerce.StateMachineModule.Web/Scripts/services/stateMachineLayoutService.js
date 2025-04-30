@@ -2,12 +2,14 @@ angular.module('virtoCommerce.stateMachineModule')
     .factory('virtoCommerce.stateMachineModule.stateMachineLayoutService', [
         '$timeout',
         'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
+        'virtoCommerce.stateMachineModule.stateMachineStateService',
         function ($timeout,
-            stateMachineWorkspaceService
+            stateMachineWorkspaceService,
+            stateMachineStateService
         ) {
             const stateWidth = 150;
             const stateHeight = 100;
-            const horizontalSpacing = 200;
+            var horizontalSpacing = 200;
             const verticalSpacing = 150;
 
             function normalizeStateLayout(states, transitions, $scope, workspace) {
@@ -84,7 +86,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             const groupWidth = groupStates.length * stateWidth +
                                 (groupStates.length - 1) * horizontalSpacing;
                             const parentX = groupStates.reduce((sum, state) => {
-                                const parents = blade.machineData.states.filter(s =>
+                                const parents = states.filter(s =>
                                     s.transitions.some(t => t.toState === state)
                                 );
                                 return sum + parents.reduce((pSum, p) => pSum + p.position.x, 0) /
