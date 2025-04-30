@@ -30,6 +30,7 @@
         },
         "placeholders": {
           "entity-type": "Entity type",
+          "entity-type-select": "Please select Entity type",
           "name": "State machine name",
           "states": "States serialized"
         }

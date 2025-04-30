@@ -11,6 +11,7 @@ public class SearchStateMachineDefinitionsQuery : SearchStateMachineDefinitionCr
         criteria.Locale = Locale;
         criteria.ResponseGroup = ResponseGroup;
         criteria.ObjectIds = ObjectIds;
+        criteria.ObjectTypes = ObjectTypes;
         criteria.Take = Take;
         criteria.Skip = Skip;
         criteria.SearchPhrase = SearchPhrase;
