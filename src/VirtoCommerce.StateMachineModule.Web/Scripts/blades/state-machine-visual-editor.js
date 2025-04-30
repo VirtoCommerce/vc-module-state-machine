@@ -329,7 +329,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     newY = lastState.position.y + 100 + stateHeight;
                 }
 
-                stateMachineModalService.editStateModal($scope, $element, newX, newY, null, null, blade.machineData.states, blades.machineData.transitions);
+                stateMachineModalService.editStateModal($scope, $element, newX, newY, null, null, blade.machineData.states, blade.machineData.transitions);
             };
 
             function updateCurrentEntity() {
