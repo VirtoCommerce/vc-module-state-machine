@@ -1,9 +1,9 @@
-<div class="modal">
-    <div class="modal-content">
-        <div class="modal-title">{{$ctrl.formTitle}}</div>
-        <div class="modal-controls">
+<div class="state-machine-modal">
+    <div class="state-machine-modal-content">
+        <div class="state-machine-modal-title">{{$ctrl.formTitle}}</div>
+        <div class="state-machine-modal-controls">
             <div ng-if="!$ctrl.isArray"
-                 ng-repeat="field in $ctrl.fields" class="form-group">
+                 ng-repeat="field in $ctrl.fields" class="state-machine-form-group">
                 <label ng-if="field.title"
                        for="{{field.name}}">{{field.title}}:</label>
                 <input ng-if="field.valueType === 'ShortText'"
@@ -21,7 +21,7 @@
             </div>
             <div ng-if="$ctrl.isArray"
                  ng-repeat="element in $ctrl.entity">
-                <div ng-repeat="field in $ctrl.fields" class="form-group">
+                <div ng-repeat="field in $ctrl.fields" class="state-machine-form-group">
                     <label ng-if="field.title"
                            for="{{field.name}}">{{field.title}}:</label>
                     <label ng-if="field.valueType === 'Label'">
@@ -42,9 +42,9 @@
                 </div>
             </div>
         </div>
-        <div class="modal-buttons">
-          <button class="modal-button modal-button-primary" ng-click="$ctrl.doOkAction()">{{$ctrl.okButtonCaption}}</button>
-            <button class="modal-button modal-button-secondary" ng-click="$ctrl.doCancelAction()">Cancel</button>
+        <div class="state-machine-modal-buttons">
+          <button class="state-machine-modal-button state-machine-modal-button-primary" ng-click="$ctrl.doOkAction()">{{$ctrl.okButtonCaption}}</button>
+            <button class="state-machine-modal-button state-machine-modal-button-secondary" ng-click="$ctrl.doCancelAction()">Cancel</button>
         </div>
     </div>
 </div>
