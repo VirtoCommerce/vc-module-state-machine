@@ -15,7 +15,7 @@
        ng-dblclick="$ctrl.editState($event, $ctrl.state)">
     <div class="state-description-text">{{$ctrl.state.description || '(No description)'}}</div>
   </div>
-  <div class="attributes" ng-if="$ctrl.state.isFinal">
+  <div class="state-node-attributes" ng-if="$ctrl.state.isFinal">
     <three-position-toggle toggle-id="{{$ctrl.state.id}}-toggle"
                            left-label="Success"
                            right-label="Fail"
@@ -23,7 +23,7 @@
                            on-change="$ctrl.onStateToggleChange($ctrl.state, $position)">
     </three-position-toggle>
   </div>
-  <div class="connector"
+  <div class="state-node-connector"
        ng-mouseenter="connector.style.background = '#424242'"
        ng-mouseleave="connector.style.background = '#757575'"
        ng-mousedown="$ctrl.startTransition($event, $ctrl.state)">
