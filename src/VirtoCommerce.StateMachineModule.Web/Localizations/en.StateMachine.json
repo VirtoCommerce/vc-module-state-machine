@@ -44,6 +44,12 @@
           "toggle-to-visual-mode": "Visual mode",
           "toggle-to-json-mode": "JSON mode"
         }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Conditions",
+          "no-condition-prototype": "There is no condition prototype defined for this entityType"
+        }
       }
     },
 
@@ -60,6 +66,7 @@
         "context-menu": {
           "edit-transition": "Edit transition",
           "edit-localization": "Edit localization",
+          "edit-condition": "Edit condition",
           "delete-transition": "Delete transition",
           "insert-state": "Insert state here"
         }

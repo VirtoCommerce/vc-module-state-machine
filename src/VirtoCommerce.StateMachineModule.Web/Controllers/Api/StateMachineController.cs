@@ -98,6 +98,16 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
         }
 
         [HttpPost]
+        [Route("instances/entity")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<StateMachineInstance>> GetStateMachineForEntity([FromBody] GetStateMachineInstanceForEntityQuery query)
+        {
+            query.User = User;
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost]
         [Route("instances/{definitionId}/new")]
         //TODO: Replace IHasDynamicProperties to some other base interface that has Disrciminator property to be able receive all vc  models as argument
         [Authorize(ModuleConstants.Security.Permissions.Create)]

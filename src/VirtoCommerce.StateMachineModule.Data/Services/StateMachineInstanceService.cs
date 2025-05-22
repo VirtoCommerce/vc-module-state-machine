@@ -36,22 +36,27 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         _stateMachineDefinitionService = stateMachineDefinitionService;
     }
 
-    public virtual async Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity)
+    public virtual async Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity, string state = null)
     {
         var stateMachineDefinition = await _stateMachineDefinitionService.GetByIdAsync(stateMachineDefinitionId);
         if (stateMachineDefinition == null)
         {
-            throw new OperationCanceledException($"SM with {stateMachineDefinitionId} not found");
+            throw new OperationCanceledException($"State machine with {stateMachineDefinitionId} not found");
         }
 
-        var stateMachineInstance = new StateMachineInstance().Configure(stateMachineDefinition, null);
+        var stateMachineInstance = ExType<StateMachineInstance>.New();
+        stateMachineInstance = stateMachineInstance.Configure(stateMachineDefinition, state);
         stateMachineInstance.Id = stateMachineInstanceId.EmptyToNull() ?? Guid.NewGuid().ToString();
         stateMachineInstance.EntityId = entity.Id;
         stateMachineInstance.EntityType = stateMachineDefinition.EntityType;
 
         var context = new StateMachineTriggerContext { ContextObject = entity };
         stateMachineInstance.Evaluate(context);
-        stateMachineInstance.Start(context);
+
+        if (string.IsNullOrEmpty(state))
+        {
+            stateMachineInstance.Start(context);
+        }
 
         await SaveChangesAsync([stateMachineInstance]);
 
@@ -71,16 +76,14 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         return firedInstance;
     }
 
-    public virtual async Task<IList<StateMachineInstance>> GetForEntity(string entityId, string entityType)
+    public virtual async Task<StateMachineInstance> GetForEntity(string entityId, string entityType)
     {
         using var repository = _repositoryFactory();
 
-        var ids = await repository.StateMachineInstances
-            .Where(x => x.EntityId == entityId && x.EntityType == entityType)
-            .Select(x => x.Id)
-            .ToListAsync();
+        var stateMachineInstanceEntity = await repository.StateMachineInstances
+            .FirstOrDefaultAsync(x => x.EntityId == entityId && x.EntityType == entityType);
 
-        return await GetAsync(ids);
+        return await this.GetByIdAsync(stateMachineInstanceEntity.Id);
     }
 
     protected override async Task<IList<StateMachineInstanceEntity>> LoadEntities(IRepository repository, IList<string> ids, string responseGroup)

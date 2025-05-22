@@ -7,10 +7,12 @@ angular.module('virtoCommerce.stateMachineModule')
         },
         templateUrl: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/components/state-transitions.tpl.html',
         controller: ['$scope', '$element', '$filter',
+            'platformWebApp.bladeNavigationService',
             'virtoCommerce.stateMachineModule.stateMachineModalService',
             'virtoCommerce.stateMachineModule.stateMachineStateService',
             'virtoCommerce.stateMachineModule.stateMachineTransitionService',
             function ($scope, $element, $filter,
+                bladeNavigationService,
                 stateMachineModalService,
                 stateMachineStateService,
                 stateMachineTransitionService
@@ -99,6 +101,23 @@ angular.module('virtoCommerce.stateMachineModule')
                                 }
                                 stateMachineModalService.editLocalization($ctrl.parentScope, $element, transition, languages, existedTranslations, $ctrl.parentScope.blade.saveCurrentTranslations);
                             }
+                        },
+                        {
+                            label: $filter('translate')('statemachine.components.state-transitions.context-menu.edit-condition'),
+                            icon: 'fas fa-filter',
+                            action: () => {
+                                $ctrl.parentScope.contextMenuData = null;
+                                var currentEntityType = $ctrl.parentScope.blade.getCuttentStateMachineEntityType();
+                                var newBlade = {
+                                    id: "stateMachineCondition",
+                                    currentEntityType: currentEntityType,
+                                    currentTransition: transition,
+                                    saveCallback: $ctrl.parentScope.blade.saveTransitionCondition,
+                                    controller: 'virtoCommerce.stateMachineModule.stateMachineConditionController',
+                                    template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-condition.tpl.html'
+                                };
+
+                                bladeNavigationService.showBlade(newBlade, $ctrl.parentScope.blade);                            }
                         },
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.delete-transition'),

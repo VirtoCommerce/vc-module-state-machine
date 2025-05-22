@@ -3,11 +3,14 @@ angular.module('virtoCommerce.stateMachineModule')
         var registeredTypes = [];
 
         return {
-            addType: function (caption, value) {
-                registeredTypes.push({caption: caption, value: value});
+            addType: function (entityType) {
+                registeredTypes.push(entityType);
             },
             getAllTypes: function () {
                 return registeredTypes;
+            },
+            getTypeInfo: function (type) {
+                return registeredTypes.find(x => x.value === type);
             }
         };
     }]);

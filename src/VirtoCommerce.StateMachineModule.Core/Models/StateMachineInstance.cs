@@ -72,7 +72,10 @@ public class StateMachineInstance : AuditableEntity, ICloneable
                     _registeredTriggersList.Add(trigger);
                 }
 
-                configuration.PermitIf(trigger, permittedTransition.ToState, (ctx) => true);
+                configuration.PermitIf(trigger, permittedTransition.ToState, (context) =>
+                {
+                    return permittedTransition.Condition != null ? permittedTransition.Condition.IsSatisfiedBy(context) : true;
+                });
             }
         }
 
@@ -97,8 +100,11 @@ public class StateMachineInstance : AuditableEntity, ICloneable
     public virtual StateMachineInstance Fire(string trigger, StateMachineTriggerContext context)
     {
         var paramsTrigger = _registeredTriggersList.FirstOrDefault(x => x.Trigger == trigger);
+        //if (paramsTrigger.Trigger.Par.Condition(context))
+        //{
         _stateMachine.Fire(paramsTrigger, context);
         Evaluate(context);
+        //}
         return this;
     }
 

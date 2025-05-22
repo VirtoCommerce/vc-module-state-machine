@@ -43,9 +43,9 @@ public class FireStateMachineTriggerCommandHandler : ICommandHandler<FireStateMa
         var instance = await _stateMachineInstanceService.GetByIdAsync(instanceId);
         if (instance == null)
         {
-            throw new OperationCanceledException($"SM instance with {instanceId} not found");
+            throw new OperationCanceledException($"State machine instance with {instanceId} not found");
         }
-        var result = await _stateMachineInstanceService.FireTriggerAsync(instance, request.Trigger, new StateMachineTriggerContext { EntityId = request.EntityId });
+        var result = await _stateMachineInstanceService.FireTriggerAsync(instance, request.Trigger, new StateMachineTriggerContext { EntityId = request.EntityId, Principal = request.User });
         await _stateMachineInstanceService.SaveChangesAsync([result]);
         return result;
     }

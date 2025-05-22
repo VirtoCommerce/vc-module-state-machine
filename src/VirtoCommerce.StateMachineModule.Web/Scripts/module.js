@@ -30,8 +30,13 @@ angular.module(moduleName, [])
                 });
         }
     ])
-    .run(['platformWebApp.mainMenuService', '$state',
-        function (mainMenuService, $state) {
+    .run(['platformWebApp.mainMenuService',
+        '$http', '$compile', '$state',
+        'virtoCommerce.coreModule.common.dynamicExpressionService',
+        function (mainMenuService,
+            $http, $compile, $state,
+            dynamicExpressionService
+        ) {
             var stateMachineMenuItem = {
                 path: 'configuration/state-machine',
                 icon: 'fas fa-project-diagram',
@@ -41,5 +46,16 @@ angular.module(moduleName, [])
                 permission: 'statemachine:access'
             };
             mainMenuService.addMenuItem(stateMachineMenuItem);
+
+            // Transition's condition template registration
+            dynamicExpressionService.registerExpression({
+                id: 'StateMachineConditionHasPermission',
+                displayName: 'Permission ...',
+                templateURL: 'StateMachineConditionHasPermission.html'
+            });
+
+            $http.get('Modules/$(VirtoCommerce.StateMachine)/Scripts/dynamicConditions/templates.html').then(function (response) {
+                $compile(response.data);
+            });
         }
     ]);

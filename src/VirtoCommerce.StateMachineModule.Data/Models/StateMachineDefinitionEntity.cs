@@ -45,7 +45,7 @@ public class StateMachineDefinitionEntity : AuditableEntity, IDataEntity<StateMa
         model.EntityType = EntityType;
         model.IsActive = IsActive;
         model.Version = Version;
-        model.States = JsonConvert.DeserializeObject<StateMachineState[]>(StatesSerialized, new PolymorphJsonConverter());
+        model.States = JsonConvert.DeserializeObject<StateMachineState[]>(StatesSerialized, new ConditionJsonConverter(), new PolymorphJsonConverter());
         model.StatesGraph = StatesGraph;
         model.StatesCapture = StatesCapture;
 

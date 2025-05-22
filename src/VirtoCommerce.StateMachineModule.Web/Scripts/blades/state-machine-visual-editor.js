@@ -113,6 +113,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                     description: transitionData.description || '',
                                     fromState: fromState,
                                     toState: toState,
+                                    condition: transitionData.condition,
                                     path: '', // Will be calculated by updateTransitionPath
                                     labelPosition: {} // Will be calculated by updateTransitionPath
                                 };
@@ -347,7 +348,8 @@ angular.module('virtoCommerce.stateMachineModule')
                         trigger: t.trigger,
                         icon: t.icon || '',
                         description: t.description || '',
-                        toState: t.toState.id
+                        toState: t.toState.id,
+                        condition: t.condition
                     }))
                 }));
 
@@ -374,6 +376,27 @@ angular.module('virtoCommerce.stateMachineModule')
                         x.definitionId = blade.stateMachineDefinitionId;
                     });
                     stateMachineApi.updateStateMachineLocalization({ localizations: localizations });
+                }
+            }
+
+            blade.getCuttentStateMachineEntityType = function () {
+                return blade.parentBlade.currentEntity.entityType;
+            }
+
+            blade.saveTransitionCondition = function (transition, condition) {
+                if (transition) {
+                    var currentTransition = blade.machineData.transitions.find(t => t.id === transition.id);
+                    if (currentTransition) {
+                        currentTransition.condition = condition;
+                    }
+                    var currentState = blade.machineData.states.find(s => s.transitions.filter(t => t.id === transition.id).length > 0);
+                    if (currentState) {
+                        var currentStateTransition = currentState.transitions.find(t => t.id === transition.id);
+                        if (currentStateTransition) {
+                            currentStateTransition.condition = condition;
+                        }
+                    }
+                    updateCurrentEntity();
                 }
             }
 

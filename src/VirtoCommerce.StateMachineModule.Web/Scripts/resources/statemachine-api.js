@@ -7,6 +7,7 @@ angular.module('virtoCommerce.stateMachineModule')
             allStates: { method: 'GET', url: 'api/statemachine/definitions/allstates', isArray: true },
             searchStateMachineInstance: { method: 'POST', url: 'api/statemachine/instances/search' },
             getStateMachineInstanceById: { method: 'GET', url: 'api/statemachine/instances/:instanceId' },
+            getStateMachineInstanceByEntity: { method: 'POST', url: 'api/statemachine/instances/entity' },
             createStateMachineInstance: { method: 'POST', url: 'api/statemachine/instances/:definitionId/new' },
             fireStateMachineInstanceTrigger: { method: 'POST', url: 'api/statemachine/firetrigger' },
             // localizations

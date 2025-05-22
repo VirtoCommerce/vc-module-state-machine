@@ -1,0 +1,21 @@
+<div class="blade-content">
+    <div class="blade-inner">
+        <div class="inner-block">
+            <form class="form" name="formScope">
+                <div class="form-group" ng-if="blade.currentEntity" ng-init="setForm(formScope)">
+                    <fieldset>
+                      <legend>{{'statemachine.blades.state-machine-condition.labels.conditions' | translate}}</legend>
+                        <div class="dynamic-expression">
+                            <va-dynamic-expression-tree source="blade.currentEntity"></va-dynamic-expression-tree>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group" ng-if="!blade.currentEntity">
+                    <fieldset>
+                      <legend>{{ 'statemachine.blades.state-machine-condition.labels.no-condition-prototype' | translate }} {{ blade.currentEntity.currentState.localizedValue || blade.currentEntity.currentState.name }}</legend>
+                  </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

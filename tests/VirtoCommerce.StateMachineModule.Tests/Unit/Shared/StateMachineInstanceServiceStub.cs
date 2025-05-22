@@ -10,7 +10,7 @@ namespace VirtoCommerce.StateMachineModule.Tests.Unit.Shared;
 [ExcludeFromCodeCoverage]
 public class StateMachineInstanceServiceStub : IStateMachineInstanceService
 {
-    public Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity)
+    public Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity, string state = null)
     {
         var stateMachineInstance = new StateMachineInstance
         {
@@ -49,6 +49,11 @@ public class StateMachineInstanceServiceStub : IStateMachineInstanceService
         }
 
         return Task.FromResult(result as IList<StateMachineInstance>);
+    }
+
+    public Task<StateMachineInstance> GetForEntity(string entityId, string entityType)
+    {
+        throw new NotImplementedException();
     }
 
     public Task SaveChangesAsync(IList<StateMachineInstance> models)

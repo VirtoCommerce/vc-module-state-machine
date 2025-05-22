@@ -1,0 +1,26 @@
+<script type="text/ng-template" id="StateMachineConditionHasPermission.html">
+  <a class="__link" left-click-menu data-target="notMenu">{{element1.notHas | boolToValue:'Has no':'Has'}}</a> permission
+  <ul class="menu __context" role="menu" id="notMenu">
+    <li class="menu-item" ng-click='element1.notHas=false;'>Has</li>
+    <li class="menu-item" ng-click='element1.notHas=true;'>Has no</li>
+  </ul>
+  <div class="form-input">
+    <ui-select multiple ng-model="element1.permissions" ng-controller="virtoCommerce.stateMachineModule.permissionConditionController">
+      <ui-select-match placeholder="Select...">{{$item|json}}</ui-select-match>
+      <ui-select-choices repeat="x in permissions | filter: $select.search">
+        <span ng-bind-html="x | highlight: $select.search"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+  <!--<a class="__link" ng-click="openPermissionsSelectWizard(element1)">
+    {{ element1.permissions ? (element.permissions.length === 1 ? element.permissions[0] : element.permissions.length + ' permission') : 'select permission' }}
+  </a>-->
+  <!--<div class="form-group" ng-controller="virtoCommerce.stateMachineModule.roleConditionController">
+    <ui-select ng-model="element1.roleName">
+      <ui-select-match placeholder="Select...">{{$select.selected.name}}</ui-select-match>
+      <ui-select-choices repeat="x.id as x in roles | filter: { name: $select.search }">
+        <span ng-bind-html="x.name | highlight: $select.search"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>-->
+</script>
