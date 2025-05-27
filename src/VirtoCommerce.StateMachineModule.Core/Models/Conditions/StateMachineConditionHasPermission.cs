@@ -13,6 +13,7 @@ public class StateMachineConditionHasPermission : ConditionTree
         var result = false;
         if (context is StateMachineTriggerContext stateMachineTriggerContext)
         {
+            result = stateMachineTriggerContext.Principal.IsInRole("__administrator");
             var userPermissions = stateMachineTriggerContext.Principal.FindAll("permission").Select(x => x.Value);
             if (!NotHas)
             {
