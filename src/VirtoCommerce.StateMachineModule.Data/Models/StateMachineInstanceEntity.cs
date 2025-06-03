@@ -47,6 +47,7 @@ public class StateMachineInstanceEntity : AuditableEntity, IDataEntity<StateMach
         {
             model.Configure(StateMachineDefinition.ToModel(ExType<StateMachineDefinition>.New()), State);
         }
+        model.IsStopped = IsStopped;
 
         return model;
     }
