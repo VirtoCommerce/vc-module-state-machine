@@ -61,6 +61,11 @@ public class StateMachineInstanceServiceStub : IStateMachineInstanceService
         return Task.CompletedTask;
     }
 
+    public Task<StateMachineInstance> StopStateMachine(string stateMachineInstanceId)
+    {
+        throw new NotImplementedException();
+    }
+
     private StateMachineDefinition GetStateMachineDefinition()
     {
         return new StateMachineDefinition

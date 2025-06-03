@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtoCommerce.StateMachineModule.Data.Repositories;
 
@@ -11,9 +12,11 @@ using VirtoCommerce.StateMachineModule.Data.Repositories;
 namespace VirtoCommerce.StateMachineModule.Data.SqlServer.Migrations
 {
     [DbContext(typeof(StateMachineDbContext))]
-    partial class StateMachineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603120809_AddIsStopped")]
+    partial class AddIsStopped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

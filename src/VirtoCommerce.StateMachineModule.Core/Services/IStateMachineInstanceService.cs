@@ -9,4 +9,5 @@ public interface IStateMachineInstanceService : ICrudService<StateMachineInstanc
     Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity, string state = null);
     Task<StateMachineInstance> GetForEntity(string entityId, string entityType);
     Task<StateMachineInstance> FireTriggerAsync(StateMachineInstance stateMachineInstance, string trigger, StateMachineTriggerContext context);
+    Task<StateMachineInstance> StopStateMachine(string stateMachineInstanceId);
 }

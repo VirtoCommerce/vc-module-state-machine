@@ -17,8 +17,9 @@ public class StateMachineInstance : AuditableEntity, ICloneable
     public StateMachineState CurrentState => StateMachineDefinition?.States.FirstOrDefault(x => x.Name == _stateMachine.State);
     public IEnumerable<string> PermittedTriggers { get; set; }
     private IList<StateMachine<string, string>.TriggerWithParameters<StateMachineTriggerContext>> _registeredTriggersList = new List<StateMachine<string, string>.TriggerWithParameters<StateMachineTriggerContext>>();
-    public bool IsActive => !CurrentState?.IsFinal ?? false;
+    public bool IsActive => IsStopped ? false : !CurrentState?.IsFinal ?? false;
     public StateMachineDefinition StateMachineDefinition { get; set; }
+    public bool IsStopped { get; set; }
 
     public StateMachineInstance()
     {
@@ -32,6 +33,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         }
         StateMachineDefinition = definition;
         StateMachineState currentState = null;
+        IsStopped = false;
 
         var initialState = definition.States.FirstOrDefault(x => x.IsInitial);
         if (initialState == null)
@@ -93,18 +95,29 @@ public class StateMachineInstance : AuditableEntity, ICloneable
 
     public virtual StateMachineInstance Evaluate(StateMachineTriggerContext context)
     {
-        PermittedTriggers = _stateMachine.GetPermittedTriggers(context);
+        PermittedTriggers = new List<string>();
+        if (context != null && !IsStopped)
+        {
+            PermittedTriggers = _stateMachine.GetPermittedTriggers(context);
+        }
         return this;
     }
 
     public virtual StateMachineInstance Fire(string trigger, StateMachineTriggerContext context)
     {
         var paramsTrigger = _registeredTriggersList.FirstOrDefault(x => x.Trigger == trigger);
-        //if (paramsTrigger.Trigger.Par.Condition(context))
-        //{
+
         _stateMachine.Fire(paramsTrigger, context);
         Evaluate(context);
-        //}
+
+        return this;
+    }
+
+    public virtual StateMachineInstance Stop()
+    {
+        IsStopped = true;
+        Evaluate(null);
+
         return this;
     }
 

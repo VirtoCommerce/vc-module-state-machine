@@ -25,6 +25,9 @@ public class StateMachineInstanceEntity : AuditableEntity, IDataEntity<StateMach
 
     public StateMachineDefinitionEntity StateMachineDefinition { get; set; }
 
+    [Required]
+    public bool IsStopped { get; set; }
+
     public virtual StateMachineInstance ToModel(StateMachineInstance model)
     {
         if (model == null)
@@ -67,6 +70,7 @@ public class StateMachineInstanceEntity : AuditableEntity, IDataEntity<StateMach
         EntityType = model.EntityType;
         StateMachineId = model.StateMachineDefinitionId;
         State = model.CurrentStateName;
+        IsStopped = model.IsStopped;
 
         return this;
     }
@@ -79,5 +83,6 @@ public class StateMachineInstanceEntity : AuditableEntity, IDataEntity<StateMach
         }
 
         target.State = State;
+        target.IsStopped = IsStopped;
     }
 }

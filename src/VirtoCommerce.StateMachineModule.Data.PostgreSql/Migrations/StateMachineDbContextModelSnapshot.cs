@@ -98,6 +98,9 @@ namespace VirtoCommerce.StateMachineModule.Data.PostgreSql.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");
 
+                    b.Property<bool>("IsStopped")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");

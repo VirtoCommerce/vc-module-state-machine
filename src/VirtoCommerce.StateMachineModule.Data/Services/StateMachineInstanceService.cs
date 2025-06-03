@@ -86,6 +86,15 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         return await this.GetByIdAsync(stateMachineInstanceEntity.Id);
     }
 
+    public virtual async Task<StateMachineInstance> StopStateMachine(string stateMachineInstanceId)
+    {
+        var stateMachineInstance = await this.GetByIdAsync(stateMachineInstanceId);
+        stateMachineInstance.Stop();
+        await SaveChangesAsync([stateMachineInstance]);
+
+        return stateMachineInstance;
+    }
+
     protected override async Task<IList<StateMachineInstanceEntity>> LoadEntities(IRepository repository, IList<string> ids, string responseGroup)
     {
         return await ((IStateMachineRepository)repository).GetStateMachineInstancesByIds(ids.ToArray(), responseGroup);
