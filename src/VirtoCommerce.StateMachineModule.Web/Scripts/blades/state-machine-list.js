@@ -3,9 +3,11 @@ angular.module('virtoCommerce.stateMachineModule')
         '$timeout', '$scope', 'platformWebApp.bladeUtils',
         'virtoCommerce.stateMachineModule.webApi',
         'platformWebApp.uiGridHelper',
+        'virtoCommerce.stateMachineModule.stateMachineExportImportService',
         function ($timeout, $scope, bladeUtils,
             webApi,
-            uiGridHelper) {
+            uiGridHelper,
+            stateMachineExportImportService) {
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
             blade.title = 'statemachine.blades.state-machine-list.title';
@@ -155,54 +157,27 @@ angular.module('virtoCommerce.stateMachineModule')
 
                         blade.importInProgress = true;
                         blade.isLoading = true;
-                        // Create a new JSZip instance
-                        const zip = new JSZip();
 
-                        // Load the zip file
-                        zip.loadAsync(file)
-                            .then(function (zip) {
-                                // Find the first JSON file in the zip
-                                const jsonFile = Object.values(zip.files).find(file =>
-                                    file.name.endsWith('.json') && !file.dir
-                                );
-
-                                if (!jsonFile) {
-                                    throw new Error('No JSON file found in the zip archive');
-                                }
-
-                                // Read the JSON file content
-                                return jsonFile.async('string');
+                        stateMachineExportImportService.importStateMachine(file)
+                            .then(function(createdDefinition) {
+                                console.log('State machine imported successfully:', createdDefinition);
+                                blade.importInProgress = false;
+                                blade.isLoading = false;
+                                blade.refresh();
                             })
-                            .then(function (jsonString) {
-                                try {
-                                    const importedData = JSON.parse(jsonString);
-
-                                    // Validate the imported data structure
-                                    if (!importedData.states || !Array.isArray(importedData.states)) {
-                                        throw new Error('Invalid state machine format');
-                                    }
-
-                                    webApi.updateStateMachineDefinition({
-                                        definition: importedData
-                                    },
-                                    function (data) {
-                                        blade.importInProgress = false;
-                                        blade.isLoading = false;
-                                        blade.refresh();
-                                    });
-
-                                } catch (error) {
-                                    console.error('Error parsing imported file:', error);
-                                }
-                            })
-                            .catch(function (error) {
-                                console.error('Error processing zip file:', error);
+                            .catch(function(error) {
+                                console.error('Error importing state machine:', error);
+                                blade.importInProgress = false;
+                                blade.isLoading = false;
+                                // Could show user notification here if needed
                             });
                     };
 
                     input.click();
                 } catch (error) {
                     console.error('Error importing state machine:', error);
+                    blade.importInProgress = false;
+                    blade.isLoading = false;
                 }
             }
 

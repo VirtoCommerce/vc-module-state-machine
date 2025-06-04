@@ -4,10 +4,12 @@ angular.module('virtoCommerce.stateMachineModule')
         'platformWebApp.dialogService',
         'virtoCommerce.stateMachineModule.stateMachineTypes',
         'virtoCommerce.stateMachineModule.webApi',
+        'virtoCommerce.stateMachineModule.stateMachineExportImportService',
         function ($scope, bladeNavigationService,
             dialogService,
             stateMachineTypes,
-            webApi) {
+            webApi,
+            stateMachineExportImportService) {
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
             blade.title = '';
@@ -148,58 +150,15 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             blade.exportStateMachine = function () {
-                try {
-                    const stateMachineData = {
-                        id: blade.currentEntity.id,
-                        name: blade.currentEntity.name,
-                        version: blade.currentEntity.version,
-                        entityType: blade.currentEntity.entityType,
-                        isActive: blade.currentEntity.isActive,
-                        statesGraph: blade.currentEntity.statesGraph,
-                        statesCapture: blade.currentEntity.statesCapture,
-                        states: JSON.parse(blade.currentEntity.statesGraph),
-                        createdDate: blade.currentEntity.createdDate,
-                        modifiedDate: blade.currentEntity.modifiedDate,
-                        createdBy: blade.currentEntity.createdBy,
-                        modifiedBy: blade.currentEntity.modifiedBy
-                    };
-
-                    const jsonString = JSON.stringify(stateMachineData, null, 2);
-
-                    // Create a new JSZip instance
-                    const zip = new JSZip();
-
-                    // Add the JSON file to the zip
-                    zip.file(`${blade.currentEntity.name || 'state-machine-export'}.json`, jsonString);
-
-                    // Generate the zip file
-                    zip.generateAsync({
-                        type: "blob",
-                        compression: "DEFLATE",
-                        compressionOptions: {
-                            level: 6  // Normal compression level (1-9, where 6 is normal)
-                        }
+                stateMachineExportImportService.exportStateMachine(blade.currentEntity)
+                    .then(function() {
+                        // Export completed successfully
+                        console.log('State machine exported successfully');
                     })
-                        .then(function(content) {
-                            // Create download link
-                            const link = document.createElement('a');
-                            link.href = URL.createObjectURL(content);
-                            link.download = `${blade.currentEntity.name || 'state-machine-export'}.zip`;
-
-                            // Trigger download
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-
-                            // Clean up
-                            URL.revokeObjectURL(link.href);
-                        })
-                        .catch(function(error) {
-                            console.error('Error creating zip file:', error);
-                        });
-                } catch (error) {
-                    console.error('Error exporting state machine:', error);
-                }
+                    .catch(function(error) {
+                        console.error('Error exporting state machine:', error);
+                        // Could show user notification here if needed
+                    });
             }
 
             blade.openVisualEditor = function () {
