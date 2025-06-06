@@ -2,11 +2,13 @@ angular.module('virtoCommerce.stateMachineModule')
     .controller('virtoCommerce.stateMachineModule.stateMachineDetailController', [
         '$scope', 'platformWebApp.bladeNavigationService',
         'platformWebApp.dialogService',
+        'platformWebApp.authService',
         'virtoCommerce.stateMachineModule.stateMachineTypes',
         'virtoCommerce.stateMachineModule.webApi',
         'virtoCommerce.stateMachineModule.stateMachineExportImportService',
         function ($scope, bladeNavigationService,
             dialogService,
+            authService,
             stateMachineTypes,
             webApi,
             stateMachineExportImportService) {
@@ -181,6 +183,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 $scope.$apply(() => {
                     blade.currentEntity.statesCapture = data;
                 });
+            }
+
+            blade.canEdit = function () {
+                return authService.checkPermission('statemachine:update');
             }
 
             blade.refresh();

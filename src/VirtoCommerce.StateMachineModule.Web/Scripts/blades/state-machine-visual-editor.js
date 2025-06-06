@@ -1,6 +1,7 @@
 angular.module('virtoCommerce.stateMachineModule')
     .controller('virtoCommerce.stateMachineModule.stateMachineVisualEditorController', [
         '$scope', '$element', '$timeout',
+        'platformWebApp.authService',
         'virtoCommerce.stateMachineModule.webApi',
         'virtoCommerce.stateMachineModule.stateMachineStateService',
         'virtoCommerce.stateMachineModule.stateMachineTransitionService',
@@ -10,6 +11,7 @@ angular.module('virtoCommerce.stateMachineModule')
         'virtoCommerce.stateMachineModule.stateMachineLayoutService',
         'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
         function ($scope, $element, $timeout,
+            authService,
             stateMachineApi,
             stateMachineStateService,
             stateMachineTransitionService,
@@ -33,6 +35,10 @@ angular.module('virtoCommerce.stateMachineModule')
             const stateHeight = 100;
 
             var oldStates = null;
+
+            function canEdit() {
+                return authService.checkPermission('statemachine:update');
+            }
 
             function initializeStateMachine() {
                 if (!blade.currentEntity) return;
@@ -166,7 +172,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         $scope.addState();
                     },
                     canExecuteMethod: function () {
-                        return true;
+                        return canEdit();
                     }
                 },
                 {
@@ -184,7 +190,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     icon: 'fas fa-project-diagram',
                     executeMethod: toggleToVisualMode,
                     canExecuteMethod: function () {
-                        return blade.isInJsonMode;
+                        return blade.isInJsonMode && canEdit();
                     }
                 },
                 {
@@ -192,7 +198,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     icon: 'fas fa-code',
                     executeMethod: toggleToJsonMode,
                     canExecuteMethod: function () {
-                        return blade.isInVisualMode;
+                        return blade.isInVisualMode && canEdit();
                     }
                 //},
                 //{
@@ -321,6 +327,10 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             $scope.addState = function () {
+                if (!canEdit()) {
+                    return;
+                }
+
                 let newX = 100;
                 let newY = 50;
 

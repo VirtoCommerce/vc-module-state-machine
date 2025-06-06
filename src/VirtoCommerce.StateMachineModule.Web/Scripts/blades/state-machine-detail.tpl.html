@@ -7,7 +7,7 @@
                 <div class="form-group" ng-init="setForm(contextEntityDetailForm)">
                   <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.name' | translate }}</label>
                     <div class="form-input">
-                        <input ng-model="blade.currentEntity.name" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.name' | translate }}" type="text">
+                        <input ng-model="blade.currentEntity.name" ng-disabled="!blade.canEdit()" placeholder="{{ 'statemachine.blades.state-machine-details.placeholders.name' | translate }}" type="text">
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
                   <label class="form-label">{{ 'statemachine.blades.state-machine-details.labels.is-active' | translate }}</label>
                     <div class="form-input">
                         <label class="form-label __switch">
-                            <input type="checkbox" ng-model="blade.currentEntity.isActive" ng-change="blade.onIsActiveChanged()" />
+                            <input type="checkbox" ng-disabled="!blade.canEdit()" ng-model="blade.currentEntity.isActive" ng-change="blade.onIsActiveChanged()" />
                             <span class="switch"></span>
                         </label>
                     </div>

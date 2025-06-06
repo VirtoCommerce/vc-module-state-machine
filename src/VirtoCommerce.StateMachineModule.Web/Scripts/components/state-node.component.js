@@ -6,12 +6,12 @@ angular.module('virtoCommerce.stateMachineModule')
             parentScope: '<',
         },
         templateUrl: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/components/state-node.tpl.html',
-        controller: ['$scope', '$element', '$filter',
+        controller: ['$scope', '$element', '$filter', 'platformWebApp.authService',
             'virtoCommerce.stateMachineModule.stateMachineModalService',
             'virtoCommerce.stateMachineModule.stateMachineStateService',
             'virtoCommerce.stateMachineModule.stateMachineTransitionService',
             'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
-            function ($scope, $element, $filter,
+            function ($scope, $element, $filter, authService,
                 stateMachineModalService,
                 stateMachineStateService,
                 stateMachineTransitionService,
@@ -22,6 +22,12 @@ angular.module('virtoCommerce.stateMachineModule')
                 const stateWidth = 150;
                 const stateHeight = 100;
                 var isTransitioning = false;
+                var isDragging = false;
+                var transitionStartState = null;
+
+                $ctrl.canEdit = function() {
+                    return authService.checkPermission('statemachine:update');
+                };
 
                 $ctrl.onStateHover = function (state, isHovered) {
                     const stateEl = document.getElementById('state' + state.id);
@@ -48,6 +54,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 };
 
                 $ctrl.onStateToggleChange = function (state, newPosition) {
+                    if (!$ctrl.canEdit()) {
+                        return;
+                    }
+
                     if (newPosition === 'left') {
                         state.isSuccess = true;
                         state.isFailed = false;
@@ -80,6 +90,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-node.context-menu.edit-state'),
                             icon: 'fas fa-edit',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 stateMachineModalService.editStateModal($ctrl.parentScope, $element, state.position.x, state.position.y, null, state, $ctrl.machineData.states, $ctrl.machineData.transitions);
@@ -88,6 +99,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-node.context-menu.edit-localization'),
                             icon: 'fas fa-globe',
+                            permission: 'statemachine:localize',
                             action: async () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 var languages = $ctrl.parentScope.blade.allLanguages;
@@ -101,6 +113,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-node.context-menu.delete-state'),
                             icon: 'fas fa-trash',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 $ctrl.deleteState(state);
@@ -127,6 +140,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 };
 
                 $ctrl.startDrag = function (event, state) {
+                    if (!$ctrl.canEdit()) {
+                        return;
+                    }
+
                     var workspace = document.getElementById('visualEditorWorkspace');
 
                     let startX = event.clientX;
@@ -171,6 +188,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 };
 
                 $ctrl.startTransition = function (event, state) {
+                    if (!$ctrl.canEdit()) {
+                        return;
+                    }
+
                     isTransitioning = true;
                     transitionStartState = state;
                     var workspace = document.getElementById('visualEditorWorkspace');
@@ -271,6 +292,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-node.context-menu.add-new-state'),
                             icon: 'fas fa-plus',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 stateMachineModalService.editStateModal($ctrl.parentScope, $element, mouseX - stateWidth / 2, mouseY, startState, null, $ctrl.machineData.states, $ctrl.machineData.transitions, (newState) => {

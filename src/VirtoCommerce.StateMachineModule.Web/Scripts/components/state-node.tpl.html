@@ -6,13 +6,15 @@
      ng-right-click="$ctrl.showStateContextMenu($event, $ctrl.state)">
   <div class="state-header"
        ng-class="{'is-success': $ctrl.state.isSuccess, 'is-failed': $ctrl.state.isFailed}"
-       ng-mousedown="$ctrl.startDrag($event, $ctrl.state)"
-       ng-dblclick="$ctrl.editState($event, $ctrl.state)">
+       ng-mousedown="$ctrl.canEdit() && $ctrl.startDrag($event, $ctrl.state)"
+       ng-dblclick="$ctrl.canEdit() && $ctrl.editState($event, $ctrl.state)"
+       ng-style="$ctrl.canEdit() ? {'cursor': 'move'} : {'cursor': 'default'}">
     <span class="state-name">{{$ctrl.state.name}}</span>
   </div>
   <div class="state-description"
-       ng-mousedown="$ctrl.startDrag($event, $ctrl.state)"
-       ng-dblclick="$ctrl.editState($event, $ctrl.state)">
+       ng-mousedown="$ctrl.canEdit() && $ctrl.startDrag($event, $ctrl.state)"
+       ng-dblclick="$ctrl.canEdit() && $ctrl.editState($event, $ctrl.state)"
+       ng-style="$ctrl.canEdit() ? {'cursor': 'move'} : {'cursor': 'default'}">
     <div class="state-description-text">{{$ctrl.state.description || '(No description)'}}</div>
   </div>
   <div class="state-node-attributes" ng-if="$ctrl.state.isFinal">
@@ -20,12 +22,15 @@
                            left-label="Success"
                            right-label="Fail"
                            ng-model="$ctrl.state.togglePosition"
+                           ng-disabled="!$ctrl.canEdit()"
                            on-change="$ctrl.onStateToggleChange($ctrl.state, $position)">
     </three-position-toggle>
   </div>
   <div class="state-node-connector"
+       ng-if="$ctrl.canEdit()"
        ng-mouseenter="connector.style.background = '#424242'"
        ng-mouseleave="connector.style.background = '#757575'"
-       ng-mousedown="$ctrl.startTransition($event, $ctrl.state)">
+       ng-mousedown="$ctrl.startTransition($event, $ctrl.state)"
+       style="cursor: crosshair">
   </div>
 </div>

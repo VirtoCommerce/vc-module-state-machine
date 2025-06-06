@@ -78,6 +78,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.edit-transition'),
                             icon: 'fas fa-edit',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 stateMachineModalService.editTransitionModal($ctrl.parentScope, $element, transition, (transitionData) => {
@@ -92,6 +93,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.edit-localization'),
                             icon: 'fas fa-globe',
+                            permission: 'statemachine:localize',
                             action: async () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 var languages = $ctrl.parentScope.blade.allLanguages;
@@ -105,6 +107,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.edit-condition'),
                             icon: 'fas fa-filter',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 var currentEntityType = $ctrl.parentScope.blade.getCuttentStateMachineEntityType();
@@ -122,6 +125,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.delete-transition'),
                             icon: 'fas fa-trash',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 stateMachineTransitionService.deleteTransition($ctrl.machineData.states, transition, $ctrl.machineData.transitions);
@@ -130,6 +134,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         {
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.insert-state'),
                             icon: 'fas fa-plus',
+                            permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 const sourceState = transition.fromState;

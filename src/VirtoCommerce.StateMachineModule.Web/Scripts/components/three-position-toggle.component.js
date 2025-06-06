@@ -5,6 +5,7 @@ angular.module('virtoCommerce.stateMachineModule')
             leftLabel: '@',
             rightLabel: '@',
             ngModel: '=',
+            ngDisabled: '<',
             onChange: '&'
         },
         templateUrl: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/components/three-position-toggle.tpl.html',
@@ -13,6 +14,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 var $ctrl = this;
 
                 $ctrl.togglePosition = function (event) {
+                    if ($ctrl.ngDisabled) {
+                        return;
+                    }
+
                     const toggle = event.currentTarget;
                     const rect = toggle.getBoundingClientRect();
                     const clickX = event.clientX - rect.left;

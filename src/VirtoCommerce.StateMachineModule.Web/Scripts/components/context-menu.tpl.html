@@ -1,6 +1,6 @@
 <div class="state-machine-context-menu"
      ng-style="{'position': 'absolute', 'left': $ctrl.x + 'px', 'top': $ctrl.y + 'px', 'zIndex': '1000'}">
-  <div ng-repeat="item in $ctrl.items"
+  <div ng-repeat="item in $ctrl.filteredItems"
        class="state-machine-context-menu-item"
        ng-click="$ctrl.doAction(item.action)">
     <i class="{{item.icon}}"></i>{{item.label}}
