@@ -30,8 +30,13 @@ angular.module('virtoCommerce.stateMachineModule')
                 states.filter(s => s.isInitial).forEach(s => s.level = 1);
 
                 let changed = true;
-                while (changed) {
+                let iterations = 0;
+                const maxIterations = states.length * 2; // Reasonable limit to prevent infinite loops
+
+                while (changed && iterations < maxIterations) {
                     changed = false;
+                    iterations++;
+
                     states.forEach(state => {
                         const incomingStates = states.filter(s =>
                             s.transitions.some(t => t.toState.id === state.id)
@@ -47,6 +52,31 @@ angular.module('virtoCommerce.stateMachineModule')
                             }
                         }
                     });
+                }
+
+                if (iterations >= maxIterations) {
+                    states.forEach(state => state.level = 0);
+                    states.filter(s => s.isInitial).forEach(s => s.level = 1);
+
+                    const visited = new Set();
+                    const queue = states.filter(s => s.isInitial).map(s => ({ state: s, level: 1 }));
+
+                    while (queue.length > 0) {
+                        const { state, level } = queue.shift();
+
+                        if (visited.has(state.id)) {
+                            continue;
+                        }
+
+                        visited.add(state.id);
+                        state.level = Math.max(state.level, level);
+
+                        state.transitions.forEach(transition => {
+                            if (!visited.has(transition.toState.id)) {
+                                queue.push({ state: transition.toState, level: level + 1 });
+                            }
+                        });
+                    }
                 }
             };
 
