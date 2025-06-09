@@ -105,7 +105,7 @@ public class StateMachineState : ValueObject
 
 ### IsInitial
 - **Purpose**: Marks the starting state for new entities
-- **Usage**: Only one state per state machine should have `IsInitial = true`
+- **Usage**: "Started" state should have `IsInitial = true`
 - **Example**: "Draft" state for new products, "New" state for orders
 
 ### IsFinal
@@ -311,6 +311,6 @@ var stats = new WorkflowStats
 
 ## Next Steps
 
-- [Entity Types](entity-types.md): Learn how to register and manage entity types
-- [Visual Editor](visual-editor.md): Create state machines using the visual interface
-- [Transition Conditions](transition-conditions.md): Implement business rules and validation logic
+- [Entity Types](03-entity-types.md): Learn how to register and manage entity types
+- [Visual Editor](04-visual-editor.md): Create state machines using the visual interface
+- [Transition Conditions](05-transition-conditions.md): Implement business rules and validation logic

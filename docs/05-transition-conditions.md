@@ -800,6 +800,6 @@ public class ConditionDebugger
 
 ## Next Steps
 
-- [Operator Portal Actions](operator-portal-actions.md): Learn to integrate state machines with admin interfaces
-- [Vendor Portal Actions](vendor-portal-actions.md): Implement customer-facing state machine operations
-- [Main Concept](main-concept.md): Review fundamental state machine concepts
+- [Operator Portal Actions](06-operator-portal-actions.md): Learn to integrate state machines with admin interfaces
+- [Vendor Portal Actions](07-vendor-portal-actions.md): Implement customer-facing state machine operations
+- [Main Concept](01-main-concept.md): Review fundamental state machine concepts

@@ -818,6 +818,6 @@ $scope.testAction = function(action) {
 
 ## Next Steps
 
-- [Vendor Portal Actions](vendor-portal-actions.md): Learn about customer-facing state machine integration
-- [Transition Conditions](transition-conditions.md): Understand business rule implementation
-- [Entity Types](entity-types.md): Review entity type registration and management
+- [Vendor Portal Actions](07-vendor-portal-actions.md): Learn about customer-facing state machine integration
+- [Transition Conditions](05-transition-conditions.md): Understand business rule implementation
+- [Entity Types](03-entity-types.md): Review entity type registration and management

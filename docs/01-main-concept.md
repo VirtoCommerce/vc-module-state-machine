@@ -113,23 +113,9 @@ The engine is built on the **Stateless** library, providing:
 - Hierarchical state machines
 - Guard conditions and entry/exit actions
 
-### Entity Binding
-Any business entity can be bound to a state machine:
-```csharp
-// Example: Binding products to approval workflow
-stateMachineRegistrar.RegisterEntityType(new StateMachineEntityType
-{
-    EntityTypeName = "Product",
-    DisplayName = "Product Approval",
-    WorkflowName = "ProductApprovalWorkflow"
-});
-```
-
 ### Condition Framework
 Extensible condition system supports:
-- **Field Conditions**: Compare entity properties
 - **Role Conditions**: Check user permissions
-- **Time Conditions**: Schedule-based rules
 - **Custom Conditions**: Domain-specific logic
 
 ## Use Cases
@@ -169,7 +155,7 @@ Extensible condition system supports:
 
 ## Next Steps
 
-- [Data Structure](data-structure.md): Learn about the core data models
-- [Entity Types](entity-types.md): Understand entity registration and management
-- [Visual Editor](visual-editor.md): Master the state machine design interface
-- [Transition Conditions](transition-conditions.md): Implement business rules and logic
+- [Data Structure](02-data-structure.md): Learn about the core data models
+- [Entity Types](03-entity-types.md): Understand entity registration and management
+- [Visual Editor](04-visual-editor.md): Master the state machine design interface
+- [Transition Conditions](05-transition-conditions.md): Implement business rules and logic

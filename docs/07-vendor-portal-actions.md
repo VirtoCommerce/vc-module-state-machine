@@ -1254,6 +1254,6 @@ export function monitorActionPerformance(action: StateMachineAction) {
 
 ## Next Steps
 
-- [Main Concept](main-concept.md): Review fundamental state machine concepts
-- [Data Structure](data-structure.md): Understand the core data models
-- [Operator Portal Actions](operator-portal-actions.md): Learn about admin interface integration
+- [Main Concept](01-main-concept.md): Review fundamental state machine concepts
+- [Data Structure](02-data-structure.md): Understand the core data models
+- [Operator Portal Actions](06-operator-portal-actions.md): Learn about admin interface integration
