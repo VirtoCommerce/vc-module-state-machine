@@ -18,8 +18,6 @@ public class StateMachineDefinition : AuditableEntity, ICloneable
     public string Name { get; set; }
     public bool IsActive { get; set; }
     public IList<StateMachineState> States { get; set; }
-    public string StatesGraph { get; set; }
-    public string StatesCapture { get; set; }
 }
 ```
 
@@ -29,8 +27,6 @@ public class StateMachineDefinition : AuditableEntity, ICloneable
 - **Name**: Human-readable name for the workflow
 - **IsActive**: Indicates if this definition is currently active
 - **States**: Collection of states that make up the workflow
-- **StatesGraph**: JSON representation of the visual state machine layout
-- **StatesCapture**: Snapshot of the state machine for versioning
 
 ### StateMachineInstance
 
@@ -42,11 +38,11 @@ public class StateMachineInstance : AuditableEntity, ICloneable
     public string EntityId { get; set; }
     public string EntityType { get; set; }
     public string StateMachineDefinitionId { get; set; }
+    public StateMachineDefinition StateMachineDefinition { get; set; }
     public string CurrentStateName { get; set; }
     public StateMachineState CurrentState { get; set; }
     public IEnumerable<string> PermittedTriggers { get; set; }
     public bool IsActive { get; set; }
-    public StateMachineDefinition StateMachineDefinition { get; set; }
     public bool IsStopped { get; set; }
 }
 ```

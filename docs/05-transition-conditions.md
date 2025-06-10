@@ -29,7 +29,7 @@ Security conditions check user permissions.
 
 ### Field Conditions
 
-Field conditions compare entity properties against specific values or patterns. This condition model based on standard VirtoCommerce [Conditions engine](https://github.com/VirtoCommerce/vc-module-core/tree/master/src/VirtoCommerce.CoreModule.Core/Conditions).
+Field conditions compare entity properties against specific values or patterns. This condition model is based on standard VirtoCommerce [Conditions engine](https://github.com/VirtoCommerce/vc-module-core/tree/master/src/VirtoCommerce.CoreModule.Core/Conditions).
 
 #### Basic Field Comparisons
 ```json

@@ -107,7 +107,7 @@ The module uses the following core entities:
 The module is actively used in several Virto Commerce modules:
 
 - **[Marketplace Registration Module](https://github.com/VirtoCommerce/vc-module-marketplace-registration)**: Vendor registration approval workflows
-- **[Marketplace Vendor Module](https://github.com/VirtoCommerce/vc-module-marketplace-vendor)**: Vendor status management
+- **[Marketplace Vendor Module](https://github.com/VirtoCommerce/vc-module-marketplace-vendor)**: Product Publication and Order management
 - **[Vendor Portal](https://github.com/VirtoCommerce/vendor-portal)**: Product lifecycle management
 
 ## References

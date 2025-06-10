@@ -32,13 +32,14 @@ The Visual Editor consists of several key areas:
 ### Canvas Area
 - The place where user draw state machine
 
-## Creating Your First State Machine
+## Creating Your First State Machine Definition
 
-### Step 1: Create New State Machine
+### Step 1: Create New State Machine Definition
 
 1. Click **New** in the state machines list
 2. Enter a descriptive name (e.g., "Product Approval Workflow")
 3. Select the entity type from the dropdown
+4. Press **Open Visual Editor** button
 
 ### Step 2: Adding States
 
@@ -52,14 +53,16 @@ The Visual Editor consists of several key areas:
 
 3. Add additional states following the same process, or start drag new transition from the bottom part of existed state. If user drops transition on empty place - this will create one more state.
 
-4. After creating Transition configure Transition properties:
+### Step 3: Configure Transitions
+
+1. After creating Transition configure Transition properties:
 
    ```
    Trigger Name: SubmitTrigger
    Description: Submit product for review
    ```
 
-5. Add more States and Transitions - draw the flow
+2. Add more States and Transitions - draw the flow
 
 ## Advanced Editor Features
 
@@ -82,7 +85,7 @@ The Visual Editor consists of several key areas:
 ### Transition Configuration
 
 #### Conditional Transitions
-- **Add Conditions**: Click "Add Condition" in transition properties
+- **Configure Conditions**: Click "Edit Condition" in transition properties
 - **Condition Types**:
   - Role conditions (user permission checks)
   - Custom conditions (business logic)
@@ -90,7 +93,7 @@ The Visual Editor consists of several key areas:
 ### Localization Support
 
 #### Adding Localizations
-1. **Select State or Transition**
+1. **Select State or Transition**, call element's context menu
 2. **Open Localization Panel**
 3. **Add Language Variants**:
    ```

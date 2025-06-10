@@ -88,7 +88,6 @@ The State Machine module follows Virto Commerce's modular architecture:
 ### 2. **Flexibility and Maintainability**
 - No-code/low-code workflow design
 - Easy modification of business rules
-- Version control for process changes
 
 ### 3. **Integration Ready**
 - RESTful API for external system integration
@@ -96,13 +95,11 @@ The State Machine module follows Virto Commerce's modular architecture:
 - Webhook support for process notifications
 
 ### 4. **Audit and Compliance**
-- Complete history of state changes
 - User tracking for all transitions
 - Configurable approval workflows
 
 ### 5. **Multi-language Support**
 - Localized state and transition names
-- International business process support
 - Cultural adaptation of workflows
 
 ## Core Mechanisms
@@ -113,7 +110,7 @@ The engine is built on the **Stateless** library, providing:
 - Hierarchical state machines
 - Guard conditions and entry/exit actions
 
-### Condition Framework
+### Condition
 Extensible condition system supports:
 - **Role Conditions**: Check user permissions
 - **Custom Conditions**: Domain-specific logic
@@ -158,4 +155,3 @@ Extensible condition system supports:
 - [Data Structure](02-data-structure.md): Learn about the core data models
 - [Entity Types](03-entity-types.md): Understand entity registration and management
 - [Visual Editor](04-visual-editor.md): Master the state machine design interface
-- [Transition Conditions](05-transition-conditions.md): Implement business rules and logic
