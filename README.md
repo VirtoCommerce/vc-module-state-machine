@@ -63,7 +63,7 @@ Web API documentation is automatically generated and can be accessed at:
 
 The module uses the following core entities:
 
-![State Machine DB Model](docs/media/state-machine-db-diagram.png)
+![State Machine DB Model](docs/media/00-state-machine-db-diagram.png)
 
 - **StateMachineDefinition**: Main configuration entity
 - **StateMachineInstance**: Runtime instances tied to business entities
