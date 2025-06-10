@@ -41,7 +41,7 @@ angular.module('virtoCommerce.stateMachineModule')
 ```
 
 #### stateMachineRegistrar.js
-This service manages custom state actions:
+This service manages Operator Portal custom state actions:
 
 ```javascript
 angular.module('virtoCommerce.stateMachineModule')
@@ -76,7 +76,7 @@ angular.module('virtoCommerce.marketplaceRegistrationModule')
     }]);
 ```
 
-## Creating custom Operator-Portal frontend actions
+## Creating custom Operator Portal frontend actions
 
 ### Step 2: Register Custom Actions
 
