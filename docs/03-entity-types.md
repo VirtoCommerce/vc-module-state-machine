@@ -12,7 +12,6 @@ An entity type represents a category of business objects that can be managed by 
 - **Products**: Manage product approval workflows
 - **Orders**: Control order processing states
 - **Vendors**: Handle vendor registration and approval
-- **Content**: Manage content publication workflows
 
 ### Registration Services
 

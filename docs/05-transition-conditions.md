@@ -22,8 +22,10 @@ Security conditions check user permissions.
 #### Permission-Based Conditions
 ```json
 {
-  "type": "PermissionCondition",
-  "requiredPermission": "product:approve"
+  "id": "StateMachineConditionHasPermission",
+  "permissions": [
+    "operator:product:approve"
+  ]
 }
 ```
 
@@ -34,10 +36,8 @@ Field conditions compare entity properties against specific values or patterns. 
 #### Basic Field Comparisons
 ```json
 {
-  "type": "FieldCondition",
-  "fieldName": "status",
-  "operator": "equals",
-  "value": "active"
+  "id": "PublicationRequestConditionApprovalPolicyIs",
+  "approvalPolicy": "Auto"
 }
 ```
 
@@ -59,11 +59,10 @@ Field conditions compare entity properties against specific values or patterns. 
 #### Complex Field Conditions
 ```json
 {
-  "type": "FieldCondition",
+  "id": "FieldCondition",
   "fieldName": "price",
   "operator": "greaterThan",
-  "value": 100,
-  "dataType": "decimal"
+  "value": 100
 }
 ```
 
