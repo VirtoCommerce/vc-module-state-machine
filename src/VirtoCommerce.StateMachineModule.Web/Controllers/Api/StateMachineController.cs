@@ -69,10 +69,11 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
         [HttpGet]
         [Route("definitions/allstates")]
         [Authorize(ModuleConstants.Security.Permissions.Read)]
-        public async Task<ActionResult<StateMachineStateShort[]>> GetAllStates([FromQuery] string entityType)
+        public async Task<ActionResult<StateMachineStateShort[]>> GetAllStates([FromQuery] string entityType, [FromQuery] string locale)
         {
             var query = ExType<GetStateMachineDefinitionStatesQuery>.New();
             query.EntityType = entityType;
+            query.Locale = locale;
             var result = await _mediator.Send(query);
 
             return Ok(result);

@@ -7,4 +7,5 @@ public class GetStateMachineDefinitionStatesQuery : IQuery<StateMachineStateShor
 {
     [Required]
     public string EntityType { get; set; }
+    public string Locale { get; set; }
 }
