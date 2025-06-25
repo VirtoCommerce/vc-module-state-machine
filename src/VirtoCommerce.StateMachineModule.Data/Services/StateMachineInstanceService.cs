@@ -83,8 +83,15 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         var stateMachineInstanceEntity = await repository.StateMachineInstances
             .FirstOrDefaultAsync(x => x.EntityId == entityId && x.EntityType == entityType);
 
-        var stateMachineInstance = await this.GetByIdAsync(stateMachineInstanceEntity.Id);
-        return stateMachineInstance;
+        if (stateMachineInstanceEntity != null)
+        {
+            var stateMachineInstance = await this.GetByIdAsync(stateMachineInstanceEntity.Id);
+            return stateMachineInstance;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public virtual async Task<StateMachineInstance> StopStateMachine(string stateMachineInstanceId)

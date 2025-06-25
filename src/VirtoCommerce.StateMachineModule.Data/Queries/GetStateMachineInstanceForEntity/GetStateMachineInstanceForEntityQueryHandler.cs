@@ -31,23 +31,27 @@ public class GetStateMachineInstanceForEntityQueryHandler : IQueryHandler<GetSta
 
         var result = await _stateMachineInstanceService.GetForEntity(request.EntityId, request.EntityType);
 
-        if (result != null && !string.IsNullOrEmpty(request.Locale))
+        if (result != null)
         {
-            var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionId = result.StateMachineDefinitionId, Locale = request.Locale };
-            var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
-            if (localizationSearchResults.Any())
+            if (!string.IsNullOrEmpty(request.Locale))
             {
-                var currentState = result.CurrentState;
-                currentState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == currentState.Name)?.Value;
-                foreach (var transition in currentState.Transitions)
+                var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionId = result.StateMachineDefinitionId, Locale = request.Locale };
+                var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
+                if (localizationSearchResults.Any())
                 {
-                    transition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == transition.Trigger)?.Value;
+                    var currentState = result.CurrentState;
+                    currentState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == currentState.Name)?.Value;
+                    foreach (var transition in currentState.Transitions)
+                    {
+                        transition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == transition.Trigger)?.Value;
+                    }
                 }
+
             }
 
+            result.Evaluate(new StateMachineTriggerContext { Principal = request.User });
         }
 
-        result.Evaluate(new StateMachineTriggerContext { Principal = request.User });
         return result;
     }
 }
