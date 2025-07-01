@@ -21,9 +21,11 @@ public class GetStateMachineSettingsQueryHandler : IQueryHandler<GetStateMachine
     public virtual async Task<StateMachineSettings> Handle(GetStateMachineSettingsQuery request, CancellationToken cancellationToken)
     {
         var languageSettings = await _settingsManager.GetObjectSettingAsync(Settings.General.StateMachineLanguages.Name);
+        var attributeSettings = await _settingsManager.GetObjectSettingAsync(Settings.General.StateMachineAttributeKeys.Name);
 
         var result = ExType<StateMachineSettings>.New();
         result.Languages = languageSettings.AllowedValues?.Select(x => x.ToString()).OrderBy(x => x).ToArray() ?? [languageSettings.DefaultValue?.ToString()];
+        result.AttributeKeys = attributeSettings.AllowedValues?.Select(x => x.ToString()).OrderBy(x => x).ToArray() ?? [attributeSettings.DefaultValue?.ToString()];
 
         return result;
     }

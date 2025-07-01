@@ -44,11 +44,21 @@ public static class ModuleConstants
                 DefaultValue = "en-US",
             };
 
+            public static SettingDescriptor StateMachineAttributeKeys { get; } = new()
+            {
+                Name = "StateMachineModule.StateMachineAttributeKeys",
+                GroupName = "State Machine",
+                ValueType = SettingValueType.ShortText,
+                IsDictionary = true,
+                DefaultValue = "Icon",
+            };
+
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
                     yield return StateMachineLanguages;
+                    yield return StateMachineAttributeKeys;
                 }
             }
         }

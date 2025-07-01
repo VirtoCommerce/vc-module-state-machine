@@ -117,6 +117,10 @@
       "StateMachineLanguages": {
         "title": "Localization languages",
         "description": "Select languages for State Machine localization"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Attribute keys",
+        "description": "Select keys for State Machine attributes"
       }
     }
   },

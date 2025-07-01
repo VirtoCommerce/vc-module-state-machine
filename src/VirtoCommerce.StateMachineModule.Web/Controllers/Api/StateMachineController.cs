@@ -147,6 +147,24 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
             return Ok();
         }
 
+        [HttpPost]
+        [Route("attribute/search")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<SearchStateMachineAttributeResult>> SearchAttribute([FromBody] SearchStateMachineAttributesQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("attribute/update")]
+        [Authorize(ModuleConstants.Security.Permissions.Update)]
+        public async Task<ActionResult> UpdateAttribute([FromBody] UpdateStateMachineAttributeCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("settings")]
         [Authorize(ModuleConstants.Security.Permissions.Read)]
