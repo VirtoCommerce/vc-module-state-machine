@@ -30,6 +30,9 @@ public class StateMachineDbContext : DbContextBase
         modelBuilder.Entity<StateMachineLocalizationEntity>().ToTable("StateMachineLocalization").HasKey(x => x.Id);
         modelBuilder.Entity<StateMachineLocalizationEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
 
+        modelBuilder.Entity<StateMachineAttributeEntity>().ToTable("StateMachineAttribute").HasKey(x => x.Id);
+        modelBuilder.Entity<StateMachineAttributeEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
+
         base.OnModelCreating(modelBuilder);
 
         switch (Database.ProviderName)

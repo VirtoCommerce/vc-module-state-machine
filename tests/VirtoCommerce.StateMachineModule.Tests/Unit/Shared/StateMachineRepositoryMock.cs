@@ -42,6 +42,17 @@ public class StateMachineRepositoryMock : IStateMachineRepository
     }
 
     public List<StateMachineLocalizationEntity> StateMachineLocalizationEntities = new();
+
+    public IQueryable<StateMachineAttributeEntity> StateMachineAttributes
+    {
+        get
+        {
+            return StateMachineAttributeEntities.AsAsyncQueryable();
+        }
+    }
+
+    public List<StateMachineAttributeEntity> StateMachineAttributeEntities = new();
+
     public IUnitOfWork UnitOfWork => new Mock<IUnitOfWork>().Object;
 
     public void Add<T>(T item) where T : class
@@ -139,6 +150,16 @@ public class StateMachineRepositoryMock : IStateMachineRepository
         if (!ids.IsNullOrEmpty())
         {
             result = StateMachineLocalizationEntities.Where(x => ids.Contains(x.Id)).ToList();
+        }
+        return Task.FromResult(result.ToArray());
+    }
+
+    public Task<StateMachineAttributeEntity[]> GetStateMachineAttributesByIds(string[] ids, string responseGroup = null)
+    {
+        var result = new List<StateMachineAttributeEntity>();
+        if (!ids.IsNullOrEmpty())
+        {
+            result = StateMachineAttributeEntities.Where(x => ids.Contains(x.Id)).ToList();
         }
         return Task.FromResult(result.ToArray());
     }

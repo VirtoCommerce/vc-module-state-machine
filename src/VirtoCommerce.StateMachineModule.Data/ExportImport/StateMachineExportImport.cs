@@ -18,6 +18,8 @@ public class StateMachineExportImport
     private readonly IStateMachineInstanceService _stateMachineInstancesCrudService;
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
     private readonly IStateMachineLocalizationCrudService _stateMachineLocalizationCrudService;
+    private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
+    private readonly IStateMachineAttributeCrudService _stateMachineAttributeCrudService;
     private readonly JsonSerializer _jsonSerializer;
 
     private readonly int _batchSize = 50;
@@ -29,6 +31,8 @@ public class StateMachineExportImport
         IStateMachineInstanceService stateMachineInstancesCrudService,
         IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
         IStateMachineLocalizationCrudService stateMachineLocalizationCrudService,
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService,
+        IStateMachineAttributeCrudService stateMachineAttributeCrudService,
         JsonSerializer jsonSerializer
         )
     {
@@ -38,6 +42,8 @@ public class StateMachineExportImport
         _stateMachineInstancesCrudService = stateMachineInstancesCrudService;
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
         _stateMachineLocalizationCrudService = stateMachineLocalizationCrudService;
+        _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
+        _stateMachineAttributeCrudService = stateMachineAttributeCrudService;
         _jsonSerializer = jsonSerializer;
     }
 
@@ -109,6 +115,25 @@ public class StateMachineExportImport
 
             #endregion
 
+            #region Export StateMachineAttributes
+
+            progressInfo.Description = "StateMachineAttribute exporting...";
+            progressCallback(progressInfo);
+
+            await writer.WritePropertyNameAsync("StateMachineAttributes");
+            await writer.SerializeArrayWithPagingAsync(_jsonSerializer, _batchSize, async (skip, take) =>
+            {
+                var searchResult = await _stateMachineAttributeSearchService.SearchAsync(new SearchStateMachineAttributeCriteria { Skip = skip, Take = take }, false);
+                return (GenericSearchResult<StateMachineAttribute>)searchResult;
+            }
+            , (processedCount, totalCount) =>
+            {
+                progressInfo.Description = $"{processedCount} of {totalCount} state machine Attributes have been exported";
+                progressCallback(progressInfo);
+            }, cancellationToken);
+
+            #endregion
+
             await writer.WriteEndObjectAsync();
             await writer.FlushAsync();
         }
@@ -151,6 +176,13 @@ public class StateMachineExportImport
                         await reader.DeserializeArrayWithPagingAsync<StateMachineLocalization>(_jsonSerializer, _batchSize, items => _stateMachineLocalizationCrudService.SaveChangesAsync(items), processedCount =>
                         {
                             progressInfo.Description = $"{processedCount} state machine localization have been imported";
+                            progressCallback(progressInfo);
+                        }, cancellationToken);
+                        break;
+                    case "StateMachineAttributes":
+                        await reader.DeserializeArrayWithPagingAsync<StateMachineAttribute>(_jsonSerializer, _batchSize, items => _stateMachineAttributeCrudService.SaveChangesAsync(items), processedCount =>
+                        {
+                            progressInfo.Description = $"{processedCount} state machine Attribute have been imported";
                             progressCallback(progressInfo);
                         }, cancellationToken);
                         break;

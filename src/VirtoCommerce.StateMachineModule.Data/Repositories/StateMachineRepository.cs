@@ -17,6 +17,7 @@ public class StateMachineRepository : DbContextRepositoryBase<StateMachineDbCont
     public IQueryable<StateMachineDefinitionEntity> StateMachineDefinitions => DbContext.Set<StateMachineDefinitionEntity>();
     public IQueryable<StateMachineInstanceEntity> StateMachineInstances => DbContext.Set<StateMachineInstanceEntity>();
     public IQueryable<StateMachineLocalizationEntity> StateMachineLocalizations => DbContext.Set<StateMachineLocalizationEntity>();
+    public IQueryable<StateMachineAttributeEntity> StateMachineAttributes => DbContext.Set<StateMachineAttributeEntity>();
 
     public virtual async Task<StateMachineDefinitionEntity[]> GetStateMachineDefinitionsByIds(string[] ids, string responseGroup = null)
     {
@@ -54,6 +55,18 @@ public class StateMachineRepository : DbContextRepositoryBase<StateMachineDbCont
         if (!ids.IsNullOrEmpty())
         {
             result = await StateMachineLocalizations.
+                Where(x => ids.Contains(x.Id)).ToArrayAsync();
+        }
+        return result;
+    }
+
+    public virtual async Task<StateMachineAttributeEntity[]> GetStateMachineAttributesByIds(string[] ids, string responseGroup = null)
+    {
+        var result = Array.Empty<StateMachineAttributeEntity>();
+
+        if (!ids.IsNullOrEmpty())
+        {
+            result = await StateMachineAttributes.
                 Where(x => ids.Contains(x.Id)).ToArrayAsync();
         }
         return result;

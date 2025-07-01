@@ -18,4 +18,5 @@ public class StateMachineState : ValueObject
     public object StateData { get; set; }
     public string LocalizedValue { get; set; }
     public IList<StateMachineTransition> Transitions { get; set; }
+    public IList<StateMachineAttribute> Attributes { get; set; }
 }

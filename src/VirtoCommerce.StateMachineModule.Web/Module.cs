@@ -66,6 +66,9 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
         serviceCollection.AddTransient<IStateMachineLocalizationSearchService, StateMachineLocalizationSearchService>();
         serviceCollection.AddTransient<IStateMachineLocalizationCrudService, StateMachineLocalizationCrudService>();
 
+        serviceCollection.AddTransient<IStateMachineAttributeSearchService, StateMachineAttributeSearchService>();
+        serviceCollection.AddTransient<IStateMachineAttributeCrudService, StateMachineAttributeCrudService>();
+
         serviceCollection.AddTransient<StateMachineTriggerEvent>();
 
         serviceCollection.AddTransient<StateMachineExportImport>();

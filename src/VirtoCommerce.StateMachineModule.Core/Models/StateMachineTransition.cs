@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VirtoCommerce.CoreModule.Core.Conditions;
 
 namespace VirtoCommerce.StateMachineModule.Core.Models;
@@ -10,4 +11,5 @@ public class StateMachineTransition
     public string LocalizedValue { get; set; }
 
     public IConditionTree Condition { get; set; }
+    public IList<StateMachineAttribute> Attributes { get; set; }
 }
