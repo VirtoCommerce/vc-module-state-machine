@@ -97,6 +97,20 @@ angular.module('virtoCommerce.stateMachineModule')
                             }
                         },
                         {
+                            label: $filter('translate')('statemachine.components.state-node.context-menu.edit-attributes'),
+                            icon: 'fa fa-cogs',
+                            permission: 'statemachine:update',
+                            action: async () => {
+                                $ctrl.parentScope.contextMenuData = null;
+                                var attributeKeys = $ctrl.parentScope.blade.allAttributeKeys;
+                                var existedAttributes = [];
+                                if ($ctrl.parentScope.blade.getCurrentAttributes) {
+                                    existedAttributes = await $ctrl.parentScope.blade.getCurrentAttributes(state);
+                                }
+                                stateMachineModalService.editAttributes($ctrl.parentScope, $element, state, attributeKeys, existedAttributes, $ctrl.parentScope.blade.saveCurrentAttributes);
+                            }
+                        },
+                        {
                             label: $filter('translate')('statemachine.components.state-node.context-menu.edit-localization'),
                             icon: 'fas fa-globe',
                             permission: 'statemachine:localize',

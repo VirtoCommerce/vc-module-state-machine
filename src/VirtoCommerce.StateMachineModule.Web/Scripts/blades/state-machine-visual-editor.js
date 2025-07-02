@@ -45,6 +45,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
                 stateMachineApi.getStateMachineSettings({}, function (data) {
                     blade.allLanguages = data.languages;
+                    blade.allAttributeKeys = data.attributeKeys;
                 });
 
                 try {
@@ -386,6 +387,28 @@ angular.module('virtoCommerce.stateMachineModule')
                         x.definitionId = blade.stateMachineDefinitionId;
                     });
                     stateMachineApi.updateStateMachineLocalization({ localizations: localizations });
+                }
+            }
+
+            blade.getCurrentAttributes = async function (item) {
+                var itemText = item.name || item.trigger;
+                var searchCriteria = {
+                    definitionId: blade.stateMachineDefinitionId,
+                    item: itemText
+                };
+                var attributeSearchResult = await stateMachineApi.searchStateMachineAttribute(searchCriteria).$promise;
+                var currentAttributes = attributeSearchResult ? attributeSearchResult.results : [];
+
+                return currentAttributes;
+            }
+
+            blade.saveCurrentAttributes = function (attributes) {
+                if (attributes) {
+                    attributes = attributes.filter(x => x.value !== undefined && x.value !== null && x.value !== '');
+                    attributes.forEach(x => {
+                        x.definitionId = blade.stateMachineDefinitionId;
+                    });
+                    stateMachineApi.updateStateMachineAttribute({ attributes: attributes });
                 }
             }
 

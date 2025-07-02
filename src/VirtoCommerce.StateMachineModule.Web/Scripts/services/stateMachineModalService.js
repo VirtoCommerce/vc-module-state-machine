@@ -196,10 +196,59 @@ angular.module('virtoCommerce.stateMachineModule')
                 });
             }
 
+            function editAttributes($scope, $element, item, attributeKeys, existedAttributes, saveCallback) {
+                var itemText = item.name || item.trigger;
+                var attributes = [];
+                attributeKeys.forEach(attributeKey => {
+                    attributes.push({
+                        attributeKey: attributeKey,
+                        item: itemText,
+                        value: existedAttributes?.find(x => x.attributeKey === attributeKey)?.value
+                    });
+                });
+                var modalComponent = {
+                    title: $filter('translate')('statemachine.modals.attributes.edit-title', { itemText: itemText }),
+                    entity: attributes,
+                    isArray: true,
+                    fields: [
+                        {
+                            name: 'attributeKey',
+                            title: '',
+                            valueType: 'Label'
+                        },
+                        {
+                            name: 'value',
+                            title: '',
+                            valueType: 'ShortText'
+                        }
+                    ],
+                    okButtonCaption: $filter('translate')('statemachine.modals.common.save'),
+                    okAction: function () {
+                        if (saveCallback) {
+                            saveCallback(attributes);
+                        }
+                        $scope.modalData = null;
+                    },
+                    cancelAction: function () {
+                        $scope.modalData = null;
+                    }
+                };
+
+                $scope.modalData = modalComponent;
+
+                $timeout(() => {
+                    const valueInput = $element[0].querySelector('input[name="value"]');
+                    if (valueInput) {
+                        valueInput.focus();
+                    }
+                });
+            }
+
             return {
                 editStateModal: editStateModal,
                 editTransitionModal: editTransitionModal,
-                editLocalization: editLocalization
+                editLocalization: editLocalization,
+                editAttributes: editAttributes
             };
         }
     ]);

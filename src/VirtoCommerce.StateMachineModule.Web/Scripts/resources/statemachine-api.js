@@ -13,6 +13,9 @@ angular.module('virtoCommerce.stateMachineModule')
             // localizations
             searchStateMachineLocalization: { method: 'POST', url: 'api/statemachine/localization/search' },
             updateStateMachineLocalization: { method: 'POST', url: 'api/statemachine/localization/update' },
+            // attributes
+            searchStateMachineAttribute: { method: 'POST', url: 'api/statemachine/attribute/search' },
+            updateStateMachineAttribute: { method: 'POST', url: 'api/statemachine/attribute/update' },
             // settings
             getStateMachineSettings: { method: 'GET', url: 'api/statemachine/settings' },
         });

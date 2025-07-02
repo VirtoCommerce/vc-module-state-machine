@@ -50,6 +50,7 @@ public static class ModuleConstants
                 GroupName = "State Machine",
                 ValueType = SettingValueType.ShortText,
                 IsDictionary = true,
+                AllowedValues = ["Icon"],
                 DefaultValue = "Icon",
             };
 

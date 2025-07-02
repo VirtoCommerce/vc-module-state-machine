@@ -57,6 +57,7 @@
       "state-node": {
         "context-menu": {
           "edit-state": "Edit state",
+          "edit-attributes": "Edit attributes",
           "edit-localization": "Edit localization",
           "delete-state": "Delete state",
           "add-new-state": "Add new State"
@@ -65,6 +66,7 @@
       "state-transitions": {
         "context-menu": {
           "edit-transition": "Edit transition",
+          "edit-attributes": "Edit attributes",
           "edit-localization": "Edit localization",
           "edit-condition": "Edit condition",
           "delete-transition": "Delete transition",
@@ -94,6 +96,9 @@
       },
       "localization": {
         "edit-title": "Edit localization {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Edit attributes {{itemText}}"
       }
     },
 
