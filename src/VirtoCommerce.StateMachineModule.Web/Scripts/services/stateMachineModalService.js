@@ -93,7 +93,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         $filter('translate')('statemachine.modals.transition.new-title'),
                     entity: existingTransition || {
                         trigger: '',
-                        icon: '',
+                        //icon: '',
                         description: ''
                     },
                     fields: [
@@ -103,11 +103,11 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'ShortText',
                             isRequired: true
                         },
-                        {
-                            name: 'icon',
-                            title: $filter('translate')('statemachine.modals.transition.icon'),
-                            valueType: 'ShortText'
-                        },
+                        //{
+                        //    name: 'icon',
+                        //    title: $filter('translate')('statemachine.modals.transition.icon'),
+                        //    valueType: 'ShortText'
+                        //},
                         {
                             name: 'description',
                             title: $filter('translate')('statemachine.modals.common.description'),
@@ -124,7 +124,7 @@ angular.module('virtoCommerce.stateMachineModule')
 
                         callback({
                             trigger: trigger,
-                            icon: modalComponent.entity.icon.trim(),
+                            //icon: modalComponent.entity.icon.trim(),
                             description: modalComponent.entity.description.trim()
                         });
 

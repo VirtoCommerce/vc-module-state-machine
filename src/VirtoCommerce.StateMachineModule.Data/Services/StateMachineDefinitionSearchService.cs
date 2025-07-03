@@ -18,17 +18,20 @@ public class StateMachineDefinitionSearchService : SearchService<SearchStateMach
     IStateMachineDefinitionSearchService
 {
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
+    private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
 
     public StateMachineDefinitionSearchService(
         Func<IStateMachineRepository> repositoryFactory,
         IPlatformMemoryCache platformMemoryCache,
         IStateMachineDefinitionService crudService,
         IOptions<CrudOptions> crudOptions,
-        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService
         )
         : base(repositoryFactory, platformMemoryCache, crudService, crudOptions)
     {
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
+        _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
     }
     protected override IQueryable<StateMachineDefinitionEntity> BuildQuery(IRepository repository, SearchStateMachineDefinitionCriteria criteria)
     {
@@ -69,19 +72,27 @@ public class StateMachineDefinitionSearchService : SearchService<SearchStateMach
             if (!result.Results.IsNullOrEmpty())
             {
                 var definitionIds = result.Results.Select(x => x.Id).ToArray();
+
                 var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionIds = definitionIds, Locale = criteria.Locale };
                 var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
+
+                var attributeSearchCriteria = new SearchStateMachineAttributeCriteria { DefinitionIds = definitionIds };
+                var attributeSearchResults = (await _stateMachineAttributeSearchService.SearchAsync(attributeSearchCriteria, false)).Results;
+
                 foreach (var definition in result.Results)
                 {
                     var definitionLocalizations = localizationSearchResults.Where(x => x.DefinitionId == definition.Id);
-                    if (definitionLocalizations.Any())
+                    var definitionAttributes = attributeSearchResults.Where(x => x.DefinitionId == definition.Id);
+                    if (definitionLocalizations.Any() || definitionAttributes.Any())
                     {
                         foreach (var definitionState in definition.States)
                         {
                             definitionState.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
+                            definitionState.Attributes = definitionAttributes.Where(x => x.Item == definitionState.Name).ToList();
                             foreach (var definitionStateTransition in definitionState.Transitions)
                             {
                                 definitionStateTransition.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                                definitionStateTransition.Attributes = definitionAttributes.Where(x => x.Item == definitionStateTransition.Trigger).ToList();
                             }
                         }
                     }

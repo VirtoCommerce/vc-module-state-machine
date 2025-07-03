@@ -65,7 +65,8 @@ public class StateMachineDefinitionsSearchServiceTests
             platformMemoryCache,
             serviceProvider.GetService<IStateMachineDefinitionService>(),
             serviceProvider.GetService<IOptions<CrudOptions>>(),
-            serviceProvider.GetService<IStateMachineLocalizationSearchService>()
+            serviceProvider.GetService<IStateMachineLocalizationSearchService>(),
+            serviceProvider.GetService<IStateMachineAttributeSearchService>()
         );
 
         return stateMachineDefinitionsSearchService;

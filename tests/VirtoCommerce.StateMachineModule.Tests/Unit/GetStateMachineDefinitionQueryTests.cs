@@ -60,6 +60,7 @@ public class GetStateMachineDefinitionQueryTests
     {
         IStateMachineDefinitionService stateMachineDefinitionService = new StateMachineDefinitionServiceStub();
         IStateMachineLocalizationSearchService stateMachineLocalizationSearchServiceStub = new StateMachineLocalizationSearchServiceStub();
-        return new GetStateMachineDefinitionQueryHandler(stateMachineDefinitionService, stateMachineLocalizationSearchServiceStub);
+        IStateMachineAttributeSearchService stateMachineAttributeSearchServiceStub = new StateMachineAttributeSearchServiceStub();
+        return new GetStateMachineDefinitionQueryHandler(stateMachineDefinitionService, stateMachineLocalizationSearchServiceStub, stateMachineAttributeSearchServiceStub);
     }
 }

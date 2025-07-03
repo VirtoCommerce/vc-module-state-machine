@@ -18,17 +18,20 @@ public class StateMachineInstanceSearchService : SearchService<SearchStateMachin
     IStateMachineInstanceSearchService
 {
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
+    private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
 
     public StateMachineInstanceSearchService(
         Func<IStateMachineRepository> repositoryFactory,
         IPlatformMemoryCache platformMemoryCache,
         IStateMachineInstanceService crudService,
         IOptions<CrudOptions> crudOptions,
-        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService
         )
         : base(repositoryFactory, platformMemoryCache, crudService, crudOptions)
     {
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
+        _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
     }
 
     protected override IQueryable<StateMachineInstanceEntity> BuildQuery(IRepository repository, SearchStateMachineInstanceCriteria criteria)
@@ -75,21 +78,31 @@ public class StateMachineInstanceSearchService : SearchService<SearchStateMachin
             if (!result.Results.IsNullOrEmpty())
             {
                 var definitionIds = result.Results.Select(x => x.StateMachineDefinitionId).ToArray();
+
                 var localizationSearchCriteria = new SearchStateMachineLocalizationCriteria { DefinitionIds = definitionIds, Locale = criteria.Locale };
                 var localizationSearchResults = (await _stateMachineLocalizationSearchService.SearchAsync(localizationSearchCriteria, false)).Results;
 
+                var attributeSearchCriteria = new SearchStateMachineAttributeCriteria { DefinitionIds = definitionIds };
+                var attributeSearchResults = (await _stateMachineAttributeSearchService.SearchAsync(attributeSearchCriteria, false)).Results;
+
                 foreach (var instance in result.Results)
                 {
-                    if (localizationSearchResults.Any() && instance.StateMachineDefinition != null)
+                    if (instance.StateMachineDefinition != null)
                     {
-                        var definitionLocalizations = localizationSearchResults.Where(x => x.DefinitionId == instance.StateMachineDefinitionId);
-
-                        foreach (var definitionState in instance.StateMachineDefinition.States)
+                        if (localizationSearchResults.Any() || attributeSearchResults.Any())
                         {
-                            definitionState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
-                            foreach (var definitionStateTransition in definitionState.Transitions)
+                            var definitionLocalizations = localizationSearchResults.Where(x => x.DefinitionId == instance.StateMachineDefinitionId);
+                            var definitionAttributes = attributeSearchResults.Where(x => x.DefinitionId == instance.StateMachineDefinitionId);
+
+                            foreach (var definitionState in instance.StateMachineDefinition.States)
                             {
-                                definitionStateTransition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                                definitionState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
+                                definitionState.Attributes = attributeSearchResults.Where(x => x.Item == definitionState.Name).ToList();
+                                foreach (var definitionStateTransition in definitionState.Transitions)
+                                {
+                                    definitionStateTransition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                                    definitionStateTransition.Attributes = attributeSearchResults.Where(x => x.Item == definitionStateTransition.Trigger).ToList();
+                                }
                             }
                         }
                     }

@@ -116,7 +116,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                 const transition = {
                                     id: transitionData.id || stateMachineTransitionService.generateUniqueId(),
                                     trigger: transitionData.trigger,
-                                    icon: transitionData.icon || '',
+                                    //icon: transitionData.icon || '',
                                     description: transitionData.description || '',
                                     fromState: fromState,
                                     toState: toState,
@@ -357,7 +357,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     transitions: state.transitions.map(t => ({
                         id: t.id,
                         trigger: t.trigger,
-                        icon: t.icon || '',
+                        //icon: t.icon || '',
                         description: t.description || '',
                         toState: t.toState.id,
                         condition: t.condition

@@ -12,14 +12,17 @@ public class GetStateMachineInstanceForEntityQueryHandler : IQueryHandler<GetSta
 {
     private readonly IStateMachineInstanceService _stateMachineInstanceService;
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
+    private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
 
     public GetStateMachineInstanceForEntityQueryHandler(
         IStateMachineInstanceService stateMachineInstanceService,
-        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService
         )
     {
         _stateMachineInstanceService = stateMachineInstanceService;
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
+        _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
     }
 
     public virtual async Task<StateMachineInstance> Handle(GetStateMachineInstanceForEntityQuery request, CancellationToken cancellationToken)
@@ -46,7 +49,18 @@ public class GetStateMachineInstanceForEntityQueryHandler : IQueryHandler<GetSta
                         transition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == transition.Trigger)?.Value;
                     }
                 }
+            }
 
+            var attributeSearchCriteria = new SearchStateMachineAttributeCriteria { DefinitionId = result.StateMachineDefinitionId };
+            var attributeSearchResults = (await _stateMachineAttributeSearchService.SearchAsync(attributeSearchCriteria, false)).Results;
+            if (attributeSearchResults.Any())
+            {
+                var currentState = result.CurrentState;
+                currentState.Attributes = attributeSearchResults.Where(x => x.Item == currentState.Name).ToList();
+                foreach (var transition in currentState.Transitions)
+                {
+                    transition.Attributes = attributeSearchResults.Where(x => x.Item == transition.Trigger).ToList();
+                }
             }
 
             result.Evaluate(new StateMachineTriggerContext { Principal = request.User });

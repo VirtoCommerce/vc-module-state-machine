@@ -56,8 +56,7 @@ public class StateMachineStateShortTests
                 {
                     Trigger = "TestTrigger",
                     Description = "Test transition description",
-                    ToState = "AnotherState",
-                    Icon = "any-icon"
+                    ToState = "AnotherState"
                 }
             }
         };

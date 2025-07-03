@@ -24,6 +24,7 @@ public class ServiceBuilder
         services.AddTransient<IStateMachineInstanceService, StateMachineInstanceServiceStub>();
         services.AddTransient<IStateMachineInstanceSearchService, StateMachineInstancesSearchServiceStub>();
         services.AddTransient<IStateMachineLocalizationSearchService, StateMachineLocalizationSearchServiceStub>();
+        services.AddTransient<IStateMachineAttributeSearchService, StateMachineAttributeSearchServiceStub>();
 
         return services;
     }
