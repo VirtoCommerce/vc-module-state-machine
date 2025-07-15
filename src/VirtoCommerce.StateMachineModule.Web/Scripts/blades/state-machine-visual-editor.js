@@ -30,7 +30,7 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.allLanguages = [];
 
             // State machine data
-            blade.machineData = { states: [], transitions: [] };
+            blade.machineData = { states: [], transitions: [], localizations: [], attributes: [] };
 
             const stateHeight = 100;
 
@@ -116,7 +116,6 @@ angular.module('virtoCommerce.stateMachineModule')
                                 const transition = {
                                     id: transitionData.id || stateMachineTransitionService.generateUniqueId(),
                                     trigger: transitionData.trigger,
-                                    //icon: transitionData.icon || '',
                                     description: transitionData.description || '',
                                     fromState: fromState,
                                     toState: toState,
@@ -134,6 +133,9 @@ angular.module('virtoCommerce.stateMachineModule')
                     stateMachineStateService.updateStatesAttributes(blade.machineData.states);
 
                     stateMachineStateService.calculateStateLevels(blade.machineData.states);
+
+                    blade.machineData.localizations = blade.localizations;
+                    blade.machineData.attributes = blade.attributes;
 
                     $timeout(() => {
                         if (needsNormalization) {
@@ -179,11 +181,7 @@ angular.module('virtoCommerce.stateMachineModule')
                 {
                     name: "platform.commands.reset",
                     icon: 'fa fa-undo',
-                    executeMethod: function () {
-                        const origData = typeof blade.origEntity === 'string' ? blade.origEntity : JSON.stringify(blade.origEntity);
-                        blade.currentEntity = origData;
-                        initializeStateMachine();
-                    },
+                    executeMethod: blade.reset,
                     canExecuteMethod: isDirty
                 },
                 {
@@ -286,6 +284,12 @@ angular.module('virtoCommerce.stateMachineModule')
                 }
             }
 
+            blade.reset = function () {
+                const origData = typeof blade.origEntity === 'string' ? blade.origEntity : JSON.stringify(blade.origEntity);
+                blade.currentEntity = origData;
+                initializeStateMachine();
+            }
+
             blade.recalculateStatePositions = function () {
                 if (!isDirty()) {
                     return;
@@ -357,7 +361,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     transitions: state.transitions.map(t => ({
                         id: t.id,
                         trigger: t.trigger,
-                        //icon: t.icon || '',
                         description: t.description || '',
                         toState: t.toState.id,
                         condition: t.condition
@@ -368,47 +371,68 @@ angular.module('virtoCommerce.stateMachineModule')
                 blade.parentBlade.updateStateMachineData(blade.currentEntity);
             }
 
-            blade.getCurrentTranslations = async function (item) {
-                var itemText = item.name || item.trigger;
-                var searchCriteria = {
-                    definitionId: blade.stateMachineDefinitionId,
-                    item: itemText
-                };
-                var localizationSearchResult = await stateMachineApi.searchStateMachineLocalization(searchCriteria).$promise;
-                var currentTranslations = localizationSearchResult ? localizationSearchResult.results : [];
-
-                return currentTranslations;
-            }
-
-            blade.saveCurrentTranslations = function (localizations) {
-                if (localizations) {
+            blade.saveCurrentTranslations = function (localizations, item) {
+                if (localizations && item) {
+                    var itemText = item.name || item.trigger;
                     localizations = localizations.filter(x => x.value !== undefined && x.value !== null && x.value !== '');
+
                     localizations.forEach(x => {
-                        x.definitionId = blade.stateMachineDefinitionId;
+                        var existedLocalization = blade.machineData.localizations.find(l => l.item === itemText && l.locale === x.locale);
+                        if (existedLocalization) {
+                            existedLocalization.value = x.value;
+                        }
+                        else {
+                            x.definitionId = blade.stateMachineDefinitionId;
+                            blade.machineData.localizations.push(x);
+                        }
                     });
-                    stateMachineApi.updateStateMachineLocalization({ localizations: localizations });
+
+                    if (blade.parentBlade.updateLocalizationsAttributes) {
+                        blade.parentBlade.updateLocalizationsAttributes(blade.machineData.localizations, blade.machineData.attributes);
+                    }
                 }
             }
 
-            blade.getCurrentAttributes = async function (item) {
-                var itemText = item.name || item.trigger;
-                var searchCriteria = {
-                    definitionId: blade.stateMachineDefinitionId,
-                    item: itemText
-                };
-                var attributeSearchResult = await stateMachineApi.searchStateMachineAttribute(searchCriteria).$promise;
-                var currentAttributes = attributeSearchResult ? attributeSearchResult.results : [];
+            blade.saveCurrentAttributes = function (attributes, item) {
+                if (attributes && item) {
+                    var itemText = item.name || item.trigger;
+                    attributes = attributes.filter(x => x.value !== undefined && x.value !== null && x.value !== '');
 
-                return currentAttributes;
+                    attributes.forEach(x => {
+                        var existedAttribute = blade.machineData.attributes.find(l => l.item === itemText && l.attributeKey === x.attributeKey);
+                        if (existedAttribute) {
+                            existedAttribute.value = x.value;
+                        }
+                        else {
+                            x.definitionId = blade.stateMachineDefinitionId;
+                            blade.machineData.attributes.push(x);
+                        }
+                    });
+
+                    if (blade.parentBlade.updateLocalizationsAttributes) {
+                        blade.parentBlade.updateLocalizationsAttributes(blade.machineData.localizations, blade.machineData.attributes);
+                    }
+                }
             }
 
-            blade.saveCurrentAttributes = function (attributes) {
-                if (attributes) {
-                    attributes = attributes.filter(x => x.value !== undefined && x.value !== null && x.value !== '');
-                    attributes.forEach(x => {
-                        x.definitionId = blade.stateMachineDefinitionId;
+            blade.updateLocalizationsAttributes = function (oldItem, newItem) {
+                var oldItemText = oldItem.name || oldItem.trigger;
+                var newItemText = newItem.name || newItem.trigger;
+                if (oldItemText && newItemText && oldItemText !== newItemText) {
+                    blade.machineData.localizations.forEach(x => {
+                        if (x.item === oldItemText) {
+                            x.item = newItemText;
+                        }
                     });
-                    stateMachineApi.updateStateMachineAttribute({ attributes: attributes });
+                    blade.machineData.attributes.forEach(x => {
+                        if (x.item === oldItemText) {
+                            x.item = newItemText;
+                        }
+                    });
+
+                    if (blade.parentBlade.updateLocalizationsAttributes) {
+                        blade.parentBlade.updateLocalizationsAttributes(blade.machineData.localizations, blade.machineData.attributes);
+                    }
                 }
             }
 

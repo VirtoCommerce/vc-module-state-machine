@@ -81,7 +81,11 @@ angular.module('virtoCommerce.stateMachineModule')
                             permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
-                                stateMachineModalService.editTransitionModal($ctrl.parentScope, $element, transition, (transitionData) => {
+                                stateMachineModalService.editTransitionModal($ctrl.parentScope, $element, transition, (transitionData, oldTransition) => {
+                                    if ($ctrl.parentScope.blade.updateLocalizationsAttributes) {
+                                        $ctrl.parentScope.blade.updateLocalizationsAttributes(oldTransition, transitionData);
+                                    }
+
                                     transition.trigger = transitionData.trigger;
                                     transition.icon = transitionData.icon;
                                     transition.description = transitionData.description;
@@ -98,8 +102,8 @@ angular.module('virtoCommerce.stateMachineModule')
                                 $ctrl.parentScope.contextMenuData = null;
                                 var attributeKeys = $ctrl.parentScope.blade.allAttributeKeys;
                                 var existedAttributes = [];
-                                if ($ctrl.parentScope.blade.getCurrentAttributes) {
-                                    existedAttributes = await $ctrl.parentScope.blade.getCurrentAttributes(transition);
+                                if ($ctrl.machineData && $ctrl.machineData.attributes) {
+                                    existedAttributes = $ctrl.machineData.attributes.filter(x => x.item == transition.trigger);
                                 }
                                 stateMachineModalService.editAttributes($ctrl.parentScope, $element, transition, attributeKeys, existedAttributes, $ctrl.parentScope.blade.saveCurrentAttributes);
                             }
@@ -112,8 +116,8 @@ angular.module('virtoCommerce.stateMachineModule')
                                 $ctrl.parentScope.contextMenuData = null;
                                 var languages = $ctrl.parentScope.blade.allLanguages;
                                 var existedTranslations = [];
-                                if ($ctrl.parentScope.blade.getCurrentTranslations) {
-                                    existedTranslations = await $ctrl.parentScope.blade.getCurrentTranslations(transition);
+                                if ($ctrl.machineData && $ctrl.machineData.localizations) {
+                                    existedTranslations = $ctrl.machineData.localizations.filter(x => x.item == transition.trigger);
                                 }
                                 stateMachineModalService.editLocalization($ctrl.parentScope, $element, transition, languages, existedTranslations, $ctrl.parentScope.blade.saveCurrentTranslations);
                             }
@@ -207,7 +211,11 @@ angular.module('virtoCommerce.stateMachineModule')
                         e.stopPropagation();
                     }
 
-                    stateMachineModalService.editTransitionModal($ctrl.parentScope, $element, transition, (transitionData) => {
+                    stateMachineModalService.editTransitionModal($ctrl.parentScope, $element, transition, (transitionData, oldTransition) => {
+                        if ($ctrl.parentScope.blade.updateLocalizationsAttributes) {
+                            $ctrl.parentScope.blade.updateLocalizationsAttributes(oldTransition, transitionData);
+                        }
+
                         transition.trigger = transitionData.trigger;
                         transition.icon = transitionData.icon;
                         transition.description = transitionData.description;

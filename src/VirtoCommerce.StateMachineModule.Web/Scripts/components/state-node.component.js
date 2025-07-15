@@ -93,7 +93,11 @@ angular.module('virtoCommerce.stateMachineModule')
                             permission: 'statemachine:update',
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
-                                stateMachineModalService.editStateModal($ctrl.parentScope, $element, state.position.x, state.position.y, null, state, $ctrl.machineData.states, $ctrl.machineData.transitions);
+                                stateMachineModalService.editStateModal($ctrl.parentScope, $element, state.position.x, state.position.y, null, state, $ctrl.machineData.states, $ctrl.machineData.transitions, (editedState, oldState) => {
+                                    if ($ctrl.parentScope.blade.updateLocalizationsAttributes) {
+                                        $ctrl.parentScope.blade.updateLocalizationsAttributes(oldState, editedState);
+                                    }
+                                });
                             }
                         },
                         {
@@ -104,8 +108,8 @@ angular.module('virtoCommerce.stateMachineModule')
                                 $ctrl.parentScope.contextMenuData = null;
                                 var attributeKeys = $ctrl.parentScope.blade.allAttributeKeys;
                                 var existedAttributes = [];
-                                if ($ctrl.parentScope.blade.getCurrentAttributes) {
-                                    existedAttributes = await $ctrl.parentScope.blade.getCurrentAttributes(state);
+                                if ($ctrl.machineData && $ctrl.machineData.attributes) {
+                                    existedAttributes = $ctrl.machineData.attributes.filter(x => x.item == state.name);
                                 }
                                 stateMachineModalService.editAttributes($ctrl.parentScope, $element, state, attributeKeys, existedAttributes, $ctrl.parentScope.blade.saveCurrentAttributes);
                             }
@@ -118,8 +122,8 @@ angular.module('virtoCommerce.stateMachineModule')
                                 $ctrl.parentScope.contextMenuData = null;
                                 var languages = $ctrl.parentScope.blade.allLanguages;
                                 var existedTranslations = [];
-                                if ($ctrl.parentScope.blade.getCurrentTranslations) {
-                                    existedTranslations = await $ctrl.parentScope.blade.getCurrentTranslations(state);
+                                if ($ctrl.machineData && $ctrl.machineData.localizations) {
+                                    existedTranslations = $ctrl.machineData.localizations.filter(x => x.item == state.name);
                                 }
                                 stateMachineModalService.editLocalization($ctrl.parentScope, $element, state, languages, existedTranslations, $ctrl.parentScope.blade.saveCurrentTranslations);
                             }
@@ -356,7 +360,11 @@ angular.module('virtoCommerce.stateMachineModule')
                         e.stopPropagation();
                     }
 
-                    stateMachineModalService.editStateModal($ctrl.parentScope, $element, state.position.x, state.position.y, null, state, $ctrl.machineData.states, $ctrl.machineData.transitions);
+                    stateMachineModalService.editStateModal($ctrl.parentScope, $element, state.position.x, state.position.y, null, state, $ctrl.machineData.states, $ctrl.machineData.transitions, (editedState, oldState) => {
+                        if ($ctrl.parentScope.blade.updateLocalizationsAttributes) {
+                            $ctrl.parentScope.blade.updateLocalizationsAttributes(oldState, editedState);
+                        }
+                    });
                 };
 
                 $ctrl.deleteState = function (state) {
@@ -381,7 +389,6 @@ angular.module('virtoCommerce.stateMachineModule')
 
                     stateMachineTransitionService.updateTransitionPaths($ctrl.machineData.transitions, $ctrl.parentScope, workspace);
                 }
-
 
             }]
     });

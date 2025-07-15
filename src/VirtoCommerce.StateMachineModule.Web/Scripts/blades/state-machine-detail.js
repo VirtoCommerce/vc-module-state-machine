@@ -10,7 +10,7 @@ angular.module('virtoCommerce.stateMachineModule')
             dialogService,
             authService,
             stateMachineTypes,
-            webApi,
+            stateMachineApi,
             stateMachineExportImportService) {
             var blade = $scope.blade;
             blade.headIcon = 'far fa-plus-square';
@@ -25,11 +25,35 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 }
 
-                webApi.searchStateMachineDefinition({ objectTypes: [blade.currentEntity.entityType] }
-                    , (result) =>  blade.allEntityTypes = result.results );
+                stateMachineApi.searchStateMachineDefinition({
+                    objectTypes: [blade.currentEntity.entityType]
+                },
+                    (result) => blade.allEntityTypes = result.results
+                );
 
-                blade.currentEntity = angular.copy(data);
-                blade.origEntity = data;
+                var searchCriteria = {
+                    definitionId: blade.currentEntity.id
+                };
+
+                var promises = [
+                    stateMachineApi.searchStateMachineLocalization(searchCriteria).$promise,
+                    stateMachineApi.searchStateMachineAttribute(searchCriteria).$promise
+                ];
+
+                Promise.all(promises)
+                    .then(function (results) {
+                        blade.localizations = results[0] ? results[0].results : [];
+                        blade.origLocalizations = angular.copy(blade.localizations);
+                        blade.attributes = results[1] ? results[1].results : [];
+                        blade.origAttributes = angular.copy(blade.attributes);
+
+                    })
+                    .catch(function (error) {
+                        bladeNavigationService.setError('Error ' + (error.status || ''), blade);
+                    });
+
+                blade.currentEntity = data;
+                blade.origEntity = angular.copy(data);
 
                 blade.stateMachineRegisteredTypes = stateMachineTypes.getAllTypes();
                 blade.updateAnotherActiveStateMachine = false;
@@ -44,7 +68,9 @@ angular.module('virtoCommerce.stateMachineModule')
             $scope.setForm = function (form) { $scope.formScope = form; }
 
             function isDirty() {
-                return !angular.equals(blade.currentEntity, blade.origEntity);
+                return !angular.equals(blade.currentEntity, blade.origEntity)
+                    || !angular.equals(blade.localizations, blade.origLocalizations)
+                    || !angular.equals(blade.attributes, blade.origAttributes);
             }
 
             function canSave() {
@@ -86,12 +112,14 @@ angular.module('virtoCommerce.stateMachineModule')
                 }
 
                 const promises = [
-                    webApi.updateStateMachineDefinition({ definition: blade.currentEntity }).$promise
+                    stateMachineApi.updateStateMachineDefinition({ definition: blade.currentEntity }).$promise,
+                    stateMachineApi.updateStateMachineLocalization({ localizations: blade.localizations }),
+                    stateMachineApi.updateStateMachineAttribute({ attributes: blade.attributes })
                 ];
 
                 if (blade.anotherActiveStateMachine) {
                     promises.push(
-                        webApi.updateStateMachineDefinition({ definition: blade.anotherActiveStateMachine }).$promise
+                        stateMachineApi.updateStateMachineDefinition({ definition: blade.anotherActiveStateMachine }).$promise
                     );
                 }
 
@@ -122,7 +150,16 @@ angular.module('virtoCommerce.stateMachineModule')
                 {
                     name: "platform.commands.reset", icon: 'fa fa-undo',
                     executeMethod: function () {
-                        angular.copy(blade.origEntity, blade.currentEntity);
+                        blade.currentEntity = angular.copy(blade.origEntity);
+                        blade.localizations = angular.copy(blade.origLocalizations);
+                        blade.attributes = angular.copy(blade.origAttributes);
+                        if (blade.childrenBlades && blade.childrenBlades.length > 0) {
+                            blade.childrenBlades.forEach(x => {
+                                if (x.reset) {
+                                    x.reset();
+                                }
+                            });
+                        }
                     },
                     canExecuteMethod: isDirty
                 },
@@ -154,12 +191,10 @@ angular.module('virtoCommerce.stateMachineModule')
             blade.exportStateMachine = function () {
                 stateMachineExportImportService.exportStateMachine(blade.currentEntity)
                     .then(function() {
-                        // Export completed successfully
                         console.log('State machine exported successfully');
                     })
                     .catch(function(error) {
                         console.error('Error exporting state machine:', error);
-                        // Could show user notification here if needed
                     });
             }
 
@@ -168,6 +203,8 @@ angular.module('virtoCommerce.stateMachineModule')
                     id: "stateMachineVisualEditor",
                     stateMachineDefinitionId: blade.currentEntity.id,
                     currentEntity: blade.currentEntity.statesGraph,
+                    localizations: blade.localizations,
+                    attributes: blade.attributes,
                     controller: 'virtoCommerce.stateMachineModule.stateMachineVisualEditorController',
                     template: 'Modules/$(VirtoCommerce.StateMachine)/Scripts/blades/state-machine-visual-editor.tpl.html'
                 };
@@ -177,6 +214,11 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.updateStateMachineData = function (data) {
                 blade.currentEntity.statesGraph = data;
+            }
+
+            blade.updateLocalizationsAttributes = function (localizations, attributes) {
+                blade.localizations = localizations;
+                blade.attributes = attributes;
             }
 
             blade.updateStateMachineSnapshot = function (data) {

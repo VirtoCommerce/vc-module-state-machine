@@ -8,6 +8,7 @@ angular.module('virtoCommerce.stateMachineModule')
             stateMachineTransitionService
         ) {
             function editStateModal($scope, $element, x, y, startState = null, existingState = null, states, transitions, callback = null) {
+                var oldState = angular.copy(existingState);
                 var modalComponent = {
                     title: existingState ?
                         $filter('translate')('statemachine.modals.state.edit-title') :
@@ -45,6 +46,9 @@ angular.module('virtoCommerce.stateMachineModule')
                                     }
                                 });
                             });
+                            if (callback) {
+                                callback(modalComponent.entity, oldState);
+                            }
                         } else {
                             const newState = {
                                 id: modalComponent.entity.name,
@@ -87,13 +91,13 @@ angular.module('virtoCommerce.stateMachineModule')
             }
 
             function editTransitionModal($scope, $element, existingTransition, callback) {
+                var oldTransition = angular.copy(existingTransition);
                 var modalComponent = {
                     title: existingTransition ?
                         $filter('translate')('statemachine.modals.transition.edit-title') :
                         $filter('translate')('statemachine.modals.transition.new-title'),
                     entity: existingTransition || {
                         trigger: '',
-                        //icon: '',
                         description: ''
                     },
                     fields: [
@@ -103,11 +107,6 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'ShortText',
                             isRequired: true
                         },
-                        //{
-                        //    name: 'icon',
-                        //    title: $filter('translate')('statemachine.modals.transition.icon'),
-                        //    valueType: 'ShortText'
-                        //},
                         {
                             name: 'description',
                             title: $filter('translate')('statemachine.modals.common.description'),
@@ -124,9 +123,8 @@ angular.module('virtoCommerce.stateMachineModule')
 
                         callback({
                             trigger: trigger,
-                            //icon: modalComponent.entity.icon.trim(),
                             description: modalComponent.entity.description.trim()
-                        });
+                        }, oldTransition);
 
                         $scope.modalData = null;
                     },
@@ -174,10 +172,10 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'ShortText'
                         }
                     ],
-                    okButtonCaption: $filter('translate')('statemachine.modals.common.save'),
+                    okButtonCaption: $filter('translate')('statemachine.modals.common.ok'),
                     okAction: function () {
                         if (saveCallback) {
-                            saveCallback(localizations);
+                            saveCallback(localizations, item);
                         }
                         $scope.modalData = null;
                     },
@@ -222,10 +220,10 @@ angular.module('virtoCommerce.stateMachineModule')
                             valueType: 'ShortText'
                         }
                     ],
-                    okButtonCaption: $filter('translate')('statemachine.modals.common.save'),
+                    okButtonCaption: $filter('translate')('statemachine.modals.common.ok'),
                     okAction: function () {
                         if (saveCallback) {
-                            saveCallback(attributes);
+                            saveCallback(attributes, item);
                         }
                         $scope.modalData = null;
                     },
