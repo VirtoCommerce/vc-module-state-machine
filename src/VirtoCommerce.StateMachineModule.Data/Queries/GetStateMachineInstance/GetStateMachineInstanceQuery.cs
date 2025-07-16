@@ -9,4 +9,5 @@ public class GetStateMachineInstanceQuery : IQuery<StateMachineInstance>
     [Required]
     public string StateMachineInstanceId { get; set; }
     public ClaimsPrincipal User { get; set; }
+    public string Locale { get; set; }
 }

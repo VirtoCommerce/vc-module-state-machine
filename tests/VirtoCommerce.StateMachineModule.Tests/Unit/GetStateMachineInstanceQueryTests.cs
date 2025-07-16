@@ -59,6 +59,8 @@ public class GetStateMachineInstanceQueryTests
     private GetStateMachineInstanceQueryHandler GetQueryHandler()
     {
         IStateMachineInstanceService stateMachineInstanceService = new StateMachineInstanceServiceStub();
-        return new GetStateMachineInstanceQueryHandler(stateMachineInstanceService);
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService = new StateMachineLocalizationSearchServiceStub();
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService = new StateMachineAttributeSearchServiceStub();
+        return new GetStateMachineInstanceQueryHandler(stateMachineInstanceService, stateMachineLocalizationSearchService, stateMachineAttributeSearchService);
     }
 }

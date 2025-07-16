@@ -96,12 +96,12 @@ public class StateMachineInstanceSearchService : SearchService<SearchStateMachin
 
                             foreach (var definitionState in instance.StateMachineDefinition.States)
                             {
-                                definitionState.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
-                                definitionState.Attributes = attributeSearchResults.Where(x => x.Item == definitionState.Name).ToList();
+                                definitionState.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionState.Name)?.Value;
+                                definitionState.Attributes = definitionAttributes.Where(x => x.Item == definitionState.Name).ToList();
                                 foreach (var definitionStateTransition in definitionState.Transitions)
                                 {
-                                    definitionStateTransition.LocalizedValue = localizationSearchResults.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
-                                    definitionStateTransition.Attributes = attributeSearchResults.Where(x => x.Item == definitionStateTransition.Trigger).ToList();
+                                    definitionStateTransition.LocalizedValue = definitionLocalizations.FirstOrDefault(x => x.Item == definitionStateTransition.Trigger)?.Value;
+                                    definitionStateTransition.Attributes = definitionAttributes.Where(x => x.Item == definitionStateTransition.Trigger).ToList();
                                 }
                             }
                         }

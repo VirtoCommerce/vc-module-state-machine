@@ -123,6 +123,8 @@ public class FireStateMachineTriggerCommandTests
     private FireStateMachineTriggerCommandHandler GetCommandHandler()
     {
         IStateMachineInstanceService stateMachineInstanceService = new StateMachineInstanceServiceStub();
-        return new FireStateMachineTriggerCommandHandler(stateMachineInstanceService);
+        IStateMachineLocalizationSearchService stateMachineLocalizationSearchService = new StateMachineLocalizationSearchServiceStub();
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService = new StateMachineAttributeSearchServiceStub();
+        return new FireStateMachineTriggerCommandHandler(stateMachineInstanceService, stateMachineLocalizationSearchService, stateMachineAttributeSearchService);
     }
 }
