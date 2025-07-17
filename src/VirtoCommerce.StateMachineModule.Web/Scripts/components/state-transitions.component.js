@@ -126,6 +126,12 @@ angular.module('virtoCommerce.stateMachineModule')
                             label: $filter('translate')('statemachine.components.state-transitions.context-menu.edit-condition'),
                             icon: 'fas fa-filter',
                             permission: 'statemachine:update',
+                            isVisible: () => {
+                                if ($ctrl.parentScope.blade.checkHasConditionPrototype) {
+                                    return $ctrl.parentScope.blade.checkHasConditionPrototype();
+                                }
+                                return false;
+                            },
                             action: () => {
                                 $ctrl.parentScope.contextMenuData = null;
                                 var currentEntityType = $ctrl.parentScope.blade.getCuttentStateMachineEntityType();

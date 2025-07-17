@@ -10,6 +10,7 @@ angular.module('virtoCommerce.stateMachineModule')
         'virtoCommerce.stateMachineModule.stateMachineModalService',
         'virtoCommerce.stateMachineModule.stateMachineLayoutService',
         'virtoCommerce.stateMachineModule.stateMachineWorkspaceService',
+        'virtoCommerce.stateMachineModule.stateMachineTypes',
         function ($scope, $element, $timeout,
             authService,
             stateMachineApi,
@@ -19,7 +20,8 @@ angular.module('virtoCommerce.stateMachineModule')
             stateMachineJsonService,
             stateMachineModalService,
             stateMachineLayoutService,
-            stateMachineWorkspaceService
+            stateMachineWorkspaceService,
+            stateMachineTypes
         ) {
             var blade = $scope.blade;
             blade.scope = $scope;
@@ -438,6 +440,12 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.getCuttentStateMachineEntityType = function () {
                 return blade.parentBlade.currentEntity.entityType;
+            }
+
+            blade.checkHasConditionPrototype = function () {
+                var currentEntityType = blade.parentBlade.currentEntity.entityType;
+                var currentEntityTypeInfo = stateMachineTypes.getTypeInfo(currentEntityType);
+                return currentEntityTypeInfo && currentEntityTypeInfo.getConditionTreeCallback;
             }
 
             blade.saveTransitionCondition = function (transition, condition) {

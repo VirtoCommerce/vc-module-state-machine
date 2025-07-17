@@ -11,14 +11,20 @@ angular.module('virtoCommerce.stateMachineModule')
                 var $ctrl = this;
 
                 $ctrl.$onInit = function () {
-                    $ctrl.filteredItems = filterItemsByPermissions($ctrl.items);
+                    $ctrl.filteredItems = filterItems($ctrl.items);
                 };
 
                 $ctrl.$onChanges = function (changes) {
                     if (changes.items && changes.items.currentValue) {
-                        $ctrl.filteredItems = filterItemsByPermissions(changes.items.currentValue);
+                        $ctrl.filteredItems = filterItems(changes.items.currentValue);
                     }
                 };
+
+                function filterItems(items) {
+                    var filteredByPermissionItems = filterItemsByPermissions(items);
+                    var filteredByConditionItems = filterItemsByConditions(filteredByPermissionItems);
+                    return filteredByConditionItems;
+                }
 
                 function filterItemsByPermissions(items) {
                     if (!items || !Array.isArray(items)) {
@@ -32,6 +38,18 @@ angular.module('virtoCommerce.stateMachineModule')
 
                         return authService.checkPermission(item.permission);
                     });
+                }
+
+                function filterItemsByConditions(items) {
+                    var filteredItems = items.filter(x => {
+                        if (x.isVisible) {
+                            var isVisible = x.isVisible()
+                            return isVisible;
+                        }
+
+                        return true;
+                    });
+                    return filteredItems;
                 }
 
                 $ctrl.doAction = function (action) {
