@@ -156,6 +156,8 @@ angular.module('virtoCommerce.stateMachineModule')
                         if (blade.childrenBlades && blade.childrenBlades.length > 0) {
                             blade.childrenBlades.forEach(x => {
                                 if (x.reset) {
+                                    x.localizations = blade.localizations;
+                                    x.attributes = blade.attributes;
                                     x.reset();
                                 }
                             });

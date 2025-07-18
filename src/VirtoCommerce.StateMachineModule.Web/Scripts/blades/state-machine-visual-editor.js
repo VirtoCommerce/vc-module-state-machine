@@ -181,12 +181,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     }
                 },
                 {
-                    name: "platform.commands.reset",
-                    icon: 'fa fa-undo',
-                    executeMethod: blade.reset,
-                    canExecuteMethod: isDirty
-                },
-                {
                     name: "statemachine.blades.state-machine-visual-editor.commands.toggle-to-visual-mode",
                     icon: 'fas fa-project-diagram',
                     executeMethod: toggleToVisualMode,
@@ -201,14 +195,6 @@ angular.module('virtoCommerce.stateMachineModule')
                     canExecuteMethod: function () {
                         return blade.isInVisualMode && canEdit();
                     }
-                //},
-                //{
-                //    name: "Snapshot",
-                //    icon: 'fa fa-camera',
-                //    executeMethod: makeSnaphot,
-                //    canExecuteMethod: function () {
-                //        return true;
-                //    }
                 }
             ];
 

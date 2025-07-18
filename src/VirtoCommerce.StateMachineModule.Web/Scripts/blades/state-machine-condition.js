@@ -75,37 +75,10 @@ angular.module('virtoCommerce.stateMachineModule')
                 return !angular.equals(blade.currentEntity, blade.originalEntity);
             }
 
-            //$scope.openPermissionsSelectWizard = function(element){
-            //    var newBlade = {
-            //        id: 'listItemChildChild',
-            //        promise: promise,
-            //        title: blade.title,
-            //        subtitle: 'platform.blades.role-permissions.subtitle',
-            //        controller: 'platformWebApp.rolePermissionsController',
-            //        template: '$(Platform)/Scripts/app/security/blades/role-permissions.tpl.html',
-            //        customizeToolbar: true,
-            //        toolbarCommands: [
-            //            {
-            //                name: "platform.commands.pick-selected", icon: 'fas fa-plus',
-            //                executeMethod: function (blade) {
-            //                    element.permissions = blade.data.permissions;
-            //                    bladeNavigationService.closeBlade(blade);
-            //                },
-            //                canExecuteMethod: function (blade) {
-            //                    return blade.data.permissions && blade.data.permissions.length > 0;
-            //                }
-            //            }]
-
-            //    };
-
-            //    bladeNavigationService.showBlade(newBlade, blade);
-            //}
-
             function extendElementBlock(expressionBlock) {
                 var retVal = dynamicExpressionService.expressions[expressionBlock.id];
                 if (!retVal) {
                     return expressionBlock;
-                    //retVal = { displayName: 'unknown element: ' + expressionBlock.id };
                 }
 
                 angular.extend(expressionBlock, retVal);
