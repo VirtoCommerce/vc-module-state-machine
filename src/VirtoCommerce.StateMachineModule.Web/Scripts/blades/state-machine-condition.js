@@ -42,20 +42,24 @@ angular.module('virtoCommerce.stateMachineModule')
 
             blade.toolbarCommands = [
                 {
-                    name: "platform.commands.save", icon: 'fas fa-save',
-                    executeMethod: function () {
-                        $scope.saveChanges();
-                    },
-                    canExecuteMethod: isDirty
-                },
-                {
                     name: "platform.commands.reset", icon: 'fa fa-undo',
                     executeMethod: function () {
-                        angular.copy(blade.originalEntity, blade.currentEntity);
-                    },
+                        blade.reset();
+                    }, 
                     canExecuteMethod: isDirty
                 }
             ];
+
+            blade.reset = function (resetValue)
+            {
+                if (resetValue) {
+                    blade.currentTransition.condition = resetValue;
+                }
+                else {
+                    blade.currentTransition.condition = angular.copy(blade.originalEntity);
+                }
+                blade.refresh();
+            }
 
             $scope.setForm = function (form) { $scope.formScope = form; };
 
@@ -68,7 +72,15 @@ angular.module('virtoCommerce.stateMachineModule')
                 if (blade.saveCallback) {
                     blade.saveCallback(blade.currentTransition, blade.currentEntity);
                 };
-                blade.refresh(true);
+                $scope.bladeClose();
+            }
+
+            $scope.cancelChanges = function(){
+                $scope.bladeClose();
+            }
+
+            $scope.isValid = function(){
+                return isDirty();
             }
 
             function isDirty() {

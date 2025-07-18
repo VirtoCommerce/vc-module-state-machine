@@ -272,10 +272,31 @@ angular.module('virtoCommerce.stateMachineModule')
                 }
             }
 
-            blade.reset = function () {
-                const origData = typeof blade.origEntity === 'string' ? blade.origEntity : JSON.stringify(blade.origEntity);
-                blade.currentEntity = origData;
+            blade.reset = function (resetValue) {
+                if (resetValue) {
+                    blade.currentEntity = resetValue;
+                }
+                else {
+                    const origData = typeof blade.origEntity === 'string' ?
+                        JSON.stringify(blade.origEntity) :
+                        angular.copy(blade.origEntity);
+                    blade.currentEntity = origData;
+                }
                 initializeStateMachine();
+                if (blade.childrenBlades && blade.childrenBlades.length > 0) {
+                    blade.childrenBlades.forEach(x => {
+                        if (x.reset) {
+                            var currentTransitionCondition = undefined;
+                            if (x.currentTransition && x.currentTransition.id) {
+                                var currentTransition = blade.machineData.transitions.find(transition => transition.id === x.currentTransition.id);
+                                if (currentTransition) {
+                                    currentTransitionCondition = currentTransition.condition;
+                                }
+                            }
+                            x.reset(currentTransitionCondition);
+                        }
+                    });
+                }
             }
 
             blade.recalculateStatePositions = function () {

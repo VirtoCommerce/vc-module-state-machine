@@ -158,7 +158,7 @@ angular.module('virtoCommerce.stateMachineModule')
                                 if (x.reset) {
                                     x.localizations = blade.localizations;
                                     x.attributes = blade.attributes;
-                                    x.reset();
+                                    x.reset(blade.currentEntity.statesGraph);
                                 }
                             });
                         }
