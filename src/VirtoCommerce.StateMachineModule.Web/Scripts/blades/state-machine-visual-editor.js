@@ -177,7 +177,7 @@ angular.module('virtoCommerce.stateMachineModule')
                         $scope.addState();
                     },
                     canExecuteMethod: function () {
-                        return canEdit();
+                        return canEdit() && refreshState();
                     }
                 },
                 {
@@ -221,6 +221,16 @@ angular.module('virtoCommerce.stateMachineModule')
                     oldStates = angular.copy(blade.machineData.states);
                 };
                 return !angular.equals(blade.currentEntity, blade.origEntity);
+            }
+
+            function refreshState() {
+                if (!blade.isLoading
+                    && blade.machineData.states.length > 0
+                    && blade.machineData.states !== oldStates) {
+                    updateCurrentEntity();
+                    oldStates = angular.copy(blade.machineData.states);
+                };
+                return true;
             }
 
             function toggleToVisualMode() {
