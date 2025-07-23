@@ -13,11 +13,13 @@ angular.module('virtoCommerce.stateMachineModule')
                     title: existingState ?
                         $filter('translate')('statemachine.modals.state.edit-title') :
                         $filter('translate')('statemachine.modals.state.add-title'),
-                    entity: existingState || {
-                        id: '',
-                        name: '',
-                        description: ''
-                    },
+                    entity: existingState ?
+                        angular.copy(existingState) :
+                        {
+                            id: '',
+                            name: '',
+                            description: ''
+                        },
                     fields: [
                         {
                             name: 'name',
@@ -38,6 +40,7 @@ angular.module('virtoCommerce.stateMachineModule')
                             const oldId = existingState.id;
                             existingState.id = modalComponent.entity.name;
                             existingState.name = modalComponent.entity.name;
+                            existingState.description = modalComponent.entity.description;
                             states.forEach(state => {
                                 state.transitions.forEach(transition => {
                                     if (transition.toState.id === oldId) {
@@ -96,10 +99,12 @@ angular.module('virtoCommerce.stateMachineModule')
                     title: existingTransition ?
                         $filter('translate')('statemachine.modals.transition.edit-title') :
                         $filter('translate')('statemachine.modals.transition.new-title'),
-                    entity: existingTransition || {
-                        trigger: '',
-                        description: ''
-                    },
+                    entity: existingTransition ?
+                        angular.copy(existingTransition) :
+                        {
+                            trigger: '',
+                            description: ''
+                        },
                     fields: [
                         {
                             name: 'trigger',
