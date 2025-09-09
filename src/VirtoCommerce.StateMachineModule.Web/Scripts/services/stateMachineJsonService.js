@@ -4,7 +4,7 @@ angular.module('virtoCommerce.stateMachineModule')
         function ($timeout) {
 
             function initializeJsonEditor(jsonEditor, $scope, blade) {
-                const formattedJson = JSON.stringify(JSON.parse(blade.currentEntity), null, 2);
+                const formattedJson = JSON.stringify(JSON.parse(blade.currentEntity ?? "{}"), null, 2);
                 jsonEditor.value = formattedJson;
 
                 jsonEditor.addEventListener('input', () => {

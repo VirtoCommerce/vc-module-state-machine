@@ -106,7 +106,7 @@ angular.module('virtoCommerce.stateMachineModule')
                     && blade.childrenBlades[0].makeSnapshot) {
                     await blade.childrenBlades[0].makeSnapshot();
                 }
-                blade.currentEntity.states = JSON.parse(blade.currentEntity.statesGraph);
+                blade.currentEntity.states = JSON.parse(blade.currentEntity.statesGraph ?? "{}");
                 if (!blade.currentEntity.version) {
                     blade.currentEntity.version = '0';
                 }
