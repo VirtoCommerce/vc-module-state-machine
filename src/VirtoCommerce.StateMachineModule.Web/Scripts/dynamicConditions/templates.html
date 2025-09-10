@@ -13,3 +13,19 @@
     </ui-select>
   </div>
 </script>
+
+<script type="text/ng-template" id="StateMachineConditionHasAccountType.html">
+  User <a class="__link" left-click-menu data-target="notMenu">{{element1.notHas | boolToValue:'Has no':'Has'}}</a> account type
+  <ul class="menu __context" role="menu" id="notMenu">
+    <li class="menu-item" ng-click='element1.notHas=false;'>has</li>
+    <li class="menu-item" ng-click='element1.notHas=true;'>has no</li>
+  </ul>
+  <div class="form-input">
+    <ui-select ng-model="element1.accountType" ng-controller="virtoCommerce.stateMachineModule.accoutTypeConditionController">
+      <ui-select-match placeholder="Select...">{{$item|json}}</ui-select-match>
+      <ui-select-choices repeat="x in accountTypes | filter: $select.search">
+        <span ng-bind-html="x | highlight: $select.search"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+</script>

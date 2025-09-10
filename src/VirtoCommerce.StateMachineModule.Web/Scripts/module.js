@@ -54,6 +54,12 @@ angular.module(moduleName, [])
                 templateURL: 'StateMachineConditionHasPermission.html'
             });
 
+            dynamicExpressionService.registerExpression({
+                id: 'StateMachineConditionHasAccountType',
+                displayName: 'Account Type ...',
+                templateURL: 'StateMachineConditionHasAccountType.html'
+            });
+
             $http.get('Modules/$(VirtoCommerce.StateMachine)/Scripts/dynamicConditions/templates.html').then(function (response) {
                 $compile(response.data);
             });

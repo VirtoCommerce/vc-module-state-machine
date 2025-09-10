@@ -7,4 +7,13 @@ angular.module('virtoCommerce.stateMachineModule')
                 });
             }
         ]
+    )
+    .controller('virtoCommerce.stateMachineModule.accoutTypeConditionController',
+        ['$scope', 'platformWebApp.settings',
+            function ($scope, settings) {
+                settings.get({ id: 'VirtoCommerce.Platform.Security.AccountTypes' }, function (setting) {
+                    $scope.accountTypes = setting.allowedValues;
+                });
+            }
+        ]
     );
