@@ -12,7 +12,7 @@ public class StateMachineConditionHasAccountType : ConditionTree
         var result = false;
         if (context is StateMachineTriggerContext stateMachineTriggerContext)
         {
-            result = !NotHas && stateMachineTriggerContext.Principal.IsInRole(AccountType);
+            result = NotHas != stateMachineTriggerContext.Principal.IsInRole($"__{AccountType.ToLower()}");
         }
 
         return result;
