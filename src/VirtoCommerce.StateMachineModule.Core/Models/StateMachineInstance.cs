@@ -132,7 +132,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
             }
         }
 
-        if (!string.IsNullOrEmpty(possibleTrigger) && _stateMachine.CanFire(possibleTrigger))
+        if (!string.IsNullOrEmpty(possibleTrigger))
         {
             _stateMachine.Fire(possibleTrigger);
             Evaluate(null);
