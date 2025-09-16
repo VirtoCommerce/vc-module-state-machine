@@ -121,6 +121,26 @@ public class StateMachineInstance : AuditableEntity, ICloneable
         return this;
     }
 
+    public virtual StateMachineInstance ForceSetState(string newState)
+    {
+        string possibleTrigger = string.Empty;
+        foreach (var transition in this.CurrentState.Transitions)
+        {
+            if (transition.ToState.Equals(newState))
+            {
+                possibleTrigger = transition.Trigger;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(possibleTrigger) && _stateMachine.CanFire(possibleTrigger))
+        {
+            _stateMachine.Fire(possibleTrigger);
+            Evaluate(null);
+        }
+
+        return this;
+    }
+
     public virtual object Clone()
     {
         return MemberwiseClone();

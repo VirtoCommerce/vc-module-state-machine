@@ -10,4 +10,5 @@ public interface IStateMachineInstanceService : ICrudService<StateMachineInstanc
     Task<StateMachineInstance> GetForEntity(string entityId, string entityType);
     Task<StateMachineInstance> FireTriggerAsync(StateMachineInstance stateMachineInstance, string trigger, StateMachineTriggerContext context);
     Task<StateMachineInstance> StopStateMachine(string stateMachineInstanceId);
+    Task<StateMachineInstance> ForceSetState(string stateMachineInstanceId, string newState);
 }

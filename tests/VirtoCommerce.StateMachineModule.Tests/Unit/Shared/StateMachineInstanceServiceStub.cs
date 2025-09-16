@@ -66,6 +66,11 @@ public class StateMachineInstanceServiceStub : IStateMachineInstanceService
         throw new NotImplementedException();
     }
 
+    public Task<StateMachineInstance> ForceSetState(string stateMachineInstanceId, string newState)
+    {
+        throw new NotImplementedException();
+    }
+
     private StateMachineDefinition GetStateMachineDefinition()
     {
         return new StateMachineDefinition

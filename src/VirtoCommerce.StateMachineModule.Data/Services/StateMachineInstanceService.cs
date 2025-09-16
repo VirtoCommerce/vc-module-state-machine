@@ -104,6 +104,16 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         return stateMachineInstance;
     }
 
+    public virtual async Task<StateMachineInstance> ForceSetState(string stateMachineInstanceId, string newState)
+    {
+        var stateMachineInstance = await this.GetByIdAsync(stateMachineInstanceId);
+        stateMachineInstance.ForceSetState(newState);
+        await SaveChangesAsync([stateMachineInstance]);
+        ClearCache([stateMachineInstance]);
+
+        return stateMachineInstance;
+    }
+
     protected override async Task<IList<StateMachineInstanceEntity>> LoadEntities(IRepository repository, IList<string> ids, string responseGroup)
     {
         return await ((IStateMachineRepository)repository).GetStateMachineInstancesByIds(ids.ToArray(), responseGroup);
