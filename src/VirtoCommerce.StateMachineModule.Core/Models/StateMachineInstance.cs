@@ -123,21 +123,10 @@ public class StateMachineInstance : AuditableEntity, ICloneable
 
     public virtual StateMachineInstance ForceSetState(string newState)
     {
-        string possibleTrigger = string.Empty;
-        foreach (var transition in this.CurrentState.Transitions)
+        if (StateMachineDefinition != null)
         {
-            if (transition.ToState.Equals(newState))
-            {
-                possibleTrigger = transition.Trigger;
-            }
+            Configure(StateMachineDefinition, newState);
         }
-
-        if (!string.IsNullOrEmpty(possibleTrigger))
-        {
-            _stateMachine.Fire(possibleTrigger);
-            Evaluate(null);
-        }
-
         return this;
     }
 
