@@ -21,74 +21,95 @@ angular.module('virtoCommerce.stateMachineModule')
                             modifiedBy: stateMachineDefinition.modifiedBy
                         };
 
-                        // Get all localizations for this state machine
                         const localizationPromises = [];
+                        const attributePromises = [];
 
-                        // Collect all state names and transition triggers for localization lookup
                         const itemsToLocalize = new Set();
+                        const itemsToAttribute = new Set();
 
-                        // Add state names
                         if (stateMachineData.states && Array.isArray(stateMachineData.states)) {
                             stateMachineData.states.forEach(state => {
                                 if (state.name) {
                                     itemsToLocalize.add(state.name);
+                                    itemsToAttribute.add(state.name);
                                 }
                             });
 
-                            // Add transition triggers
                             stateMachineData.states.forEach(state => {
                                 if (state.transitions && Array.isArray(state.transitions)) {
                                     state.transitions.forEach(transition => {
                                         if (transition.trigger) {
                                             itemsToLocalize.add(transition.trigger);
+                                            itemsToAttribute.add(transition.trigger);
                                         }
                                     });
                                 }
                             });
                         }
 
-                        // Fetch localizations for all items
-                        Array.from(itemsToLocalize).forEach(item => {
+                        if (itemsToLocalize.size > 0) {
                             const searchCriteria = {
-                                definitionId: stateMachineDefinition.id,
-                                item: item
+                                definitionId: stateMachineDefinition.id
                             };
                             localizationPromises.push(
                                 webApi.searchStateMachineLocalization(searchCriteria).$promise
                             );
-                        });
+                        }
 
-                        // If no items to localize, proceed directly with export
-                        if (localizationPromises.length === 0) {
+                        if (itemsToAttribute.size > 0) {
+                            const searchCriteria = {
+                                definitionId: stateMachineDefinition.id
+                            };
+                            attributePromises.push(
+                                webApi.searchStateMachineAttribute(searchCriteria).$promise
+                            );
+                        }
+
+                        if (localizationPromises.length === 0 && attributePromises.length === 0) {
                             stateMachineData.localizations = [];
+                            stateMachineData.attributes = [];
                             _createZipFile(stateMachineData)
                                 .then(resolve)
                                 .catch(reject);
                             return;
                         }
 
-                        // Wait for all localizations to be fetched
-                        Promise.all(localizationPromises)
-                            .then(function(localizationResults) {
-                                // Combine all localizations
-                                const allLocalizations = [];
-                                localizationResults.forEach(result => {
-                                    if (result && result.results && Array.isArray(result.results)) {
-                                        allLocalizations.push(...result.results);
-                                    }
-                                });
+                        const localizationPromise = localizationPromises.length > 0 ? Promise.all(localizationPromises) : Promise.resolve([]);
+                        const attributePromise = attributePromises.length > 0 ? Promise.all(attributePromises) : Promise.resolve([]);
 
-                                // Add localizations to export data
+                        Promise.all([localizationPromise, attributePromise])
+                            .then(function(results) {
+                                const [localizationResults, attributeResults] = results;
+
+                                const allLocalizations = [];
+                                if (Array.isArray(localizationResults)) {
+                                    localizationResults.forEach(result => {
+                                        if (result && result.results && Array.isArray(result.results)) {
+                                            allLocalizations.push(...result.results);
+                                        }
+                                    });
+                                }
+
+                                const allAttributes = [];
+                                if (Array.isArray(attributeResults)) {
+                                    attributeResults.forEach(result => {
+                                        if (result && result.results && Array.isArray(result.results)) {
+                                            allAttributes.push(...result.results);
+                                        }
+                                    });
+                                }
+
                                 stateMachineData.localizations = allLocalizations;
+                                stateMachineData.attributes = allAttributes;
 
                                 return _createZipFile(stateMachineData);
                             })
                             .then(resolve)
                             .catch(function(error) {
-                                console.error('Error fetching localizations:', error);
+                                console.error('Error fetching localizations or attributes:', error);
 
-                                // Fallback: export without localizations
                                 stateMachineData.localizations = [];
+                                stateMachineData.attributes = [];
                                 _createZipFile(stateMachineData)
                                     .then(resolve)
                                     .catch(reject);
@@ -104,13 +125,10 @@ angular.module('virtoCommerce.stateMachineModule')
             function importStateMachine(file) {
                 return new Promise((resolve, reject) => {
                     try {
-                        // Create a new JSZip instance
                         const zip = new JSZip();
 
-                        // Load the zip file
                         zip.loadAsync(file)
                             .then(function (zip) {
-                                // Find the first JSON file in the zip
                                 const jsonFile = Object.values(zip.files).find(file =>
                                     file.name.endsWith('.json') && !file.dir
                                 );
@@ -119,24 +137,21 @@ angular.module('virtoCommerce.stateMachineModule')
                                     throw new Error('No JSON file found in the zip archive');
                                 }
 
-                                // Read the JSON file content
                                 return jsonFile.async('string');
                             })
                             .then(function (jsonString) {
                                 const importedData = JSON.parse(jsonString);
 
-                                // Validate the imported data structure
                                 if (!importedData.states || !Array.isArray(importedData.states)) {
                                     throw new Error('Invalid state machine format');
                                 }
 
-                                // Extract localizations if present
                                 const localizations = importedData.localizations || [];
+                                const attributes = importedData.attributes || [];
 
-                                // Remove localizations from the definition data before creating
-                                const { localizations: _, ...stateMachineDefinition } = importedData;
+                                const { localizations: _, attributes: __, ...stateMachineDefinition } = importedData;
 
-                                return _importStateMachineDefinition(stateMachineDefinition, localizations);
+                                return _importStateMachineDefinition(stateMachineDefinition, localizations, attributes);
                             })
                             .then(resolve)
                             .catch(reject);
@@ -158,21 +173,18 @@ angular.module('virtoCommerce.stateMachineModule')
                             type: "blob",
                             compression: "DEFLATE",
                             compressionOptions: {
-                                level: 6  // Normal compression level (1-9, where 6 is normal)
+                                level: 6 
                             }
                         })
                             .then(function(content) {
-                                // Create download link
                                 const link = document.createElement('a');
                                 link.href = URL.createObjectURL(content);
                                 link.download = `${stateMachineData.name || 'state-machine-export'}.zip`;
 
-                                // Trigger download
                                 document.body.appendChild(link);
                                 link.click();
                                 document.body.removeChild(link);
 
-                                // Clean up
                                 URL.revokeObjectURL(link.href);
 
                                 resolve();
@@ -184,34 +196,56 @@ angular.module('virtoCommerce.stateMachineModule')
                 });
             }
 
-            function _importStateMachineDefinition(stateMachineDefinition, localizations) {
+            function _importStateMachineDefinition(stateMachineDefinition, localizations, attributes) {
                 return new Promise((resolve, reject) => {
                     webApi.updateStateMachineDefinition({
                         definition: stateMachineDefinition
                     }).$promise
                     .then(function (createdDefinition) {
-                        // If there are localizations and we have a definition ID, import them
+                        const importPromises = [];
+
                         if (localizations.length > 0 && createdDefinition && createdDefinition.id) {
-                            // Update localization definition IDs to match the newly created definition
                             const updatedLocalizations = localizations.map(localization => ({
                                 ...localization,
                                 definitionId: createdDefinition.id
                             }));
 
-                            // Import localizations
-                            webApi.updateStateMachineLocalization({
-                                localizations: updatedLocalizations
-                            }).$promise
-                            .then(function () {
-                                resolve(createdDefinition);
-                            })
-                            .catch(function (localizationError) {
-                                console.error('Error importing localizations:', localizationError);
-                                // Continue without localizations - the state machine itself was imported successfully
-                                resolve(createdDefinition);
-                            });
+                            importPromises.push(
+                                webApi.updateStateMachineLocalization({
+                                    localizations: updatedLocalizations
+                                }).$promise.catch(function (localizationError) {
+                                    console.error('Error importing localizations:', localizationError);
+                                    return null;
+                                })
+                            );
+                        }
+
+                        if (attributes.length > 0 && createdDefinition && createdDefinition.id) {
+                            const updatedAttributes = attributes.map(attribute => ({
+                                ...attribute,
+                                definitionId: createdDefinition.id
+                            }));
+
+                            importPromises.push(
+                                webApi.updateStateMachineAttribute({
+                                    attributes: updatedAttributes
+                                }).$promise.catch(function (attributeError) {
+                                    console.error('Error importing attributes:', attributeError);
+                                    return null;
+                                })
+                            );
+                        }
+
+                        if (importPromises.length > 0) {
+                            Promise.all(importPromises)
+                                .then(function () {
+                                    resolve(createdDefinition);
+                                })
+                                .catch(function (error) {
+                                    console.error('Error importing localizations or attributes:', error);
+                                    resolve(createdDefinition);
+                                });
                         } else {
-                            // No localizations to import
                             resolve(createdDefinition);
                         }
                     })
