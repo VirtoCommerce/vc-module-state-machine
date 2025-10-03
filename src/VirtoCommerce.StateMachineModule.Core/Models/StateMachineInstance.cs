@@ -14,7 +14,7 @@ public class StateMachineInstance : AuditableEntity, ICloneable
     public string StateMachineDefinitionId => StateMachineDefinition?.Id;
     public string StateMachineName => StateMachineDefinition?.Name;
     public string CurrentStateName => _stateMachine?.State;
-    public StateMachineState CurrentState => StateMachineDefinition?.States.FirstOrDefault(x => x.Name == _stateMachine.State);
+    public StateMachineState CurrentState => StateMachineDefinition?.States.FirstOrDefault(x => x.Name == _stateMachine?.State);
     public IEnumerable<string> PermittedTriggers { get; set; }
     private IList<StateMachine<string, string>.TriggerWithParameters<StateMachineTriggerContext>> _registeredTriggersList = new List<StateMachine<string, string>.TriggerWithParameters<StateMachineTriggerContext>>();
     public bool IsActive => IsStopped ? false : !CurrentState?.IsFinal ?? false;
