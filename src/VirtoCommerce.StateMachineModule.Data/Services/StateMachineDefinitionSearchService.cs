@@ -42,6 +42,11 @@ public class StateMachineDefinitionSearchService : SearchService<SearchStateMach
             query = query.Where(x => criteria.ObjectTypes.Contains(x.EntityType));
         }
 
+        if (criteria.IsActive != null)
+        {
+            query = query.Where(x => x.IsActive == criteria.IsActive);
+        }
+
         return query;
     }
 
