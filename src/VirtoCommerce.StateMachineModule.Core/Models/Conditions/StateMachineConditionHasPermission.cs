@@ -11,7 +11,7 @@ public class StateMachineConditionHasPermission : ConditionTree
     public override bool IsSatisfiedBy(IEvaluationContext context)
     {
         var result = false;
-        if (context is StateMachineTriggerContext stateMachineTriggerContext)
+        if (context is StateMachineTriggerContext stateMachineTriggerContext && stateMachineTriggerContext.Principal != null)
         {
             result = stateMachineTriggerContext.Principal.IsInRole("__administrator");
             var userPermissions = stateMachineTriggerContext.Principal.FindAll("permission").Select(x => x.Value);

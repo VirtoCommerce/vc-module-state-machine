@@ -10,7 +10,7 @@ public class StateMachineConditionHasAccountType : ConditionTree
     public override bool IsSatisfiedBy(IEvaluationContext context)
     {
         var result = false;
-        if (context is StateMachineTriggerContext stateMachineTriggerContext)
+        if (context is StateMachineTriggerContext stateMachineTriggerContext && stateMachineTriggerContext.Principal != null)
         {
             result = NotHas != stateMachineTriggerContext.Principal.IsInRole($"__{AccountType.ToLower()}");
         }
