@@ -27,7 +27,7 @@
   <moduleType>VirtoCommerce.StateMachineModule.Web.Module, VirtoCommerce.StateMachineModule.Web</moduleType>
 
   <releaseNotes>First version.</releaseNotes>
-  <copyright>Copyright © 2025 VirtoCommerce. All rights reserved</copyright>
+  <copyright>Copyright © 2025-2026 VirtoCommerce. All rights reserved</copyright>
   <tags>VirtoCommerce State Machine module</tags>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>
