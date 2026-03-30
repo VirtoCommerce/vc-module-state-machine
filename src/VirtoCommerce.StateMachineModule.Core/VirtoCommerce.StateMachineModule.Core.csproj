@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Project is not a test project -->
@@ -11,7 +11,7 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Stateless" Version="5.15.0" />
-    <PackageReference Include="VirtoCommerce.CoreModule.Core" Version="3.822.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.897.0" />
+    <PackageReference Include="VirtoCommerce.CoreModule.Core" Version="3.1000.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.1002.0" />
   </ItemGroup>
 </Project>
