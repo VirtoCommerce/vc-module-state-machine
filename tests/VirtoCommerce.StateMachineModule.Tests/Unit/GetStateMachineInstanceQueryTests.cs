@@ -61,6 +61,7 @@ public class GetStateMachineInstanceQueryTests
         IStateMachineInstanceService stateMachineInstanceService = new StateMachineInstanceServiceStub();
         IStateMachineLocalizationSearchService stateMachineLocalizationSearchService = new StateMachineLocalizationSearchServiceStub();
         IStateMachineAttributeSearchService stateMachineAttributeSearchService = new StateMachineAttributeSearchServiceStub();
-        return new GetStateMachineInstanceQueryHandler(stateMachineInstanceService, stateMachineLocalizationSearchService, stateMachineAttributeSearchService);
+        ITriggerContextEnrichmentService triggerContextEnrichmentService = new TriggerContextEnrichmentServiceStub();
+        return new GetStateMachineInstanceQueryHandler(stateMachineInstanceService, stateMachineLocalizationSearchService, stateMachineAttributeSearchService, triggerContextEnrichmentService);
     }
 }

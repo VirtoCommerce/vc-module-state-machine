@@ -8,6 +8,7 @@ public class FireStateMachineTriggerCommand : ICommand<StateMachineInstance>
     public string StateMachineInstanceId { get; set; }
     public string Trigger { get; set; }
     public string EntityId { get; set; }
+    public string EntityType { get; set; }
     public ClaimsPrincipal User { get; set; }
     public string Locale { get; set; }
 }

@@ -14,16 +14,19 @@ public class GetStateMachineInstanceQueryHandler : IQueryHandler<GetStateMachine
     private readonly IStateMachineInstanceService _stateMachineInstanceService;
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
     private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
+    private readonly ITriggerContextEnrichmentService _triggerContextEnrichmentService;
 
     public GetStateMachineInstanceQueryHandler(
         IStateMachineInstanceService stateMachineInstanceService,
         IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
-        IStateMachineAttributeSearchService stateMachineAttributeSearchService
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService,
+        ITriggerContextEnrichmentService triggerContextEnrichmentService
         )
     {
         _stateMachineInstanceService = stateMachineInstanceService;
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
         _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
+        _triggerContextEnrichmentService = triggerContextEnrichmentService;
     }
 
     public virtual async Task<StateMachineInstance> Handle(GetStateMachineInstanceQuery request, CancellationToken cancellationToken)
@@ -39,7 +42,9 @@ public class GetStateMachineInstanceQueryHandler : IQueryHandler<GetStateMachine
         }
 
         var result = await _stateMachineInstanceService.GetByIdAsync(request.StateMachineInstanceId);
-        result.Evaluate(new StateMachineTriggerContext { Principal = request.User });
+        var context = new StateMachineTriggerContext { EntityId = result.EntityId, EntityType = result.EntityType, Principal = request.User };
+        await _triggerContextEnrichmentService.EnrichContext(context);
+        result.Evaluate(context);
 
         if (result.StateMachineDefinition != null)
         {

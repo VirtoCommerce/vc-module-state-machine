@@ -7,4 +7,5 @@ public class StateMachineTriggerContext : EvaluationContextBase
     public StateMachineInstance StateMachineInstance { get; set; }
     public ClaimsPrincipal Principal { get; set; }
     public string EntityId { get; set; }
+    public string EntityType { get; set; }
 }

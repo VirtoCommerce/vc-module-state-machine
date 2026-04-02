@@ -23,17 +23,20 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
     private readonly Func<IStateMachineRepository> _repositoryFactory;
     private readonly IEventPublisher _eventPublisher;
     private readonly IStateMachineDefinitionService _stateMachineDefinitionService;
+    private readonly ITriggerContextEnrichmentService _triggerContextEnrichmentService;
 
     public StateMachineInstanceService(
         Func<IStateMachineRepository> repositoryFactory,
         IPlatformMemoryCache platformMemoryCache,
         IEventPublisher eventPublisher,
-        IStateMachineDefinitionService stateMachineDefinitionService)
+        IStateMachineDefinitionService stateMachineDefinitionService,
+        ITriggerContextEnrichmentService triggerContextEnrichmentService)
         : base(repositoryFactory, platformMemoryCache, eventPublisher)
     {
         _repositoryFactory = repositoryFactory;
         _eventPublisher = eventPublisher;
         _stateMachineDefinitionService = stateMachineDefinitionService;
+        _triggerContextEnrichmentService = triggerContextEnrichmentService;
     }
 
     public virtual async Task<StateMachineInstance> CreateStateMachineInstanceAsync(string stateMachineDefinitionId, string stateMachineInstanceId, IHasDynamicProperties entity, string state = null)
@@ -50,7 +53,8 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
         stateMachineInstance.EntityId = entity.Id;
         stateMachineInstance.EntityType = stateMachineDefinition.EntityType;
 
-        var context = new StateMachineTriggerContext { ContextObject = entity };
+        var context = new StateMachineTriggerContext { EntityId = stateMachineInstance.EntityId, EntityType = stateMachineInstance.EntityType, ContextObject = entity };
+        await _triggerContextEnrichmentService.EnrichContext(context);
         stateMachineInstance.Evaluate(context);
 
         if (string.IsNullOrEmpty(state))
@@ -65,6 +69,7 @@ public class StateMachineInstanceService : CrudService<StateMachineInstance, Sta
 
     public virtual async Task<StateMachineInstance> FireTriggerAsync(StateMachineInstance stateMachineInstance, string trigger, StateMachineTriggerContext context)
     {
+        await _triggerContextEnrichmentService.EnrichContext(context);
         var firedInstance = stateMachineInstance.Fire(trigger, context);
 
         var triggerEvent = ExType<StateMachineTriggerEvent>.New();

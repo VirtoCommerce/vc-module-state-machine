@@ -81,7 +81,7 @@ public class FireStateMachineTriggerCommandHandler : ICommandHandler<FireStateMa
             }
         }
 
-        var result = await _stateMachineInstanceService.FireTriggerAsync(instance, request.Trigger, new StateMachineTriggerContext { EntityId = request.EntityId, Principal = request.User });
+        var result = await _stateMachineInstanceService.FireTriggerAsync(instance, request.Trigger, new StateMachineTriggerContext { EntityId = request.EntityId, EntityType = request.EntityType, Principal = request.User });
         await _stateMachineInstanceService.SaveChangesAsync([result]);
         return result;
     }

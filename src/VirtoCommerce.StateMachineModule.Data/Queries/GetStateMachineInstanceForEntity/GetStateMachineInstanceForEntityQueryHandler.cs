@@ -13,16 +13,19 @@ public class GetStateMachineInstanceForEntityQueryHandler : IQueryHandler<GetSta
     private readonly IStateMachineInstanceService _stateMachineInstanceService;
     private readonly IStateMachineLocalizationSearchService _stateMachineLocalizationSearchService;
     private readonly IStateMachineAttributeSearchService _stateMachineAttributeSearchService;
+    private readonly ITriggerContextEnrichmentService _triggerContextEnrichmentService;
 
     public GetStateMachineInstanceForEntityQueryHandler(
         IStateMachineInstanceService stateMachineInstanceService,
         IStateMachineLocalizationSearchService stateMachineLocalizationSearchService,
-        IStateMachineAttributeSearchService stateMachineAttributeSearchService
+        IStateMachineAttributeSearchService stateMachineAttributeSearchService,
+        ITriggerContextEnrichmentService triggerContextEnrichmentService
         )
     {
         _stateMachineInstanceService = stateMachineInstanceService;
         _stateMachineLocalizationSearchService = stateMachineLocalizationSearchService;
         _stateMachineAttributeSearchService = stateMachineAttributeSearchService;
+        _triggerContextEnrichmentService = triggerContextEnrichmentService;
     }
 
     public virtual async Task<StateMachineInstance> Handle(GetStateMachineInstanceForEntityQuery request, CancellationToken cancellationToken)
@@ -62,8 +65,9 @@ public class GetStateMachineInstanceForEntityQueryHandler : IQueryHandler<GetSta
                     transition.Attributes = attributeSearchResults.Where(x => x.Item == transition.Trigger).ToList();
                 }
             }
-
-            result.Evaluate(new StateMachineTriggerContext { Principal = request.User });
+            var context = new StateMachineTriggerContext { EntityId = request.EntityId, EntityType = request.EntityType, Principal = request.User };
+            await _triggerContextEnrichmentService.EnrichContext(context);
+            result.Evaluate(context);
         }
 
         return result;
