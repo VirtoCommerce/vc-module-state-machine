@@ -20,7 +20,7 @@
   </owners>
 
   <projectUrl>https://github.com/VirtoCommerce/vc-module-state-machine</projectUrl>
-  <iconUrl>Modules/$(VirtoCommerce.StateMachine)/Content/logo.png</iconUrl>
+  <iconUrl>Modules/$(VirtoCommerce.StateMachine)/Content/logo.svg</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
   <assemblyFile>VirtoCommerce.StateMachineModule.Web.dll</assemblyFile>
