@@ -5,7 +5,7 @@
       {
         "id": "state-machines",
         "sectionId": "configuration",
-        "title": "State machines",
+        "title": "State Machines",
         "icon": "lucide-workflow",
         "route": "/state-machines",
         "permission": "statemachine:access",

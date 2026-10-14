@@ -1,11 +1,11 @@
 {
   "STATEMACHINE": {
     "MENU": {
-      "TITLE": "State machines"
+      "TITLE": "State Machines"
     },
     "PAGES": {
       "LIST": {
-        "TITLE": "State machines",
+        "TITLE": "State Machines",
         "EMPTY": "No state machines yet",
         "ACTIVE": "Active",
         "INACTIVE": "Inactive",
