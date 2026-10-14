@@ -1,0 +1,19 @@
+{
+  // State machines admin UI for the Admin Shell host (Module Federation remote).
+  // No legacy.* item to replace: the default menu has no State machines entry. Legacy priority 2 tied with
+  // Dynamic properties under Configuration, so the item goes right after it.
+  "remote": { "name": "statemachine_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "state-machines",
+        "sectionId": "configuration",
+        "title": "State machines",
+        "icon": "lucide-workflow",
+        "route": "/state-machines",
+        "permission": "statemachine:access",
+        "priority": 55
+      }
+    ]
+  }
+}
