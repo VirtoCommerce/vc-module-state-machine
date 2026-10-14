@@ -596,7 +596,11 @@ const outcomes = [
   { id: "none", label: "STATEMACHINE.PAGES.EDITOR.NEUTRAL", icon: "" },
   { id: "failed", label: "STATEMACHINE.PAGES.EDITOR.FAIL", icon: "lucide-ban" },
 ] as const;
-const outcomeOf = (s: GraphState) => (s.isSuccess ? "success" : s.isFailed ? "failed" : "none");
+function outcomeOf(s: GraphState) {
+  if (s.isSuccess) return "success";
+  if (s.isFailed) return "failed";
+  return "none";
+}
 function setOutcome(state: GraphState, outcome: (typeof outcomes)[number]["id"]) {
   state.isSuccess = outcome === "success";
   state.isFailed = outcome === "failed";

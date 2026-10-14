@@ -237,6 +237,12 @@ export function bounds(states: GraphState[], margin: number) {
 const escape = (text: string) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 const clip = (text: string, max: number) => (text.length > max ? text.slice(0, max - 1) + "…" : text);
 
+function headColor(s: GraphState) {
+  if (s.isSuccess) return "#449463";
+  if (s.isFailed) return "#ED2020";
+  return "#5983A8";
+}
+
 /**
  * The graph as an SVG image (the definition's statesCapture preview). It is an image stored with the definition, so it
  * has its own fixed light palette rather than the theme's tokens.
@@ -259,7 +265,7 @@ export function graphSvg(json?: string) {
   const nodes = graph.states
     .map((s) => {
       const { x, y } = s.position;
-      const head = s.isSuccess ? "#449463" : s.isFailed ? "#ED2020" : "#5983A8";
+      const head = headColor(s);
       return `<rect x="${x}" y="${y}" width="${STATE_WIDTH}" height="${STATE_HEIGHT}" rx="6" fill="#fff" stroke="#A3A3A3"/><path d="M ${x} ${y + 6} a 6 6 0 0 1 6 -6 h ${STATE_WIDTH - 12} a 6 6 0 0 1 6 6 v 26 h -${STATE_WIDTH} z" fill="${head}"/><text x="${x + STATE_WIDTH / 2}" y="${y + 21}" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">${escape(clip(s.name, 20))}</text><text x="${x + STATE_WIDTH / 2}" y="${y + 62}" text-anchor="middle" font-size="11" fill="#525252">${escape(clip(s.description, 24))}</text>`;
     })
     .join("");
