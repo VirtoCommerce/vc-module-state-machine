@@ -5,7 +5,6 @@
     },
     "PAGES": {
       "LIST": {
-        "TITLE": "State Machines",
         "EMPTY": "No state machines yet",
         "ACTIVE": "Active",
         "INACTIVE": "Inactive",

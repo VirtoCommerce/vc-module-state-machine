@@ -1,6 +1,6 @@
 <template>
   <VcBlade
-    :title="$t('STATEMACHINE.PAGES.LIST.TITLE')"
+    :title="$t('STATEMACHINE.MENU.TITLE')"
     :toolbar-items="bladeToolbar"
     :loading="loading"
     width="50%"
