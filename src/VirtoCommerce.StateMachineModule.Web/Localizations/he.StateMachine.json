@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "statemachine:access": "פתיחת תפריט מכונת המצבים",
+    "statemachine:create": "יצירת נתונים הקשורים למכונת המצבים",
+    "statemachine:read": "צפייה בנתונים הקשורים למכונת המצבים",
+    "statemachine:update": "עדכון נתונים הקשורים למכונת המצבים",
+    "statemachine:delete": "מחיקת נתונים הקשורים למכונת המצבים",
+    "statemachine:fire": "הפעלת מעברי מצב במכונת המצבים"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "שפות לוקליזציה",
+        "description": "יש לבחור שפות ללוקליזציה של מכונת המצבים"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "מפתחות תכונות",
+        "description": "יש לבחור מפתחות עבור תכונות מכונת המצבים"
+      }
+    }
+  }
+}
