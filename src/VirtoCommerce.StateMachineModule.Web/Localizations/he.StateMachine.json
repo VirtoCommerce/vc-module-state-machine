@@ -1,4 +1,114 @@
 {
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "מכונות מצבים"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "מכונת מצבים",
+        "commands": {
+          "new": "יצירה",
+          "import": "ייבוא"
+        },
+        "labels": {
+          "active": "פעילה",
+          "inactive": "לא פעילה",
+          "no-state-machines-yet": "אין עדיין מכונות מצבים"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "פתיחת העורך החזותי",
+          "export": "ייצוא"
+        },
+        "labels": {
+          "is-active": "פעילה",
+          "entity-type": "סוג ישות",
+          "name": "שם",
+          "states": "מצבים לאחר סריאליזציה"
+        },
+        "placeholders": {
+          "entity-type": "סוג ישות",
+          "entity-type-select": "יש לבחור סוג ישות",
+          "name": "שם מכונת המצבים",
+          "states": "מצבים לאחר סריאליזציה"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "העורך החזותי של מכונת המצבים",
+        "commands": {
+          "add-state": "הוספת מצב חדש",
+          "reset": "איפוס",
+          "delete": "מחיקה",
+          "toggle-to-visual-mode": "תצוגה חזותית",
+          "toggle-to-json-mode": "תצוגת JSON"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "תנאים",
+          "no-condition-prototype": "לא הוגדר אב-טיפוס של תנאי עבור סוג ישות זה"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "עריכת המצב",
+          "edit-attributes": "עריכת תכונות",
+          "edit-localization": "עריכת תרגומים",
+          "delete-state": "מחיקת המצב",
+          "add-new-state": "הוספת מצב חדש"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "עריכת המעבר",
+          "edit-attributes": "עריכת תכונות",
+          "edit-localization": "עריכת תרגומים",
+          "edit-condition": "עריכת התנאי",
+          "delete-transition": "מחיקת המעבר",
+          "insert-state": "הוספת מצב כאן"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "שם",
+        "description": "תיאור",
+        "ok": "אישור",
+        "save": "שמירה",
+        "cancel": "ביטול"
+      },
+      "state": {
+        "edit-title": "עריכת מצב",
+        "add-title": "הוספת מצב חדש"
+      },
+      "transition": {
+        "edit-title": "עריכת מעבר",
+        "new-title": "מעבר חדש",
+        "trigger": "טריגר",
+        "icon": "סמל",
+        "trigger-required": "יש להזין טריגר"
+      },
+      "localization": {
+        "edit-title": "עריכת תרגומים: {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "עריכת תכונות: {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "שמירת הגדרת מכונת המצבים",
+        "message": "בהגדרת מכונת המצבים יש שינויים שלא נשמרו. לשמור אותה?"
+      }
+    }
+  },
   "permissions": {
     "statemachine:access": "פתיחת תפריט מכונת המצבים",
     "statemachine:create": "יצירת נתונים הקשורים למכונת המצבים",
@@ -17,6 +127,11 @@
         "title": "מפתחות תכונות",
         "description": "יש לבחור מפתחות עבור תכונות מכונת המצבים"
       }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "ייצוא וייבוא של מכונות מצבים"
     }
   }
 }

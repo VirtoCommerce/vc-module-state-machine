@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "状态机"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "状态机",
+        "commands": {
+          "new": "新建",
+          "import": "导入"
+        },
+        "labels": {
+          "active": "活动",
+          "inactive": "非活动",
+          "no-state-machines-yet": "暂无状态机"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "打开可视化编辑器",
+          "export": "导出"
+        },
+        "labels": {
+          "is-active": "活动",
+          "entity-type": "实体类型",
+          "name": "名称",
+          "states": "序列化状态"
+        },
+        "placeholders": {
+          "entity-type": "实体类型",
+          "entity-type-select": "请选择实体类型",
+          "name": "状态机名称",
+          "states": "序列化状态"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "状态机可视化编辑器",
+        "commands": {
+          "add-state": "添加新状态",
+          "reset": "重置",
+          "delete": "删除",
+          "toggle-to-visual-mode": "可视化模式",
+          "toggle-to-json-mode": "JSON 模式"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "条件",
+          "no-condition-prototype": "未为此实体类型定义条件原型"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "编辑状态",
+          "edit-attributes": "编辑属性",
+          "edit-localization": "编辑本地化",
+          "delete-state": "删除状态",
+          "add-new-state": "添加新状态"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "编辑转换",
+          "edit-attributes": "编辑属性",
+          "edit-localization": "编辑本地化",
+          "edit-condition": "编辑条件",
+          "delete-transition": "删除转换",
+          "insert-state": "在此插入状态"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "名称",
+        "description": "描述",
+        "ok": "确定",
+        "save": "保存",
+        "cancel": "取消"
+      },
+      "state": {
+        "edit-title": "编辑状态",
+        "add-title": "添加新状态"
+      },
+      "transition": {
+        "edit-title": "编辑转换",
+        "new-title": "新建转换",
+        "trigger": "触发器",
+        "icon": "图标",
+        "trigger-required": "触发器不能为空"
+      },
+      "localization": {
+        "edit-title": "编辑 {{itemText}} 的本地化"
+      },
+      "attributes": {
+        "edit-title": "编辑 {{itemText}} 的属性"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "保存状态机定义",
+        "message": "状态机定义有未保存的更改。是否保存？"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "打开状态机菜单",
+    "statemachine:create": "创建状态机相关数据",
+    "statemachine:read": "查看状态机相关数据",
+    "statemachine:update": "更新状态机相关数据",
+    "statemachine:delete": "删除状态机相关数据",
+    "statemachine:fire": "触发状态机的状态转换"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "本地化语言",
+        "description": "选择状态机本地化所用的语言"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "属性键",
+        "description": "选择状态机属性所用的键"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "状态机导出/导入"
+    }
+  }
+}

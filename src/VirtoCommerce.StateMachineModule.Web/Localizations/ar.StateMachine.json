@@ -1,4 +1,114 @@
 {
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "آلات الحالة"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "آلة الحالة",
+        "commands": {
+          "new": "جديد",
+          "import": "استيراد"
+        },
+        "labels": {
+          "active": "نشطة",
+          "inactive": "غير نشطة",
+          "no-state-machines-yet": "لا توجد آلات حالة بعد"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "فتح المحرر المرئي",
+          "export": "تصدير"
+        },
+        "labels": {
+          "is-active": "نشطة",
+          "entity-type": "نوع الكيان",
+          "name": "الاسم",
+          "states": "الحالات المسلسلة"
+        },
+        "placeholders": {
+          "entity-type": "نوع الكيان",
+          "entity-type-select": "اختر نوع الكيان",
+          "name": "اسم آلة الحالة",
+          "states": "الحالات المسلسلة"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "المحرر المرئي لآلة الحالة",
+        "commands": {
+          "add-state": "إضافة حالة جديدة",
+          "reset": "إعادة تعيين",
+          "delete": "حذف",
+          "toggle-to-visual-mode": "الوضع المرئي",
+          "toggle-to-json-mode": "وضع JSON"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "الشروط",
+          "no-condition-prototype": "لا يوجد نموذج شرط معرّف لنوع الكيان هذا"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "تحرير الحالة",
+          "edit-attributes": "تحرير السمات",
+          "edit-localization": "تحرير الترجمة",
+          "delete-state": "حذف الحالة",
+          "add-new-state": "إضافة حالة جديدة"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "تحرير الانتقال",
+          "edit-attributes": "تحرير السمات",
+          "edit-localization": "تحرير الترجمة",
+          "edit-condition": "تحرير الشرط",
+          "delete-transition": "حذف الانتقال",
+          "insert-state": "إدراج حالة هنا"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "الاسم",
+        "description": "الوصف",
+        "ok": "موافق",
+        "save": "حفظ",
+        "cancel": "إلغاء"
+      },
+      "state": {
+        "edit-title": "تحرير الحالة",
+        "add-title": "إضافة حالة جديدة"
+      },
+      "transition": {
+        "edit-title": "تحرير الانتقال",
+        "new-title": "انتقال جديد",
+        "trigger": "المشغّل",
+        "icon": "الأيقونة",
+        "trigger-required": "لا يمكن أن يكون المشغّل فارغًا"
+      },
+      "localization": {
+        "edit-title": "تحرير الترجمة: {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "تحرير السمات: {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "حفظ تعريف آلة الحالة",
+        "message": "يحتوي تعريف آلة الحالة على تغييرات غير محفوظة. هل تريد حفظه؟"
+      }
+    }
+  },
   "permissions": {
     "statemachine:access": "فتح قائمة آلات الحالة",
     "statemachine:create": "إنشاء البيانات المتعلقة بآلات الحالة",
@@ -17,6 +127,11 @@
         "title": "مفاتيح السمات",
         "description": "تحديد مفاتيح سمات آلة الحالة"
       }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "تصدير آلات الحالة واستيرادها"
     }
   }
 }
