@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Macchine a stati"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Nessuna macchina a stati",
+        "ACTIVE": "Attiva",
+        "INACTIVE": "Inattiva",
+        "COLUMNS": {
+          "NAME": "Nome",
+          "ENTITY_TYPE": "Tipo di entità",
+          "STATUS": "Stato",
+          "MODIFIED": "Modificato"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Aggiorna",
+          "NEW": "Nuovo",
+          "IMPORT": "Importa"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Nuova macchina a stati",
+        "FIELDS": {
+          "NAME": "Nome",
+          "NAME_PLACEHOLDER": "Nome della macchina a stati",
+          "ENTITY_TYPE": "Tipo di entità",
+          "ENTITY_TYPE_PLACEHOLDER": "Nome completo del tipo di entità",
+          "ENTITY_TYPE_HINT": "ad es. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Attiva",
+          "STATES": "Stati",
+          "NO_STATES": "Nessuno stato: aprire l'editor visivo per aggiungerli"
+        },
+        "OPEN_EDITOR": "Apri editor visivo",
+        "TOOLBAR": {
+          "SAVE": "Salva",
+          "RESET": "Ripristina",
+          "EXPORT": "Esporta"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Editor visivo della macchina a stati",
+        "NO_DESCRIPTION": "(Nessuna descrizione)",
+        "SUCCESS": "Successo",
+        "FAIL": "Fallimento",
+        "NEUTRAL": "Nessuno dei due",
+        "INVALID_JSON": "JSON non valido: la modalità visiva mantiene gli ultimi stati validi",
+        "TOOLBAR": {
+          "ADD_STATE": "Aggiungi nuovo stato",
+          "VISUAL_MODE": "Modalità visiva",
+          "JSON_MODE": "Modalità JSON"
+        },
+        "STATE_MENU": {
+          "EDIT": "Modifica stato",
+          "ATTRIBUTES": "Modifica attributi",
+          "LOCALIZATION": "Modifica localizzazione",
+          "DELETE": "Elimina stato",
+          "ADD_NEW": "Aggiungi nuovo stato"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Modifica transizione",
+          "ATTRIBUTES": "Modifica attributi",
+          "LOCALIZATION": "Modifica localizzazione",
+          "DELETE": "Elimina transizione",
+          "INSERT_STATE": "Inserisci stato qui"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Nome",
+      "DESCRIPTION": "Descrizione",
+      "OK": "OK",
+      "CANCEL": "Annulla",
+      "STATE_EDIT": "Modifica stato",
+      "STATE_ADD": "Aggiungi nuovo stato",
+      "STATE_EXISTS": "Esiste già uno stato con questo nome",
+      "TRANSITION_EDIT": "Modifica transizione",
+      "TRANSITION_NEW": "Nuova transizione",
+      "TRIGGER": "Trigger",
+      "LOCALIZATION": "Modifica localizzazione di {item}",
+      "ATTRIBUTES": "Modifica attributi di {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Macchina a stati salvata",
+      "IMPORTED": "Macchina a stati importata",
+      "IMPORT_FAILED": "Importazione non riuscita: {error}",
+      "DEACTIVATE_OTHER": "Tutte le altre macchine a stati dello stesso tipo verranno disattivate. Continuare?",
+      "CLOSE_CONFIRMATION": "La definizione della macchina a stati contiene modifiche non salvate. Chiudere comunque?"
+    }
+  }
+}
