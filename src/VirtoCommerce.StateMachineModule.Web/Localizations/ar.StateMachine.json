@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "statemachine:access": "فتح قائمة آلات الحالة",
+    "statemachine:create": "إنشاء البيانات المتعلقة بآلات الحالة",
+    "statemachine:read": "عرض البيانات المتعلقة بآلات الحالة",
+    "statemachine:update": "تحديث البيانات المتعلقة بآلات الحالة",
+    "statemachine:delete": "حذف البيانات المتعلقة بآلات الحالة",
+    "statemachine:fire": "تنفيذ انتقالات الحالة في آلة الحالة"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "لغات الترجمة",
+        "description": "تحديد لغات ترجمة آلة الحالة"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "مفاتيح السمات",
+        "description": "تحديد مفاتيح سمات آلة الحالة"
+      }
+    }
+  }
+}
