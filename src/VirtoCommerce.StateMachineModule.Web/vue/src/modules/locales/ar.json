@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "آلات الحالة"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "لا توجد آلات حالة بعد",
+        "ACTIVE": "نشطة",
+        "INACTIVE": "غير نشطة",
+        "COLUMNS": {
+          "NAME": "الاسم",
+          "ENTITY_TYPE": "نوع الكيان",
+          "STATUS": "الحالة",
+          "MODIFIED": "تاريخ التعديل"
+        },
+        "TOOLBAR": {
+          "REFRESH": "تحديث",
+          "NEW": "جديد",
+          "IMPORT": "استيراد"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "آلة حالة جديدة",
+        "FIELDS": {
+          "NAME": "الاسم",
+          "NAME_PLACEHOLDER": "اسم آلة الحالة",
+          "ENTITY_TYPE": "نوع الكيان",
+          "ENTITY_TYPE_PLACEHOLDER": "الاسم الكامل لنوع الكيان",
+          "ENTITY_TYPE_HINT": "مثل VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "نشطة",
+          "STATES": "الحالات",
+          "NO_STATES": "لا توجد حالات بعد: افتح المحرر المرئي لإضافتها"
+        },
+        "OPEN_EDITOR": "فتح المحرر المرئي",
+        "TOOLBAR": {
+          "SAVE": "حفظ",
+          "RESET": "إعادة تعيين",
+          "EXPORT": "تصدير"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "المحرر المرئي لآلة الحالة",
+        "NO_DESCRIPTION": "(بدون وصف)",
+        "SUCCESS": "نجاح",
+        "FAIL": "فشل",
+        "NEUTRAL": "لا هذا ولا ذاك",
+        "INVALID_JSON": "JSON غير صالح: يحتفظ الوضع المرئي بآخر حالات صالحة",
+        "TOOLBAR": {
+          "ADD_STATE": "إضافة حالة جديدة",
+          "VISUAL_MODE": "الوضع المرئي",
+          "JSON_MODE": "وضع JSON"
+        },
+        "STATE_MENU": {
+          "EDIT": "تحرير الحالة",
+          "ATTRIBUTES": "تحرير السمات",
+          "LOCALIZATION": "تحرير الترجمة",
+          "DELETE": "حذف الحالة",
+          "ADD_NEW": "إضافة حالة جديدة"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "تحرير الانتقال",
+          "ATTRIBUTES": "تحرير السمات",
+          "LOCALIZATION": "تحرير الترجمة",
+          "DELETE": "حذف الانتقال",
+          "INSERT_STATE": "إدراج حالة هنا"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "الاسم",
+      "DESCRIPTION": "الوصف",
+      "OK": "موافق",
+      "CANCEL": "إلغاء",
+      "STATE_EDIT": "تحرير الحالة",
+      "STATE_ADD": "إضافة حالة جديدة",
+      "STATE_EXISTS": "توجد حالة بهذا الاسم بالفعل",
+      "TRANSITION_EDIT": "تحرير الانتقال",
+      "TRANSITION_NEW": "انتقال جديد",
+      "TRIGGER": "المشغّل",
+      "LOCALIZATION": "تحرير الترجمة: {item}",
+      "ATTRIBUTES": "تحرير السمات: {item}"
+    },
+    "ALERTS": {
+      "SAVED": "تم حفظ آلة الحالة",
+      "IMPORTED": "تم استيراد آلة الحالة",
+      "IMPORT_FAILED": "فشل الاستيراد: {error}",
+      "DEACTIVATE_OTHER": "سيتم تعطيل كل آلات الحالة الأخرى من النوع نفسه. هل تريد المتابعة؟",
+      "CLOSE_CONFIRMATION": "يحتوي تعريف آلة الحالة على تغييرات غير محفوظة. هل تريد الإغلاق على أي حال؟"
+    }
+  }
+}
