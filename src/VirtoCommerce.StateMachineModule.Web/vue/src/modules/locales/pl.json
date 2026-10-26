@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Maszyny stanów"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Brak maszyn stanów",
+        "ACTIVE": "Aktywna",
+        "INACTIVE": "Nieaktywna",
+        "COLUMNS": {
+          "NAME": "Nazwa",
+          "ENTITY_TYPE": "Typ encji",
+          "STATUS": "Status",
+          "MODIFIED": "Zmodyfikowano"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Odśwież",
+          "NEW": "Nowa",
+          "IMPORT": "Importuj"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Nowa maszyna stanów",
+        "FIELDS": {
+          "NAME": "Nazwa",
+          "NAME_PLACEHOLDER": "Nazwa maszyny stanów",
+          "ENTITY_TYPE": "Typ encji",
+          "ENTITY_TYPE_PLACEHOLDER": "Pełna nazwa typu encji",
+          "ENTITY_TYPE_HINT": "np. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Aktywna",
+          "STATES": "Stany",
+          "NO_STATES": "Brak stanów: otwórz edytor wizualny, aby je dodać"
+        },
+        "OPEN_EDITOR": "Otwórz edytor wizualny",
+        "TOOLBAR": {
+          "SAVE": "Zapisz",
+          "RESET": "Resetuj",
+          "EXPORT": "Eksportuj"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Edytor wizualny maszyny stanów",
+        "NO_DESCRIPTION": "(Brak opisu)",
+        "SUCCESS": "Sukces",
+        "FAIL": "Niepowodzenie",
+        "NEUTRAL": "Żadne z nich",
+        "INVALID_JSON": "Nieprawidłowy JSON: tryb wizualny zachowuje ostatnie prawidłowe stany",
+        "TOOLBAR": {
+          "ADD_STATE": "Dodaj nowy stan",
+          "VISUAL_MODE": "Tryb wizualny",
+          "JSON_MODE": "Tryb JSON"
+        },
+        "STATE_MENU": {
+          "EDIT": "Edytuj stan",
+          "ATTRIBUTES": "Edytuj atrybuty",
+          "LOCALIZATION": "Edytuj lokalizację",
+          "DELETE": "Usuń stan",
+          "ADD_NEW": "Dodaj nowy stan"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Edytuj przejście",
+          "ATTRIBUTES": "Edytuj atrybuty",
+          "LOCALIZATION": "Edytuj lokalizację",
+          "DELETE": "Usuń przejście",
+          "INSERT_STATE": "Wstaw stan tutaj"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Nazwa",
+      "DESCRIPTION": "Opis",
+      "OK": "OK",
+      "CANCEL": "Anuluj",
+      "STATE_EDIT": "Edytuj stan",
+      "STATE_ADD": "Dodaj nowy stan",
+      "STATE_EXISTS": "Stan o tej nazwie już istnieje",
+      "TRANSITION_EDIT": "Edytuj przejście",
+      "TRANSITION_NEW": "Nowe przejście",
+      "TRIGGER": "Wyzwalacz",
+      "LOCALIZATION": "Edytuj lokalizację: {item}",
+      "ATTRIBUTES": "Edytuj atrybuty: {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Zapisano maszynę stanów",
+      "IMPORTED": "Zaimportowano maszynę stanów",
+      "IMPORT_FAILED": "Import nie powiódł się: {error}",
+      "DEACTIVATE_OTHER": "Wszystkie pozostałe maszyny stanów tego samego typu zostaną wyłączone. Kontynuować?",
+      "CLOSE_CONFIRMATION": "Definicja maszyny stanów zawiera niezapisane zmiany. Zamknąć mimo to?"
+    }
+  }
+}

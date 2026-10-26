@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Tilakoneet"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Tilakone",
+        "commands": {
+          "new": "Uusi",
+          "import": "Tuo"
+        },
+        "labels": {
+          "active": "Aktiivinen",
+          "inactive": "Ei aktiivinen",
+          "no-state-machines-yet": "Ei vielä tilakoneita"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Avaa visuaalinen editori",
+          "export": "Vie"
+        },
+        "labels": {
+          "is-active": "Aktiivinen",
+          "entity-type": "Entiteetin tyyppi",
+          "name": "Nimi",
+          "states": "Serialisoidut tilat"
+        },
+        "placeholders": {
+          "entity-type": "Entiteetin tyyppi",
+          "entity-type-select": "Valitse entiteetin tyyppi",
+          "name": "Tilakoneen nimi",
+          "states": "Serialisoidut tilat"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Tilakoneen visuaalinen editori",
+        "commands": {
+          "add-state": "Lisää uusi tila",
+          "reset": "Palauta",
+          "delete": "Poista",
+          "toggle-to-visual-mode": "Visuaalinen näkymä",
+          "toggle-to-json-mode": "JSON-näkymä"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Ehdot",
+          "no-condition-prototype": "Tälle entiteetin tyypille ei ole määritetty ehtoprototyyppiä"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Muokkaa tilaa",
+          "edit-attributes": "Muokkaa määritteitä",
+          "edit-localization": "Muokkaa lokalisointia",
+          "delete-state": "Poista tila",
+          "add-new-state": "Lisää uusi tila"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Muokkaa siirtymää",
+          "edit-attributes": "Muokkaa määritteitä",
+          "edit-localization": "Muokkaa lokalisointia",
+          "edit-condition": "Muokkaa ehtoa",
+          "delete-transition": "Poista siirtymä",
+          "insert-state": "Lisää tila tähän"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Nimi",
+        "description": "Kuvaus",
+        "ok": "OK",
+        "save": "Tallenna",
+        "cancel": "Peruuta"
+      },
+      "state": {
+        "edit-title": "Muokkaa tilaa",
+        "add-title": "Lisää uusi tila"
+      },
+      "transition": {
+        "edit-title": "Muokkaa siirtymää",
+        "new-title": "Uusi siirtymä",
+        "trigger": "Laukaisin",
+        "icon": "Kuvake",
+        "trigger-required": "Laukaisin ei voi olla tyhjä"
+      },
+      "localization": {
+        "edit-title": "Muokkaa lokalisointia: {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Muokkaa määritteitä: {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Tallenna tilakoneen määritys",
+        "message": "Tilakoneen määrityksessä on tallentamattomia muutoksia. Tallennetaanko se?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Avaa tilakonevalikko",
+    "statemachine:create": "Luo tilakoneisiin liittyviä tietoja",
+    "statemachine:read": "Näytä tilakoneisiin liittyvät tiedot",
+    "statemachine:update": "Päivitä tilakoneisiin liittyviä tietoja",
+    "statemachine:delete": "Poista tilakoneisiin liittyviä tietoja",
+    "statemachine:fire": "Suorita tilakoneiden tilasiirtymiä"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Lokalisointikielet",
+        "description": "Valitse tilakoneiden lokalisoinnin kielet"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Määriteavaimet",
+        "description": "Valitse tilakoneiden määritteiden avaimet"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Tilakoneiden vienti/tuonti"
+    }
+  }
+}
