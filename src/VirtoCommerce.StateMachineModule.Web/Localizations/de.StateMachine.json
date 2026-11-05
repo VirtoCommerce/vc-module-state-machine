@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Zustandsautomaten"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Zustandsautomat",
+        "commands": {
+          "new": "Neu",
+          "import": "Importieren"
+        },
+        "labels": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "no-state-machines-yet": "Noch keine Zustandsautomaten"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Visuellen Editor öffnen",
+          "export": "Exportieren"
+        },
+        "labels": {
+          "is-active": "Aktiv",
+          "entity-type": "Entitätstyp",
+          "name": "Name",
+          "states": "Serialisierte Zustände"
+        },
+        "placeholders": {
+          "entity-type": "Entitätstyp",
+          "entity-type-select": "Bitte Entitätstyp auswählen",
+          "name": "Name des Zustandsautomaten",
+          "states": "Serialisierte Zustände"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Visueller Editor für Zustandsautomaten",
+        "commands": {
+          "add-state": "Neuen Zustand hinzufügen",
+          "reset": "Zurücksetzen",
+          "delete": "Löschen",
+          "toggle-to-visual-mode": "Visueller Modus",
+          "toggle-to-json-mode": "JSON-Modus"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Bedingungen",
+          "no-condition-prototype": "Für diesen Entitätstyp ist kein Bedingungsprototyp definiert"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Zustand bearbeiten",
+          "edit-attributes": "Attribute bearbeiten",
+          "edit-localization": "Lokalisierung bearbeiten",
+          "delete-state": "Zustand löschen",
+          "add-new-state": "Neuen Zustand hinzufügen"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Übergang bearbeiten",
+          "edit-attributes": "Attribute bearbeiten",
+          "edit-localization": "Lokalisierung bearbeiten",
+          "edit-condition": "Bedingung bearbeiten",
+          "delete-transition": "Übergang löschen",
+          "insert-state": "Zustand hier einfügen"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Name",
+        "description": "Beschreibung",
+        "ok": "OK",
+        "save": "Speichern",
+        "cancel": "Abbrechen"
+      },
+      "state": {
+        "edit-title": "Zustand bearbeiten",
+        "add-title": "Neuen Zustand hinzufügen"
+      },
+      "transition": {
+        "edit-title": "Übergang bearbeiten",
+        "new-title": "Neuer Übergang",
+        "trigger": "Auslöser",
+        "icon": "Symbol",
+        "trigger-required": "Der Auslöser darf nicht leer sein"
+      },
+      "localization": {
+        "edit-title": "Lokalisierung von {{itemText}} bearbeiten"
+      },
+      "attributes": {
+        "edit-title": "Attribute von {{itemText}} bearbeiten"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Definition des Zustandsautomaten speichern",
+        "message": "Die Definition des Zustandsautomaten enthält nicht gespeicherte Änderungen. Möchten Sie sie speichern?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Zustandsautomaten-Menü öffnen",
+    "statemachine:create": "Daten zu Zustandsautomaten erstellen",
+    "statemachine:read": "Daten zu Zustandsautomaten anzeigen",
+    "statemachine:update": "Daten zu Zustandsautomaten aktualisieren",
+    "statemachine:delete": "Daten zu Zustandsautomaten löschen",
+    "statemachine:fire": "Zustandsübergänge von Zustandsautomaten auslösen"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Lokalisierungssprachen",
+        "description": "Sprachen für die Lokalisierung von Zustandsautomaten auswählen"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Attributschlüssel",
+        "description": "Schlüssel für Attribute von Zustandsautomaten auswählen"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Export/Import von Zustandsautomaten"
+    }
+  }
+}

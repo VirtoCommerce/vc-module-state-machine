@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "State Machines"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "No state machines yet",
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "COLUMNS": {
+          "NAME": "Name",
+          "ENTITY_TYPE": "Entity type",
+          "STATUS": "Status",
+          "MODIFIED": "Modified"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Refresh",
+          "NEW": "New",
+          "IMPORT": "Import"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "New state machine",
+        "FIELDS": {
+          "NAME": "Name",
+          "NAME_PLACEHOLDER": "State machine name",
+          "ENTITY_TYPE": "Entity type",
+          "ENTITY_TYPE_PLACEHOLDER": "Full type name of the entity",
+          "ENTITY_TYPE_HINT": "e.g. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Active",
+          "STATES": "States",
+          "NO_STATES": "No states yet: open the visual editor to add them"
+        },
+        "OPEN_EDITOR": "Open Visual Editor",
+        "TOOLBAR": {
+          "SAVE": "Save",
+          "RESET": "Reset",
+          "EXPORT": "Export"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "State machine Visual Editor",
+        "NO_DESCRIPTION": "(No description)",
+        "SUCCESS": "Success",
+        "FAIL": "Fail",
+        "NEUTRAL": "Neither",
+        "INVALID_JSON": "Not valid JSON: the visual mode keeps the last valid states",
+        "TOOLBAR": {
+          "ADD_STATE": "Add new state",
+          "VISUAL_MODE": "Visual mode",
+          "JSON_MODE": "JSON mode"
+        },
+        "STATE_MENU": {
+          "EDIT": "Edit state",
+          "ATTRIBUTES": "Edit attributes",
+          "LOCALIZATION": "Edit localization",
+          "DELETE": "Delete state",
+          "ADD_NEW": "Add new State"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Edit transition",
+          "ATTRIBUTES": "Edit attributes",
+          "LOCALIZATION": "Edit localization",
+          "DELETE": "Delete transition",
+          "INSERT_STATE": "Insert state here"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Name",
+      "DESCRIPTION": "Description",
+      "OK": "OK",
+      "CANCEL": "Cancel",
+      "STATE_EDIT": "Edit State",
+      "STATE_ADD": "Add New State",
+      "STATE_EXISTS": "A state with this name already exists",
+      "TRANSITION_EDIT": "Edit Transition",
+      "TRANSITION_NEW": "New Transition",
+      "TRIGGER": "Trigger",
+      "LOCALIZATION": "Edit localization {item}",
+      "ATTRIBUTES": "Edit attributes {item}"
+    },
+    "ALERTS": {
+      "SAVED": "State machine saved",
+      "IMPORTED": "State machine imported",
+      "IMPORT_FAILED": "Import failed: {error}",
+      "DEACTIVATE_OTHER": "All other state machines of the same type will be disabled. Continue?",
+      "CLOSE_CONFIRMATION": "The state machine definition has unsaved changes. Close anyway?"
+    }
+  }
+}

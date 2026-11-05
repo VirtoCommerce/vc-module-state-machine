@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Macchine a stati"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Macchina a stati",
+        "commands": {
+          "new": "Nuovo",
+          "import": "Importa"
+        },
+        "labels": {
+          "active": "Attiva",
+          "inactive": "Inattiva",
+          "no-state-machines-yet": "Nessuna macchina a stati"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Apri editor visivo",
+          "export": "Esporta"
+        },
+        "labels": {
+          "is-active": "Attiva",
+          "entity-type": "Tipo di entità",
+          "name": "Nome",
+          "states": "Stati serializzati"
+        },
+        "placeholders": {
+          "entity-type": "Tipo di entità",
+          "entity-type-select": "Selezionare il tipo di entità",
+          "name": "Nome della macchina a stati",
+          "states": "Stati serializzati"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Editor visivo della macchina a stati",
+        "commands": {
+          "add-state": "Aggiungi nuovo stato",
+          "reset": "Ripristina",
+          "delete": "Elimina",
+          "toggle-to-visual-mode": "Modalità visiva",
+          "toggle-to-json-mode": "Modalità JSON"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Condizioni",
+          "no-condition-prototype": "Nessun prototipo di condizione definito per questo tipo di entità"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Modifica stato",
+          "edit-attributes": "Modifica attributi",
+          "edit-localization": "Modifica localizzazione",
+          "delete-state": "Elimina stato",
+          "add-new-state": "Aggiungi nuovo stato"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Modifica transizione",
+          "edit-attributes": "Modifica attributi",
+          "edit-localization": "Modifica localizzazione",
+          "edit-condition": "Modifica condizione",
+          "delete-transition": "Elimina transizione",
+          "insert-state": "Inserisci stato qui"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Nome",
+        "description": "Descrizione",
+        "ok": "OK",
+        "save": "Salva",
+        "cancel": "Annulla"
+      },
+      "state": {
+        "edit-title": "Modifica stato",
+        "add-title": "Aggiungi nuovo stato"
+      },
+      "transition": {
+        "edit-title": "Modifica transizione",
+        "new-title": "Nuova transizione",
+        "trigger": "Trigger",
+        "icon": "Icona",
+        "trigger-required": "Il trigger non può essere vuoto"
+      },
+      "localization": {
+        "edit-title": "Modifica localizzazione di {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Modifica attributi di {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Salva definizione della macchina a stati",
+        "message": "La definizione della macchina a stati contiene modifiche non salvate. Salvarla?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Apri menu macchine a stati",
+    "statemachine:create": "Crea dati relativi alle macchine a stati",
+    "statemachine:read": "Visualizza dati relativi alle macchine a stati",
+    "statemachine:update": "Aggiorna dati relativi alle macchine a stati",
+    "statemachine:delete": "Elimina dati relativi alle macchine a stati",
+    "statemachine:fire": "Esegui transizioni di stato delle macchine a stati"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Lingue di localizzazione",
+        "description": "Selezionare le lingue per la localizzazione delle macchine a stati"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Chiavi degli attributi",
+        "description": "Selezionare le chiavi per gli attributi delle macchine a stati"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Esportazione/importazione di macchine a stati"
+    }
+  }
+}

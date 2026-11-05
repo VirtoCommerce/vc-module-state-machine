@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Tillståndsmaskiner"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Inga tillståndsmaskiner ännu",
+        "ACTIVE": "Aktiv",
+        "INACTIVE": "Inaktiv",
+        "COLUMNS": {
+          "NAME": "Namn",
+          "ENTITY_TYPE": "Entitetstyp",
+          "STATUS": "Status",
+          "MODIFIED": "Ändrad"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Uppdatera",
+          "NEW": "Ny",
+          "IMPORT": "Importera"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Ny tillståndsmaskin",
+        "FIELDS": {
+          "NAME": "Namn",
+          "NAME_PLACEHOLDER": "Tillståndsmaskinens namn",
+          "ENTITY_TYPE": "Entitetstyp",
+          "ENTITY_TYPE_PLACEHOLDER": "Fullständigt typnamn för entiteten",
+          "ENTITY_TYPE_HINT": "t.ex. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Aktiv",
+          "STATES": "Tillstånd",
+          "NO_STATES": "Inga tillstånd ännu: öppna den visuella redigeraren för att lägga till dem"
+        },
+        "OPEN_EDITOR": "Öppna visuell redigerare",
+        "TOOLBAR": {
+          "SAVE": "Spara",
+          "RESET": "Återställ",
+          "EXPORT": "Exportera"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Visuell redigerare för tillståndsmaskin",
+        "NO_DESCRIPTION": "(Ingen beskrivning)",
+        "SUCCESS": "Lyckat",
+        "FAIL": "Misslyckat",
+        "NEUTRAL": "Ingetdera",
+        "INVALID_JSON": "Ogiltig JSON: visuellt läge behåller de senaste giltiga tillstånden",
+        "TOOLBAR": {
+          "ADD_STATE": "Lägg till nytt tillstånd",
+          "VISUAL_MODE": "Visuellt läge",
+          "JSON_MODE": "JSON-läge"
+        },
+        "STATE_MENU": {
+          "EDIT": "Redigera tillstånd",
+          "ATTRIBUTES": "Redigera attribut",
+          "LOCALIZATION": "Redigera lokalisering",
+          "DELETE": "Ta bort tillstånd",
+          "ADD_NEW": "Lägg till nytt tillstånd"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Redigera övergång",
+          "ATTRIBUTES": "Redigera attribut",
+          "LOCALIZATION": "Redigera lokalisering",
+          "DELETE": "Ta bort övergång",
+          "INSERT_STATE": "Infoga tillstånd här"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Namn",
+      "DESCRIPTION": "Beskrivning",
+      "OK": "OK",
+      "CANCEL": "Avbryt",
+      "STATE_EDIT": "Redigera tillstånd",
+      "STATE_ADD": "Lägg till nytt tillstånd",
+      "STATE_EXISTS": "Det finns redan ett tillstånd med det här namnet",
+      "TRANSITION_EDIT": "Redigera övergång",
+      "TRANSITION_NEW": "Ny övergång",
+      "TRIGGER": "Utlösare",
+      "LOCALIZATION": "Redigera lokalisering för {item}",
+      "ATTRIBUTES": "Redigera attribut för {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Tillståndsmaskinen har sparats",
+      "IMPORTED": "Tillståndsmaskinen har importerats",
+      "IMPORT_FAILED": "Importen misslyckades: {error}",
+      "DEACTIVATE_OTHER": "Alla andra tillståndsmaskiner av samma typ inaktiveras. Fortsätta?",
+      "CLOSE_CONFIRMATION": "Tillståndsmaskinens definition har osparade ändringar. Stäng ändå?"
+    }
+  }
+}

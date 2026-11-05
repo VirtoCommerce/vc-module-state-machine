@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Máquinas de estados"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Aún no hay máquinas de estados",
+        "ACTIVE": "Activa",
+        "INACTIVE": "Inactiva",
+        "COLUMNS": {
+          "NAME": "Nombre",
+          "ENTITY_TYPE": "Tipo de entidad",
+          "STATUS": "Estado",
+          "MODIFIED": "Modificado"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Actualizar",
+          "NEW": "Nueva",
+          "IMPORT": "Importar"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Nueva máquina de estados",
+        "FIELDS": {
+          "NAME": "Nombre",
+          "NAME_PLACEHOLDER": "Nombre de la máquina de estados",
+          "ENTITY_TYPE": "Tipo de entidad",
+          "ENTITY_TYPE_PLACEHOLDER": "Nombre completo del tipo de la entidad",
+          "ENTITY_TYPE_HINT": "p. ej., VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Activa",
+          "STATES": "Estados",
+          "NO_STATES": "Aún no hay estados: abra el editor visual para agregarlos"
+        },
+        "OPEN_EDITOR": "Abrir editor visual",
+        "TOOLBAR": {
+          "SAVE": "Guardar",
+          "RESET": "Restablecer",
+          "EXPORT": "Exportar"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Editor visual de máquina de estados",
+        "NO_DESCRIPTION": "(Sin descripción)",
+        "SUCCESS": "Éxito",
+        "FAIL": "Fallo",
+        "NEUTRAL": "Ninguno",
+        "INVALID_JSON": "JSON no válido: el modo visual conserva los últimos estados válidos",
+        "TOOLBAR": {
+          "ADD_STATE": "Agregar nuevo estado",
+          "VISUAL_MODE": "Modo visual",
+          "JSON_MODE": "Modo JSON"
+        },
+        "STATE_MENU": {
+          "EDIT": "Editar estado",
+          "ATTRIBUTES": "Editar atributos",
+          "LOCALIZATION": "Editar localización",
+          "DELETE": "Eliminar estado",
+          "ADD_NEW": "Agregar nuevo estado"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Editar transición",
+          "ATTRIBUTES": "Editar atributos",
+          "LOCALIZATION": "Editar localización",
+          "DELETE": "Eliminar transición",
+          "INSERT_STATE": "Insertar estado aquí"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "OK": "Aceptar",
+      "CANCEL": "Cancelar",
+      "STATE_EDIT": "Editar estado",
+      "STATE_ADD": "Agregar nuevo estado",
+      "STATE_EXISTS": "Ya existe un estado con este nombre",
+      "TRANSITION_EDIT": "Editar transición",
+      "TRANSITION_NEW": "Nueva transición",
+      "TRIGGER": "Disparador",
+      "LOCALIZATION": "Editar localización de {item}",
+      "ATTRIBUTES": "Editar atributos de {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Máquina de estados guardada",
+      "IMPORTED": "Máquina de estados importada",
+      "IMPORT_FAILED": "Error de importación: {error}",
+      "DEACTIVATE_OTHER": "Se desactivarán todas las demás máquinas de estados del mismo tipo. ¿Continuar?",
+      "CLOSE_CONFIRMATION": "La definición de la máquina de estados tiene cambios sin guardar. ¿Cerrar de todos modos?"
+    }
+  }
+}

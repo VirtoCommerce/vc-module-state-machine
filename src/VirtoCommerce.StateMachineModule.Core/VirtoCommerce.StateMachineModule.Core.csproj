@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.402" PrivateAssets="All" />
     <PackageReference Include="Stateless" Version="5.15.0" />
     <PackageReference Include="VirtoCommerce.CoreModule.Core" Version="3.1000.0" />
     <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.1007.10" />

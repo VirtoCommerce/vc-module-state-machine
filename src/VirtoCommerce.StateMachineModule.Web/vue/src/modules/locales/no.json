@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Tilstandsmaskiner"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Ingen tilstandsmaskiner ennå",
+        "ACTIVE": "Aktiv",
+        "INACTIVE": "Inaktiv",
+        "COLUMNS": {
+          "NAME": "Navn",
+          "ENTITY_TYPE": "Enhetstype",
+          "STATUS": "Status",
+          "MODIFIED": "Endret"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Oppdater",
+          "NEW": "Ny",
+          "IMPORT": "Importer"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Ny tilstandsmaskin",
+        "FIELDS": {
+          "NAME": "Navn",
+          "NAME_PLACEHOLDER": "Navn på tilstandsmaskin",
+          "ENTITY_TYPE": "Enhetstype",
+          "ENTITY_TYPE_PLACEHOLDER": "Fullt typenavn for enheten",
+          "ENTITY_TYPE_HINT": "f.eks. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Aktiv",
+          "STATES": "Tilstander",
+          "NO_STATES": "Ingen tilstander ennå: åpne det visuelle redigeringsprogrammet for å legge dem til"
+        },
+        "OPEN_EDITOR": "Åpne visuelt redigeringsprogram",
+        "TOOLBAR": {
+          "SAVE": "Lagre",
+          "RESET": "Tilbakestill",
+          "EXPORT": "Eksporter"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Visuelt redigeringsprogram for tilstandsmaskin",
+        "NO_DESCRIPTION": "(Ingen beskrivelse)",
+        "SUCCESS": "Vellykket",
+        "FAIL": "Mislykket",
+        "NEUTRAL": "Ingen av delene",
+        "INVALID_JSON": "Ugyldig JSON: visuell modus beholder de siste gyldige tilstandene",
+        "TOOLBAR": {
+          "ADD_STATE": "Legg til ny tilstand",
+          "VISUAL_MODE": "Visuell modus",
+          "JSON_MODE": "JSON-modus"
+        },
+        "STATE_MENU": {
+          "EDIT": "Rediger tilstand",
+          "ATTRIBUTES": "Rediger attributter",
+          "LOCALIZATION": "Rediger lokalisering",
+          "DELETE": "Slett tilstand",
+          "ADD_NEW": "Legg til ny tilstand"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Rediger overgang",
+          "ATTRIBUTES": "Rediger attributter",
+          "LOCALIZATION": "Rediger lokalisering",
+          "DELETE": "Slett overgang",
+          "INSERT_STATE": "Sett inn tilstand her"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Navn",
+      "DESCRIPTION": "Beskrivelse",
+      "OK": "OK",
+      "CANCEL": "Avbryt",
+      "STATE_EDIT": "Rediger tilstand",
+      "STATE_ADD": "Legg til ny tilstand",
+      "STATE_EXISTS": "Det finnes allerede en tilstand med dette navnet",
+      "TRANSITION_EDIT": "Rediger overgang",
+      "TRANSITION_NEW": "Ny overgang",
+      "TRIGGER": "Utløser",
+      "LOCALIZATION": "Rediger lokalisering for {item}",
+      "ATTRIBUTES": "Rediger attributter for {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Tilstandsmaskin lagret",
+      "IMPORTED": "Tilstandsmaskin importert",
+      "IMPORT_FAILED": "Import mislyktes: {error}",
+      "DEACTIVATE_OTHER": "Alle andre tilstandsmaskiner av samme type blir deaktivert. Fortsette?",
+      "CLOSE_CONFIRMATION": "Definisjonen av tilstandsmaskinen har endringer som ikke er lagret. Lukke likevel?"
+    }
+  }
+}

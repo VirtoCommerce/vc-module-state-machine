@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "ステートマシン"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "ステートマシン",
+        "commands": {
+          "new": "新規",
+          "import": "インポート"
+        },
+        "labels": {
+          "active": "有効",
+          "inactive": "無効",
+          "no-state-machines-yet": "ステートマシンはまだありません"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "ビジュアルエディターを開く",
+          "export": "エクスポート"
+        },
+        "labels": {
+          "is-active": "有効",
+          "entity-type": "エンティティタイプ",
+          "name": "名前",
+          "states": "シリアル化されたステート"
+        },
+        "placeholders": {
+          "entity-type": "エンティティタイプ",
+          "entity-type-select": "エンティティタイプを選択してください",
+          "name": "ステートマシン名",
+          "states": "シリアル化されたステート"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "ステートマシン ビジュアルエディター",
+        "commands": {
+          "add-state": "新しいステートを追加",
+          "reset": "リセット",
+          "delete": "削除",
+          "toggle-to-visual-mode": "ビジュアルモード",
+          "toggle-to-json-mode": "JSON モード"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "条件",
+          "no-condition-prototype": "このエンティティタイプには条件プロトタイプが定義されていません"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "ステートを編集",
+          "edit-attributes": "属性を編集",
+          "edit-localization": "ローカライズを編集",
+          "delete-state": "ステートを削除",
+          "add-new-state": "新しいステートを追加"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "遷移を編集",
+          "edit-attributes": "属性を編集",
+          "edit-localization": "ローカライズを編集",
+          "edit-condition": "条件を編集",
+          "delete-transition": "遷移を削除",
+          "insert-state": "ここにステートを挿入"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "名前",
+        "description": "説明",
+        "ok": "OK",
+        "save": "保存",
+        "cancel": "キャンセル"
+      },
+      "state": {
+        "edit-title": "ステートを編集",
+        "add-title": "新しいステートを追加"
+      },
+      "transition": {
+        "edit-title": "遷移を編集",
+        "new-title": "新しい遷移",
+        "trigger": "トリガー",
+        "icon": "アイコン",
+        "trigger-required": "トリガーを空にすることはできません"
+      },
+      "localization": {
+        "edit-title": "{{itemText}} のローカライズを編集"
+      },
+      "attributes": {
+        "edit-title": "{{itemText}} の属性を編集"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "ステートマシン定義を保存",
+        "message": "ステートマシンの定義に保存されていない変更があります。保存しますか？"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "ステートマシンメニューを開く",
+    "statemachine:create": "ステートマシン関連データを作成",
+    "statemachine:read": "ステートマシン関連データを表示",
+    "statemachine:update": "ステートマシン関連データを更新",
+    "statemachine:delete": "ステートマシン関連データを削除",
+    "statemachine:fire": "ステートマシンのステート遷移を実行"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "ローカライズ言語",
+        "description": "ステートマシンのローカライズに使用する言語を選択します"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "属性キー",
+        "description": "ステートマシンの属性に使用するキーを選択します"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "ステートマシンのエクスポート/インポート"
+    }
+  }
+}

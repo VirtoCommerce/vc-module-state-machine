@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Maszyny stanów"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Maszyna stanów",
+        "commands": {
+          "new": "Nowa",
+          "import": "Importuj"
+        },
+        "labels": {
+          "active": "Aktywna",
+          "inactive": "Nieaktywna",
+          "no-state-machines-yet": "Brak maszyn stanów"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Otwórz edytor wizualny",
+          "export": "Eksportuj"
+        },
+        "labels": {
+          "is-active": "Aktywna",
+          "entity-type": "Typ encji",
+          "name": "Nazwa",
+          "states": "Zserializowane stany"
+        },
+        "placeholders": {
+          "entity-type": "Typ encji",
+          "entity-type-select": "Wybierz typ encji",
+          "name": "Nazwa maszyny stanów",
+          "states": "Zserializowane stany"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Edytor wizualny maszyny stanów",
+        "commands": {
+          "add-state": "Dodaj nowy stan",
+          "reset": "Resetuj",
+          "delete": "Usuń",
+          "toggle-to-visual-mode": "Tryb wizualny",
+          "toggle-to-json-mode": "Tryb JSON"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Warunki",
+          "no-condition-prototype": "Dla tego typu encji nie zdefiniowano prototypu warunku"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Edytuj stan",
+          "edit-attributes": "Edytuj atrybuty",
+          "edit-localization": "Edytuj lokalizację",
+          "delete-state": "Usuń stan",
+          "add-new-state": "Dodaj nowy stan"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Edytuj przejście",
+          "edit-attributes": "Edytuj atrybuty",
+          "edit-localization": "Edytuj lokalizację",
+          "edit-condition": "Edytuj warunek",
+          "delete-transition": "Usuń przejście",
+          "insert-state": "Wstaw stan tutaj"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Nazwa",
+        "description": "Opis",
+        "ok": "OK",
+        "save": "Zapisz",
+        "cancel": "Anuluj"
+      },
+      "state": {
+        "edit-title": "Edytuj stan",
+        "add-title": "Dodaj nowy stan"
+      },
+      "transition": {
+        "edit-title": "Edytuj przejście",
+        "new-title": "Nowe przejście",
+        "trigger": "Wyzwalacz",
+        "icon": "Ikona",
+        "trigger-required": "Wyzwalacz nie może być pusty"
+      },
+      "localization": {
+        "edit-title": "Edytuj lokalizację: {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Edytuj atrybuty: {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Zapisz definicję maszyny stanów",
+        "message": "Definicja maszyny stanów zawiera niezapisane zmiany. Czy chcesz ją zapisać?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Otwórz menu maszyn stanów",
+    "statemachine:create": "Twórz dane związane z maszynami stanów",
+    "statemachine:read": "Przeglądaj dane związane z maszynami stanów",
+    "statemachine:update": "Aktualizuj dane związane z maszynami stanów",
+    "statemachine:delete": "Usuwaj dane związane z maszynami stanów",
+    "statemachine:fire": "Wyzwalaj przejścia stanów maszyn stanów"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Języki lokalizacji",
+        "description": "Wybierz języki lokalizacji maszyn stanów"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Klucze atrybutów",
+        "description": "Wybierz klucze atrybutów maszyn stanów"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Eksport/import maszyn stanów"
+    }
+  }
+}

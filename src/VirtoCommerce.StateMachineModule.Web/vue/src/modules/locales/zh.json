@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "状态机"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "暂无状态机",
+        "ACTIVE": "活动",
+        "INACTIVE": "非活动",
+        "COLUMNS": {
+          "NAME": "名称",
+          "ENTITY_TYPE": "实体类型",
+          "STATUS": "状态",
+          "MODIFIED": "修改时间"
+        },
+        "TOOLBAR": {
+          "REFRESH": "刷新",
+          "NEW": "新建",
+          "IMPORT": "导入"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "新建状态机",
+        "FIELDS": {
+          "NAME": "名称",
+          "NAME_PLACEHOLDER": "状态机名称",
+          "ENTITY_TYPE": "实体类型",
+          "ENTITY_TYPE_PLACEHOLDER": "实体的完整类型名称",
+          "ENTITY_TYPE_HINT": "例如 VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "活动",
+          "STATES": "状态",
+          "NO_STATES": "暂无状态：请打开可视化编辑器进行添加"
+        },
+        "OPEN_EDITOR": "打开可视化编辑器",
+        "TOOLBAR": {
+          "SAVE": "保存",
+          "RESET": "重置",
+          "EXPORT": "导出"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "状态机可视化编辑器",
+        "NO_DESCRIPTION": "（无描述）",
+        "SUCCESS": "成功",
+        "FAIL": "失败",
+        "NEUTRAL": "两者皆非",
+        "INVALID_JSON": "JSON 无效：可视化模式保留最后一次有效的状态",
+        "TOOLBAR": {
+          "ADD_STATE": "添加新状态",
+          "VISUAL_MODE": "可视化模式",
+          "JSON_MODE": "JSON 模式"
+        },
+        "STATE_MENU": {
+          "EDIT": "编辑状态",
+          "ATTRIBUTES": "编辑属性",
+          "LOCALIZATION": "编辑本地化",
+          "DELETE": "删除状态",
+          "ADD_NEW": "添加新状态"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "编辑转换",
+          "ATTRIBUTES": "编辑属性",
+          "LOCALIZATION": "编辑本地化",
+          "DELETE": "删除转换",
+          "INSERT_STATE": "在此插入状态"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "名称",
+      "DESCRIPTION": "描述",
+      "OK": "确定",
+      "CANCEL": "取消",
+      "STATE_EDIT": "编辑状态",
+      "STATE_ADD": "添加新状态",
+      "STATE_EXISTS": "已存在同名状态",
+      "TRANSITION_EDIT": "编辑转换",
+      "TRANSITION_NEW": "新建转换",
+      "TRIGGER": "触发器",
+      "LOCALIZATION": "编辑 {item} 的本地化",
+      "ATTRIBUTES": "编辑 {item} 的属性"
+    },
+    "ALERTS": {
+      "SAVED": "状态机已保存",
+      "IMPORTED": "状态机已导入",
+      "IMPORT_FAILED": "导入失败：{error}",
+      "DEACTIVATE_OTHER": "同一类型的所有其他状态机都将被禁用。是否继续？",
+      "CLOSE_CONFIRMATION": "状态机定义有未保存的更改。仍要关闭吗？"
+    }
+  }
+}
