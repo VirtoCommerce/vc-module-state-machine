@@ -1,0 +1,16 @@
+{
+  "remote": { "name": "statemachine_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "state-machines",
+        "sectionId": "configuration",
+        "title": "State Machines",
+        "icon": "lucide-workflow",
+        "route": "/state-machines",
+        "permission": "statemachine:access",
+        "priority": 55
+      }
+    ]
+  }
+}

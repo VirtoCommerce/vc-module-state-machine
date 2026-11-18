@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Zustandsautomaten"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Noch keine Zustandsautomaten",
+        "ACTIVE": "Aktiv",
+        "INACTIVE": "Inaktiv",
+        "COLUMNS": {
+          "NAME": "Name",
+          "ENTITY_TYPE": "Entitätstyp",
+          "STATUS": "Status",
+          "MODIFIED": "Geändert"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Aktualisieren",
+          "NEW": "Neu",
+          "IMPORT": "Importieren"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Neuer Zustandsautomat",
+        "FIELDS": {
+          "NAME": "Name",
+          "NAME_PLACEHOLDER": "Name des Zustandsautomaten",
+          "ENTITY_TYPE": "Entitätstyp",
+          "ENTITY_TYPE_PLACEHOLDER": "Vollständiger Typname der Entität",
+          "ENTITY_TYPE_HINT": "z. B. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Aktiv",
+          "STATES": "Zustände",
+          "NO_STATES": "Noch keine Zustände: Öffnen Sie den visuellen Editor, um sie hinzuzufügen"
+        },
+        "OPEN_EDITOR": "Visuellen Editor öffnen",
+        "TOOLBAR": {
+          "SAVE": "Speichern",
+          "RESET": "Zurücksetzen",
+          "EXPORT": "Exportieren"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Visueller Editor für Zustandsautomaten",
+        "NO_DESCRIPTION": "(Keine Beschreibung)",
+        "SUCCESS": "Erfolg",
+        "FAIL": "Fehlschlag",
+        "NEUTRAL": "Keines von beiden",
+        "INVALID_JSON": "Ungültiges JSON: Der visuelle Modus behält die letzten gültigen Zustände bei",
+        "TOOLBAR": {
+          "ADD_STATE": "Neuen Zustand hinzufügen",
+          "VISUAL_MODE": "Visueller Modus",
+          "JSON_MODE": "JSON-Modus"
+        },
+        "STATE_MENU": {
+          "EDIT": "Zustand bearbeiten",
+          "ATTRIBUTES": "Attribute bearbeiten",
+          "LOCALIZATION": "Lokalisierung bearbeiten",
+          "DELETE": "Zustand löschen",
+          "ADD_NEW": "Neuen Zustand hinzufügen"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Übergang bearbeiten",
+          "ATTRIBUTES": "Attribute bearbeiten",
+          "LOCALIZATION": "Lokalisierung bearbeiten",
+          "DELETE": "Übergang löschen",
+          "INSERT_STATE": "Zustand hier einfügen"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Name",
+      "DESCRIPTION": "Beschreibung",
+      "OK": "OK",
+      "CANCEL": "Abbrechen",
+      "STATE_EDIT": "Zustand bearbeiten",
+      "STATE_ADD": "Neuen Zustand hinzufügen",
+      "STATE_EXISTS": "Ein Zustand mit diesem Namen ist bereits vorhanden",
+      "TRANSITION_EDIT": "Übergang bearbeiten",
+      "TRANSITION_NEW": "Neuer Übergang",
+      "TRIGGER": "Auslöser",
+      "LOCALIZATION": "Lokalisierung von {item} bearbeiten",
+      "ATTRIBUTES": "Attribute von {item} bearbeiten"
+    },
+    "ALERTS": {
+      "SAVED": "Zustandsautomat gespeichert",
+      "IMPORTED": "Zustandsautomat importiert",
+      "IMPORT_FAILED": "Import fehlgeschlagen: {error}",
+      "DEACTIVATE_OTHER": "Alle anderen Zustandsautomaten desselben Typs werden deaktiviert. Fortfahren?",
+      "CLOSE_CONFIRMATION": "Die Definition des Zustandsautomaten enthält nicht gespeicherte Änderungen. Trotzdem schließen?"
+    }
+  }
+}

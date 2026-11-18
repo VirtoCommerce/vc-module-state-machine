@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Tillståndsmaskiner"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Tillståndsmaskin",
+        "commands": {
+          "new": "Ny",
+          "import": "Importera"
+        },
+        "labels": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "no-state-machines-yet": "Inga tillståndsmaskiner ännu"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Öppna visuell redigerare",
+          "export": "Exportera"
+        },
+        "labels": {
+          "is-active": "Aktiv",
+          "entity-type": "Entitetstyp",
+          "name": "Namn",
+          "states": "Serialiserade tillstånd"
+        },
+        "placeholders": {
+          "entity-type": "Entitetstyp",
+          "entity-type-select": "Välj entitetstyp",
+          "name": "Tillståndsmaskinens namn",
+          "states": "Serialiserade tillstånd"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Visuell redigerare för tillståndsmaskin",
+        "commands": {
+          "add-state": "Lägg till nytt tillstånd",
+          "reset": "Återställ",
+          "delete": "Ta bort",
+          "toggle-to-visual-mode": "Visuellt läge",
+          "toggle-to-json-mode": "JSON-läge"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Villkor",
+          "no-condition-prototype": "Det finns ingen villkorsprototyp definierad för den här entitetstypen"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Redigera tillstånd",
+          "edit-attributes": "Redigera attribut",
+          "edit-localization": "Redigera lokalisering",
+          "delete-state": "Ta bort tillstånd",
+          "add-new-state": "Lägg till nytt tillstånd"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Redigera övergång",
+          "edit-attributes": "Redigera attribut",
+          "edit-localization": "Redigera lokalisering",
+          "edit-condition": "Redigera villkor",
+          "delete-transition": "Ta bort övergång",
+          "insert-state": "Infoga tillstånd här"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Namn",
+        "description": "Beskrivning",
+        "ok": "OK",
+        "save": "Spara",
+        "cancel": "Avbryt"
+      },
+      "state": {
+        "edit-title": "Redigera tillstånd",
+        "add-title": "Lägg till nytt tillstånd"
+      },
+      "transition": {
+        "edit-title": "Redigera övergång",
+        "new-title": "Ny övergång",
+        "trigger": "Utlösare",
+        "icon": "Ikon",
+        "trigger-required": "Utlösaren får inte vara tom"
+      },
+      "localization": {
+        "edit-title": "Redigera lokalisering för {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Redigera attribut för {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Spara tillståndsmaskinens definition",
+        "message": "Tillståndsmaskinens definition har osparade ändringar. Vill du spara den?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Öppna tillståndsmaskin-menyn",
+    "statemachine:create": "Skapa tillståndsmaskin-relaterad data",
+    "statemachine:read": "Visa tillståndsmaskin-relaterad data",
+    "statemachine:update": "Uppdatera tillståndsmaskin-relaterad data",
+    "statemachine:delete": "Ta bort tillståndsmaskin-relaterad data",
+    "statemachine:fire": "Utlös tillståndsövergångar i tillståndsmaskiner"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Lokaliseringsspråk",
+        "description": "Välj språk för lokalisering av tillståndsmaskiner"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Attributnycklar",
+        "description": "Välj nycklar för attribut i tillståndsmaskiner"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Export/import av tillståndsmaskiner"
+    }
+  }
+}

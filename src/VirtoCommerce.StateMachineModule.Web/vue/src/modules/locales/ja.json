@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "ステートマシン"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "ステートマシンはまだありません",
+        "ACTIVE": "有効",
+        "INACTIVE": "無効",
+        "COLUMNS": {
+          "NAME": "名前",
+          "ENTITY_TYPE": "エンティティタイプ",
+          "STATUS": "ステータス",
+          "MODIFIED": "更新日時"
+        },
+        "TOOLBAR": {
+          "REFRESH": "再読み込み",
+          "NEW": "新規",
+          "IMPORT": "インポート"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "新しいステートマシン",
+        "FIELDS": {
+          "NAME": "名前",
+          "NAME_PLACEHOLDER": "ステートマシン名",
+          "ENTITY_TYPE": "エンティティタイプ",
+          "ENTITY_TYPE_PLACEHOLDER": "エンティティの完全な型名",
+          "ENTITY_TYPE_HINT": "例: VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "有効",
+          "STATES": "ステート",
+          "NO_STATES": "ステートはまだありません。ビジュアルエディターを開いて追加してください"
+        },
+        "OPEN_EDITOR": "ビジュアルエディターを開く",
+        "TOOLBAR": {
+          "SAVE": "保存",
+          "RESET": "リセット",
+          "EXPORT": "エクスポート"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "ステートマシン ビジュアルエディター",
+        "NO_DESCRIPTION": "（説明なし）",
+        "SUCCESS": "成功",
+        "FAIL": "失敗",
+        "NEUTRAL": "どちらでもない",
+        "INVALID_JSON": "JSON が無効です。ビジュアルモードでは最後の有効なステートが保持されます",
+        "TOOLBAR": {
+          "ADD_STATE": "新しいステートを追加",
+          "VISUAL_MODE": "ビジュアルモード",
+          "JSON_MODE": "JSON モード"
+        },
+        "STATE_MENU": {
+          "EDIT": "ステートを編集",
+          "ATTRIBUTES": "属性を編集",
+          "LOCALIZATION": "ローカライズを編集",
+          "DELETE": "ステートを削除",
+          "ADD_NEW": "新しいステートを追加"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "遷移を編集",
+          "ATTRIBUTES": "属性を編集",
+          "LOCALIZATION": "ローカライズを編集",
+          "DELETE": "遷移を削除",
+          "INSERT_STATE": "ここにステートを挿入"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "名前",
+      "DESCRIPTION": "説明",
+      "OK": "OK",
+      "CANCEL": "キャンセル",
+      "STATE_EDIT": "ステートを編集",
+      "STATE_ADD": "新しいステートを追加",
+      "STATE_EXISTS": "この名前のステートは既に存在します",
+      "TRANSITION_EDIT": "遷移を編集",
+      "TRANSITION_NEW": "新しい遷移",
+      "TRIGGER": "トリガー",
+      "LOCALIZATION": "{item} のローカライズを編集",
+      "ATTRIBUTES": "{item} の属性を編集"
+    },
+    "ALERTS": {
+      "SAVED": "ステートマシンを保存しました",
+      "IMPORTED": "ステートマシンをインポートしました",
+      "IMPORT_FAILED": "インポートに失敗しました: {error}",
+      "DEACTIVATE_OTHER": "同じタイプの他のステートマシンはすべて無効になります。続行しますか？",
+      "CLOSE_CONFIRMATION": "ステートマシンの定義に保存されていない変更があります。閉じてもよろしいですか？"
+    }
+  }
+}

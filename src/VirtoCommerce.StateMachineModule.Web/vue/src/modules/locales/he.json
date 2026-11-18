@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "מכונות מצבים"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "אין עדיין מכונות מצבים",
+        "ACTIVE": "פעילה",
+        "INACTIVE": "לא פעילה",
+        "COLUMNS": {
+          "NAME": "שם",
+          "ENTITY_TYPE": "סוג ישות",
+          "STATUS": "סטטוס",
+          "MODIFIED": "שונה"
+        },
+        "TOOLBAR": {
+          "REFRESH": "רענון",
+          "NEW": "יצירה",
+          "IMPORT": "ייבוא"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "מכונת מצבים חדשה",
+        "FIELDS": {
+          "NAME": "שם",
+          "NAME_PLACEHOLDER": "שם מכונת המצבים",
+          "ENTITY_TYPE": "סוג ישות",
+          "ENTITY_TYPE_PLACEHOLDER": "שם הסוג המלא של הישות",
+          "ENTITY_TYPE_HINT": "לדוגמה VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "פעילה",
+          "STATES": "מצבים",
+          "NO_STATES": "אין עדיין מצבים: יש לפתוח את העורך החזותי כדי להוסיף אותם"
+        },
+        "OPEN_EDITOR": "פתיחת העורך החזותי",
+        "TOOLBAR": {
+          "SAVE": "שמירה",
+          "RESET": "איפוס",
+          "EXPORT": "ייצוא"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "העורך החזותי של מכונת המצבים",
+        "NO_DESCRIPTION": "(אין תיאור)",
+        "SUCCESS": "הצלחה",
+        "FAIL": "כישלון",
+        "NEUTRAL": "אף אחד מהם",
+        "INVALID_JSON": "JSON לא תקין: התצוגה החזותית שומרת את המצבים התקינים האחרונים",
+        "TOOLBAR": {
+          "ADD_STATE": "הוספת מצב חדש",
+          "VISUAL_MODE": "תצוגה חזותית",
+          "JSON_MODE": "תצוגת JSON"
+        },
+        "STATE_MENU": {
+          "EDIT": "עריכת המצב",
+          "ATTRIBUTES": "עריכת תכונות",
+          "LOCALIZATION": "עריכת תרגומים",
+          "DELETE": "מחיקת המצב",
+          "ADD_NEW": "הוספת מצב חדש"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "עריכת המעבר",
+          "ATTRIBUTES": "עריכת תכונות",
+          "LOCALIZATION": "עריכת תרגומים",
+          "DELETE": "מחיקת המעבר",
+          "INSERT_STATE": "הוספת מצב כאן"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "שם",
+      "DESCRIPTION": "תיאור",
+      "OK": "אישור",
+      "CANCEL": "ביטול",
+      "STATE_EDIT": "עריכת מצב",
+      "STATE_ADD": "הוספת מצב חדש",
+      "STATE_EXISTS": "כבר קיים מצב בשם זה",
+      "TRANSITION_EDIT": "עריכת מעבר",
+      "TRANSITION_NEW": "מעבר חדש",
+      "TRIGGER": "טריגר",
+      "LOCALIZATION": "עריכת תרגומים: {item}",
+      "ATTRIBUTES": "עריכת תכונות: {item}"
+    },
+    "ALERTS": {
+      "SAVED": "מכונת המצבים נשמרה",
+      "IMPORTED": "מכונת המצבים יובאה",
+      "IMPORT_FAILED": "הייבוא נכשל: {error}",
+      "DEACTIVATE_OTHER": "כל שאר מכונות המצבים מאותו סוג יושבתו. להמשיך?",
+      "CLOSE_CONFIRMATION": "בהגדרת מכונת המצבים יש שינויים שלא נשמרו. לסגור בכל זאת?"
+    }
+  }
+}
