@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -104,14 +105,14 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
     }
 
     public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
-        ICancellationToken cancellationToken)
+        CancellationToken cancellationToken)
     {
         return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoExportAsync(outStream, options,
             progressCallback, cancellationToken);
     }
 
     public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
-        ICancellationToken cancellationToken)
+        CancellationToken cancellationToken)
     {
         return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoImportAsync(inputStream, options,
             progressCallback, cancellationToken);
