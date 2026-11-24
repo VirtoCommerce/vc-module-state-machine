@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Машины состояний"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Машина состояний",
+        "commands": {
+          "new": "Создать",
+          "import": "Импортировать"
+        },
+        "labels": {
+          "active": "Активна",
+          "inactive": "Неактивна",
+          "no-state-machines-yet": "Машин состояний пока нет"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Открыть визуальный редактор",
+          "export": "Экспортировать"
+        },
+        "labels": {
+          "is-active": "Активна",
+          "entity-type": "Тип сущности",
+          "name": "Название",
+          "states": "Сериализованные состояния"
+        },
+        "placeholders": {
+          "entity-type": "Тип сущности",
+          "entity-type-select": "Выберите тип сущности",
+          "name": "Название машины состояний",
+          "states": "Сериализованные состояния"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Визуальный редактор машины состояний",
+        "commands": {
+          "add-state": "Добавить состояние",
+          "reset": "Сбросить",
+          "delete": "Удалить",
+          "toggle-to-visual-mode": "Визуальный режим",
+          "toggle-to-json-mode": "Режим JSON"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Условия",
+          "no-condition-prototype": "Для этого типа сущности не задан прототип условия"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Изменить состояние",
+          "edit-attributes": "Изменить атрибуты",
+          "edit-localization": "Изменить локализацию",
+          "delete-state": "Удалить состояние",
+          "add-new-state": "Добавить состояние"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Изменить переход",
+          "edit-attributes": "Изменить атрибуты",
+          "edit-localization": "Изменить локализацию",
+          "edit-condition": "Изменить условие",
+          "delete-transition": "Удалить переход",
+          "insert-state": "Вставить состояние здесь"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Название",
+        "description": "Описание",
+        "ok": "ОК",
+        "save": "Сохранить",
+        "cancel": "Отмена"
+      },
+      "state": {
+        "edit-title": "Изменить состояние",
+        "add-title": "Добавить состояние"
+      },
+      "transition": {
+        "edit-title": "Изменить переход",
+        "new-title": "Новый переход",
+        "trigger": "Триггер",
+        "icon": "Значок",
+        "trigger-required": "Триггер не может быть пустым"
+      },
+      "localization": {
+        "edit-title": "Изменить локализацию: {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Изменить атрибуты: {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Сохранить определение машины состояний",
+        "message": "В определении машины состояний есть несохранённые изменения. Сохранить его?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Открыть меню машин состояний",
+    "statemachine:create": "Создание данных машин состояний",
+    "statemachine:read": "Просмотр данных машин состояний",
+    "statemachine:update": "Изменение данных машин состояний",
+    "statemachine:delete": "Удаление данных машин состояний",
+    "statemachine:fire": "Выполнение переходов между состояниями машин состояний"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Языки локализации",
+        "description": "Выберите языки для локализации машин состояний"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Ключи атрибутов",
+        "description": "Выберите ключи для атрибутов машин состояний"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Экспорт и импорт машин состояний"
+    }
+  }
+}

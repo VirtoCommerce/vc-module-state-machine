@@ -1,0 +1,92 @@
+{
+  "STATEMACHINE": {
+    "MENU": {
+      "TITLE": "Tilakoneet"
+    },
+    "PAGES": {
+      "LIST": {
+        "EMPTY": "Ei vielä tilakoneita",
+        "ACTIVE": "Aktiivinen",
+        "INACTIVE": "Ei aktiivinen",
+        "COLUMNS": {
+          "NAME": "Nimi",
+          "ENTITY_TYPE": "Entiteetin tyyppi",
+          "STATUS": "Tila",
+          "MODIFIED": "Muokattu"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Päivitä",
+          "NEW": "Uusi",
+          "IMPORT": "Tuo"
+        }
+      },
+      "DETAILS": {
+        "NEW_TITLE": "Uusi tilakone",
+        "FIELDS": {
+          "NAME": "Nimi",
+          "NAME_PLACEHOLDER": "Tilakoneen nimi",
+          "ENTITY_TYPE": "Entiteetin tyyppi",
+          "ENTITY_TYPE_PLACEHOLDER": "Entiteetin tyypin täydellinen nimi",
+          "ENTITY_TYPE_HINT": "esim. VirtoCommerce.OrdersModule.Core.Model.CustomerOrder",
+          "IS_ACTIVE": "Aktiivinen",
+          "STATES": "Tilat",
+          "NO_STATES": "Ei vielä tiloja: avaa visuaalinen editori ja lisää ne"
+        },
+        "OPEN_EDITOR": "Avaa visuaalinen editori",
+        "TOOLBAR": {
+          "SAVE": "Tallenna",
+          "RESET": "Palauta",
+          "EXPORT": "Vie"
+        }
+      },
+      "EDITOR": {
+        "TITLE": "Tilakoneen visuaalinen editori",
+        "NO_DESCRIPTION": "(Ei kuvausta)",
+        "SUCCESS": "Onnistuminen",
+        "FAIL": "Epäonnistuminen",
+        "NEUTRAL": "Ei kumpikaan",
+        "INVALID_JSON": "Virheellinen JSON: visuaalinen näkymä säilyttää viimeiset kelvolliset tilat",
+        "TOOLBAR": {
+          "ADD_STATE": "Lisää uusi tila",
+          "VISUAL_MODE": "Visuaalinen näkymä",
+          "JSON_MODE": "JSON-näkymä"
+        },
+        "STATE_MENU": {
+          "EDIT": "Muokkaa tilaa",
+          "ATTRIBUTES": "Muokkaa määritteitä",
+          "LOCALIZATION": "Muokkaa lokalisointia",
+          "DELETE": "Poista tila",
+          "ADD_NEW": "Lisää uusi tila"
+        },
+        "TRANSITION_MENU": {
+          "EDIT": "Muokkaa siirtymää",
+          "ATTRIBUTES": "Muokkaa määritteitä",
+          "LOCALIZATION": "Muokkaa lokalisointia",
+          "DELETE": "Poista siirtymä",
+          "INSERT_STATE": "Lisää tila tähän"
+        }
+      }
+    },
+    "MODALS": {
+      "NAME": "Nimi",
+      "DESCRIPTION": "Kuvaus",
+      "OK": "OK",
+      "CANCEL": "Peruuta",
+      "STATE_EDIT": "Muokkaa tilaa",
+      "STATE_ADD": "Lisää uusi tila",
+      "STATE_EXISTS": "Tämänniminen tila on jo olemassa",
+      "TRANSITION_EDIT": "Muokkaa siirtymää",
+      "TRANSITION_NEW": "Uusi siirtymä",
+      "TRIGGER": "Laukaisin",
+      "LOCALIZATION": "Muokkaa lokalisointia: {item}",
+      "ATTRIBUTES": "Muokkaa määritteitä: {item}"
+    },
+    "ALERTS": {
+      "SAVED": "Tilakone tallennettu",
+      "IMPORTED": "Tilakone tuotu",
+      "IMPORT_FAILED": "Tuonti epäonnistui: {error}",
+      "DEACTIVATE_OTHER": "Kaikki muut samantyyppiset tilakoneet poistetaan käytöstä. Jatketaanko?",
+      "CLOSE_CONFIRMATION": "Tilakoneen määrityksessä on tallentamattomia muutoksia. Suljetaanko silti?"
+    }
+  }
+}

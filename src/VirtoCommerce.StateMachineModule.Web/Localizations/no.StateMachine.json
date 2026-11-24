@@ -1,0 +1,137 @@
+{
+  "statemachine": {
+    "main-menu": {
+      "statemachine": "Tilstandsmaskiner"
+    },
+
+    "blades": {
+      "state-machine-list": {
+        "title": "Tilstandsmaskin",
+        "commands": {
+          "new": "Ny",
+          "import": "Importer"
+        },
+        "labels": {
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "no-state-machines-yet": "Ingen tilstandsmaskiner ennå"
+        }
+      },
+      "state-machine-details": {
+        "commands": {
+          "open-visual-editor": "Åpne visuelt redigeringsprogram",
+          "export": "Eksporter"
+        },
+        "labels": {
+          "is-active": "Aktiv",
+          "entity-type": "Enhetstype",
+          "name": "Navn",
+          "states": "Serialiserte tilstander"
+        },
+        "placeholders": {
+          "entity-type": "Enhetstype",
+          "entity-type-select": "Velg enhetstype",
+          "name": "Navn på tilstandsmaskin",
+          "states": "Serialiserte tilstander"
+        }
+      },
+      "state-machine-visual-editor": {
+        "title": "Visuelt redigeringsprogram for tilstandsmaskin",
+        "commands": {
+          "add-state": "Legg til ny tilstand",
+          "reset": "Tilbakestill",
+          "delete": "Slett",
+          "toggle-to-visual-mode": "Visuell modus",
+          "toggle-to-json-mode": "JSON-modus"
+        }
+      },
+      "state-machine-condition": {
+        "labels": {
+          "conditions": "Betingelser",
+          "no-condition-prototype": "Det er ikke definert noen betingelsesprototype for denne enhetstypen"
+        }
+      }
+    },
+
+    "components": {
+      "state-node": {
+        "context-menu": {
+          "edit-state": "Rediger tilstand",
+          "edit-attributes": "Rediger attributter",
+          "edit-localization": "Rediger lokalisering",
+          "delete-state": "Slett tilstand",
+          "add-new-state": "Legg til ny tilstand"
+        }
+      },
+      "state-transitions": {
+        "context-menu": {
+          "edit-transition": "Rediger overgang",
+          "edit-attributes": "Rediger attributter",
+          "edit-localization": "Rediger lokalisering",
+          "edit-condition": "Rediger betingelse",
+          "delete-transition": "Slett overgang",
+          "insert-state": "Sett inn tilstand her"
+        }
+      }
+    },
+
+    "modals": {
+      "common": {
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "ok": "OK",
+        "save": "Lagre",
+        "cancel": "Avbryt"
+      },
+      "state": {
+        "edit-title": "Rediger tilstand",
+        "add-title": "Legg til ny tilstand"
+      },
+      "transition": {
+        "edit-title": "Rediger overgang",
+        "new-title": "Ny overgang",
+        "trigger": "Utløser",
+        "icon": "Ikon",
+        "trigger-required": "Utløseren kan ikke være tom"
+      },
+      "localization": {
+        "edit-title": "Rediger lokalisering for {{itemText}}"
+      },
+      "attributes": {
+        "edit-title": "Rediger attributter for {{itemText}}"
+      }
+    },
+
+    "dialogs": {
+      "state-machine-details-save": {
+        "title": "Lagre definisjonen av tilstandsmaskinen",
+        "message": "Definisjonen av tilstandsmaskinen har endringer som ikke er lagret. Vil du lagre den?"
+      }
+    }
+  },
+  "permissions": {
+    "statemachine:access": "Åpne tilstandsmaskin-menyen",
+    "statemachine:create": "Opprett tilstandsmaskin-relaterte data",
+    "statemachine:read": "Vis tilstandsmaskin-relaterte data",
+    "statemachine:update": "Oppdater tilstandsmaskin-relaterte data",
+    "statemachine:delete": "Slett tilstandsmaskin-relaterte data",
+    "statemachine:fire": "Utløs tilstandsoverganger i tilstandsmaskiner"
+  },
+  "settings": {
+    "StateMachineModule": {
+      "StateMachineLanguages": {
+        "title": "Lokaliseringsspråk",
+        "description": "Velg språk for lokalisering av tilstandsmaskiner"
+      },
+      "StateMachineAttributeKeys": {
+        "title": "Attributtnøkler",
+        "description": "Velg nøkler for attributter i tilstandsmaskiner"
+      }
+    }
+  },
+  "module": {
+    "VirtoCommerce.StateMachine": {
+      "description": "Eksport/import av tilstandsmaskiner"
+    }
+  }
+}
