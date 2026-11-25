@@ -73,7 +73,7 @@ import { VcBlade, VcButton, VcContainer, VcForm, VcHint, VcInput, VcLabel, VcSel
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { api, clone, errorText } from "../api";
-import { entityTypeName, loadEntityTypes, usedEntityTypes } from "../entityTypes";
+import { entityTypeName, loadEntityTypes } from "../entityTypes";
 import { graphSnapshot, graphSvg, normalizePositions, svgDataUrl } from "../graph";
 import { exportDefinition } from "../transfer";
 import type { DefinitionModel, EditorOptions } from "../types";
@@ -103,15 +103,11 @@ const readonly = computed(() => !hasAccess("statemachine:update"));
 const form = useBladeForm({ data: model, closeConfirmMessage: computed(() => t("STATE_MACHINE.DETAILS.CLOSE_CONFIRM")) });
 
 const entityTypes = ref<StateMachineEntityType[]>([]);
-const usedTypes = ref<string[]>([]);
 loadEntityTypes().then((x) => (entityTypes.value = x));
-usedEntityTypes()
-  .then((x) => (usedTypes.value = x))
-  .catch(() => undefined);
-// registered types, plus types existing definitions use and the definition's own: no module registers its types on
-// the server yet, and a definition of an unregistered type must still show and save it
+// as legacy, only the types installed modules registered; plus the definition's own, so a definition of a type no
+// installed module registers still shows and saves it
 const entityTypeOptions = computed(() => {
-  const ids = [...entityTypes.value.map((x) => x.id!), ...usedTypes.value, model.value.entity.entityType].filter(
+  const ids = [...entityTypes.value.map((x) => x.id!), model.value.entity.entityType].filter(
     (x): x is string => !!x,
   );
   const unique = ids.filter((id, i) => ids.findIndex((x) => x.toLowerCase() === id.toLowerCase()) === i);

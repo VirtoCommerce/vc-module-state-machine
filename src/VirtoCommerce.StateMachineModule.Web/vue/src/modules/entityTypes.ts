@@ -19,15 +19,6 @@ export function loadEntityTypes(): Promise<StateMachineEntityType[]> {
   return entityTypes;
 }
 
-/**
- * Types the existing definitions use. Offered next to the registered ones, so a definition of a type no module
- * registers yet can still be created for it.
- */
-export async function usedEntityTypes(): Promise<string[]> {
-  const res = await api.stateMachine.search({ take: 1000 });
-  return [...new Set((res.results ?? []).map((x) => x.entityType).filter((x): x is string => !!x))];
-}
-
 /** Display name of an entity type; an unregistered one shows its id. */
 export const entityTypeName = (types: StateMachineEntityType[], id?: string) =>
   types.find((x) => x.id?.toLowerCase() === id?.toLowerCase())?.name ?? id;
