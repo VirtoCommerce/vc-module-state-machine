@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "آلات الحالة"
+    },
+    "TOOLBAR": {
+      "REFRESH": "تحديث",
+      "ADD": "جديد",
+      "IMPORT": "استيراد",
+      "EXPORT": "تصدير",
+      "SAVE": "حفظ",
+      "RESET": "إعادة تعيين",
+      "APPLY": "تطبيق",
+      "ADD_STATE": "إضافة حالة جديدة",
+      "VISUAL_MODE": "الوضع المرئي",
+      "JSON_MODE": "وضع JSON"
+    },
+    "LIST": {
+      "TITLE": "آلات الحالة",
+      "EMPTY": "لا توجد آلات حالة بعد",
+      "NAME": "الاسم",
+      "STATUS": "الحالة",
+      "ENTITY_TYPE": "نوع الكيان",
+      "MODIFIED": "تاريخ التعديل",
+      "ACTIVE": "نشطة",
+      "INACTIVE": "غير نشطة",
+      "IMPORTED": "تم استيراد آلة الحالات \"{name}\"."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "آلة حالة جديدة",
+      "SUBTITLE": "آلة الحالة",
+      "NAME": "الاسم",
+      "NAME_PLACEHOLDER": "اسم آلة الحالة",
+      "ENTITY_TYPE": "نوع الكيان",
+      "ENTITY_TYPE_PLACEHOLDER": "اختر نوع الكيان",
+      "IS_ACTIVE": "نشطة",
+      "STATES": "الحالات",
+      "NO_STATES": "لا توجد حالات بعد. افتح المحرر المرئي لإضافتها؛ تُحفظ آلة الحالات عندما تحتوي على حالة واحدة على الأقل.",
+      "OPEN_EDITOR": "فتح المحرر المرئي",
+      "PREVIEW": "معاينة آلة الحالات",
+      "ACTIVE_CONFIRM": "سيتم تعطيل آلة الحالات النشطة لنوع الكيان هذا، \"{name}\". هل تريد المتابعة؟",
+      "CLOSE_CONFIRM": "يحتوي تعريف آلة الحالات على تغييرات غير محفوظة. هل تريد الإغلاق دون حفظ؟"
+    },
+    "EDITOR": {
+      "TITLE": "المحرر المرئي لآلة الحالة",
+      "INVALID_JSON": "JSON غير صالح؛ يتم الاحتفاظ بآخر مخطط صالح.",
+      "NO_DESCRIPTION": "(بدون وصف)",
+      "SUCCESS": "نجاح",
+      "FAIL": "فشل",
+      "HAS_CONDITION": "يحتوي على شرط",
+      "CANVAS": "مخطط آلة الحالات. انقر بزر الماوس الأيمن على حالة أو انتقال لعرض الإجراءات؛ اسحب النقطة أسفل الحالة لربطها.",
+      "STATE_EXISTS": "توجد بالفعل حالة باسم \"{name}\"."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "تحرير الحالة",
+      "EDIT_ATTRIBUTES": "تحرير السمات",
+      "EDIT_LOCALIZATION": "تحرير الترجمة",
+      "DELETE_STATE": "حذف الحالة",
+      "ADD_NEW_STATE": "إضافة حالة جديدة"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "تحرير الانتقال",
+      "EDIT_ATTRIBUTES": "تحرير السمات",
+      "EDIT_LOCALIZATION": "تحرير الترجمة",
+      "EDIT_CONDITION": "تحرير الشرط",
+      "DELETE_TRANSITION": "حذف الانتقال",
+      "INSERT_STATE": "إدراج حالة هنا"
+    },
+    "DIALOGS": {
+      "NAME": "الاسم",
+      "DESCRIPTION": "الوصف",
+      "TRIGGER": "المشغّل",
+      "OK": "موافق",
+      "CANCEL": "إلغاء",
+      "REQUIRED": "هذا الحقل مطلوب",
+      "STATE_EDIT": "تحرير الحالة",
+      "STATE_ADD": "إضافة حالة جديدة",
+      "TRANSITION_EDIT": "تحرير الانتقال",
+      "TRANSITION_NEW": "انتقال جديد",
+      "LOCALIZATION": "تحرير الترجمة: {item}",
+      "ATTRIBUTES": "تحرير السمات: {item}"
+    },
+    "CONDITION": {
+      "TITLE": "الشرط",
+      "SUBTITLE": "الانتقال \"{trigger}\"",
+      "CONDITIONS": "الشروط",
+      "NO_PROTOTYPE": "لا يوجد نموذج شرط معرّف لنوع الكيان هذا",
+      "IF": "إذا تحقق",
+      "ANY": "أيٌّ",
+      "ALL": "كل",
+      "OF_THESE": "من هذه الشروط",
+      "ADD": "إضافة شرط",
+      "REMOVE": "إزالة الشرط",
+      "HAS": "لديه",
+      "HAS_NO": "ليس لديه",
+      "PERMISSION": "الصلاحية",
+      "USER": "المستخدم",
+      "ACCOUNT_TYPE": "نوع الحساب",
+      "SELECT": "اختر...",
+      "CLOSE_CONFIRM": "تم تغيير الشرط. هل تريد الإغلاق دون تطبيق؟",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "الصلاحية ...",
+        "StateMachineConditionHasAccountType": "نوع الحساب ..."
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Maszyny stanów"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Odśwież",
+      "ADD": "Nowa",
+      "IMPORT": "Importuj",
+      "EXPORT": "Eksportuj",
+      "SAVE": "Zapisz",
+      "RESET": "Resetuj",
+      "APPLY": "Zastosuj",
+      "ADD_STATE": "Dodaj nowy stan",
+      "VISUAL_MODE": "Tryb wizualny",
+      "JSON_MODE": "Tryb JSON"
+    },
+    "LIST": {
+      "TITLE": "Maszyny stanów",
+      "EMPTY": "Brak maszyn stanów",
+      "NAME": "Nazwa",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Typ encji",
+      "MODIFIED": "Zmodyfikowano",
+      "ACTIVE": "Aktywna",
+      "INACTIVE": "Nieaktywna",
+      "IMPORTED": "Maszyna stanów „{name}” została zaimportowana."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Nowa maszyna stanów",
+      "SUBTITLE": "Maszyna stanów",
+      "NAME": "Nazwa",
+      "NAME_PLACEHOLDER": "Nazwa maszyny stanów",
+      "ENTITY_TYPE": "Typ encji",
+      "ENTITY_TYPE_PLACEHOLDER": "Wybierz typ encji",
+      "IS_ACTIVE": "Aktywna",
+      "STATES": "Stany",
+      "NO_STATES": "Brak stanów. Otwórz edytor wizualny, aby je dodać; maszyna stanów jest zapisywana z co najmniej jednym stanem.",
+      "OPEN_EDITOR": "Otwórz edytor wizualny",
+      "PREVIEW": "Podgląd maszyny stanów",
+      "ACTIVE_CONFIRM": "Aktywna maszyna stanów tego typu encji, „{name}”, zostanie wyłączona. Kontynuować?",
+      "CLOSE_CONFIRM": "Definicja maszyny stanów ma niezapisane zmiany. Zamknąć bez zapisywania?"
+    },
+    "EDITOR": {
+      "TITLE": "Edytor wizualny maszyny stanów",
+      "INVALID_JSON": "JSON jest nieprawidłowy; zachowano ostatni prawidłowy graf.",
+      "NO_DESCRIPTION": "(Brak opisu)",
+      "SUCCESS": "Sukces",
+      "FAIL": "Niepowodzenie",
+      "HAS_CONDITION": "Ma warunek",
+      "CANVAS": "Graf maszyny stanów. Kliknij prawym przyciskiem stan lub przejście, aby wyświetlić akcje; przeciągnij kropkę pod stanem, aby go połączyć.",
+      "STATE_EXISTS": "Stan o nazwie „{name}” już istnieje."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Edytuj stan",
+      "EDIT_ATTRIBUTES": "Edytuj atrybuty",
+      "EDIT_LOCALIZATION": "Edytuj lokalizację",
+      "DELETE_STATE": "Usuń stan",
+      "ADD_NEW_STATE": "Dodaj nowy stan"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Edytuj przejście",
+      "EDIT_ATTRIBUTES": "Edytuj atrybuty",
+      "EDIT_LOCALIZATION": "Edytuj lokalizację",
+      "EDIT_CONDITION": "Edytuj warunek",
+      "DELETE_TRANSITION": "Usuń przejście",
+      "INSERT_STATE": "Wstaw stan tutaj"
+    },
+    "DIALOGS": {
+      "NAME": "Nazwa",
+      "DESCRIPTION": "Opis",
+      "TRIGGER": "Wyzwalacz",
+      "OK": "OK",
+      "CANCEL": "Anuluj",
+      "REQUIRED": "To pole jest wymagane",
+      "STATE_EDIT": "Edytuj stan",
+      "STATE_ADD": "Dodaj nowy stan",
+      "TRANSITION_EDIT": "Edytuj przejście",
+      "TRANSITION_NEW": "Nowe przejście",
+      "LOCALIZATION": "Edytuj lokalizację: {item}",
+      "ATTRIBUTES": "Edytuj atrybuty: {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Warunek",
+      "SUBTITLE": "Przejście „{trigger}”",
+      "CONDITIONS": "Warunki",
+      "NO_PROTOTYPE": "Dla tego typu encji nie zdefiniowano prototypu warunku",
+      "IF": "Jeśli",
+      "ANY": "którykolwiek",
+      "ALL": "wszystkie",
+      "OF_THESE": "z tych warunków są spełnione",
+      "ADD": "Dodaj warunek",
+      "REMOVE": "Usuń warunek",
+      "HAS": "Ma",
+      "HAS_NO": "Nie ma",
+      "PERMISSION": "uprawnienie",
+      "USER": "Użytkownik",
+      "ACCOUNT_TYPE": "typ konta",
+      "SELECT": "Wybierz...",
+      "CLOSE_CONFIRM": "Warunek został zmieniony. Zamknąć bez zastosowania?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Uprawnienie ...",
+        "StateMachineConditionHasAccountType": "Typ konta ..."
+      }
+    }
+  }
+}

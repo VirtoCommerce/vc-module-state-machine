@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VirtoCommerce.CoreModule.Core.Conditions;
 using VirtoCommerce.Platform.Core.DynamicProperties;
 using VirtoCommerce.StateMachineModule.Core;
 using VirtoCommerce.StateMachineModule.Core.Common;
@@ -172,6 +174,32 @@ namespace VirtoCommerce.StateMachineModule.Web.Controllers.Api
         {
             var query = new GetStateMachineSettingsQuery();
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        /// <summary>Entity types state machines can be defined for, as registered by the installed modules</summary>
+        [HttpGet]
+        [Route("entitytypes")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<IList<StateMachineEntityType>>> GetEntityTypes()
+        {
+            var result = await _mediator.Send(new GetStateMachineEntityTypesQuery());
+            return Ok(result);
+        }
+
+        /// <summary>The transition condition tree prototype of a registered entity type</summary>
+        [HttpGet]
+        [Route("entitytypes/{id}/conditiontree")]
+        [Authorize(ModuleConstants.Security.Permissions.Read)]
+        public async Task<ActionResult<IConditionTree>> GetConditionTreePrototype([FromRoute] string id)
+        {
+            var query = new GetStateMachineConditionTreePrototypeQuery { EntityTypeId = id };
+            var result = await _mediator.Send(query);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
             return Ok(result);
         }
     }

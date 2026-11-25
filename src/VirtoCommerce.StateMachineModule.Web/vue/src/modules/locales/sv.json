@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Tillståndsmaskiner"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Uppdatera",
+      "ADD": "Ny",
+      "IMPORT": "Importera",
+      "EXPORT": "Exportera",
+      "SAVE": "Spara",
+      "RESET": "Återställ",
+      "APPLY": "Verkställ",
+      "ADD_STATE": "Lägg till nytt tillstånd",
+      "VISUAL_MODE": "Visuellt läge",
+      "JSON_MODE": "JSON-läge"
+    },
+    "LIST": {
+      "TITLE": "Tillståndsmaskiner",
+      "EMPTY": "Inga tillståndsmaskiner ännu",
+      "NAME": "Namn",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Entitetstyp",
+      "MODIFIED": "Ändrad",
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv",
+      "IMPORTED": "Tillståndsmaskinen \"{name}\" har importerats."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Ny tillståndsmaskin",
+      "SUBTITLE": "Tillståndsmaskin",
+      "NAME": "Namn",
+      "NAME_PLACEHOLDER": "Tillståndsmaskinens namn",
+      "ENTITY_TYPE": "Entitetstyp",
+      "ENTITY_TYPE_PLACEHOLDER": "Välj entitetstyp",
+      "IS_ACTIVE": "Aktiv",
+      "STATES": "Tillstånd",
+      "NO_STATES": "Inga tillstånd ännu. Öppna den visuella redigeraren för att lägga till dem; en tillståndsmaskin sparas med minst ett tillstånd.",
+      "OPEN_EDITOR": "Öppna visuell redigerare",
+      "PREVIEW": "Förhandsvisning av tillståndsmaskinen",
+      "ACTIVE_CONFIRM": "Den aktiva tillståndsmaskinen för den här entitetstypen, \"{name}\", inaktiveras. Fortsätta?",
+      "CLOSE_CONFIRM": "Definitionen av tillståndsmaskinen har osparade ändringar. Stäng utan att spara?"
+    },
+    "EDITOR": {
+      "TITLE": "Visuell redigerare för tillståndsmaskin",
+      "INVALID_JSON": "JSON är ogiltig; den senaste giltiga grafen behålls.",
+      "NO_DESCRIPTION": "(Ingen beskrivning)",
+      "SUCCESS": "Lyckat",
+      "FAIL": "Misslyckat",
+      "HAS_CONDITION": "Har ett villkor",
+      "CANVAS": "Tillståndsmaskinens graf. Högerklicka på ett tillstånd eller en övergång för åtgärder; dra punkten under ett tillstånd för att ansluta det.",
+      "STATE_EXISTS": "Ett tillstånd med namnet \"{name}\" finns redan."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Redigera tillstånd",
+      "EDIT_ATTRIBUTES": "Redigera attribut",
+      "EDIT_LOCALIZATION": "Redigera lokalisering",
+      "DELETE_STATE": "Ta bort tillstånd",
+      "ADD_NEW_STATE": "Lägg till nytt tillstånd"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Redigera övergång",
+      "EDIT_ATTRIBUTES": "Redigera attribut",
+      "EDIT_LOCALIZATION": "Redigera lokalisering",
+      "EDIT_CONDITION": "Redigera villkor",
+      "DELETE_TRANSITION": "Ta bort övergång",
+      "INSERT_STATE": "Infoga tillstånd här"
+    },
+    "DIALOGS": {
+      "NAME": "Namn",
+      "DESCRIPTION": "Beskrivning",
+      "TRIGGER": "Utlösare",
+      "OK": "OK",
+      "CANCEL": "Avbryt",
+      "REQUIRED": "Det här fältet är obligatoriskt",
+      "STATE_EDIT": "Redigera tillstånd",
+      "STATE_ADD": "Lägg till nytt tillstånd",
+      "TRANSITION_EDIT": "Redigera övergång",
+      "TRANSITION_NEW": "Ny övergång",
+      "LOCALIZATION": "Redigera lokalisering för {item}",
+      "ATTRIBUTES": "Redigera attribut för {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Villkor",
+      "SUBTITLE": "Övergång \"{trigger}\"",
+      "CONDITIONS": "Villkor",
+      "NO_PROTOTYPE": "Det finns ingen villkorsprototyp definierad för den här entitetstypen",
+      "IF": "Om",
+      "ANY": "något",
+      "ALL": "alla",
+      "OF_THESE": "av dessa villkor är uppfyllda",
+      "ADD": "Lägg till villkor",
+      "REMOVE": "Ta bort villkor",
+      "HAS": "Har",
+      "HAS_NO": "Har inte",
+      "PERMISSION": "behörigheten",
+      "USER": "Användaren",
+      "ACCOUNT_TYPE": "kontotypen",
+      "SELECT": "Välj...",
+      "CLOSE_CONFIRM": "Villkoret har ändrats. Stäng utan att verkställa?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Behörighet ...",
+        "StateMachineConditionHasAccountType": "Kontotyp ..."
+      }
+    }
+  }
+}

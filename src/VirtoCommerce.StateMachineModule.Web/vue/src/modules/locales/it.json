@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Macchine a stati"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Aggiorna",
+      "ADD": "Nuovo",
+      "IMPORT": "Importa",
+      "EXPORT": "Esporta",
+      "SAVE": "Salva",
+      "RESET": "Ripristina",
+      "APPLY": "Applica",
+      "ADD_STATE": "Aggiungi nuovo stato",
+      "VISUAL_MODE": "Modalità visiva",
+      "JSON_MODE": "Modalità JSON"
+    },
+    "LIST": {
+      "TITLE": "Macchine a stati",
+      "EMPTY": "Nessuna macchina a stati",
+      "NAME": "Nome",
+      "STATUS": "Stato",
+      "ENTITY_TYPE": "Tipo di entità",
+      "MODIFIED": "Modificato",
+      "ACTIVE": "Attiva",
+      "INACTIVE": "Inattiva",
+      "IMPORTED": "La macchina a stati \"{name}\" è stata importata."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Nuova macchina a stati",
+      "SUBTITLE": "Macchina a stati",
+      "NAME": "Nome",
+      "NAME_PLACEHOLDER": "Nome della macchina a stati",
+      "ENTITY_TYPE": "Tipo di entità",
+      "ENTITY_TYPE_PLACEHOLDER": "Selezionare il tipo di entità",
+      "IS_ACTIVE": "Attiva",
+      "STATES": "Stati",
+      "NO_STATES": "Ancora nessuno stato. Apri l'editor visuale per aggiungerli; una macchina a stati viene salvata con almeno uno stato.",
+      "OPEN_EDITOR": "Apri editor visivo",
+      "PREVIEW": "Anteprima della macchina a stati",
+      "ACTIVE_CONFIRM": "La macchina a stati attiva di questo tipo di entità, \"{name}\", verrà disattivata. Continuare?",
+      "CLOSE_CONFIRM": "La definizione della macchina a stati ha modifiche non salvate. Chiudere senza salvare?"
+    },
+    "EDITOR": {
+      "TITLE": "Editor visivo della macchina a stati",
+      "INVALID_JSON": "Il JSON non è valido; viene mantenuto l'ultimo grafo valido.",
+      "NO_DESCRIPTION": "(Nessuna descrizione)",
+      "SUCCESS": "Successo",
+      "FAIL": "Fallimento",
+      "HAS_CONDITION": "Ha una condizione",
+      "CANVAS": "Grafo della macchina a stati. Fai clic destro su uno stato o una transizione per le azioni; trascina il punto sotto uno stato per collegarlo.",
+      "STATE_EXISTS": "Esiste già uno stato denominato \"{name}\"."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Modifica stato",
+      "EDIT_ATTRIBUTES": "Modifica attributi",
+      "EDIT_LOCALIZATION": "Modifica localizzazione",
+      "DELETE_STATE": "Elimina stato",
+      "ADD_NEW_STATE": "Aggiungi nuovo stato"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Modifica transizione",
+      "EDIT_ATTRIBUTES": "Modifica attributi",
+      "EDIT_LOCALIZATION": "Modifica localizzazione",
+      "EDIT_CONDITION": "Modifica condizione",
+      "DELETE_TRANSITION": "Elimina transizione",
+      "INSERT_STATE": "Inserisci stato qui"
+    },
+    "DIALOGS": {
+      "NAME": "Nome",
+      "DESCRIPTION": "Descrizione",
+      "TRIGGER": "Trigger",
+      "OK": "OK",
+      "CANCEL": "Annulla",
+      "REQUIRED": "Questo campo è obbligatorio",
+      "STATE_EDIT": "Modifica stato",
+      "STATE_ADD": "Aggiungi nuovo stato",
+      "TRANSITION_EDIT": "Modifica transizione",
+      "TRANSITION_NEW": "Nuova transizione",
+      "LOCALIZATION": "Modifica localizzazione di {item}",
+      "ATTRIBUTES": "Modifica attributi di {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Condizione",
+      "SUBTITLE": "Transizione \"{trigger}\"",
+      "CONDITIONS": "Condizioni",
+      "NO_PROTOTYPE": "Nessun prototipo di condizione definito per questo tipo di entità",
+      "IF": "Se",
+      "ANY": "almeno una",
+      "ALL": "tutte",
+      "OF_THESE": "di queste condizioni sono vere",
+      "ADD": "Aggiungi condizione",
+      "REMOVE": "Rimuovi condizione",
+      "HAS": "Ha",
+      "HAS_NO": "Non ha",
+      "PERMISSION": "l'autorizzazione",
+      "USER": "L'utente",
+      "ACCOUNT_TYPE": "il tipo di account",
+      "SELECT": "Seleziona...",
+      "CLOSE_CONFIRM": "La condizione è stata modificata. Chiudere senza applicare?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Autorizzazione ...",
+        "StateMachineConditionHasAccountType": "Tipo di account ..."
+      }
+    }
+  }
+}

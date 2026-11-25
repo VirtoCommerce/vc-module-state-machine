@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Tilstandsmaskiner"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Oppdater",
+      "ADD": "Ny",
+      "IMPORT": "Importer",
+      "EXPORT": "Eksporter",
+      "SAVE": "Lagre",
+      "RESET": "Tilbakestill",
+      "APPLY": "Bruk",
+      "ADD_STATE": "Legg til ny tilstand",
+      "VISUAL_MODE": "Visuell modus",
+      "JSON_MODE": "JSON-modus"
+    },
+    "LIST": {
+      "TITLE": "Tilstandsmaskiner",
+      "EMPTY": "Ingen tilstandsmaskiner ennå",
+      "NAME": "Navn",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Enhetstype",
+      "MODIFIED": "Endret",
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv",
+      "IMPORTED": "Tilstandsmaskinen «{name}» er importert."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Ny tilstandsmaskin",
+      "SUBTITLE": "Tilstandsmaskin",
+      "NAME": "Navn",
+      "NAME_PLACEHOLDER": "Navn på tilstandsmaskin",
+      "ENTITY_TYPE": "Enhetstype",
+      "ENTITY_TYPE_PLACEHOLDER": "Velg enhetstype",
+      "IS_ACTIVE": "Aktiv",
+      "STATES": "Tilstander",
+      "NO_STATES": "Ingen tilstander ennå. Åpne den visuelle redigereren for å legge dem til; en tilstandsmaskin lagres med minst én tilstand.",
+      "OPEN_EDITOR": "Åpne visuelt redigeringsprogram",
+      "PREVIEW": "Forhåndsvisning av tilstandsmaskinen",
+      "ACTIVE_CONFIRM": "Den aktive tilstandsmaskinen for denne enhetstypen, «{name}», blir deaktivert. Fortsette?",
+      "CLOSE_CONFIRM": "Definisjonen av tilstandsmaskinen har ulagrede endringer. Lukke uten å lagre?"
+    },
+    "EDITOR": {
+      "TITLE": "Visuelt redigeringsprogram for tilstandsmaskin",
+      "INVALID_JSON": "JSON er ugyldig; den siste gyldige grafen beholdes.",
+      "NO_DESCRIPTION": "(Ingen beskrivelse)",
+      "SUCCESS": "Vellykket",
+      "FAIL": "Mislykket",
+      "HAS_CONDITION": "Har en betingelse",
+      "CANVAS": "Graf over tilstandsmaskinen. Høyreklikk på en tilstand eller en overgang for handlinger; dra punktet under en tilstand for å koble den.",
+      "STATE_EXISTS": "En tilstand med navnet «{name}» finnes allerede."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Rediger tilstand",
+      "EDIT_ATTRIBUTES": "Rediger attributter",
+      "EDIT_LOCALIZATION": "Rediger lokalisering",
+      "DELETE_STATE": "Slett tilstand",
+      "ADD_NEW_STATE": "Legg til ny tilstand"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Rediger overgang",
+      "EDIT_ATTRIBUTES": "Rediger attributter",
+      "EDIT_LOCALIZATION": "Rediger lokalisering",
+      "EDIT_CONDITION": "Rediger betingelse",
+      "DELETE_TRANSITION": "Slett overgang",
+      "INSERT_STATE": "Sett inn tilstand her"
+    },
+    "DIALOGS": {
+      "NAME": "Navn",
+      "DESCRIPTION": "Beskrivelse",
+      "TRIGGER": "Utløser",
+      "OK": "OK",
+      "CANCEL": "Avbryt",
+      "REQUIRED": "Dette feltet er obligatorisk",
+      "STATE_EDIT": "Rediger tilstand",
+      "STATE_ADD": "Legg til ny tilstand",
+      "TRANSITION_EDIT": "Rediger overgang",
+      "TRANSITION_NEW": "Ny overgang",
+      "LOCALIZATION": "Rediger lokalisering for {item}",
+      "ATTRIBUTES": "Rediger attributter for {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Betingelse",
+      "SUBTITLE": "Overgang «{trigger}»",
+      "CONDITIONS": "Betingelser",
+      "NO_PROTOTYPE": "Det er ikke definert noen betingelsesprototype for denne enhetstypen",
+      "IF": "Hvis",
+      "ANY": "noen",
+      "ALL": "alle",
+      "OF_THESE": "av disse betingelsene er oppfylt",
+      "ADD": "Legg til betingelse",
+      "REMOVE": "Fjern betingelse",
+      "HAS": "Har",
+      "HAS_NO": "Har ikke",
+      "PERMISSION": "tillatelsen",
+      "USER": "Brukeren",
+      "ACCOUNT_TYPE": "kontotypen",
+      "SELECT": "Velg...",
+      "CLOSE_CONFIRM": "Betingelsen er endret. Lukke uten å bruke?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Tillatelse ...",
+        "StateMachineConditionHasAccountType": "Kontotype ..."
+      }
+    }
+  }
+}

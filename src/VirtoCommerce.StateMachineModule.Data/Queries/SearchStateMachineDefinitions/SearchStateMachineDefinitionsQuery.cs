@@ -15,6 +15,8 @@ public class SearchStateMachineDefinitionsQuery : SearchStateMachineDefinitionCr
         criteria.Take = Take;
         criteria.Skip = Skip;
         criteria.SearchPhrase = SearchPhrase;
+        criteria.Sort = Sort;
+        criteria.IsActive = IsActive;
 
         return criteria;
     }

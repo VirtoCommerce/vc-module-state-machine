@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Zustandsautomaten"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Aktualisieren",
+      "ADD": "Neu",
+      "IMPORT": "Importieren",
+      "EXPORT": "Exportieren",
+      "SAVE": "Speichern",
+      "RESET": "Zurücksetzen",
+      "APPLY": "Übernehmen",
+      "ADD_STATE": "Neuen Zustand hinzufügen",
+      "VISUAL_MODE": "Visueller Modus",
+      "JSON_MODE": "JSON-Modus"
+    },
+    "LIST": {
+      "TITLE": "Zustandsautomaten",
+      "EMPTY": "Noch keine Zustandsautomaten",
+      "NAME": "Name",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Entitätstyp",
+      "MODIFIED": "Geändert",
+      "ACTIVE": "Aktiv",
+      "INACTIVE": "Inaktiv",
+      "IMPORTED": "Der Zustandsautomat „{name}“ wurde importiert."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Neuer Zustandsautomat",
+      "SUBTITLE": "Zustandsautomat",
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "Name des Zustandsautomaten",
+      "ENTITY_TYPE": "Entitätstyp",
+      "ENTITY_TYPE_PLACEHOLDER": "Bitte Entitätstyp auswählen",
+      "IS_ACTIVE": "Aktiv",
+      "STATES": "Zustände",
+      "NO_STATES": "Noch keine Zustände. Öffnen Sie den visuellen Editor, um sie hinzuzufügen; ein Zustandsautomat wird mit mindestens einem Zustand gespeichert.",
+      "OPEN_EDITOR": "Visuellen Editor öffnen",
+      "PREVIEW": "Vorschau des Zustandsautomaten",
+      "ACTIVE_CONFIRM": "Der aktive Zustandsautomat dieses Entitätstyps, „{name}“, wird deaktiviert. Fortfahren?",
+      "CLOSE_CONFIRM": "Die Definition des Zustandsautomaten hat nicht gespeicherte Änderungen. Ohne Speichern schließen?"
+    },
+    "EDITOR": {
+      "TITLE": "Visueller Editor für Zustandsautomaten",
+      "INVALID_JSON": "Das JSON ist ungültig; der letzte gültige Graph bleibt erhalten.",
+      "NO_DESCRIPTION": "(Keine Beschreibung)",
+      "SUCCESS": "Erfolg",
+      "FAIL": "Fehlschlag",
+      "HAS_CONDITION": "Hat eine Bedingung",
+      "CANVAS": "Graph des Zustandsautomaten. Klicken Sie mit der rechten Maustaste auf einen Zustand oder Übergang, um Aktionen anzuzeigen; ziehen Sie den Punkt unter einem Zustand, um ihn zu verbinden.",
+      "STATE_EXISTS": "Ein Zustand namens „{name}“ ist bereits vorhanden."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Zustand bearbeiten",
+      "EDIT_ATTRIBUTES": "Attribute bearbeiten",
+      "EDIT_LOCALIZATION": "Lokalisierung bearbeiten",
+      "DELETE_STATE": "Zustand löschen",
+      "ADD_NEW_STATE": "Neuen Zustand hinzufügen"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Übergang bearbeiten",
+      "EDIT_ATTRIBUTES": "Attribute bearbeiten",
+      "EDIT_LOCALIZATION": "Lokalisierung bearbeiten",
+      "EDIT_CONDITION": "Bedingung bearbeiten",
+      "DELETE_TRANSITION": "Übergang löschen",
+      "INSERT_STATE": "Zustand hier einfügen"
+    },
+    "DIALOGS": {
+      "NAME": "Name",
+      "DESCRIPTION": "Beschreibung",
+      "TRIGGER": "Auslöser",
+      "OK": "OK",
+      "CANCEL": "Abbrechen",
+      "REQUIRED": "Dieses Feld ist erforderlich",
+      "STATE_EDIT": "Zustand bearbeiten",
+      "STATE_ADD": "Neuen Zustand hinzufügen",
+      "TRANSITION_EDIT": "Übergang bearbeiten",
+      "TRANSITION_NEW": "Neuer Übergang",
+      "LOCALIZATION": "Lokalisierung von {item} bearbeiten",
+      "ATTRIBUTES": "Attribute von {item} bearbeiten"
+    },
+    "CONDITION": {
+      "TITLE": "Bedingung",
+      "SUBTITLE": "Übergang „{trigger}“",
+      "CONDITIONS": "Bedingungen",
+      "NO_PROTOTYPE": "Für diesen Entitätstyp ist kein Bedingungsprototyp definiert",
+      "IF": "Wenn",
+      "ANY": "eine",
+      "ALL": "alle",
+      "OF_THESE": "dieser Bedingungen erfüllt sind",
+      "ADD": "Bedingung hinzufügen",
+      "REMOVE": "Bedingung entfernen",
+      "HAS": "Hat",
+      "HAS_NO": "Hat keine",
+      "PERMISSION": "Berechtigung",
+      "USER": "Benutzer",
+      "ACCOUNT_TYPE": "Kontotyp",
+      "SELECT": "Auswählen...",
+      "CLOSE_CONFIRM": "Die Bedingung wurde geändert. Ohne Übernehmen schließen?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Berechtigung ...",
+        "StateMachineConditionHasAccountType": "Kontotyp ..."
+      }
+    }
+  }
+}

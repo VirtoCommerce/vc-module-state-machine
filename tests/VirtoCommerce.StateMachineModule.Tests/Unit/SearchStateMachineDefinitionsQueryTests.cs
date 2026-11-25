@@ -43,6 +43,30 @@ public class SearchStateMachineDefinitionsQueryTests
         searchStateMachineDefinitionResult.TotalCount.Should().Be(1);
     }
 
+    [Fact]
+    public void ToCriteria_CopiesSortAndIsActive()
+    {
+        // Arrange
+        var query = new SearchStateMachineDefinitionsQuery
+        {
+            Sort = "name:ASC",
+            IsActive = true,
+            ObjectTypes = ["TestEntityType"],
+            Skip = 20,
+            Take = 10,
+        };
+
+        // Act
+        var criteria = query.ToCriteria();
+
+        // Assert
+        criteria.Sort.Should().Be("name:ASC");
+        criteria.IsActive.Should().BeTrue();
+        criteria.ObjectTypes.Should().Equal("TestEntityType");
+        criteria.Skip.Should().Be(20);
+        criteria.Take.Should().Be(10);
+    }
+
     private SearchStateMachineDefinitionsQueryHandler GetQueryHandler()
     {
         IStateMachineDefinitionSearchService stateMachineDefinitionsSearchServiceStub = new StateMachineDefinitionsSearchServiceStub();

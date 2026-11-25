@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "State Machines"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Refresh",
+      "ADD": "New",
+      "IMPORT": "Import",
+      "EXPORT": "Export",
+      "SAVE": "Save",
+      "RESET": "Reset",
+      "APPLY": "Apply",
+      "ADD_STATE": "Add new state",
+      "VISUAL_MODE": "Visual mode",
+      "JSON_MODE": "JSON mode"
+    },
+    "LIST": {
+      "TITLE": "State machines",
+      "EMPTY": "No state machines yet",
+      "NAME": "Name",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Entity type",
+      "MODIFIED": "Modified",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "IMPORTED": "State machine \"{name}\" has been imported."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "New state machine",
+      "SUBTITLE": "State machine",
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "State machine name",
+      "ENTITY_TYPE": "Entity type",
+      "ENTITY_TYPE_PLACEHOLDER": "Please select Entity type",
+      "IS_ACTIVE": "Active",
+      "STATES": "States",
+      "NO_STATES": "No states yet. Open the visual editor to add them; a state machine is saved with at least one state.",
+      "OPEN_EDITOR": "Open Visual Editor",
+      "PREVIEW": "State machine preview",
+      "ACTIVE_CONFIRM": "The active state machine of this entity type, \"{name}\", will be disabled. Continue?",
+      "CLOSE_CONFIRM": "The state machine definition has unsaved changes. Close without saving?"
+    },
+    "EDITOR": {
+      "TITLE": "State machine Visual Editor",
+      "INVALID_JSON": "The JSON is not valid; the last valid graph is kept.",
+      "NO_DESCRIPTION": "(No description)",
+      "SUCCESS": "Success",
+      "FAIL": "Fail",
+      "HAS_CONDITION": "Has a condition",
+      "CANVAS": "State machine graph. Right-click a state or a transition for actions; drag the dot under a state to connect it.",
+      "STATE_EXISTS": "A state named \"{name}\" already exists."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Edit state",
+      "EDIT_ATTRIBUTES": "Edit attributes",
+      "EDIT_LOCALIZATION": "Edit localization",
+      "DELETE_STATE": "Delete state",
+      "ADD_NEW_STATE": "Add new State"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Edit transition",
+      "EDIT_ATTRIBUTES": "Edit attributes",
+      "EDIT_LOCALIZATION": "Edit localization",
+      "EDIT_CONDITION": "Edit condition",
+      "DELETE_TRANSITION": "Delete transition",
+      "INSERT_STATE": "Insert state here"
+    },
+    "DIALOGS": {
+      "NAME": "Name",
+      "DESCRIPTION": "Description",
+      "TRIGGER": "Trigger",
+      "OK": "OK",
+      "CANCEL": "Cancel",
+      "REQUIRED": "This field is required",
+      "STATE_EDIT": "Edit State",
+      "STATE_ADD": "Add New State",
+      "TRANSITION_EDIT": "Edit Transition",
+      "TRANSITION_NEW": "New Transition",
+      "LOCALIZATION": "Edit localization {item}",
+      "ATTRIBUTES": "Edit attributes {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Condition",
+      "SUBTITLE": "Transition \"{trigger}\"",
+      "CONDITIONS": "Conditions",
+      "NO_PROTOTYPE": "There is no condition prototype defined for this entityType",
+      "IF": "If",
+      "ANY": "any",
+      "ALL": "all",
+      "OF_THESE": "of these conditions are true",
+      "ADD": "Add condition",
+      "REMOVE": "Remove condition",
+      "HAS": "Has",
+      "HAS_NO": "Has no",
+      "PERMISSION": "permission",
+      "USER": "User",
+      "ACCOUNT_TYPE": "account type",
+      "SELECT": "Select...",
+      "CLOSE_CONFIRM": "The condition has been changed. Close without applying?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Permission ...",
+        "StateMachineConditionHasAccountType": "Account Type ..."
+      }
+    }
+  }
+}

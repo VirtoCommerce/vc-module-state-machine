@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Máquinas de estados"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Actualizar",
+      "ADD": "Nueva",
+      "IMPORT": "Importar",
+      "EXPORT": "Exportar",
+      "SAVE": "Guardar",
+      "RESET": "Restablecer",
+      "APPLY": "Aplicar",
+      "ADD_STATE": "Agregar nuevo estado",
+      "VISUAL_MODE": "Modo visual",
+      "JSON_MODE": "Modo JSON"
+    },
+    "LIST": {
+      "TITLE": "Máquinas de estados",
+      "EMPTY": "Aún no hay máquinas de estados",
+      "NAME": "Nombre",
+      "STATUS": "Estado",
+      "ENTITY_TYPE": "Tipo de entidad",
+      "MODIFIED": "Modificado",
+      "ACTIVE": "Activa",
+      "INACTIVE": "Inactiva",
+      "IMPORTED": "Se ha importado la máquina de estados «{name}»."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Nueva máquina de estados",
+      "SUBTITLE": "Máquina de estados",
+      "NAME": "Nombre",
+      "NAME_PLACEHOLDER": "Nombre de la máquina de estados",
+      "ENTITY_TYPE": "Tipo de entidad",
+      "ENTITY_TYPE_PLACEHOLDER": "Seleccione el tipo de entidad",
+      "IS_ACTIVE": "Activa",
+      "STATES": "Estados",
+      "NO_STATES": "Aún no hay estados. Abra el editor visual para añadirlos; una máquina de estados se guarda con al menos un estado.",
+      "OPEN_EDITOR": "Abrir editor visual",
+      "PREVIEW": "Vista previa de la máquina de estados",
+      "ACTIVE_CONFIRM": "Se desactivará la máquina de estados activa de este tipo de entidad, «{name}». ¿Continuar?",
+      "CLOSE_CONFIRM": "La definición de la máquina de estados tiene cambios sin guardar. ¿Cerrar sin guardar?"
+    },
+    "EDITOR": {
+      "TITLE": "Editor visual de máquina de estados",
+      "INVALID_JSON": "El JSON no es válido; se conserva el último grafo válido.",
+      "NO_DESCRIPTION": "(Sin descripción)",
+      "SUCCESS": "Éxito",
+      "FAIL": "Fallo",
+      "HAS_CONDITION": "Tiene una condición",
+      "CANVAS": "Grafo de la máquina de estados. Haga clic derecho en un estado o una transición para ver las acciones; arrastre el punto bajo un estado para conectarlo.",
+      "STATE_EXISTS": "Ya existe un estado llamado «{name}»."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Editar estado",
+      "EDIT_ATTRIBUTES": "Editar atributos",
+      "EDIT_LOCALIZATION": "Editar localización",
+      "DELETE_STATE": "Eliminar estado",
+      "ADD_NEW_STATE": "Agregar nuevo estado"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Editar transición",
+      "EDIT_ATTRIBUTES": "Editar atributos",
+      "EDIT_LOCALIZATION": "Editar localización",
+      "EDIT_CONDITION": "Editar condición",
+      "DELETE_TRANSITION": "Eliminar transición",
+      "INSERT_STATE": "Insertar estado aquí"
+    },
+    "DIALOGS": {
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "TRIGGER": "Disparador",
+      "OK": "Aceptar",
+      "CANCEL": "Cancelar",
+      "REQUIRED": "Este campo es obligatorio",
+      "STATE_EDIT": "Editar estado",
+      "STATE_ADD": "Agregar nuevo estado",
+      "TRANSITION_EDIT": "Editar transición",
+      "TRANSITION_NEW": "Nueva transición",
+      "LOCALIZATION": "Editar localización de {item}",
+      "ATTRIBUTES": "Editar atributos de {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Condición",
+      "SUBTITLE": "Transición «{trigger}»",
+      "CONDITIONS": "Condiciones",
+      "NO_PROTOTYPE": "No hay ningún prototipo de condición definido para este tipo de entidad",
+      "IF": "Si",
+      "ANY": "alguna",
+      "ALL": "todas",
+      "OF_THESE": "de estas condiciones se cumplen",
+      "ADD": "Añadir condición",
+      "REMOVE": "Quitar condición",
+      "HAS": "Tiene",
+      "HAS_NO": "No tiene",
+      "PERMISSION": "el permiso",
+      "USER": "El usuario",
+      "ACCOUNT_TYPE": "el tipo de cuenta",
+      "SELECT": "Seleccionar...",
+      "CLOSE_CONFIRM": "La condición ha cambiado. ¿Cerrar sin aplicar?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Permiso ...",
+        "StateMachineConditionHasAccountType": "Tipo de cuenta ..."
+      }
+    }
+  }
+}

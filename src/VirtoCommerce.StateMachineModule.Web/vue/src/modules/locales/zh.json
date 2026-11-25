@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "状态机"
+    },
+    "TOOLBAR": {
+      "REFRESH": "刷新",
+      "ADD": "新建",
+      "IMPORT": "导入",
+      "EXPORT": "导出",
+      "SAVE": "保存",
+      "RESET": "重置",
+      "APPLY": "应用",
+      "ADD_STATE": "添加新状态",
+      "VISUAL_MODE": "可视化模式",
+      "JSON_MODE": "JSON 模式"
+    },
+    "LIST": {
+      "TITLE": "状态机",
+      "EMPTY": "暂无状态机",
+      "NAME": "名称",
+      "STATUS": "状态",
+      "ENTITY_TYPE": "实体类型",
+      "MODIFIED": "修改时间",
+      "ACTIVE": "活动",
+      "INACTIVE": "非活动",
+      "IMPORTED": "已导入状态机“{name}”。"
+    },
+    "DETAILS": {
+      "TITLE_NEW": "新建状态机",
+      "SUBTITLE": "状态机",
+      "NAME": "名称",
+      "NAME_PLACEHOLDER": "状态机名称",
+      "ENTITY_TYPE": "实体类型",
+      "ENTITY_TYPE_PLACEHOLDER": "请选择实体类型",
+      "IS_ACTIVE": "活动",
+      "STATES": "状态",
+      "NO_STATES": "尚无状态。打开可视化编辑器添加状态；状态机至少包含一个状态才能保存。",
+      "OPEN_EDITOR": "打开可视化编辑器",
+      "PREVIEW": "状态机预览",
+      "ACTIVE_CONFIRM": "此实体类型当前启用的状态机“{name}”将被停用。是否继续？",
+      "CLOSE_CONFIRM": "状态机定义有未保存的更改。是否不保存就关闭？"
+    },
+    "EDITOR": {
+      "TITLE": "状态机可视化编辑器",
+      "INVALID_JSON": "JSON 无效；保留最后一个有效的图。",
+      "NO_DESCRIPTION": "（无描述）",
+      "SUCCESS": "成功",
+      "FAIL": "失败",
+      "HAS_CONDITION": "有条件",
+      "CANVAS": "状态机图。右键单击状态或转换可查看操作；拖动状态下方的圆点可将其连接。",
+      "STATE_EXISTS": "名为“{name}”的状态已存在。"
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "编辑状态",
+      "EDIT_ATTRIBUTES": "编辑属性",
+      "EDIT_LOCALIZATION": "编辑本地化",
+      "DELETE_STATE": "删除状态",
+      "ADD_NEW_STATE": "添加新状态"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "编辑转换",
+      "EDIT_ATTRIBUTES": "编辑属性",
+      "EDIT_LOCALIZATION": "编辑本地化",
+      "EDIT_CONDITION": "编辑条件",
+      "DELETE_TRANSITION": "删除转换",
+      "INSERT_STATE": "在此插入状态"
+    },
+    "DIALOGS": {
+      "NAME": "名称",
+      "DESCRIPTION": "描述",
+      "TRIGGER": "触发器",
+      "OK": "确定",
+      "CANCEL": "取消",
+      "REQUIRED": "此字段为必填项",
+      "STATE_EDIT": "编辑状态",
+      "STATE_ADD": "添加新状态",
+      "TRANSITION_EDIT": "编辑转换",
+      "TRANSITION_NEW": "新建转换",
+      "LOCALIZATION": "编辑 {item} 的本地化",
+      "ATTRIBUTES": "编辑 {item} 的属性"
+    },
+    "CONDITION": {
+      "TITLE": "条件",
+      "SUBTITLE": "转换“{trigger}”",
+      "CONDITIONS": "条件",
+      "NO_PROTOTYPE": "未为此实体类型定义条件原型",
+      "IF": "如果以下条件中",
+      "ANY": "任一",
+      "ALL": "全部",
+      "OF_THESE": "成立",
+      "ADD": "添加条件",
+      "REMOVE": "删除条件",
+      "HAS": "具有",
+      "HAS_NO": "不具有",
+      "PERMISSION": "权限",
+      "USER": "用户",
+      "ACCOUNT_TYPE": "账户类型",
+      "SELECT": "选择...",
+      "CLOSE_CONFIRM": "条件已更改。是否不应用就关闭？",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "权限 ...",
+        "StateMachineConditionHasAccountType": "账户类型 ..."
+      }
+    }
+  }
+}

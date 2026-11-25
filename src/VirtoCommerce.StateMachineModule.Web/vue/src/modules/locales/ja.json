@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "ステートマシン"
+    },
+    "TOOLBAR": {
+      "REFRESH": "再読み込み",
+      "ADD": "新規",
+      "IMPORT": "インポート",
+      "EXPORT": "エクスポート",
+      "SAVE": "保存",
+      "RESET": "リセット",
+      "APPLY": "適用",
+      "ADD_STATE": "新しいステートを追加",
+      "VISUAL_MODE": "ビジュアルモード",
+      "JSON_MODE": "JSON モード"
+    },
+    "LIST": {
+      "TITLE": "ステートマシン",
+      "EMPTY": "ステートマシンはまだありません",
+      "NAME": "名前",
+      "STATUS": "ステータス",
+      "ENTITY_TYPE": "エンティティタイプ",
+      "MODIFIED": "更新日時",
+      "ACTIVE": "有効",
+      "INACTIVE": "無効",
+      "IMPORTED": "ステートマシン「{name}」をインポートしました。"
+    },
+    "DETAILS": {
+      "TITLE_NEW": "新しいステートマシン",
+      "SUBTITLE": "ステートマシン",
+      "NAME": "名前",
+      "NAME_PLACEHOLDER": "ステートマシン名",
+      "ENTITY_TYPE": "エンティティタイプ",
+      "ENTITY_TYPE_PLACEHOLDER": "エンティティタイプを選択してください",
+      "IS_ACTIVE": "有効",
+      "STATES": "ステート",
+      "NO_STATES": "まだ状態がありません。ビジュアルエディターを開いて追加してください。ステートマシンは少なくとも 1 つの状態がある場合に保存されます。",
+      "OPEN_EDITOR": "ビジュアルエディターを開く",
+      "PREVIEW": "ステートマシンのプレビュー",
+      "ACTIVE_CONFIRM": "このエンティティ タイプの有効なステートマシン「{name}」は無効になります。続行しますか?",
+      "CLOSE_CONFIRM": "ステートマシンの定義に未保存の変更があります。保存せずに閉じますか?"
+    },
+    "EDITOR": {
+      "TITLE": "ステートマシン ビジュアルエディター",
+      "INVALID_JSON": "JSON が無効です。最後に有効だったグラフが保持されます。",
+      "NO_DESCRIPTION": "（説明なし）",
+      "SUCCESS": "成功",
+      "FAIL": "失敗",
+      "HAS_CONDITION": "条件あり",
+      "CANVAS": "ステートマシンのグラフ。状態または遷移を右クリックすると操作を選べます。状態の下の点をドラッグすると接続できます。",
+      "STATE_EXISTS": "「{name}」という名前の状態は既に存在します。"
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "ステートを編集",
+      "EDIT_ATTRIBUTES": "属性を編集",
+      "EDIT_LOCALIZATION": "ローカライズを編集",
+      "DELETE_STATE": "ステートを削除",
+      "ADD_NEW_STATE": "新しいステートを追加"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "遷移を編集",
+      "EDIT_ATTRIBUTES": "属性を編集",
+      "EDIT_LOCALIZATION": "ローカライズを編集",
+      "EDIT_CONDITION": "条件を編集",
+      "DELETE_TRANSITION": "遷移を削除",
+      "INSERT_STATE": "ここにステートを挿入"
+    },
+    "DIALOGS": {
+      "NAME": "名前",
+      "DESCRIPTION": "説明",
+      "TRIGGER": "トリガー",
+      "OK": "OK",
+      "CANCEL": "キャンセル",
+      "REQUIRED": "この項目は必須です",
+      "STATE_EDIT": "ステートを編集",
+      "STATE_ADD": "新しいステートを追加",
+      "TRANSITION_EDIT": "遷移を編集",
+      "TRANSITION_NEW": "新しい遷移",
+      "LOCALIZATION": "{item} のローカライズを編集",
+      "ATTRIBUTES": "{item} の属性を編集"
+    },
+    "CONDITION": {
+      "TITLE": "条件",
+      "SUBTITLE": "遷移「{trigger}」",
+      "CONDITIONS": "条件",
+      "NO_PROTOTYPE": "このエンティティタイプには条件プロトタイプが定義されていません",
+      "IF": "次の条件の",
+      "ANY": "いずれか",
+      "ALL": "すべて",
+      "OF_THESE": "が満たされる場合",
+      "ADD": "条件を追加",
+      "REMOVE": "条件を削除",
+      "HAS": "あり",
+      "HAS_NO": "なし",
+      "PERMISSION": "権限",
+      "USER": "ユーザー",
+      "ACCOUNT_TYPE": "アカウント タイプ",
+      "SELECT": "選択...",
+      "CLOSE_CONFIRM": "条件が変更されています。適用せずに閉じますか?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "権限 ...",
+        "StateMachineConditionHasAccountType": "アカウント タイプ ..."
+      }
+    }
+  }
+}

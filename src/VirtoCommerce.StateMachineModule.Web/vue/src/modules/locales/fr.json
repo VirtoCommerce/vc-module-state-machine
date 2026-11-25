@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Machines à états"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Actualiser",
+      "ADD": "Nouveau",
+      "IMPORT": "Importer",
+      "EXPORT": "Exporter",
+      "SAVE": "Enregistrer",
+      "RESET": "Réinitialiser",
+      "APPLY": "Appliquer",
+      "ADD_STATE": "Ajouter un état",
+      "VISUAL_MODE": "Mode visuel",
+      "JSON_MODE": "Mode JSON"
+    },
+    "LIST": {
+      "TITLE": "Machines à états",
+      "EMPTY": "Aucune machine à états pour le moment",
+      "NAME": "Nom",
+      "STATUS": "Statut",
+      "ENTITY_TYPE": "Type d'entité",
+      "MODIFIED": "Modifié",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "IMPORTED": "La machine à états « {name} » a été importée."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Nouvelle machine à états",
+      "SUBTITLE": "Machine à états",
+      "NAME": "Nom",
+      "NAME_PLACEHOLDER": "Nom de la machine à états",
+      "ENTITY_TYPE": "Type d'entité",
+      "ENTITY_TYPE_PLACEHOLDER": "Veuillez sélectionner le type d'entité",
+      "IS_ACTIVE": "Active",
+      "STATES": "États",
+      "NO_STATES": "Aucun état pour l’instant. Ouvrez l’éditeur visuel pour en ajouter ; une machine à états est enregistrée avec au moins un état.",
+      "OPEN_EDITOR": "Ouvrir l'éditeur visuel",
+      "PREVIEW": "Aperçu de la machine à états",
+      "ACTIVE_CONFIRM": "La machine à états active de ce type d’entité, « {name} », sera désactivée. Continuer ?",
+      "CLOSE_CONFIRM": "La définition de la machine à états comporte des modifications non enregistrées. Fermer sans enregistrer ?"
+    },
+    "EDITOR": {
+      "TITLE": "Éditeur visuel de machine à états",
+      "INVALID_JSON": "Le JSON n’est pas valide ; le dernier graphe valide est conservé.",
+      "NO_DESCRIPTION": "(Aucune description)",
+      "SUCCESS": "Succès",
+      "FAIL": "Échec",
+      "HAS_CONDITION": "A une condition",
+      "CANVAS": "Graphe de la machine à états. Faites un clic droit sur un état ou une transition pour les actions ; faites glisser le point sous un état pour le relier.",
+      "STATE_EXISTS": "Un état nommé « {name} » existe déjà."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Modifier l'état",
+      "EDIT_ATTRIBUTES": "Modifier les attributs",
+      "EDIT_LOCALIZATION": "Modifier la localisation",
+      "DELETE_STATE": "Supprimer l'état",
+      "ADD_NEW_STATE": "Ajouter un état"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Modifier la transition",
+      "EDIT_ATTRIBUTES": "Modifier les attributs",
+      "EDIT_LOCALIZATION": "Modifier la localisation",
+      "EDIT_CONDITION": "Modifier la condition",
+      "DELETE_TRANSITION": "Supprimer la transition",
+      "INSERT_STATE": "Insérer un état ici"
+    },
+    "DIALOGS": {
+      "NAME": "Nom",
+      "DESCRIPTION": "Description",
+      "TRIGGER": "Déclencheur",
+      "OK": "OK",
+      "CANCEL": "Annuler",
+      "REQUIRED": "Ce champ est obligatoire",
+      "STATE_EDIT": "Modifier l'état",
+      "STATE_ADD": "Ajouter un état",
+      "TRANSITION_EDIT": "Modifier la transition",
+      "TRANSITION_NEW": "Nouvelle transition",
+      "LOCALIZATION": "Modifier la localisation de {item}",
+      "ATTRIBUTES": "Modifier les attributs de {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Condition",
+      "SUBTITLE": "Transition « {trigger} »",
+      "CONDITIONS": "Conditions",
+      "NO_PROTOTYPE": "Aucun prototype de condition n'est défini pour ce type d'entité",
+      "IF": "Si",
+      "ANY": "l’une",
+      "ALL": "toutes",
+      "OF_THESE": "de ces conditions sont vraies",
+      "ADD": "Ajouter une condition",
+      "REMOVE": "Supprimer la condition",
+      "HAS": "A",
+      "HAS_NO": "N’a pas",
+      "PERMISSION": "la permission",
+      "USER": "L’utilisateur",
+      "ACCOUNT_TYPE": "le type de compte",
+      "SELECT": "Sélectionner...",
+      "CLOSE_CONFIRM": "La condition a été modifiée. Fermer sans appliquer ?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Permission ...",
+        "StateMachineConditionHasAccountType": "Type de compte ..."
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "מכונות מצבים"
+    },
+    "TOOLBAR": {
+      "REFRESH": "רענון",
+      "ADD": "יצירה",
+      "IMPORT": "ייבוא",
+      "EXPORT": "ייצוא",
+      "SAVE": "שמירה",
+      "RESET": "איפוס",
+      "APPLY": "החל",
+      "ADD_STATE": "הוספת מצב חדש",
+      "VISUAL_MODE": "תצוגה חזותית",
+      "JSON_MODE": "תצוגת JSON"
+    },
+    "LIST": {
+      "TITLE": "מכונות מצבים",
+      "EMPTY": "אין עדיין מכונות מצבים",
+      "NAME": "שם",
+      "STATUS": "סטטוס",
+      "ENTITY_TYPE": "סוג ישות",
+      "MODIFIED": "שונה",
+      "ACTIVE": "פעילה",
+      "INACTIVE": "לא פעילה",
+      "IMPORTED": "מכונת המצבים \"{name}\" יובאה."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "מכונת מצבים חדשה",
+      "SUBTITLE": "מכונת מצבים",
+      "NAME": "שם",
+      "NAME_PLACEHOLDER": "שם מכונת המצבים",
+      "ENTITY_TYPE": "סוג ישות",
+      "ENTITY_TYPE_PLACEHOLDER": "יש לבחור סוג ישות",
+      "IS_ACTIVE": "פעילה",
+      "STATES": "מצבים",
+      "NO_STATES": "אין עדיין מצבים. פתחו את העורך החזותי כדי להוסיף אותם; מכונת מצבים נשמרת כשיש בה לפחות מצב אחד.",
+      "OPEN_EDITOR": "פתיחת העורך החזותי",
+      "PREVIEW": "תצוגה מקדימה של מכונת המצבים",
+      "ACTIVE_CONFIRM": "מכונת המצבים הפעילה של סוג ישות זה, \"{name}\", תושבת. להמשיך?",
+      "CLOSE_CONFIRM": "בהגדרת מכונת המצבים יש שינויים שלא נשמרו. לסגור בלי לשמור?"
+    },
+    "EDITOR": {
+      "TITLE": "העורך החזותי של מכונת המצבים",
+      "INVALID_JSON": "ה-JSON אינו תקין; הגרף התקין האחרון נשמר.",
+      "NO_DESCRIPTION": "(אין תיאור)",
+      "SUCCESS": "הצלחה",
+      "FAIL": "כישלון",
+      "HAS_CONDITION": "יש תנאי",
+      "CANVAS": "גרף מכונת המצבים. לחצו לחיצה ימנית על מצב או על מעבר כדי לראות פעולות; גררו את הנקודה שמתחת למצב כדי לחבר אותו.",
+      "STATE_EXISTS": "כבר קיים מצב בשם \"{name}\"."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "עריכת המצב",
+      "EDIT_ATTRIBUTES": "עריכת תכונות",
+      "EDIT_LOCALIZATION": "עריכת תרגומים",
+      "DELETE_STATE": "מחיקת המצב",
+      "ADD_NEW_STATE": "הוספת מצב חדש"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "עריכת המעבר",
+      "EDIT_ATTRIBUTES": "עריכת תכונות",
+      "EDIT_LOCALIZATION": "עריכת תרגומים",
+      "EDIT_CONDITION": "עריכת התנאי",
+      "DELETE_TRANSITION": "מחיקת המעבר",
+      "INSERT_STATE": "הוספת מצב כאן"
+    },
+    "DIALOGS": {
+      "NAME": "שם",
+      "DESCRIPTION": "תיאור",
+      "TRIGGER": "טריגר",
+      "OK": "אישור",
+      "CANCEL": "ביטול",
+      "REQUIRED": "שדה חובה",
+      "STATE_EDIT": "עריכת מצב",
+      "STATE_ADD": "הוספת מצב חדש",
+      "TRANSITION_EDIT": "עריכת מעבר",
+      "TRANSITION_NEW": "מעבר חדש",
+      "LOCALIZATION": "עריכת תרגומים: {item}",
+      "ATTRIBUTES": "עריכת תכונות: {item}"
+    },
+    "CONDITION": {
+      "TITLE": "תנאי",
+      "SUBTITLE": "מעבר \"{trigger}\"",
+      "CONDITIONS": "תנאים",
+      "NO_PROTOTYPE": "לא הוגדר אב-טיפוס של תנאי עבור סוג ישות זה",
+      "IF": "אם",
+      "ANY": "אחד",
+      "ALL": "כל אחד",
+      "OF_THESE": "מהתנאים האלה מתקיים",
+      "ADD": "הוספת תנאי",
+      "REMOVE": "הסרת תנאי",
+      "HAS": "יש",
+      "HAS_NO": "אין",
+      "PERMISSION": "הרשאה",
+      "USER": "למשתמש",
+      "ACCOUNT_TYPE": "סוג חשבון",
+      "SELECT": "בחירה...",
+      "CLOSE_CONFIRM": "התנאי השתנה. לסגור בלי להחיל?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "הרשאה ...",
+        "StateMachineConditionHasAccountType": "סוג חשבון ..."
+      }
+    }
+  }
+}

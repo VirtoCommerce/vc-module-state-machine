@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +72,9 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
 
         serviceCollection.AddTransient<ITriggerContextEnrichmentService, TriggerContextEnrichmentService>();
 
+        // filled by the modules that own entity types, in their PostInitialize
+        serviceCollection.AddSingleton<IStateMachineEntityTypeRegistrar, StateMachineEntityTypeRegistrar>();
+
         serviceCollection.AddTransient<StateMachineTriggerEvent>();
 
         serviceCollection.AddTransient<StateMachineExportImport>();
@@ -104,14 +108,14 @@ public class Module : IModule, IHasConfiguration, IExportSupport, IImportSupport
     }
 
     public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
-        ICancellationToken cancellationToken)
+        CancellationToken cancellationToken)
     {
         return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoExportAsync(outStream, options,
             progressCallback, cancellationToken);
     }
 
     public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
-        ICancellationToken cancellationToken)
+        CancellationToken cancellationToken)
     {
         return _appBuilder.ApplicationServices.GetRequiredService<StateMachineExportImport>().DoImportAsync(inputStream, options,
             progressCallback, cancellationToken);

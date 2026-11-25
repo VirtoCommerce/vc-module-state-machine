@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Máquinas de estados"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Atualizar",
+      "ADD": "Nova",
+      "IMPORT": "Importar",
+      "EXPORT": "Exportar",
+      "SAVE": "Salvar",
+      "RESET": "Redefinir",
+      "APPLY": "Aplicar",
+      "ADD_STATE": "Adicionar novo estado",
+      "VISUAL_MODE": "Modo visual",
+      "JSON_MODE": "Modo JSON"
+    },
+    "LIST": {
+      "TITLE": "Máquinas de estados",
+      "EMPTY": "Ainda não há máquinas de estados",
+      "NAME": "Nome",
+      "STATUS": "Status",
+      "ENTITY_TYPE": "Tipo de entidade",
+      "MODIFIED": "Modificado",
+      "ACTIVE": "Ativa",
+      "INACTIVE": "Inativa",
+      "IMPORTED": "A máquina de estados \"{name}\" foi importada."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Nova máquina de estados",
+      "SUBTITLE": "Máquina de estados",
+      "NAME": "Nome",
+      "NAME_PLACEHOLDER": "Nome da máquina de estados",
+      "ENTITY_TYPE": "Tipo de entidade",
+      "ENTITY_TYPE_PLACEHOLDER": "Selecione o tipo de entidade",
+      "IS_ACTIVE": "Ativa",
+      "STATES": "Estados",
+      "NO_STATES": "Ainda não há estados. Abra o editor visual para adicioná-los; uma máquina de estados é salva com pelo menos um estado.",
+      "OPEN_EDITOR": "Abrir editor visual",
+      "PREVIEW": "Pré-visualização da máquina de estados",
+      "ACTIVE_CONFIRM": "A máquina de estados ativa deste tipo de entidade, \"{name}\", será desativada. Continuar?",
+      "CLOSE_CONFIRM": "A definição da máquina de estados tem alterações não salvas. Fechar sem salvar?"
+    },
+    "EDITOR": {
+      "TITLE": "Editor visual de máquina de estados",
+      "INVALID_JSON": "O JSON não é válido; o último grafo válido é mantido.",
+      "NO_DESCRIPTION": "(Sem descrição)",
+      "SUCCESS": "Sucesso",
+      "FAIL": "Falha",
+      "HAS_CONDITION": "Tem uma condição",
+      "CANVAS": "Grafo da máquina de estados. Clique com o botão direito num estado ou numa transição para ver as ações; arraste o ponto sob um estado para conectá-lo.",
+      "STATE_EXISTS": "Já existe um estado chamado \"{name}\"."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Editar estado",
+      "EDIT_ATTRIBUTES": "Editar atributos",
+      "EDIT_LOCALIZATION": "Editar localização",
+      "DELETE_STATE": "Excluir estado",
+      "ADD_NEW_STATE": "Adicionar novo estado"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Editar transição",
+      "EDIT_ATTRIBUTES": "Editar atributos",
+      "EDIT_LOCALIZATION": "Editar localização",
+      "EDIT_CONDITION": "Editar condição",
+      "DELETE_TRANSITION": "Excluir transição",
+      "INSERT_STATE": "Inserir estado aqui"
+    },
+    "DIALOGS": {
+      "NAME": "Nome",
+      "DESCRIPTION": "Descrição",
+      "TRIGGER": "Gatilho",
+      "OK": "OK",
+      "CANCEL": "Cancelar",
+      "REQUIRED": "Este campo é obrigatório",
+      "STATE_EDIT": "Editar estado",
+      "STATE_ADD": "Adicionar novo estado",
+      "TRANSITION_EDIT": "Editar transição",
+      "TRANSITION_NEW": "Nova transição",
+      "LOCALIZATION": "Editar localização de {item}",
+      "ATTRIBUTES": "Editar atributos de {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Condição",
+      "SUBTITLE": "Transição \"{trigger}\"",
+      "CONDITIONS": "Condições",
+      "NO_PROTOTYPE": "Não há protótipo de condição definido para este tipo de entidade",
+      "IF": "Se",
+      "ANY": "alguma",
+      "ALL": "todas",
+      "OF_THESE": "destas condições forem verdadeiras",
+      "ADD": "Adicionar condição",
+      "REMOVE": "Remover condição",
+      "HAS": "Tem",
+      "HAS_NO": "Não tem",
+      "PERMISSION": "a permissão",
+      "USER": "O usuário",
+      "ACCOUNT_TYPE": "o tipo de conta",
+      "SELECT": "Selecionar...",
+      "CLOSE_CONFIRM": "A condição foi alterada. Fechar sem aplicar?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Permissão ...",
+        "StateMachineConditionHasAccountType": "Tipo de conta ..."
+      }
+    }
+  }
+}

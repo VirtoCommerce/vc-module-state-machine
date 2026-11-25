@@ -1,0 +1,107 @@
+{
+  "STATE_MACHINE": {
+    "MENU": {
+      "TITLE": "Tilakoneet"
+    },
+    "TOOLBAR": {
+      "REFRESH": "Päivitä",
+      "ADD": "Uusi",
+      "IMPORT": "Tuo",
+      "EXPORT": "Vie",
+      "SAVE": "Tallenna",
+      "RESET": "Palauta",
+      "APPLY": "Käytä",
+      "ADD_STATE": "Lisää uusi tila",
+      "VISUAL_MODE": "Visuaalinen näkymä",
+      "JSON_MODE": "JSON-näkymä"
+    },
+    "LIST": {
+      "TITLE": "Tilakoneet",
+      "EMPTY": "Ei vielä tilakoneita",
+      "NAME": "Nimi",
+      "STATUS": "Tila",
+      "ENTITY_TYPE": "Entiteetin tyyppi",
+      "MODIFIED": "Muokattu",
+      "ACTIVE": "Aktiivinen",
+      "INACTIVE": "Ei aktiivinen",
+      "IMPORTED": "Tilakone ”{name}” on tuotu."
+    },
+    "DETAILS": {
+      "TITLE_NEW": "Uusi tilakone",
+      "SUBTITLE": "Tilakone",
+      "NAME": "Nimi",
+      "NAME_PLACEHOLDER": "Tilakoneen nimi",
+      "ENTITY_TYPE": "Entiteetin tyyppi",
+      "ENTITY_TYPE_PLACEHOLDER": "Valitse entiteetin tyyppi",
+      "IS_ACTIVE": "Aktiivinen",
+      "STATES": "Tilat",
+      "NO_STATES": "Ei vielä tiloja. Avaa visuaalinen editori lisätäksesi niitä; tilakone tallennetaan, kun siinä on vähintään yksi tila.",
+      "OPEN_EDITOR": "Avaa visuaalinen editori",
+      "PREVIEW": "Tilakoneen esikatselu",
+      "ACTIVE_CONFIRM": "Tämän entiteettityypin aktiivinen tilakone ”{name}” poistetaan käytöstä. Jatketaanko?",
+      "CLOSE_CONFIRM": "Tilakoneen määrityksessä on tallentamattomia muutoksia. Suljetaanko tallentamatta?"
+    },
+    "EDITOR": {
+      "TITLE": "Tilakoneen visuaalinen editori",
+      "INVALID_JSON": "JSON ei ole kelvollinen; viimeisin kelvollinen graafi säilytetään.",
+      "NO_DESCRIPTION": "(Ei kuvausta)",
+      "SUCCESS": "Onnistuminen",
+      "FAIL": "Epäonnistuminen",
+      "HAS_CONDITION": "Sisältää ehdon",
+      "CANVAS": "Tilakoneen graafi. Napsauta tilaa tai siirtymää hiiren oikealla painikkeella nähdäksesi toiminnot; yhdistä tila vetämällä sen alla olevaa pistettä.",
+      "STATE_EXISTS": "Tila nimeltä ”{name}” on jo olemassa."
+    },
+    "MENU_STATE": {
+      "EDIT_STATE": "Muokkaa tilaa",
+      "EDIT_ATTRIBUTES": "Muokkaa määritteitä",
+      "EDIT_LOCALIZATION": "Muokkaa lokalisointia",
+      "DELETE_STATE": "Poista tila",
+      "ADD_NEW_STATE": "Lisää uusi tila"
+    },
+    "MENU_TRANSITION": {
+      "EDIT_TRANSITION": "Muokkaa siirtymää",
+      "EDIT_ATTRIBUTES": "Muokkaa määritteitä",
+      "EDIT_LOCALIZATION": "Muokkaa lokalisointia",
+      "EDIT_CONDITION": "Muokkaa ehtoa",
+      "DELETE_TRANSITION": "Poista siirtymä",
+      "INSERT_STATE": "Lisää tila tähän"
+    },
+    "DIALOGS": {
+      "NAME": "Nimi",
+      "DESCRIPTION": "Kuvaus",
+      "TRIGGER": "Laukaisin",
+      "OK": "OK",
+      "CANCEL": "Peruuta",
+      "REQUIRED": "Tämä kenttä on pakollinen",
+      "STATE_EDIT": "Muokkaa tilaa",
+      "STATE_ADD": "Lisää uusi tila",
+      "TRANSITION_EDIT": "Muokkaa siirtymää",
+      "TRANSITION_NEW": "Uusi siirtymä",
+      "LOCALIZATION": "Muokkaa lokalisointia: {item}",
+      "ATTRIBUTES": "Muokkaa määritteitä: {item}"
+    },
+    "CONDITION": {
+      "TITLE": "Ehto",
+      "SUBTITLE": "Siirtymä ”{trigger}”",
+      "CONDITIONS": "Ehdot",
+      "NO_PROTOTYPE": "Tälle entiteetin tyypille ei ole määritetty ehtoprototyyppiä",
+      "IF": "Jos",
+      "ANY": "jokin",
+      "ALL": "kaikki",
+      "OF_THESE": "näistä ehdoista täyttyy",
+      "ADD": "Lisää ehto",
+      "REMOVE": "Poista ehto",
+      "HAS": "On",
+      "HAS_NO": "Ei ole",
+      "PERMISSION": "oikeus",
+      "USER": "Käyttäjän",
+      "ACCOUNT_TYPE": "tilityyppi",
+      "SELECT": "Valitse...",
+      "CLOSE_CONFIRM": "Ehtoa on muutettu. Suljetaanko käyttämättä?",
+      "ELEMENTS": {
+        "StateMachineConditionHasPermission": "Oikeus ...",
+        "StateMachineConditionHasAccountType": "Tilityyppi ..."
+      }
+    }
+  }
+}
